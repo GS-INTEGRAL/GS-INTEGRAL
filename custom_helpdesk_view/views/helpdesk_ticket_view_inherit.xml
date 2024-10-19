@@ -5,10 +5,9 @@
             <field name="name">helpdesk.ticket.form.inherit.customer</field>
             <field name="model">helpdesk.ticket</field>
             <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_form"/>
-            <field name="groups_id" eval="[(4, ref('base.group_portal'))]"/> <!-- Solo clientes (grupo Portal) -->
             <field name="arch" type="xml">
-                <!-- Insertar campos personalizados dentro de un grupo existente -->
-                <xpath expr="//group[@name='ticket_description']" position="inside">
+                <!-- Insertar campos personalizados dentro de un grupo existente, visible solo para el grupo Portal -->
+                <xpath expr="//group[@name='ticket_description']" position="inside" groups="base.group_portal">
                     <field name="x_custom_field1"/>
                     <field name="x_custom_field2"/>
                 </xpath>
