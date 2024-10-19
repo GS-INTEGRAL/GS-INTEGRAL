@@ -13,7 +13,7 @@
             <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_form"/>
             <field name="arch" type="xml">
                 <xpath expr="//group" position="inside">
-                    <group string="Customer Specific Fields" groups="custom_helpdesk_view.group_custom_helpdesk_customer">
+                    <group string="Campos específicos para los clientes" groups="custom_helpdesk_view.group_custom_helpdesk_customer">
                         <field name="user_id"/>  <!-- Campo existente -->
                         <field name="priority"/>  <!-- Campo existente -->
                     </group>
