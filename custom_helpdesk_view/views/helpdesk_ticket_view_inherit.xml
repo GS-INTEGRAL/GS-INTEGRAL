@@ -1,0 +1,18 @@
+<odoo>
+    <data>
+        <!-- Heredamos la vista de formulario de Helpdesk -->
+        <record id="view_helpdesk_ticket_form_inherit_customer" model="ir.ui.view">
+            <field name="name">helpdesk.ticket.form.inherit.customer</field>
+            <field name="model">helpdesk.ticket</field>
+            <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_form"/>
+            <field name="groups_id" eval="[(4, ref('base.group_portal'))]"/> <!-- Solo clientes (grupo Portal) -->
+            <field name="arch" type="xml">
+                <!-- Insertar campos personalizados dentro de un grupo existente -->
+                <xpath expr="//group[@name='ticket_description']" position="inside">
+                    <field name="x_custom_field1"/>
+                    <field name="x_custom_field2"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
