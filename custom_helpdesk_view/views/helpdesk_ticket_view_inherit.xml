@@ -1,22 +1,40 @@
 <odoo>
     <data>
-        <!-- Crear un nuevo grupo para clientes -->
-        <record id="group_custom_helpdesk_customer" model="res.groups">
-            <field name="name">Custom Helpdesk Customer Group</field>
-            <field name="category_id" ref="base.module_category_helpdesk"/>
-        </record>
-
-        <!-- Vista heredada -->
+        <!-- Inherit the original Helpdesk Ticket form view -->
         <record id="view_helpdesk_ticket_form_inherit_customer" model="ir.ui.view">
             <field name="name">helpdesk.ticket.form.inherit.customer</field>
             <field name="model">helpdesk.ticket</field>
-            <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_form"/>
+            <field name="inherit_id" ref="helpdesk.view_helpdesk_ticket_form"/>
             <field name="arch" type="xml">
-                <xpath expr="//group" position="inside">
-                    <group string="Campos específicos para los clientes" groups="custom_helpdesk_view.group_custom_helpdesk_customer">
-                        <field name="user_id"/>  <!-- Campo existente -->
-                        <field name="priority"/>  <!-- Campo existente -->
-                    </group>
+                <xpath expr="//sheet" position="inside">
+                    <sheet>
+                        <group>
+                            <!-- Show only the fields you want -->
+                            <field name="partner_id" placeholder="Cliente" />
+                            <field name="ticket_type_id" placeholder="Tipo" />
+                            <field name="name" string="Título Incidencia" placeholder="Asunto" />
+                            <field name="description" string="Descripción" />
+                            <field name="location" string="Lugar Incidencia" />
+                            <field name="priority" widget="priority" />
+                            
+                            <!-- Hide unnecessary fields -->
+                            <field name="stage_id" invisible="1"/>
+                            <field name="legend_blocked" invisible="1"/>
+                            <field name="legend_normal" invisible="1"/>
+                            <field name="legend_done" invisible="1"/>
+                            <field name="rating_count" invisible="1"/>
+                            <field name="use_rating" invisible="1"/>
+                            <field name="rating_avg" invisible="1"/>
+                            <field name="company_id" invisible="1"/>
+                            <field name="team_privacy_visibility" invisible="1"/>
+                            <field name="active" invisible="1"/>
+                            <field name="team_id" invisible="1"/>
+                            <field name="user_id" invisible="1"/>
+                            <field name="domain_user_ids" invisible="1"/>
+                            <field name="email_cc" invisible="1"/>
+                            <field name="properties" invisible="1"/>
+                        </group>
+                    </sheet>
                 </xpath>
             </field>
         </record>
