@@ -6,7 +6,7 @@
             <field name="category_id" ref="base.module_category_helpdesk"/>
         </record>
 
-        <!-- Aquí puedes incluir la vista heredada que mencionabas -->
+        <!-- Vista heredada -->
         <record id="view_helpdesk_ticket_form_inherit_customer" model="ir.ui.view">
             <field name="name">helpdesk.ticket.form.inherit.customer</field>
             <field name="model">helpdesk.ticket</field>
@@ -14,8 +14,8 @@
             <field name="arch" type="xml">
                 <xpath expr="//group" position="inside">
                     <group string="Customer Specific Fields" groups="custom_helpdesk_view.group_custom_helpdesk_customer">
-                        <field name="x_custom_field1"/>
-                        <field name="x_custom_field2"/>
+                        <field name="user_id"/>  <!-- Campo existente -->
+                        <field name="priority"/>  <!-- Campo existente -->
                     </group>
                 </xpath>
             </field>
