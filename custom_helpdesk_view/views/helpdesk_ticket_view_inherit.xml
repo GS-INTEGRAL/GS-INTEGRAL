@@ -1,23 +1,29 @@
 <odoo>
     <data>
-        <!-- Inherit the original Helpdesk Ticket form view -->
+        <!-- Crear un nuevo grupo para clientes -->
+        <record id="group_custom_helpdesk_customer" model="res.groups">
+            <field name="name">Custom Helpdesk Customer Group</field>
+            <field name="category_id" ref="base.module_category_helpdesk"/>
+        </record>
+
+        <!-- Vista heredada -->
         <record id="view_helpdesk_ticket_form_inherit_customer" model="ir.ui.view">
             <field name="name">helpdesk.ticket.form.inherit.customer</field>
             <field name="model">helpdesk.ticket</field>
-            <field name="inherit_id" ref="helpdesk.view_helpdesk_ticket_form"/>
+            <field name="inherit_id" ref="helpdesk.view_helpdesk_ticket_form"/>  <!-- Usar el ID correcto -->
             <field name="arch" type="xml">
                 <xpath expr="//sheet" position="inside">
                     <sheet>
                         <group>
-                            <!-- Show only the fields you want -->
-                            <field name="partner_id" placeholder="Cliente" />
-                            <field name="ticket_type_id" placeholder="Tipo" />
-                            <field name="name" string="Título Incidencia" placeholder="Asunto" />
-                            <field name="description" string="Descripción" />
-                            <field name="location" string="Lugar Incidencia" />
-                            <field name="priority" widget="priority" />
+                            <!-- Campos visibles para los clientes -->
+                            <field name="partner_id" placeholder="Cliente"/>
+                            <field name="ticket_type_id" placeholder="Tipo"/>
+                            <field name="name" string="Título Incidencia" placeholder="Asunto"/>
+                            <field name="description" string="Descripción"/>
+                            <field name="location" string="Lugar Incidencia"/>
+                            <field name="priority" widget="priority"/>
                             
-                            <!-- Hide unnecessary fields -->
+                            <!-- Ocultar campos innecesarios -->
                             <field name="stage_id" invisible="1"/>
                             <field name="legend_blocked" invisible="1"/>
                             <field name="legend_normal" invisible="1"/>
