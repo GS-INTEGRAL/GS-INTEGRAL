@@ -10,7 +10,7 @@
         <record id="view_helpdesk_ticket_form_inherit_customer" model="ir.ui.view">
             <field name="name">helpdesk.ticket.form.inherit.customer</field>
             <field name="model">helpdesk.ticket</field>
-            <field name="inherit_id" ref="helpdesk.view_helpdesk_ticket_form"/>  <!-- Usar el ID correcto -->
+            <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_form"/>  <!-- Asegúrate de que este ID sea correcto -->
             <field name="arch" type="xml">
                 <xpath expr="//sheet" position="inside">
                     <sheet>
