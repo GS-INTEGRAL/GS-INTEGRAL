@@ -15,12 +15,9 @@
                 <xpath expr="//sheet" position="inside">
                     <sheet>
                         <group>
-                            <!-- Campos visibles para los clientes -->
-                            <field name="partner_id" placeholder="Cliente"/>
-                            <field name="ticket_type_id" placeholder="Tipo"/>
-                            <field name="name" string="Título Incidencia" placeholder="Asunto"/>
-                            <field name="description" string="Descripción"/>                            
-                            <field name="priority" widget="priority"/>
+                            <!-- Campos visibles para los clientes -->                            
+                            <field name="name" string="Título Incidencia" placeholder="Asunto"/>                                                      
+                            
                             
                             <!-- Ocultar campos innecesarios -->
                             <field name="stage_id" invisible="1"/>
@@ -38,6 +35,8 @@
                             <field name="domain_user_ids" invisible="1"/>
                             <field name="email_cc" invisible="1"/>
                             <field name="properties" invisible="1"/>
+                            <field name="tag_ids" invisible="1"/>
+                            <field name="user_id" invisible="1"/>                            
                         </group>
                     </sheet>
                 </xpath>
