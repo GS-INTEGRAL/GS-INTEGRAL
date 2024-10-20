@@ -1,4 +1,4 @@
-from odoo import models, fields
+from odoo import models, fields, api
 
 class HelpdeskTicketInherit(models.Model):
     _inherit = 'helpdesk.ticket'
@@ -16,5 +16,15 @@ class HelpdeskTicketInherit(models.Model):
         ],
         string='Categoría'
     )
+    
+    
     sede_imagen = fields.Binary(string='Imagen o Archivo de la Sede', attachment=True, help='Sube una imagen o archivo de la sede donde ocurrió la incidencia (PNG, JPEG, PDF)')
     lugar_incidencia_imagen = fields.Binary(string='Imagen o Archivo del Lugar de Incidencia', attachment=True, help='Sube una imagen o archivo del lugar exacto de la incidencia (PNG, JPEG, PDF)')
+    fecha_fin = fields.Date(string="Fecha Finalización", readonly=True)
+
+    @api.onchange('state')
+    def _onchange_stage(self):
+        if self.stage_id in ['done', 'cancel']:
+            self.fecha_fin = fields.Date.today()
+        else:
+            self.fecha_fin = False

@@ -35,4 +35,15 @@
             </xpath>
         </field>
     </record>
+
+    <record id="view_helpdesk_ticket_tree_inherit" model="ir.ui.view">
+    <field name="name">helpdesk.ticket.tree.inherit</field>
+    <field name="model">helpdesk.ticket</field>  
+    <field name="inherit_id" ref="helpdesk.helpdesk_tickets_view_tree"/> 
+    <field name="arch" type="xml">
+        <tree>
+            <field name="fecha_fin" optional = "show"/>
+        </tree>
+    </field>
+</record>
 </odoo>
