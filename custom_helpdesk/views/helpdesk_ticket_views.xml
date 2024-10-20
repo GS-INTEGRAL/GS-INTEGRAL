@@ -5,18 +5,26 @@
         <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_form"/>
         <field name="arch" type="xml">
             <xpath expr="//sheet" position="inside">
-                <group>
-                    <field name="sede"/>
-                    <field name="sede_imagen" widget="image" filename="sede_imagen_filename"/>
-                </group>
-                <group>
-                    <field name="lugar_incidencia"/>
-                    <field name="lugar_incidencia_imagen" widget="image" filename="lugar_incidencia_imagen_filename"/>
-                </group>
-                <group>
-                    <field name="comentario_reparacion"/>
-                    <field name="observacion_mantenimiento"/>
-                </group>
+                <notebook>
+                    <page string="Sede">
+                        <group>
+                            <field name="sede"/>
+                            <field name="sede_imagen" widget="image" filename="sede_imagen_filename"/>
+                        </group>
+                    </page>
+                    <page string="Lugar de Incidencia">
+                        <group>
+                            <field name="lugar_incidencia"/>
+                            <field name="lugar_incidencia_imagen" widget="image" filename="lugar_incidencia_imagen_filename"/>
+                        </group>
+                    </page>
+                    <page string="Reparación y Mantenimiento">
+                        <group>
+                            <field name="comentario_reparacion"/>
+                            <field name="observacion_mantenimiento"/>
+                        </group>
+                    </page>
+                </notebook>
             </xpath>
         </field>
     </record>
