@@ -4,9 +4,8 @@
         <field name="model">helpdesk.ticket</field>
         <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_form"/>
         <field name="arch" type="xml">
-            <xpath expr="//sheet" position="inside">
-                <notebook>
-                    <page string="Sede">
+            <xpath expr="//sheet/notebook" position="after">
+                  <page string="Sede">
                         <group>
                             <field name="sede"/>
                             <field name="sede_imagen" widget="image" filename="sede_imagen_filename"/>
@@ -18,13 +17,16 @@
                             <field name="lugar_incidencia_imagen" widget="image" filename="lugar_incidencia_imagen_filename"/>
                         </group>
                     </page>
-                    <page string="Reparación y Mantenimiento">
+                    <page string="Sobe la Reparación">
                         <group>
                             <field name="comentario_reparacion"/>
+                        </group>
+                    </page> 
+                    <page string="Obsevaciones del Mantenimiento">
+                        <group>
                             <field name="observacion_mantenimiento"/>
                         </group>
-                    </page>
-                </notebook>
+                    </page>                     
             </xpath>
         </field>
     </record>
