@@ -4,6 +4,11 @@
         <field name="model">helpdesk.ticket</field>
         <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_form"/>
         <field name="arch" type="xml">
+            <xpath expr="//sheet/notebook" position="before">
+                <group>
+                    <field name="categoria"/>
+                </group>
+            </xpath>
             <xpath expr="//sheet/notebook" position="inside">
                   <page string="Sede">
                         <group>
