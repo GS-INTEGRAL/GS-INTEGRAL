@@ -14,9 +14,7 @@
             <field name="arch" type="xml">
                 <xpath expr="//sheet" position="inside">
                     <sheet>
-                        <group>
-                            <!-- Campos visibles para los clientes -->                            
-                            <field name="name" string="Título Incidencia" placeholder="Asunto"/>                                                      
+                        <group>                                                                             
                             
                             
                             <!-- Ocultar campos innecesarios -->
