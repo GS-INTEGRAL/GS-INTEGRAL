@@ -13,6 +13,14 @@ class HelpdeskTicketInherit(models.Model):
             ('fontaneria', 'Fontanería'),
             ('climatizacion', 'Climatización'),
             ('electricidad', 'Electricidad'),
+            ('albañileria', 'Albañilería'),
+            ('varios', 'Varios'),
+            ('tic-ordenadores', 'Tic-Ordenadores'),
+            ('mantenimiento', 'Mantenimiento'),
+            ('pintura', 'Pintura'),
+            ('herreria', 'Herrería'),
+            ('jardineria', 'Jardinería'),
+            
         ],
         string='Categoría'
     )
