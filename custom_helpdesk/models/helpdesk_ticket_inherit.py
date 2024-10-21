@@ -20,7 +20,8 @@ class HelpdeskTicketInherit(models.Model):
             ('pintura', 'Pintura'),
             ('herreria', 'Herrería'),
             ('jardineria', 'Jardinería'),
-            
+            ('carpinteria', 'Carpintería'),
+            ('cristaleria', 'Cristalería'),            
         ],
         string='Categoría'
     )
@@ -36,7 +37,7 @@ class HelpdeskTicketInherit(models.Model):
     
     estado = fields.Selection(
         [
-            ('abierto', 'Abierto'),
+            ('abierta', 'Abierta'),
             ('cerrado', 'Cerrado'),
             ('En proceso', 'En proceso'),
             ('baja', 'Baja'),
