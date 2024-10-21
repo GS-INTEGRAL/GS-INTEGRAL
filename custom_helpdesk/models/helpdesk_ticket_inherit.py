@@ -25,6 +25,33 @@ class HelpdeskTicketInherit(models.Model):
         string='Categoría'
     )
     
+    prioridad = fields.Selection(
+        [
+            ('alta', 'Alta'),
+            ('media', 'Media'),
+            ('baja', 'Baja'),                    
+        ],
+        string='Prioridad'
+    )
+    
+    estado = fields.Selection(
+        [
+            ('abierto', 'Abierto'),
+            ('cerrado', 'Cerrado'),
+            ('En proceso', 'En proceso'),
+            ('baja', 'Baja'),
+            ('derivada', 'Derivada'),                        
+        ],
+        string='Estado'
+    )
+    
+    satisfaccion = fields.Selection(
+        [
+            ('positiva', 'Positiva'),
+            ('negativa', 'Negativa'),
+        ],
+        string='Satisfacción'
+    )
     
     sede_imagen = fields.Binary(string='Imagen o Archivo de la Sede', attachment=True, help='Sube una imagen o archivo de la sede donde ocurrió la incidencia (PNG, JPEG, PDF)')
     lugar_incidencia_imagen = fields.Binary(string='Imagen o Archivo del Lugar de Incidencia', attachment=True, help='Sube una imagen o archivo del lugar exacto de la incidencia (PNG, JPEG, PDF)')
