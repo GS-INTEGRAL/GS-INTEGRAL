@@ -58,9 +58,9 @@ class HelpdeskTicketInherit(models.Model):
     lugar_incidencia_imagen = fields.Binary(string='Imagen o Archivo del Lugar de Incidencia', attachment=True, help='Sube una imagen o archivo del lugar exacto de la incidencia (PNG, JPEG, PDF)')
     fecha_fin = fields.Date(string="Fecha Finalización", readonly=True)
 
-    @api.onchange('state')
-    def _onchange_stage(self):
-        if self.estado in ['Cerrado', 'Baja', 'Derivada']:
+    @api.onchange('estado')
+    def _onchange_estado(self):
+        if self.estado in ['cerrado', 'baja', 'derivada']:
             self.fecha_fin = fields.Date.today()
         else:
             self.fecha_fin = False
