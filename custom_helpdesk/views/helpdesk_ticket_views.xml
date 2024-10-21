@@ -30,7 +30,7 @@
                             <field name="comentario_reparacion"/>
                         </group>
                     </page> 
-                    <page string="Obsevaciones del Mantenimiento">
+                    <page string="Observaciones del Mantenimiento">
                         <group>
                             <field name="observacion_mantenimiento"/>
                         </group>
