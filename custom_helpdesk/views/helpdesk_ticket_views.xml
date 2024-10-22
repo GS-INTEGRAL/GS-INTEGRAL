@@ -7,7 +7,7 @@
             <xpath expr="//sheet/notebook" position="before">
                 <group>
                     <field name="categoria"/><field name="fecha_fin" optional = "show"/>
-                    <field name="prioridad" optional = "show"/>
+                    <!--<field name="prioridad" optional = "show"/>-->
                     <field name="estado" optional = "show"/>
                     <field name="satisfaccion" optional = "show"/>
                 </group>
