@@ -1,7 +1,7 @@
 <record id="website_helpdesk_team_form_inherit" model="ir.ui.view">
     <field name="name">website_helpdesk_team_form_inherit</field>
     <field name="model">website_helpdesk</field>
-    <field name="inherit_id" ref="website_helpdesk.ticket_submit_form"/>
+    <field name="inherit_id" ref="website_helpdesk.team_form_1"/>
     <field name="arch" type="xml">
         <xpath expr="//input[@name='name']/following-sibling::div[@class='mb-0 py-2 s_website_form_model_required'][1]" position="after">
             <div class="mb-0 py-2 s_website_form_field col-12 s_website_form_required" data-type="selection" data-name="Field">
@@ -11,13 +11,13 @@
                         <span class="s_website_form_mark"> *</span>
                     </label>
                     <div class="col-sm">
-                        <select name="priority" id="helpdesk_priority" class="form-control s_website_form_input">
-                            <option value="0">Low priority</option>
-                            <option value="1">Medium priority</option>
-                            <option value="2">High priority</option>
-                            <option value="3">Urgent</option>
-                        </select>
-                    </div>
+                <select name="priority" id="helpdesk_priority" class="form-control s_website_form_input">
+                    <option value="0">Low priority</option>
+                    <option value="1">Medium priority</option>
+                    <option value="2">High priority</option>
+                    <option value="3">Urgent</option>
+                </select>
+            </div>
                 </div>
             </div>
         </xpath>
