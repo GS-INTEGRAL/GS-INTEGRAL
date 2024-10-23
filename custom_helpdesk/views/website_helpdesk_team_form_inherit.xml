@@ -11,7 +11,12 @@
                         <span class="s_website_form_mark"> *</span>
                     </label>
                     <div class="col-sm">
-                        <field name="priority" widget="priority" id="helpdesk_priority"/>
+                        <select name="priority" id="helpdesk_priority" class="form-control s_website_form_input">
+                            <option value="0">Low priority</option>
+                            <option value="1">Medium priority</option>
+                            <option value="2">High priority</option>
+                            <option value="3">Urgent</option>
+                        </select>
                     </div>
                 </div>
             </div>
