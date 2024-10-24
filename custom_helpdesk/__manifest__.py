@@ -5,9 +5,10 @@
     'author': 'Pedro Mayor',
     'category': 'Helpdesk',
     'license': 'LGPL-3',
-    'depends': ['helpdesk'],
+    'depends': ['helpdesk', 'website_helpdesk'],
     'data': [
         'views/helpdesk_ticket_views.xml',
+        'views/website_helpdesk_ticket_views.xml'
     ],
     'installable': True,
     'application': False,
