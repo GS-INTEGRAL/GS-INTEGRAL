@@ -8,7 +8,7 @@
     'depends': ['helpdesk', 'website_helpdesk'],
     'data': [
         'views/helpdesk_ticket_views.xml',
-        'views/website_helpdesk_team_form_inherit.xml',
+        'views/website_helpdesk_ticket_form_inherit.xml',
     ],
     'installable': True,
     'application': False,
