@@ -1,9 +1,9 @@
 <odoo>
     <data>
         <record id="website_helpdesk_ticket_form_inherit" model="ir.ui.view">
-            <field name="name">website_helpdesk.ticket_submit_form.inherit</field>
+            <field name="name">website_helpdesk.ticket.form.inherit</field>
             <field name="model">helpdesk.ticket</field>
-            <field name="inherit_id" ref="website_helpdesk.ticket_submit_form"/>
+            <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_form"/>
             <field name="arch" type="xml">
                 <xpath expr="//div[@id='helpdesk_section']//form" position="inside">
                     <div class="mb-0 py-2 s_website_form_field col-12">
@@ -12,7 +12,7 @@
                                 <span class="s_website_form_label_content">Priority</span>
                             </label>
                             <div class="col-sm">
-                                <field name="priority" widget="priority" id="helpdesk_priority"/>
+                                <field name="priority" widget="priority"/>
                             </div>
                         </div>
                     </div>
