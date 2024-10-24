@@ -1,7 +1,7 @@
 from odoo import models, fields, api
 
 class HelpdeskTicketInherit(models.Model):
-    _inherit = 'website.helpdesk'
+    _inherit = 'helpdesk.ticket'
 
     sede = fields.Char(string='Sede', help='Centro en general donde se ha producido la incidencia')
     categoria = fields.Selection(
