@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="ticket_submit_form_extended" inherit_id="website_helpdesk.ticket_submit_form">
+        <xpath expr="//div[hasclass('form-group')]" position="after">
+            <div class="form-group">
+                <label for="sede" class="col-form-label">Sede</label>
+                <select id="sede" name="sede" class="form-control">
+                    <option value="">Seleccione una sede</option>
+                    <option value="sede1">Sede 1</option>
+                    <option value="sede2">Sede 2</option>
+                    <option value="sede3">Sede 3</option>
+                </select>
+            </div>
+        </xpath>
+    </template>
+</odoo>
