@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <template id="ticket_submit_form_extended" inherit_id="website_helpdesk.ticket_submit_form">
-        <xpath expr="//div[hasclass('form-group')]" position="after">
-            <div class="form-group">
+         <xpath expr="//form" position="inside">
+            <div class="form-group row">
                 <label for="sede" class="col-form-label">Sede</label>
                 <select id="sede" name="sede" class="form-control">
                     <option value="">Seleccione una sede</option>
