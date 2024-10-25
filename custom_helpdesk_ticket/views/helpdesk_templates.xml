@@ -1,16 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <template id="ticket_submit_form_extended" inherit_id="website_helpdesk.ticket_submit_form">
-         <xpath expr="//form" position="inside">
-            <div class="form-group row">
-                <label for="sede" class="col-form-label">Sede</label>
-                <select id="sede" name="sede" class="form-control">
-                    <option value="">Seleccione una sede</option>
-                    <option value="sede1">Sede 1</option>
-                    <option value="sede2">Sede 2</option>
-                    <option value="sede3">Sede 3</option>
-                </select>
+        <xpath expr="//div[@class='s_website_form_rows row s_col_no_bgcolor']" position="inside">
+            <div class="mb-0 py-2 s_website_form_field col-12" data-type="selection" data-name="Field">
+                <div class="row s_col_no_resize s_col_no_bgcolor">
+                    <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px" for="sede">
+                        <span class="s_website_form_label_content">Sede</span>
+                    </label>
+                    <div class="col-sm">
+                        <select id="sede" name="sede" class="form-control s_website_form_input">
+                            <option value="">Seleccione una sede</option>
+                            <option value="sede1">Sede 1</option>
+                            <option value="sede2">Sede 2</option>
+                            <option value="sede3">Sede 3</option>
+                        </select>
+                    </div>
+                </div>
             </div>
         </xpath>
     </template>
 </odoo>
+
