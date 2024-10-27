@@ -1,6 +1,6 @@
 <odoo>
     <template id="auth_signup_login_inherit" inherit_id="auth_signup.login">
-        <xpath expr="//div[@class='field-name']" position="after">
+        <xpath expr="//div[@class='mb-3 field-name']" position="after">
             <!-- Campo Sede -->
             <div class="mb-3 field-sede">
                 <label for="sede">Sede</label>
