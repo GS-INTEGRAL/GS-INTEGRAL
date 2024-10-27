@@ -1,0 +1,80 @@
+<!-- <?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="loyalty_program_report">
+        <t t-call="web.internal_layout">
+            <div class="card">
+                <div class="card-body">
+                    <div class="page">
+                        <div class="row text-center">
+                            
+                            <div class="o_offer col-lg-12">
+                                <h4 >
+                                    Felicidades!
+                                    
+                                </h4>
+                                
+                                <h4>Han compartido contigo este código promocional de  <t t-esc="o.company_id.name"/>.</h4>
+                                <t t-foreach="range(len(o.reward_ids))" t-as="reward_idx">
+                                    <t t-set="reward" t-value="o.reward_ids[reward_idx]"/>
+                    
+                                    <br/>
+                                    <t t-if="reward_idx &lt; (len(o.reward_ids) - 1)">
+                                        <span class="text-center">OR</span>
+                                        <br/>
+                                    </t>
+                                </t>
+                                <t t-if="reward.description == 'E-bikes decuento e-mobility'">
+                                    <t t-set="text">Obten 150€ de descuento en los productos del link con el siguiente código!</t>
+                                    </t>
+                                    <t t-if="reward.description == 'Patinete decuento e-mobility'">
+                                        <t t-set="text">Obten 20€ de descuento en los productos del link con el siguiente código!</t>
+                                    </t>
+                                <h1 class="fw-bold" style="font-size: 34px" t-esc="text"/>
+                                <br/>
+                                <t t-set="rule" t-value="o.rule_ids[:1]"/>
+                                <h2 class="mt-4">
+                                    <strong class="bg-light" t-esc="rule.code"></strong>
+                                </h2>
+                                <t t-if="reward.description == 'E-bikes decuento e-mobility'">
+                                    <a href="https://www.abce.store/shop/category/bicicleta-electrica-promocion-347">⇨ E-Bikes en promoción ⇦</a>
+                                    <br/>
+                                </t>
+                                <t t-if="reward.description == 'Patinete decuento e-mobility'">
+                                    <a href="https://www.abce.store/shop/category/patinete-electrico-promocion-348">⇨ Patinetes en Promoción ⇦</a>
+                                    <br/>
+                                </t>
+                                <!-- <a href="https://www.abce.store/" class="btn btn-primary">Productos en promoción</a> -->
+                                <br/>
+                                <br/>
+                                <div t-field="rule.code" t-options="{'widget': 'barcode', 'width': 600, 'height': 100}"/>
+                                <br/><br/>
+                                <h4>Muchas gracias!</h4>
+                                <br/>
+                                <div class="mt32">
+                                    <div class="text-center">
+                                        <img alt="Logo" t-att-src="'/logo?company=%d' % (o.company_id)" t-att-alt="'%s' % (o.company_id.name)" style="border:0px solid transparent; height: 50; width: 200px;" height="50"/>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="text-center d-inline-block">
+                                        <span t-field="o.company_id.partner_id"
+                                            t-options='{"widget": "contact", "fields": ["address", "email"], "no_marker": True}'/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <template id="loyalty_program_report_i18n">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+              
+                <t t-call="onmi_abc_web_coupons.loyalty_program_report" />
+            </t>
+        </t>
+    </template>
+</odoo> -->

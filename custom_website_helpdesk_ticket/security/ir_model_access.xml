@@ -1,0 +1,66 @@
+<!-- <?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="web_coupons_model_access" model="ir.model.access">
+            <field name="name">web_coupons_model_access</field>
+            <field name="model_id" ref="model_web_coupons"/>
+            <field name="active">1</field>
+            <field name="perm_read">1</field>
+            <field name="perm_write">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <record id="loyalty_card_change_date_model_access" model="ir.model.access">
+            <field name="name">loyalty_card_change_date_model_access</field>
+            <field name="model_id" ref="model_loyalty_card_change_date"/>
+            <field name="active">1</field>
+            <field name="perm_read">1</field>
+            <field name="perm_write">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <record id="loyalty_card_payment_model_access" model="ir.model.access">
+            <field name="name">loyalty_card_payment_model_access</field>
+            <field name="model_id" ref="model_loyalty_card_payment"/>
+            <field name="active">1</field>
+            <field name="perm_read">1</field>
+            <field name="perm_write">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <record id="coupons_conf_model_access" model="ir.model.access">
+            <field name="name">coupons_conf_model_access</field>
+            <field name="model_id" ref="model_coupons_conf"/>
+            <field name="active">1</field>
+            <field name="perm_read">1</field>
+            <field name="perm_write">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_unlink">1</field>
+        </record>
+
+        <record id="coupons_product_template" model="ir.model.access">
+            <field name="name">coupons_product_template</field>
+            <field name="model_id" ref="model_product_template"/>
+            <field name="active">1</field>
+            <field name="perm_read">1</field>
+            <field name="perm_write">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_unlink">1</field>
+        </record>   
+        
+        <record id="update_discount_wizard_model_access" model="ir.model.access">
+            <field name="name">update.discount.wizard.model.access</field>
+            <field name="model_id" ref="model_update_discount_wizard"/>
+            <field name="active">1</field>
+            <field name="perm_read">1</field>
+            <field name="perm_write">1</field>
+            <field name="perm_create">1</field>
+            <field name="perm_unlink">1</field>
+        </record>
+
+    </data>
+</odoo> -->
