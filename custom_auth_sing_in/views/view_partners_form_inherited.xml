@@ -1,9 +1,9 @@
 <odoo>
     <data>
         <!-- Inheritance of the res.users form view to add custom fields -->
-        <record id="view_users_form_inherited" model="ir.ui.view">
-            <field name="name">res.users.inherited.form</field>
-            <field name="model">res.users</field>
+        <record id="view_partners_form_inherited" model="ir.ui.view">
+            <field name="name">res.partners.inherited.form</field>
+            <field name="model">res.partners</field>
             <field name="inherit_id" ref="base.view_partner_form"/>
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='vat']" position="after">

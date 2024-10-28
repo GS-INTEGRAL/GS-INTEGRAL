@@ -9,7 +9,7 @@
     'depends': ['base', 'auth_signup', 'website_helpdesk'],
     'data': [
             'views/auth_signup_login_inherit.xml',
-            'views/view_users_form_inherited.xml',
+            'views/view_partners_form_inherited.xml',
             ],
         
     'installable': True,
