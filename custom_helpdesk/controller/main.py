@@ -1,27 +1,21 @@
 from odoo import http
 from odoo.http import request
+from odoo.addons.website_form.controllers.main import WebsiteForm
 
-class WebsiteHelpdesk(http.Controller):
-    
-    @http.route('/helpdesk/ticket/submit', type='http', auth='user', website=True)
-    def helpdesk_ticket_submit(self, **kwargs):
-        partner = request.env.user.partner_id
-        values = {
-            'partner': partner,
-            'sede': partner.sede,
-            'lugar': partner.lugar,
-        }
-        return request.render('website_helpdesk.ticket_form_template', values)
+class CustomWebsiteForm(WebsiteForm):
 
-    @http.route('/helpdesk/ticket/create', type='http', auth='user', website=True)
-    def helpdesk_ticket_create(self, **post):
-        partner = request.env.user.partner_id
-        ticket_vals = {
-            'name': post.get('name'),
-            'email': post.get('email'),
-            'sede': post.get('sede') or partner.sede,
-            'lugar': post.get('lugar') or partner.lugar,
-            # otros campos de ticket...
-        }
-        ticket = request.env['helpdesk.ticket'].sudo().create(ticket_vals)
-        return request.redirect('/helpdesk/ticket/thanks')
+    def _handle_website_form(self, model_name, **kwargs):
+        # Ejecuta la lógica original del método padre
+        result = super(CustomWebsiteForm, self)._handle_website_form(model_name, **kwargs)
+
+        # Añadir lógica solo si es un ticket de soporte
+        if model_name == 'helpdesk.ticket':
+            partner_id = request.params.get('partner_id')
+            partner = request.env['res.partner'].sudo().browse(partner_id)
+
+            # Asignar los campos adicionales `sede` y `lugar` al ticket
+            if partner:
+                request.params['sede'] = partner.sede
+                request.params['lugar'] = partner.lugar
+
+        return result
