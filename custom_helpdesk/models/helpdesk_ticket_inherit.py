@@ -4,7 +4,7 @@ class HelpdeskTicketInherit(models.Model):
     _inherit = 'helpdesk.ticket'
 
     sede = fields.Char(string='Sede', help='Centro en general donde se ha producido la incidencia')
-    lugar_incidencia = fields.Char(string='Lugar de Incidencia', help='Sitio exacto dentro de la sede donde se ha producido la incidencia')
+    lugar = fields.Char(string='Lugar', help='Sitio exacto dentro de la sede donde se ha producido la incidencia')
     comentario_reparacion = fields.Text(string='Comentario de Reparación', help='Comentarios positivos o negativos sobre la reparación realizada por el cliente')
     observacion_mantenimiento = fields.Text(string='Observaciones de Mantenimiento', help='Observaciones del técnico sobre dudas o problemas durante la reparación')
     categoria = fields.Selection(
