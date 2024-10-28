@@ -1,5 +1,5 @@
 from odoo import http
-from odoo.addons.website_form.controllers.main import WebsiteForm
+from odoo.addons.website_helpdesk.controllers.main import WebsiteForm
 
 class CustomWebsiteForm(WebsiteForm):
 
