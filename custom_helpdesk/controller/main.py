@@ -1,37 +1,27 @@
 from odoo import http
 from odoo.addons.website_helpdesk.controllers.main import WebsiteForm
 
-class CustomWebsiteForm(WebsiteForm):
 
-    def _handle_website_form(self, model_name, **kwargs):
-        # Recuperar los parámetros sede y lugar
-        sede = request.params.get('sede')
-        lugar = request.params.get('lugar')
-        email = request.params.get('partner_email')
+class AuthSignupHomeCustom(AuthSignupHome):
 
-        if email:
-            if request.env.user.email == email:
-                partner = request.env.user.partner_id
-            else:
-                partner = request.env['res.partner'].sudo().search([('email', '=', email)], limit=1)
-            
-            # Si no existe el partner, crearlo con los campos adicionales
-            if not partner:
-                partner = request.env['res.partner'].sudo().create({
-                    'email': email,
-                    'name': request.params.get('partner_name', False),
-                    'lang': request.lang.code,
-                    'sede': sede,
-                    'lugar': lugar,
-                })
-            else:
-                # Si el partner existe, actualizar los campos sede y lugar
-                partner.sudo().write({
-                    'sede': sede,
-                    'lugar': lugar,
-                })
+    def get_auth_signup_qcontext(self):
+        # Llama al método original para obtener el contexto
+        qcontext = super().get_auth_signup_qcontext()
 
-            request.params['partner_id'] = partner.id
+        # Agrega los campos adicionales al contexto si están en request.params
+        qcontext['lugar'] = http.request.params.get('lugar')
+        qcontext['sede'] = http.request.params.get('sede')
 
-        # Llamar al método original
-        return super(CustomWebsiteForm, self)._handle_website_form(model_name, **kwargs)
+        return qcontext
+
+    def _prepare_signup_values(self, qcontext):
+        # Llama al método original para obtener los valores básicos
+        values = super()._prepare_signup_values(qcontext)
+
+        # Extrae y agrega los campos adicionales al diccionario de valores
+        values['lugar'] = qcontext.get('lugar')
+        values['sede'] = qcontext.get('sede')
+
+        return values
+
+
