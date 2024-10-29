@@ -1,27 +1,19 @@
 from odoo import http
-from odoo.addons.auth_signup.controllers.main import AuthSignupHome
+from odoo.http import request
+from odoo.addons.website_helpdesk.controllers.main import WebsiteHelpdesk
 
+class CustomWebsiteHelpdesk(WebsiteHelpdesk):
 
-class AuthSignupHomeCustom(AuthSignupHome):
+    @http.route(['/helpdesk/create'], type='http', auth="public", website=True, csrf=False)
+    def helpdesk_ticket_create(self, **kwargs):
+        # Extraer el usuario autenticado y sus datos de res.partner
+        user = request.env.user
+        if user.partner_id:
+            kwargs['sede'] = user.partner_id.sede
+            kwargs['lugar'] = user.partner_id.lugar
 
-    def get_auth_signup_qcontext(self):
-        # Llama al método original para obtener el contexto
-        qcontext = super().get_auth_signup_qcontext()
+        # Llamada al controlador original para crear el ticket
+        return super(CustomWebsiteHelpdesk, self).helpdesk_ticket_create(**kwargs)
 
-        # Agrega los campos adicionales al contexto si están en request.params
-        qcontext['lugar'] = http.request.params.get('lugar')
-        qcontext['sede'] = http.request.params.get('sede')
-
-        return qcontext
-
-    def _prepare_signup_values(self, qcontext):
-        # Llama al método original para obtener los valores básicos
-        values = super()._prepare_signup_values(qcontext)
-
-        # Extrae y agrega los campos adicionales al diccionario de valores
-        values['lugar'] = qcontext.get('lugar')
-        values['sede'] = qcontext.get('sede')
-
-        return values
 
 
