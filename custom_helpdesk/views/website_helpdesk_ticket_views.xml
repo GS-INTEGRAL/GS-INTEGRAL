@@ -8,7 +8,7 @@
                     </label>
                     <div class="col-sm">
                         <input type="text" class="form-control s_website_form_input" name="sede" id="helpdesk_sede" readonly="1" 
-                               t-att-value="qcontext.partner and qcontext.partner.sede or ''"/>
+                               t-att-value="partner and partner.sede or ''"/>
                     </div>
                 </div>
             </div>
@@ -20,30 +20,10 @@
                     </label>
                     <div class="col-sm">
                         <input type="text" class="form-control s_website_form_input" name="lugar" id="helpdesk_lugar" readonly="1" 
-                               t-att-value="qcontext.partner and qcontext.partner.lugar or ''"/>
+                               t-att-value="partner and partner.lugar or ''"/>
                     </div>
                 </div>
             </div>
         </xpath>
     </template>
 </odoo>
-
-<!-- <odoo>
-    <data>
-        
-        <record id="view_website_ticket_form_inherit" model="ir.ui.view">
-            <field name="name">website.ticket.form.inherit</field>
-            <field name="model">website.ticket</field>
-            <field name="inherit_id" ref="website_helpdesk.team_form_1"/>
-            <field name="arch" type="xml">
-                <xpath expr="//input[@name='partner_email']" position="after">  
-                    <field name="partner_id" invisible="1"/> 
-                    <field name="sede" placeholder="sede" required="1"/>
-                    <field name="lugar" placeholder="lugar" required="1"/>
-                </xpath>
-            </field>
-        </record>
-    </data>
-</odoo> -->
-
-

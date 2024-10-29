@@ -26,7 +26,7 @@ class CustomWebsiteHelpdesk(WebsiteHelpdesk):
             # Llamada al controlador original
             response = super(CustomWebsiteHelpdesk, self).helpdesk_ticket_create(**kwargs)
             response.qcontext.update({
-                'partner': partner,  # Agregar el objeto partner
+                'partner': partner,  
                 'sede': kwargs.get('sede'),
                 'lugar': kwargs.get('lugar')
             })
