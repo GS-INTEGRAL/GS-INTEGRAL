@@ -8,8 +8,8 @@
             <field name="arch" type="xml">
                 <xpath expr="//input[@name='partner_email']" position="after">  
                     <field name="partner_id" invisible="1"/> <!-- Relación con el partner -->
-                    <field name="campo_1" placeholder="Campo 1" required="1"/>
-                    <field name="campo_2" placeholder="Campo 2" required="1"/>
+                    <field name="sede" placeholder="sede" required="1"/>
+                    <field name="lugar" placeholder="lugar" required="1"/>
                 </xpath>
             </field>
         </record>
