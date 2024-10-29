@@ -4,7 +4,7 @@
         <record id="view_website_ticket_form_inherit" model="ir.ui.view">
             <field name="name">website.ticket.form.inherit</field>
             <field name="model">website.ticket</field>
-            <field name="inherit_id" ref="website_helpdesk.view_helpdesk_ticket_form"/>
+            <field name="inherit_id" ref="website_helpdesk.team_form_1"/>
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='some_existing_field']" position="before">
                     <field name="partner_id" invisible="1"/> <!-- Relación con el partner -->
