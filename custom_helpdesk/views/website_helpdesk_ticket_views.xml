@@ -8,7 +8,8 @@
                         <span class="s_website_form_label_content">Sede</span>
                     </label>
                     <div class="col-sm">
-                        <input type="text" class="form-control s_website_form_input" name="sede" id="helpdesk_sede" readonly="1" t-att-value="partner.sede"/>
+                        <input type="text" class="form-control s_website_form_input" name="sede" id="helpdesk_sede" readonly="1" 
+                               t-att-value="partner and partner.sede or ''"/>
                     </div>
                 </div>
             </div>
@@ -19,7 +20,8 @@
                         <span class="s_website_form_label_content">Lugar</span>
                     </label>
                     <div class="col-sm">
-                        <input type="text" class="form-control s_website_form_input" name="lugar" id="helpdesk_lugar" readonly="1" t-att-value="partner.lugar"/>
+                        <input type="text" class="form-control s_website_form_input" name="lugar" id="helpdesk_lugar" readonly="1" 
+                               t-att-value="partner and partner.lugar or ''"/>
                     </div>
                 </div>
             </div>

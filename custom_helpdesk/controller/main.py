@@ -12,6 +12,10 @@ class CustomWebsiteHelpdesk(WebsiteHelpdesk):
             if partner:
                 kwargs['sede'] = partner.sede
                 kwargs['lugar'] = partner.lugar
+            else:
+                kwargs['sede'] = ''
+                kwargs['lugar'] = ''
+
 
             # Llamada al controlador original
             response = super(CustomWebsiteHelpdesk, self).helpdesk_ticket_create(**kwargs)
