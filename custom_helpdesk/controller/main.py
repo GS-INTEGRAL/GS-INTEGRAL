@@ -21,6 +21,8 @@ class CustomWebsiteHelpdesk(WebsiteHelpdesk):
                 _logger.warning("No se encontró el partner para el usuario: %s", user.login)
                 kwargs['sede'] = ''
                 kwargs['lugar'] = ''
+            
+            _logger.info("Datos enviados a la vista - Sede: %s, Lugar: %s", kwargs.get('sede'), kwargs.get('lugar'))
 
             return request.render('website_helpdesk.team_form_1', {
                         'partner': partner,
