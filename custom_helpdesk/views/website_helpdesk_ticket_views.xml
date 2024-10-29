@@ -1,4 +1,22 @@
 <odoo>
+    <data>
+        <!-- Heredamos la vista del formulario del ticket -->
+        <record id="view_website_ticket_form_inherit" model="ir.ui.view">
+            <field name="name">website.ticket.form.inherit</field>
+            <field name="model">website.ticket</field>
+            <field name="inherit_id" ref="website_helpdesk.view_helpdesk_ticket_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='some_existing_field']" position="before">
+                    <field name="partner_id" invisible="1"/> <!-- Relación con el partner -->
+                    <field name="campo_1" placeholder="Campo 1" required="1"/>
+                    <field name="campo_2" placeholder="Campo 2" required="1"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
+
+<!-- <odoo>
     <template id="portal_helpdesk_form_inherit" inherit_id="website_helpdesk.team_form_1">
         <xpath expr="//input[@name='partner_email']" position="after">
             <!-- Campo Sede -->
@@ -27,4 +45,4 @@
             </div>
         </xpath>
     </template>
-</odoo>
+</odoo> -->
