@@ -37,7 +37,7 @@
             <field name="inherit_id" ref="website_helpdesk.team_form_1"/>
             <field name="arch" type="xml">
                 <xpath expr="//input[@name='partner_email']" position="after">  
-                    <field name="partner_id" invisible="1"/> <!-- Relación con el partner -->
+                    <field name="partner_id" invisible="1"/> 
                     <field name="sede" placeholder="sede" required="1"/>
                     <field name="lugar" placeholder="lugar" required="1"/>
                 </xpath>
