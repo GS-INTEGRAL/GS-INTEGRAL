@@ -1,5 +1,5 @@
 <odoo>
-    <template id="portal_helpdesk_form_inherit" inherit_id="website_helpdesk.ticket_submit_form">
+    <template id="portal_helpdesk_form_inherit" inherit_id="website_helpdesk.team_form_1">
         <xpath expr="//input[@name='partner_email']" position="after">
             <!-- Campo Sede -->
             <div class="mb-0 py-2 s_website_form_field col-12" data-type="char" data-name="Field">
@@ -8,7 +8,7 @@
                         <span class="s_website_form_label_content">Sede</span>
                     </label>
                     <div class="col-sm">
-                        <input type="text" class="form-control s_website_form_input" name="sede" id="helpdesk_sede" readonly="1" t-att-value="ticket.sede"/>
+                        <input type="text" class="form-control s_website_form_input" name="sede" id="helpdesk_sede" readonly="1" t-att-value="sede"/>
                     </div>
                 </div>
             </div>
@@ -19,7 +19,7 @@
                         <span class="s_website_form_label_content">Lugar</span>
                     </label>
                     <div class="col-sm">
-                        <input type="text" class="form-control s_website_form_input" name="lugar" id="helpdesk_lugar" readonly="1" t-att-value="ticket.lugar"/>
+                        <input type="text" class="form-control s_website_form_input" name="lugar" id="helpdesk_lugar" readonly="1" t-att-value="lugar"/>
                     </div>
                 </div>
             </div>
