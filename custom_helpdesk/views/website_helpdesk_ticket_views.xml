@@ -1,6 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-    <template id="portal_helpdesk_form_inherit" inherit_id="website_helpdesk.portal_helpdesk_ticket_form">
+    <template id="portal_helpdesk_form_inherit" inherit_id="website_helpdesk.team_form_1">
         <xpath expr="//div[@class='form-group o_website_helpdesk_form_partner_id']" position="after">
             <div class="form-group">
                 <label for="sede">Sede</label>
@@ -13,4 +12,3 @@
         </xpath>
     </template>
 </odoo>
-
