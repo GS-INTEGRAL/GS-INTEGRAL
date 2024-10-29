@@ -22,15 +22,11 @@ class CustomWebsiteHelpdesk(WebsiteHelpdesk):
                 kwargs['sede'] = ''
                 kwargs['lugar'] = ''
 
-
-            # Llamada al controlador original
-            response = super(CustomWebsiteHelpdesk, self).helpdesk_ticket_create(**kwargs)
-            response.qcontext.update({
-                'partner': partner,  
-                'sede': kwargs.get('sede'),
-                'lugar': kwargs.get('lugar')
-            })
-            return response
+            return request.render('website_helpdesk.team_form_1', {
+                        'partner': partner,
+                        'sede': kwargs.get('sede'),
+                        'lugar': kwargs.get('lugar')
+                    })
 
 
 
