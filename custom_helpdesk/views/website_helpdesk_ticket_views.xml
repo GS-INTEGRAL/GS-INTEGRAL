@@ -26,6 +26,46 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="mb-0 py-2 s_website_form_field col-12" data-type="selection" data-name="Field">
+                    <div class="row s_col_no_resize s_col_no_bgcolor">
+                        <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px" for="helpdesk_categoria">
+                            <span class="s_website_form_label_content">Categoria</span>
+                        </label>
+                        <div class="col-sm">
+                             <select class="form-control s_website_form_input" name="categoria" id="helpdesk_categoria">
+                                <option value="bricolage">Bricolaje</option>
+                                <option value="fontaneria">Fontanería</option>
+                                <option value="climatizacion">Climatización</option>
+                                <option value="electricidad">Electricidad</option>
+                                <option value="albañileria">Albañilería</option>
+                                <option value="varios">Varios</option>
+                                <option value="tic-ordenadores">Tic-Ordenadores</option>
+                                <option value="mantenimiento">Mantenimiento</option>
+                                <option value="pintura">Pintura</option>
+                                <option value="herreria">Herrería</option>
+                                <option value="jardineria">Jardinería</option>
+                                <option value="carpinteria">Carpintería</option>
+                                <option value="cristaleria">Cristalería</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-0 py-2 s_website_form_field col-12" data-type="selection" data-name="Field">
+                    <div class="row s_col_no_resize s_col_no_bgcolor">
+                        <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px" for="helpdesk_prioridad">
+                            <span class="s_website_form_label_content">Prioridad</span>
+                        </label>
+                        <div class="col-sm">
+                            <select class="form-control s_website_form_input" name="prioridad" id="helpdesk_prioridad">
+                                <option value="alta">Alta</option>
+                                <option value="media">Media</option>
+                                <option value="baja">Baja</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
             </t>
         </xpath>
     </template>
