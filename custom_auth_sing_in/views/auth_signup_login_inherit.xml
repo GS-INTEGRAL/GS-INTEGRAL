@@ -4,12 +4,16 @@
             <!-- Campo Sede -->
             <div class="mb-3 field-sede">
                 <label for="sede">Sede</label>
-                <input name="sede" type="text" id="sede" class="form-control" t-att-value="request.params.get('sede') or ''"/>
+                <input name="sede" type="text" id="sede" class="form-control" 
+                       t-att-value="request.params.get('sede') or ''" 
+                       placeholder="Centro general de origen"/>
             </div>
             <!-- Campo Lugar -->
             <div class="mb-3 field-lugar">
                 <label for="lugar">Lugar</label>
-                <input name="lugar" type="text" id="lugar" class="form-control" t-att-value="request.params.get('lugar') or ''"/>
+                <input name="lugar" type="text" id="lugar" class="form-control" 
+                       t-att-value="request.params.get('lugar') or ''" 
+                       placeholder="Dependencia donde se produce la incidencia"/>
             </div>
         </xpath>
     </template>
