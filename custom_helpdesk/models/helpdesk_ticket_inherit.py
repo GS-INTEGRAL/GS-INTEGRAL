@@ -69,7 +69,7 @@ class HelpdeskTicketInherit(models.Model):
             
     @api.onchange('prioridad')
     def _onchange_prioridad(self):
-        if self.prioridad == 'Alta':
+        if self.prioridad == 'alta':
             self._enviar_email_prioridad_alta()
     
     def _enviar_email_prioridad_alta(self):
