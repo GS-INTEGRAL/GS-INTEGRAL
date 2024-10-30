@@ -1,5 +1,5 @@
 from odoo import models, fields, api
-from odooError import UserError
+from odoo.exceptions import UserError
 
 class HelpdeskTicketInherit(models.Model):
     _inherit = 'helpdesk.ticket'
