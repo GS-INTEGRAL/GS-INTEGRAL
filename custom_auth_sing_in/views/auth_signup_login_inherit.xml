@@ -1,0 +1,16 @@
+<odoo>
+    <template id="auth_signup_login_inherit" inherit_id="auth_signup.fields">
+        <xpath expr="//div[@class='mb-3 field-name']" position="after">
+            <!-- Campo Sede -->
+            <div class="mb-3 field-sede">
+                <label for="sede">Sede</label>
+                <input name="sede" type="text" id="sede" class="form-control" t-att-value="request.params.get('sede') or ''"/>
+            </div>
+            <!-- Campo Lugar -->
+            <div class="mb-3 field-lugar">
+                <label for="lugar">Lugar</label>
+                <input name="lugar" type="text" id="lugar" class="form-control" t-att-value="request.params.get('lugar') or ''"/>
+            </div>
+        </xpath>
+    </template>
+</odoo>

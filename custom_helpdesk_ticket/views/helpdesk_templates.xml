@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+   <template id="ticket_submit_form_inherit" inherit_id="module_name.ticket_submit_form">
+    <xpath expr="//input[@id='helpdesk2']/../../.." position="after">
+        <!-- Campo Sede -->
+        <div class="mb-0 py-2 s_website_form_field col-12 s_website_form_required" data-type="char" data-name="Field">
+            <div class="row s_col_no_resize s_col_no_bgcolor">
+                <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px" for="helpdesk_sede">
+                    <span class="s_website_form_label_content">Sede</span>
+                    <span class="s_website_form_mark"> *</span>
+                </label>
+                <div class="col-sm">
+                    <input type="text" class="form-control s_website_form_input" name="sede" required="1" id="helpdesk_sede" data-fill-with="sede"/>
+                </div>
+            </div>
+        </div>
+
+        <!-- Campo Lugar -->
+        <div class="mb-0 py-2 s_website_form_field col-12" data-type="char" data-name="Field">
+            <div class="row s_col_no_resize s_col_no_bgcolor">
+                <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px" for="helpdesk_lugar">
+                    <span class="s_website_form_label_content">Lugar</span>
+                </label>
+                <div class="col-sm">
+                    <input type="text" class="form-control s_website_form_input" name="lugar" id="helpdesk_lugar" data-fill-with="lugar"/>
+                </div>
+            </div>
+        </div>
+    </xpath>
+</template>
+
+</odoo>
+
