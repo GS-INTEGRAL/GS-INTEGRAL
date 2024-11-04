@@ -1,6 +1,7 @@
 from odoo import http, _
 from odoo.addons.auth_signup.controllers.main import AuthSignupHome
 
+
 class AuthSignupHomeCustom(AuthSignupHome):
 
     def get_auth_signup_qcontext(self):
@@ -8,8 +9,8 @@ class AuthSignupHomeCustom(AuthSignupHome):
         qcontext = super().get_auth_signup_qcontext()
 
         # Agrega los campos adicionales al contexto si están en request.params
-        qcontext['lugar'] = http.request.params.get('lugar')
-        qcontext['sede'] = http.request.params.get('sede')
+        qcontext["lugar"] = http.request.params.get("lugar")
+        qcontext["sede"] = http.request.params.get("sede")
 
         return qcontext
 
@@ -18,7 +19,7 @@ class AuthSignupHomeCustom(AuthSignupHome):
         values = super()._prepare_signup_values(qcontext)
 
         # Extrae y agrega los campos adicionales al diccionario de valores
-        values['lugar'] = qcontext.get('lugar')
-        values['sede'] = qcontext.get('sede')
+        values["lugar"] = qcontext.get("lugar")
+        values["sede"] = qcontext.get("sede")
 
         return values

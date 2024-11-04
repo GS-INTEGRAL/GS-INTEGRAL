@@ -6,10 +6,10 @@
         <field name="arch" type="xml">
             <xpath expr="//sheet/notebook" position="before">
                 <group>
-                    <field name="categoria"/><field name="fecha_fin" optional = "show"/>
-                    <field name="prioridad" optional = "show"/>
-                    <field name="estado" optional = "show"/>
-                    <field name="satisfaccion" optional = "show"/>
+                    <field name="categoria"/>
+                    <field name="fecha_fin" />
+                    <field name="prioridad" />
+                    <field name="satisfaccion"/>
                 </group>
             </xpath>
             <xpath expr="//sheet/notebook" position="inside">
@@ -47,7 +47,6 @@
         <tree>
             <field name="fecha_fin" optional = "show"/>
             <field name="prioridad" optional = "show"/>
-            <field name="estado" optional = "show"/>
             <field name="satisfaccion" optional = "show"/>
         </tree>
     </field>
