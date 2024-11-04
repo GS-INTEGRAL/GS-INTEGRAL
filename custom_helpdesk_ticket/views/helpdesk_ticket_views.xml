@@ -6,8 +6,8 @@
         <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_form"/>
         <field name="arch" type="xml">
             <field name="partner_id" position="after">
-                <field name="sede" readonly="1"/>
-                <field name="lugar" readonly="1"/>
+                <field name="sede" readonly="0"/>
+                <field name="lugar" readonly="0"/>
             </field>
         </field>
     </record>
