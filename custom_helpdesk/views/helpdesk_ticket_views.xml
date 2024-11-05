@@ -17,7 +17,6 @@
                   <page string="Sede">
                         <group>
                             <field name="sede"/>
-                            <field name="email"/>
                             <field name="sede_imagen" widget="image" filename="sede_imagen_filename"/>
                         </group>
                     </page>

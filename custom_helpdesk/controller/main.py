@@ -17,13 +17,11 @@ class CustomWebsiteHelpdesk(WebsiteHelpdesk):
     )
     def helpdesk_ticket_create(self, **kwargs):
         user = request.env.user
-        partner = (
-            user.partner_id if user.partner_id else None
-        ) 
-        
+        partner = user.partner_id if user.partner_id else None
+
         categoria = kwargs.get("categoria")
         prioridad = kwargs.get("prioridad")
-        email = kwargs.get("partner_email") 
+        email = kwargs.get("partner_email")
 
         if partner:
             # Log para verificar que partner y sus campos están disponibles
@@ -35,12 +33,14 @@ class CustomWebsiteHelpdesk(WebsiteHelpdesk):
             )
             kwargs["sede"] = partner.sede
             kwargs["lugar"] = partner.lugar
+            kwargs["prioridad"] = prioridad
+            kwargs["email"] = partner.email
         else:
-            _logger.warning(
-                "No se encontró el partner para el usuario: %s", user.login
-            )
+            _logger.warning("No se encontró el partner para el usuario: %s", user.login)
             kwargs["sede"] = ""
             kwargs["lugar"] = ""
+            kwargs["prioridad"] = ""
+            kwargs["email"] = ""
 
         _logger.info(
             "Datos enviados a la vista - Sede: %s, Lugar: %s",
@@ -48,15 +48,21 @@ class CustomWebsiteHelpdesk(WebsiteHelpdesk):
             kwargs.get("lugar"),
         )
 
-        ticket = request.env["helpdesk.ticket"].sudo().create({
-            "sede": kwargs["sede"],
-            "lugar": kwargs["lugar"],
-            "categoria": categoria,
-            "prioridad": prioridad,
-            "partner_id": partner.id if partner else None,
-            "email_cc": email,
-        })
-        
+        ticket = (
+            request.env["helpdesk.ticket"]
+            .sudo()
+            .create(
+                {
+                    "sede": kwargs["sede"],
+                    "lugar": kwargs["lugar"],
+                    "categoria": categoria,
+                    "prioridad": prioridad,
+                    "partner_id": partner.id if partner else None,
+                    "email": email,
+                }
+            )
+        )
+
         return request.render(
             "website_helpdesk.team_form_1",
             {
