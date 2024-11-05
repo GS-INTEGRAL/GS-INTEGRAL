@@ -75,9 +75,9 @@ class HelpdeskTicketInherit(models.Model):
     fecha_fin = fields.Date(string="Fecha Finalización")
 
     @api.onchange("estado")
-    def _onchange_estado(self):
-        print("Estado cambiado:", self.estado)
-        if self.estado in ["cerrado", "baja", "derivada"]:
+    def _onchange_stage_id(self):
+        print("Estado cambiado:", self.stage_id)
+        if self.stage_id in ["Resuelto", "Cancelado"]:
             self.fecha_fin = fields.Date.today()
         else:
             self.fecha_fin = False
