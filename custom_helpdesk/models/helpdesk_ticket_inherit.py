@@ -1,87 +1,104 @@
 from odoo import models, fields, api
 from odoo.exceptions import UserError
 
+
 class HelpdeskTicketInherit(models.Model):
-    _inherit = 'helpdesk.ticket'
+    _inherit = "helpdesk.ticket"
 
     sede = fields.Char(string="Sede", related="partner_id.sede", store=True)
     lugar = fields.Char(string="Lugar", related="partner_id.lugar", store=True)
-    comentario_reparacion = fields.Text(string='Comentario de Reparación', help='Comentarios positivos o negativos sobre la reparación realizada por el cliente')
-    observacion_mantenimiento = fields.Text(string='Observaciones de Mantenimiento', help='Observaciones del técnico sobre dudas o problemas durante la reparación')
+    comentario_reparacion = fields.Text(
+        string="Comentario de Reparación",
+        help="Comentarios positivos o negativos sobre la reparación realizada por el cliente",
+    )
+    observacion_mantenimiento = fields.Text(
+        string="Observaciones de Mantenimiento",
+        help="Observaciones del técnico sobre dudas o problemas durante la reparación",
+    )
     categoria = fields.Selection(
         [
-            ('bricolage', 'Bricolaje'),
-            ('fontaneria', 'Fontanería'),
-            ('climatizacion', 'Climatización'),
-            ('electricidad', 'Electricidad'),
-            ('albañileria', 'Albañilería'),
-            ('varios', 'Varios'),
-            ('tic-ordenadores', 'Tic-Ordenadores'),
-            ('mantenimiento', 'Mantenimiento'),
-            ('pintura', 'Pintura'),
-            ('herreria', 'Herrería'),
-            ('jardineria', 'Jardinería'),
-            ('carpinteria', 'Carpintería'),
-            ('cristaleria', 'Cristalería'),            
+            ("bricolage", "Bricolaje"),
+            ("fontaneria", "Fontanería"),
+            ("climatizacion", "Climatización"),
+            ("electricidad", "Electricidad"),
+            ("albañileria", "Albañilería"),
+            ("varios", "Varios"),
+            ("tic-ordenadores", "Tic-Ordenadores"),
+            ("mantenimiento", "Mantenimiento"),
+            ("pintura", "Pintura"),
+            ("herreria", "Herrería"),
+            ("jardineria", "Jardinería"),
+            ("carpinteria", "Carpintería"),
+            ("cristaleria", "Cristalería"),
         ],
-        string='Categoría'
+        string="Categoría",
     )
-    
+
     prioridad = fields.Selection(
         [
-            ('alta', 'Alta'),
-            ('media', 'Media'),
-            ('baja', 'Baja'),                    
+            ("alta", "Alta"),
+            ("media", "Media"),
+            ("baja", "Baja"),
         ],
-        string='Prioridad'
+        string="Prioridad",
     )
-    
+
     estado = fields.Selection(
         [
-            ('abierta', 'Abierta'),
-            ('cerrado', 'Cerrado'),
-            ('En proceso', 'En proceso'),
-            ('baja', 'Baja'),
-            ('derivada', 'Derivada'),                        
+            ("abierta", "Abierta"),
+            ("cerrado", "Cerrado"),
+            ("En proceso", "En proceso"),
+            ("baja", "Baja"),
+            ("derivada", "Derivada"),
         ],
-        string='Estado'
+        string="Estado",
     )
-    
+
     satisfaccion = fields.Selection(
         [
-            ('positiva', 'Positiva'),
-            ('negativa', 'Negativa'),
+            ("positiva", "Positiva"),
+            ("negativa", "Negativa"),
         ],
-        string='Satisfacción'
+        string="Satisfacción",
     )
-    
-    sede_imagen = fields.Binary(string='Imagen o Archivo de la Sede', attachment=True, help='Sube una imagen o archivo de la sede donde ocurrió la incidencia (PNG, JPEG, PDF)')
-    lugar_incidencia_imagen = fields.Binary(string='Imagen o Archivo del Lugar de Incidencia', attachment=True, help='Sube una imagen o archivo del lugar exacto de la incidencia (PNG, JPEG, PDF)')
+
+    sede_imagen = fields.Binary(
+        string="Imagen o Archivo de la Sede",
+        attachment=True,
+        help="Sube una imagen o archivo de la sede donde ocurrió la incidencia (PNG, JPEG, PDF)",
+    )
+    lugar_incidencia_imagen = fields.Binary(
+        string="Imagen o Archivo del Lugar de Incidencia",
+        attachment=True,
+        help="Sube una imagen o archivo del lugar exacto de la incidencia (PNG, JPEG, PDF)",
+    )
     fecha_fin = fields.Date(string="Fecha Finalización")
 
-    @api.onchange('estado')
+    @api.onchange("estado")
     def _onchange_estado(self):
         print("Estado cambiado:", self.estado)
-        if self.estado in ['cerrado', 'baja', 'derivada']:
+        if self.estado in ["cerrado", "baja", "derivada"]:
             self.fecha_fin = fields.Date.today()
         else:
             self.fecha_fin = False
-            
-    @api.onchange('prioridad')
+
+    @api.onchange("prioridad")
     def _onchange_prioridad(self):
-        if self.prioridad == 'alta':
+        if self.prioridad == "alta":
             self._enviar_email_prioridad_alta()
-    
+
     def _enviar_email_prioridad_alta(self):
         """Envía un correo electrónico al administrador cuando la prioridad es alta."""
-        admin = self.env.ref('base.user_admin')
+        admin = self.env.ref("base.user_admin")
         if not admin.email:
-            raise UserError("El usuario administrador no tiene un correo electrónico configurado.")
-    
+            raise UserError(
+                "El usuario administrador no tiene un correo electrónico configurado."
+            )
+
         ticket_num = self.id
-        ticket_description = self.name or 'Sin descripción'
-        opened_by = self.partner_id.name or 'Desconocido'
-        opened_email = self.partner_id.email or 'Sin correo'
+        ticket_description = self.name or "Sin descripción"
+        opened_by = self.partner_id.name or "Desconocido"
+        opened_email = self.partner_id.email or "Sin correo"
 
         subject = f"Alerta: Ticket {ticket_num} con Prioridad Alta"
         body_html = f"""
@@ -94,12 +111,12 @@ class HelpdeskTicketInherit(models.Model):
             </ul>
             <p>Por favor, revisa el ticket con urgencia.</p>
         """
-        
+
         mail_values = {
-            'subject': subject,
-            'body_html': body_html,
-            'email_to': admin.email,
-            'email_from': self.env.user.email,  
+            "subject": subject,
+            "body_html": body_html,
+            "email_to": admin.email,
+            "email_from": self.env.user.email,
         }
-        mail = self.env['mail.mail'].create(mail_values)
+        mail = self.env["mail.mail"].create(mail_values)
         mail.send()

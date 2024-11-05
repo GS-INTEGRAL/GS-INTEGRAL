@@ -19,7 +19,11 @@ class CustomWebsiteHelpdesk(WebsiteHelpdesk):
         user = request.env.user
         partner = (
             user.partner_id if user.partner_id else None
-        )  # Asegúrate de que el partner existe
+        ) 
+        
+        categoria = kwargs.get("categoria")
+        prioridad = kwargs.get("prioridad")
+        email = kwargs.get("partner_email") 
 
         if partner:
             # Log para verificar que partner y sus campos están disponibles
@@ -44,11 +48,21 @@ class CustomWebsiteHelpdesk(WebsiteHelpdesk):
             kwargs.get("lugar"),
         )
 
+        ticket = request.env["helpdesk.ticket"].sudo().create({
+            "sede": kwargs["sede"],
+            "lugar": kwargs["lugar"],
+            "categoria": categoria,
+            "prioridad": prioridad,
+            "partner_id": partner.id if partner else None,
+            "partner_email": email,
+        })
+        
         return request.render(
             "website_helpdesk.team_form_1",
             {
                 "partner": partner,
                 "sede": kwargs.get("sede"),
                 "lugar": kwargs.get("lugar"),
+                "ticket": ticket,
             },
         )
