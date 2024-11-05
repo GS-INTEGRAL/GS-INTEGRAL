@@ -54,7 +54,7 @@ class CustomWebsiteHelpdesk(WebsiteHelpdesk):
             "categoria": categoria,
             "prioridad": prioridad,
             "partner_id": partner.id if partner else None,
-            "partner_email": email,
+            "email_cc": email,
         })
         
         return request.render(

@@ -73,6 +73,8 @@ class HelpdeskTicketInherit(models.Model):
         help="Sube una imagen o archivo del lugar exacto de la incidencia (PNG, JPEG, PDF)",
     )
     fecha_fin = fields.Date(string="Fecha Finalización")
+    email = fields.Char(string="Correo Electrónico", help="Correo electrónico ingresado en el formulario web")
+
 
     @api.onchange("estado")
     def _onchange_stage_id(self):
