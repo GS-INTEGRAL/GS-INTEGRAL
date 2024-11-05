@@ -8,8 +8,12 @@
                 <group>
                     <field name="email"/>
                     <field name="categoria"/>
-                    <field name="fecha_fin" />
+                    </group>
+            </xpath>        
+            <xpath expr="//field[@name='tag_ids']" position="after">
+                <group>
                     <field name="prioridad" />
+                    <field name="fecha_fin" />
                     <field name="satisfaccion"/>
                 </group>
             </xpath>
