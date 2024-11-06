@@ -5,30 +5,34 @@
         <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_form"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='email_cc']" position="after">
-                    <field name="email"/>
+                    <field name="sede"/>
                     <field name="categoria"/>
+                    <field name="satisfaccion"/>
             </xpath>        
             <xpath expr="//field[@name='tag_ids']" position="after">
                     <field name="prioridad" />
+                    <field name="lugar"/>
                     <field name="fecha_fin" />
-                    <field name="satisfaccion"/>
+                    
             </xpath>
             <xpath expr="//sheet/notebook/page[@name='description']" position="after">
                   <page string="Sede">
                         <group>
-                            <field name="sede"/>
                             <field name="sede_imagen" widget="image" filename="sede_imagen_filename"/>
                         </group>
                     </page>
                     <page string="Lugar">
                         <group>
-                            <field name="lugar"/>
                             <field name="lugar_incidencia_imagen" widget="image" filename="lugar_incidencia_imagen_filename"/>
                         </group>
                     </page>
                     <page string="Sobre la Reparación">
-                        <group>
+                        <group>                            
                             <field name="comentario_reparacion"/>
+                            <field name="material_name"/>
+                            <field name="quantity"/>
+                            <field name="model"/>
+                            <field name="attachment"/>
                         </group>
                     </page> 
                     <page string="Observaciones del Mantenimiento">

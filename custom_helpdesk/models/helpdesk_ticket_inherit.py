@@ -1,3 +1,4 @@
+import string
 from odoo import models, fields, api
 from odoo.exceptions import UserError
 
@@ -40,19 +41,8 @@ class HelpdeskTicketInherit(models.Model):
             ("media", "Media"),
             ("baja", "Baja"),
         ],
-        string="Prioridad", store = True,
+        string="Prioridad",
     )
-
-    # estado = fields.Selection(
-    #     [
-    #         ("abierta", "Abierta"),
-    #         ("cerrado", "Cerrado"),
-    #         ("En proceso", "En proceso"),
-    #         ("baja", "Baja"),
-    #         ("derivada", "Derivada"),
-    #     ],
-    #     string="Estado",
-    # )
 
     satisfaccion = fields.Selection(
         [
@@ -75,7 +65,7 @@ class HelpdeskTicketInherit(models.Model):
     fecha_fin = fields.Date(string="Fecha Finalización")
     email = fields.Char(
         string="Correo Electrónico",
-        help="Correo electrónico ingresado en el formulario web", store = True,
+        help="Correo electrónico ingresado en el formulario web",
     )
 
     @api.onchange("stage_id")
@@ -127,3 +117,12 @@ class HelpdeskTicketInherit(models.Model):
         }
         mail = self.env["mail.mail"].create(mail_values)
         mail.send()
+
+
+class HelpdeskEmployee(models.Model):
+    _inherit = "helpdesk.ticket"
+    
+    material_name = fields.Char(string="Material", help="Materiales necesarios para la obra", required=True)
+    quantity = fields.Float(string="Cantidad", default=1.0, help="Cantidad del material requerido")
+    model = fields.Char(string="Modelo", help="Modelo del material")
+    attachment = fields.Image(string="Imagen del Material", help="Adjunta una imagen del material si es necesario")
