@@ -23,6 +23,9 @@ class CustomWebsiteHelpdesk(WebsiteHelpdesk):
         prioridad = kwargs.get("prioridad")
         email = kwargs.get("partner_email")
 
+        if not categoria or not prioridad:
+            raise UserError("Faltan algunos datos requeridos para crear el ticket.")
+        
         if partner:
             # Log para verificar que partner y sus campos están disponibles
             _logger.info(
@@ -33,12 +36,12 @@ class CustomWebsiteHelpdesk(WebsiteHelpdesk):
             )
             kwargs["sede"] = partner.sede
             kwargs["lugar"] = partner.lugar
-            kwargs["email"] = partner.email
+            kwargs["email"] = partner.email if partner else kwargs.get("partner_email")
         else:
             _logger.warning("No se encontró el partner para el usuario: %s", user.login)
             kwargs["sede"] = ""
             kwargs["lugar"] = ""
-            kwargs["email"] = ""
+            kwargs["email"] = email
 
         _logger.info(
             "Datos enviados a la vista - Sede: %s, Lugar: %s",
