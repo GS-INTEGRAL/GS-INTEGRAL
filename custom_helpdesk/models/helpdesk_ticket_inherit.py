@@ -79,13 +79,26 @@ class HelpdeskTicketInherit(models.Model):
         else:
             self.fecha_fin = False
 
+    def create(self, vals):
+        # Si partner_id está presente, copiamos su email a email_cc
+        if vals.get("partner_id"):
+            partner = self.env["res.partner"].browse(vals["partner_id"])
+            vals["email_cc"] = partner.email
+        return super().create(vals)
+
+    def write(self, vals):
+        # Si se está actualizando el partner_id, actualizamos el email_cc
+        if "partner_id" in vals:
+            partner = self.env["res.partner"].browse(vals["partner_id"])
+            vals["email_cc"] = partner.email
+        return super().write(vals)
+
     @api.onchange("prioridad")
     def _onchange_prioridad(self):
         if self.prioridad == "alta":
             self._enviar_email_prioridad_alta()
 
     def _enviar_email_prioridad_alta(self):
-        """Envía un correo electrónico al administrador cuando la prioridad es alta."""
         admin = self.env.ref("base.user_admin")
         if not admin.email:
             raise UserError(
@@ -121,8 +134,15 @@ class HelpdeskTicketInherit(models.Model):
 
 class HelpdeskEmployee(models.Model):
     _inherit = "helpdesk.ticket"
-    
-    material_name = fields.Char(string="Material", help="Materiales necesarios para la obra", required=True)
-    quantity = fields.Float(string="Cantidad", default=1.0, help="Cantidad del material requerido")
+
+    material_name = fields.Char(
+        string="Material", help="Materiales necesarios para la obra", required=True
+    )
+    quantity = fields.Float(
+        string="Cantidad", default=1.0, help="Cantidad del material requerido"
+    )
     model = fields.Char(string="Modelo", help="Modelo del material")
-    attachment = fields.Image(string="Imagen del Material", help="Adjunta una imagen del material si es necesario")
+    attachment = fields.Image(
+        string="Imagen del Material",
+        help="Adjunta una imagen del material si es necesario",
+    )
