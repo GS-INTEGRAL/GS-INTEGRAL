@@ -75,8 +75,7 @@ class HelpdeskTicketInherit(models.Model):
     fecha_fin = fields.Date(string="Fecha Finalización")
     email = fields.Char(
         string="Correo Electrónico",
-        help="Correo electrónico ingresado en el formulario web",
-        related='partner_id.prioridad', store = True,
+        help="Correo electrónico ingresado en el formulario web", store = True,
     )
 
     @api.onchange("stage_id")
