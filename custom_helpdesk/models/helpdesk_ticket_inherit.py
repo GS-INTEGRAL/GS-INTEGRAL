@@ -80,21 +80,33 @@ class HelpdeskTicketInherit(models.Model):
             self.fecha_fin = False
 
     def create(self, vals_list):
-        # Comprobar si vals_list es una lista y procesar cada diccionario en la lista
-        if isinstance(vals_list, list):
-            for vals in vals_list:
-                # Si existe partner_id, asignamos su email a email_cc
-                if vals.get("partner_id"):
-                    partner = self.env["res.partner"].browse(vals["partner_id"])
-                    vals["email_cc"] = partner.email
-        else:
-            # Si es un solo diccionario, entonces lo procesamos directamente
-            if vals_list.get("partner_id"):
-                partner = self.env["res.partner"].browse(vals_list["partner_id"])
-                vals_list["email_cc"] = partner.email
+        # Asegúrate de que `vals_list` sea una lista
+        if not isinstance(vals_list, list):
+            vals_list = [vals_list]
 
-        # Llamada al super para crear los registros
-        return super().create(vals_list)
+        # Iterar sobre cada conjunto de valores en `vals_list`
+        for vals in vals_list:
+            # Si hay un `partner_id`, asigna su email a `email_cc`
+            if vals.get("partner_id"):
+                partner = self.env["res.partner"].browse(vals["partner_id"])
+                vals["email_cc"] = partner.email
+
+        # Crear el ticket llamando a `super`
+        tickets = super().create(vals_list)
+
+        # Enviar correo electrónico a cada ticket creado con `email_cc`
+        for ticket in tickets:
+            if ticket.email_cc:
+                # Publicar mensaje y enviar notificación por correo electrónico
+                ticket.message_post(
+                    subject="Nuevo ticket creado",
+                    body="Se ha creado un nuevo ticket en el sistema de soporte.",
+                    partner_ids=[ticket.partner_id.id] if ticket.partner_id else [],
+                    email_layout_xmlid="mail.mail_notification_light",
+                    subtype_id=self.env.ref("mail.mt_comment").id,
+                )
+
+        return tickets
 
     def write(self, vals):
         # Si se está actualizando el partner_id, actualizamos el email_cc
@@ -105,12 +117,12 @@ class HelpdeskTicketInherit(models.Model):
 
     @api.onchange("prioridad")
     def _onchange_prioridad(self):
-        if self.prioridad == "alta":
+        if self.prioridad == "alta" and not self._context.get('from_email_trigger', False):
             self._enviar_email_prioridad_alta()
 
     def _enviar_email_prioridad_alta(self):
-        admin = self.env.ref("base.user_admin")
-        if not admin.email:
+        admin = self.env.ref("base.user_admin", raise_if_not_found=False)
+        if not admin.email or not admin.email:
             raise UserError(
                 "El usuario administrador no tiene un correo electrónico configurado."
             )
