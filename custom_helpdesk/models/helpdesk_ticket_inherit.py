@@ -158,8 +158,7 @@ class HelpdeskEmployee(models.Model):
     _inherit = "helpdesk.ticket"
 
     material_name = fields.Char(
-        string="Material", help="Materiales necesarios para la obra", required=True
-    )
+        string="Material", help="Materiales necesarios para la obra")
     quantity = fields.Float(
         string="Cantidad", default=1.0, help="Cantidad del material requerido"
     )
