@@ -33,13 +33,11 @@ class CustomWebsiteHelpdesk(WebsiteHelpdesk):
             )
             kwargs["sede"] = partner.sede
             kwargs["lugar"] = partner.lugar
-            kwargs["prioridad"] = prioridad
             kwargs["email"] = partner.email
         else:
             _logger.warning("No se encontró el partner para el usuario: %s", user.login)
             kwargs["sede"] = ""
             kwargs["lugar"] = ""
-            kwargs["prioridad"] = ""
             kwargs["email"] = ""
 
         _logger.info(
@@ -58,7 +56,7 @@ class CustomWebsiteHelpdesk(WebsiteHelpdesk):
                     "categoria": categoria,
                     "prioridad": prioridad,
                     "partner_id": partner.id if partner else None,
-                    "email": email,
+                    "email": kwargs["email"],
                 }
             )
         )

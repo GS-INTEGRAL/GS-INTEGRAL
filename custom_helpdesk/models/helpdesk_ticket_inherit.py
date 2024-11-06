@@ -40,19 +40,19 @@ class HelpdeskTicketInherit(models.Model):
             ("media", "Media"),
             ("baja", "Baja"),
         ],
-        string="Prioridad",
+        string="Prioridad", related='partner_id.prioridad', store = True,
     )
 
-    estado = fields.Selection(
-        [
-            ("abierta", "Abierta"),
-            ("cerrado", "Cerrado"),
-            ("En proceso", "En proceso"),
-            ("baja", "Baja"),
-            ("derivada", "Derivada"),
-        ],
-        string="Estado",
-    )
+    # estado = fields.Selection(
+    #     [
+    #         ("abierta", "Abierta"),
+    #         ("cerrado", "Cerrado"),
+    #         ("En proceso", "En proceso"),
+    #         ("baja", "Baja"),
+    #         ("derivada", "Derivada"),
+    #     ],
+    #     string="Estado",
+    # )
 
     satisfaccion = fields.Selection(
         [
@@ -76,6 +76,7 @@ class HelpdeskTicketInherit(models.Model):
     email = fields.Char(
         string="Correo Electrónico",
         help="Correo electrónico ingresado en el formulario web",
+        related='partner_id.prioridad', store = True,
     )
 
     @api.onchange("stage_id")
