@@ -40,7 +40,7 @@ class HelpdeskTicketInherit(models.Model):
             ("media", "Media"),
             ("baja", "Baja"),
         ],
-        string="Prioridad", related='partner_id.prioridad', store = True,
+        string="Prioridad", store = True,
     )
 
     # estado = fields.Selection(
