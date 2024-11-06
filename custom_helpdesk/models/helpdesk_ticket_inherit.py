@@ -79,12 +79,22 @@ class HelpdeskTicketInherit(models.Model):
         else:
             self.fecha_fin = False
 
-    def create(self, vals):
-        # Si partner_id está presente, copiamos su email a email_cc
-        if vals.get("partner_id"):
-            partner = self.env["res.partner"].browse(vals["partner_id"])
-            vals["email_cc"] = partner.email
-        return super().create(vals)
+    def create(self, vals_list):
+        # Comprobar si vals_list es una lista y procesar cada diccionario en la lista
+        if isinstance(vals_list, list):
+            for vals in vals_list:
+                # Si existe partner_id, asignamos su email a email_cc
+                if vals.get("partner_id"):
+                    partner = self.env["res.partner"].browse(vals["partner_id"])
+                    vals["email_cc"] = partner.email
+        else:
+            # Si es un solo diccionario, entonces lo procesamos directamente
+            if vals_list.get("partner_id"):
+                partner = self.env["res.partner"].browse(vals_list["partner_id"])
+                vals_list["email_cc"] = partner.email
+
+        # Llamada al super para crear los registros
+        return super().create(vals_list)
 
     def write(self, vals):
         # Si se está actualizando el partner_id, actualizamos el email_cc
