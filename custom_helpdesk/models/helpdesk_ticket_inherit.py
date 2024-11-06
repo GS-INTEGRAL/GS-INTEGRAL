@@ -80,11 +80,20 @@ class HelpdeskTicketInherit(models.Model):
 
     @api.onchange("stage_id")
     def _onchange_stage_id(self):
-        print("Estado cambiado:", self.stage_id)
-        if self.stage_id in ["Resuelto", "Cancelado"]:
-            self.fecha_fin = fields.Date.today()
+    #     print("Estado cambiado:", self.stage_id)
+    #     if self.stage_id in ["Resuelto", "Cancelado"]:
+    #         self.fecha_fin = fields.Date.today()
+    #     else:
+    #         self.fecha_fin = False
+
+        resolved_stage_id = self.env.ref("helpdesk.stage_solved").id  
+        canceled_stage_id = self.env.ref("helpdesk.stage_canceled").id  
+
+        if self.stage_id.id in [resolved_stage_id, canceled_stage_id]:
+            if not self.fecha_fin:
+                self.fecha_fin = fields.Date.today()
         else:
-            self.fecha_fin = False
+                self.fecha_fin = False
 
     @api.onchange("prioridad")
     def _onchange_prioridad(self):
