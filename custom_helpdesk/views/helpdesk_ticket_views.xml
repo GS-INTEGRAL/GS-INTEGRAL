@@ -34,7 +34,7 @@
                             <field name="product_qty"/>
                             <field name="attachment"/>
                             <button name="create_purchase_order_line"
-                        string="Crear Orden de Compra"
+                        string="Crear Compra"
                         type="object"
                         class="btn-primary"
                         icon="fa-shopping-cart"/>
