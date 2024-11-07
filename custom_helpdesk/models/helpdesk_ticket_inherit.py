@@ -79,79 +79,79 @@ class HelpdeskTicketInherit(models.Model):
         else:
             self.fecha_fin = False
 
-    def create(self, vals_list):
-        # Asegúrate de que `vals_list` sea una lista
-        if not isinstance(vals_list, list):
-            vals_list = [vals_list]
+    # def create(self, vals_list):
+    #     # Asegúrate de que `vals_list` sea una lista
+    #     if not isinstance(vals_list, list):
+    #         vals_list = [vals_list]
 
-        # Iterar sobre cada conjunto de valores en `vals_list`
-        for vals in vals_list:
-            # Si hay un `partner_id`, asigna su email a `email_cc`
-            if vals.get("partner_id"):
-                partner = self.env["res.partner"].browse(vals["partner_id"])
-                vals["email_cc"] = partner.email
+    #     # Iterar sobre cada conjunto de valores en `vals_list`
+    #     for vals in vals_list:
+    #         # Si hay un `partner_id`, asigna su email a `email_cc`
+    #         if vals.get("partner_id"):
+    #             partner = self.env["res.partner"].browse(vals["partner_id"])
+    #             vals["email_cc"] = partner.email
 
-        # Crear el ticket llamando a `super`
-        tickets = super().create(vals_list)
+    #     # Crear el ticket llamando a `super`
+    #     tickets = super().create(vals_list)
 
-        # Enviar correo electrónico a cada ticket creado con `email_cc`
-        for ticket in tickets:
-            if ticket.email_cc:
-                # Publicar mensaje y enviar notificación por correo electrónico
-                ticket.message_post(
-                    subject="Nuevo ticket creado",
-                    body="Se ha creado un nuevo ticket en el sistema de soporte.",
-                    partner_ids=[ticket.partner_id.id] if ticket.partner_id else [],
-                    email_layout_xmlid="mail.mail_notification_light",
-                    subtype_id=self.env.ref("mail.mt_comment").id,
-                )
+    #     # Enviar correo electrónico a cada ticket creado con `email_cc`
+    #     for ticket in tickets:
+    #         if ticket.email_cc:
+    #             # Publicar mensaje y enviar notificación por correo electrónico
+    #             ticket.message_post(
+    #                 subject="Nuevo ticket creado",
+    #                 body="Se ha creado un nuevo ticket en el sistema de soporte.",
+    #                 partner_ids=[ticket.partner_id.id] if ticket.partner_id else [],
+    #                 email_layout_xmlid="mail.mail_notification_light",
+    #                 subtype_id=self.env.ref("mail.mt_comment").id,
+    #             )
 
-        return tickets
+    #     return tickets
 
-    def write(self, vals):
-        # Si se está actualizando el partner_id, actualizamos el email_cc
-        if "partner_id" in vals:
-            partner = self.env["res.partner"].browse(vals["partner_id"])
-            vals["email_cc"] = partner.email
-        return super().write(vals)
+    # def write(self, vals):
+    #     # Si se está actualizando el partner_id, actualizamos el email_cc
+    #     if "partner_id" in vals:
+    #         partner = self.env["res.partner"].browse(vals["partner_id"])
+    #         vals["email_cc"] = partner.email
+    #     return super().write(vals)
 
-    @api.onchange("prioridad")
-    def _onchange_prioridad(self):
-        if self.prioridad == "alta" and not self._context.get('from_email_trigger', False):
-            self._enviar_email_prioridad_alta()
+    # @api.onchange("prioridad")
+    # def _onchange_prioridad(self):
+    #     if self.prioridad == "alta" and not self._context.get('from_email_trigger', False):
+    #         self._enviar_email_prioridad_alta()
 
-    def _enviar_email_prioridad_alta(self):
-        admin = self.env.ref("base.user_admin", raise_if_not_found=False)
-        if not admin.email or not admin.email:
-            raise UserError(
-                "El usuario administrador no tiene un correo electrónico configurado."
-            )
+    # def _enviar_email_prioridad_alta(self):
+    #     admin = self.env.ref("base.user_admin", raise_if_not_found=False)
+    #     if not admin.email or not admin.email:
+    #         raise UserError(
+    #             "El usuario administrador no tiene un correo electrónico configurado."
+    #         )
 
-        ticket_num = self.id
-        ticket_description = self.name or "Sin descripción"
-        opened_by = self.partner_id.name or "Desconocido"
-        opened_email = self.partner_id.email or "Sin correo"
+    #     ticket_num = self.id
+    #     ticket_description = self.name or "Sin descripción"
+    #     opened_by = self.partner_id.name or "Desconocido"
+    #     opened_email = self.partner_id.email or "Sin correo"
 
-        subject = f"Alerta: Ticket {ticket_num} con Prioridad Alta"
-        body_html = f"""
-            <p>¡Alerta! Se ha creado o actualizado un ticket con prioridad <strong>Alta</strong>.</p>
-            <ul>
-                <li><strong>Número de Ticket:</strong> {ticket_num}</li>
-                <li><strong>Descripción:</strong> {ticket_description}</li>
-                <li><strong>Creado por:</strong> {opened_by}</li>
-                <li><strong>Email del Creador:</strong> {opened_email}</li>
-            </ul>
-            <p>Por favor, revisa el ticket con urgencia.</p>
-        """
+    #     subject = f"Alerta: Ticket {ticket_num} con Prioridad Alta"
+    #     body_html = f"""
+    #         <p>¡Alerta! Se ha creado o actualizado un ticket con prioridad <strong>Alta</strong>.</p>
+    #         <ul>
+    #             <li><strong>Número de Ticket:</strong> {ticket_num}</li>
+    #             <li><strong>Descripción:</strong> {ticket_description}</li>
+    #             <li><strong>Creado por:</strong> {opened_by}</li>
+    #             <li><strong>Email del Creador:</strong> {opened_email}</li>
+    #         </ul>
+    #         <p>Por favor, revisa el ticket con urgencia.</p>
+    #     """
 
-        mail_values = {
-            "subject": subject,
-            "body_html": body_html,
-            "email_to": admin.email,
-            "email_from": self.env.user.email,
-        }
-        mail = self.env["mail.mail"].create(mail_values)
-        mail.send()
+    #     mail_values = {
+    #         "subject": subject,
+    #         "body_html": body_html,
+    #         "email_to": admin.email,
+    #         "email_from": self.env.user.email,
+    #     }
+    #     mail = self.env["mail.mail"].create(mail_values)
+    #     mail.send()
 
 
 class HelpdeskEmployee(models.Model):
