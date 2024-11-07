@@ -29,10 +29,15 @@
                     <page string="Sobre la Reparación">
                         <group>                            
                             <field name="comentario_reparacion"/>
-                            <field name="material_name"/>
-                            <field name="quantity"/>
-                            <field name="model"/>
+                            <field name="product_id"/>
+                            <field name="name"/>
+                            <field name="product_qty"/>
                             <field name="attachment"/>
+                            <button name="create_purchase_order_line"
+                        string="Crear Orden de Compra"
+                        type="object"
+                        class="btn-primary"
+                        icon="fa-shopping-cart"/>
                         </group>
                     </page> 
                     <page string="Observaciones del Mantenimiento">

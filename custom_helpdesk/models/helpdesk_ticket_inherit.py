@@ -153,17 +153,3 @@ class HelpdeskTicketInherit(models.Model):
     #     mail = self.env["mail.mail"].create(mail_values)
     #     mail.send()
 
-
-class HelpdeskEmployee(models.Model):
-    _inherit = "helpdesk.ticket"
-
-    material_name = fields.Char(
-        string="Material", help="Materiales necesarios para la obra")
-    quantity = fields.Float(
-        string="Cantidad", default=1.0, help="Cantidad del material requerido"
-    )
-    model = fields.Char(string="Modelo", help="Modelo del material")
-    attachment = fields.Image(
-        string="Imagen del Material",
-        help="Adjunta una imagen del material si es necesario",
-    )
