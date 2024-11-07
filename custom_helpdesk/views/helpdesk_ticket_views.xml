@@ -27,19 +27,23 @@
                         </group>
                     </page>
                     <page string="Sobre la Reparación">
-                        <group>                            
-                            <field name="comentario_reparacion"/>
-                            <field name="product_id"/>
-                            <field name="name"/>
-                            <field name="product_qty"/>
-                            <field name="attachment"/>
-                            <button name="create_purchase_order_line"
-                        string="Crear Compra"
-                        type="object"
-                        class="btn-primary"
-                        icon="fa-shopping-cart"/>
+                    <group>
+                        <field name="comentario_reparacion"/>
+                        <field name="product_id"/>
+                        <field name="name"/>
+                        <field name="product_qty"/>
+                        <field name="attachment" widget="image"/>
+                        <button name="download_attachment"
+                                string="Descargar Imagen"
+                                type="object"
+                                class="btn-secondary"/>
+                        <button name="create_purchase_order_line"
+                                string="Crear Compra"
+                                type="object"
+                                class="btn-primary"
+                                icon="fa-shopping-cart"/>
                         </group>
-                    </page> 
+                    </page>
                     <page string="Observaciones del Mantenimiento">
                         <group>
                             <field name="observacion_mantenimiento"/>

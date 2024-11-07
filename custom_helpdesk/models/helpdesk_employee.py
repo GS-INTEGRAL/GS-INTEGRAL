@@ -44,7 +44,6 @@ class HelpdeskEmployee(models.Model):
                 "product_id": self.product_id.id,
                 "name": self.name or self.product_id.name,
                 "product_qty": self.product_qty,
-                "price_unit": self.product_id.standard_price,
                 "date_planned": fields.Date.today(),
             }
         )
@@ -57,4 +56,14 @@ class HelpdeskEmployee(models.Model):
             "view_mode": "form",
             "res_id": purchase_order.id,
             "target": "current",
+        }
+
+    def download_attachment(self):
+        if not self.attachment:
+            return False
+
+        return {
+            "type": "ir.actions.act_url",
+            "url": f"/web/content/{self._name}/{self.id}/attachment/{self.attachment_filename}",
+            "target": "self",
         }
