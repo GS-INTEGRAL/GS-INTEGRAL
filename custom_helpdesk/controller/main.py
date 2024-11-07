@@ -35,6 +35,7 @@ class CustomWebsiteHelpdesk(WebsiteHelpdesk):
                 partner.name,
                 partner.sede,
                 partner.lugar,
+                partner.email,
             )
             kwargs["sede"] = partner.sede
             kwargs["lugar"] = partner.lugar
@@ -78,6 +79,7 @@ class CustomWebsiteHelpdesk(WebsiteHelpdesk):
                 "partner": partner,
                 "sede": kwargs.get("sede"),
                 "lugar": kwargs.get("lugar"),
+                "email_cc": kwargs.get("email")
                 "ticket": ticket,
             },
         )
