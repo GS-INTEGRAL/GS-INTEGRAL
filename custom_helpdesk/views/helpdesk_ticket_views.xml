@@ -4,18 +4,18 @@
         <field name="model">helpdesk.ticket</field>
         <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_form"/>
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='email_cc']" position="after">
-                    <field name="prioridad" />
-                    <field name="categoria"/>
-                    <field name="satisfaccion"/>
-            </xpath>        
-            <xpath expr="//field[@name='tag_ids']" position="after">
+             <xpath expr="//field[@name='tag_ids']" position="after">
                     <field name="sede"/>
                     <field name="lugar"/>
                     <field name="fecha_fin"/>
                     
             </xpath>
-            <xpath expr="//sheet/notebook/page[@name='description']" position="after">
+            <xpath expr="//field[@name='email_cc']" position="after">
+                    <field name="prioridad" />
+                    <field name="categoria"/>
+                    <field name="satisfaccion"/>
+            </xpath>              
+            <xpath expr="//sheet/notebook" position="inside">
                   <page string="Sede">
                         <group>
                             <field name="sede_imagen" widget="image" filename="sede_imagen_filename"/>
