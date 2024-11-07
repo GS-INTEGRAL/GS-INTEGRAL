@@ -52,7 +52,7 @@ class CustomWebsiteHelpdesk(WebsiteHelpdesk):
             "prioridad": prioridad,
             "partner_id": partner.id if partner else None,
             "email": kwargs["email"],
-            "email_cc": kwargs["email"],
+            # "email_cc": kwargs["email"],
         }
 
         ticket = request.env["helpdesk.ticket"].sudo().create(ticket_values)
