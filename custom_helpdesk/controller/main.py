@@ -9,26 +9,26 @@ _logger = logging.getLogger(__name__)
 class CustomWebsiteHelpdesk(WebsiteHelpdesk):
 
     @http.route(
-        ["/helpdesk/create"],
+        "/website/form/",
         type="http",
         auth="public",
         website=True,
         csrf=False,
     )
-    def helpdesk_ticket_create(self, **kwargs):
+    def website_form(self, **kwargs):
         user = request.env.user
         partner = user.partner_id if user.partner_id else None
 
         categoria = kwargs.get("categoria")
-        email = kwargs.get("partner_email")
-        _logger.info("Email recibido en controlador: %s", email)
+        partner_email = kwargs.get("partner_email")
+        _logger.info("Email recibido en controlador: %s", partner_email)
         sede_imagen = kwargs.get("sede_imagen")
         lugar_incidencia_imagen = kwargs.get("lugar_incidencia_imagen")
 
         _logger.info(
             "Valores recibidos: categoria=%s, email=%s, sede_imagen=%s, lugar_incidencia_imagen=%s",
             categoria,
-            email,
+            partner_email,
             sede_imagen,
             lugar_incidencia_imagen,
         )
@@ -37,11 +37,11 @@ class CustomWebsiteHelpdesk(WebsiteHelpdesk):
 
             kwargs["sede"] = partner.sede
             kwargs["lugar"] = partner.lugar
-            kwargs["email"] = partner.email or email
+            kwargs["email"] = partner.email or partner_email
         else:
             kwargs["sede"] = ""
             kwargs["lugar"] = ""
-            kwargs["email"] = email
+            kwargs["email"] = partner_email
 
         _logger.info(
             "Valores de sede y lugar asignados: sede=%s, lugar=%s, email=%s",
@@ -55,8 +55,8 @@ class CustomWebsiteHelpdesk(WebsiteHelpdesk):
             "lugar": kwargs["lugar"],
             "categoria": categoria,
             "partner_id": partner.id if partner else None,
-            "email": kwargs["email"],
-            "email_cc": kwargs["email"],
+            "email": kwargs["partner_email"],
+            "email_cc": kwargs["partner_email"],
         }
 
         # Añadir los archivos a los valores del ticket
@@ -78,7 +78,7 @@ class CustomWebsiteHelpdesk(WebsiteHelpdesk):
 
         # Renderizar la vista con los datos pasados
         return request.render(
-            "website_helpdesk.team_form_1",
+            "helpdesk.helpdesk_ticket_view_form",
             {
                 "partner": partner,
                 "sede": kwargs.get("sede"),
