@@ -152,4 +152,3 @@ class HelpdeskTicketInherit(models.Model):
     #     }
     #     mail = self.env["mail.mail"].create(mail_values)
     #     mail.send()
-
