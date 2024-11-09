@@ -16,12 +16,12 @@
                     <field name="satisfaccion"/>
             </xpath>             
             <xpath expr="//sheet/notebook" position="inside">
-                  <page string="Sede">
+                  <page string="Sede/Obra">
                         <group>
                             <field name="sede_imagen" widget="image" filename="sede_imagen_filename"/>
                         </group>
                     </page>
-                    <page string="Lugar">
+                    <page string="Estancia/Capitulo">
                         <group>
                             <field name="lugar_incidencia_imagen" widget="image" filename="lugar_incidencia_imagen_filename"/>
                         </group>

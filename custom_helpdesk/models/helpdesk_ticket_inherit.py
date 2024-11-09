@@ -6,8 +6,8 @@ from odoo.exceptions import UserError
 class HelpdeskTicketInherit(models.Model):
     _inherit = "helpdesk.ticket"
 
-    sede = fields.Char(string="Sede", related="partner_id.sede", store=True)
-    lugar = fields.Char(string="Lugar", related="partner_id.lugar", store=True)
+    sede = fields.Char(string="Sede/Obra", related="partner_id.sede", store=True)
+    lugar = fields.Char(string="Estancia/Capitulo", related="partner_id.lugar", store=True)
     comentario_reparacion = fields.Text(
         string="Comentario de Reparación",
         help="Comentarios positivos o negativos sobre la reparación realizada por el cliente",

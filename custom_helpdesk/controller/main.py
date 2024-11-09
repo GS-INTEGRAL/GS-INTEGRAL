@@ -2,7 +2,6 @@ from odoo import http
 from odoo.http import request
 from odoo.addons.website_helpdesk.controllers.main import WebsiteHelpdesk
 import logging
-from odoo.error import UserError
 
 _logger = logging.getLogger(__name__)
 
@@ -21,27 +20,16 @@ class CustomWebsiteHelpdesk(WebsiteHelpdesk):
         partner = user.partner_id if user.partner_id else None
 
         categoria = kwargs.get("categoria")
-        prioridad = kwargs.get("prioridad")
         email = kwargs.get("partner_email")
-        attachment = kwargs.get("Attachment")
-
-        if not categoria or not prioridad:
-            raise UserError("Faltan algunos datos requeridos para crear el ticket.")
+        sede_imagen = kwargs.get("sede_imagen")
+        lugar_incidencia_imagen = kwargs.get("lugar_incidencia_imagen")
 
         if partner:
-            # Log para verificar que partner y sus campos están disponibles
-            _logger.info(
-                "Partner encontrado: %s, Sede: %s, Lugar: %s",
-                partner.name,
-                partner.sede,
-                partner.lugar,
-                partner.email,
-            )
+
             kwargs["sede"] = partner.sede
             kwargs["lugar"] = partner.lugar
             kwargs["email"] = partner.email or email
         else:
-            _logger.warning("No se encontró el partner para el usuario: %s", user.login)
             kwargs["sede"] = ""
             kwargs["lugar"] = ""
             kwargs["email"] = email
@@ -50,27 +38,18 @@ class CustomWebsiteHelpdesk(WebsiteHelpdesk):
             "sede": kwargs["sede"],
             "lugar": kwargs["lugar"],
             "categoria": categoria,
-            "prioridad": prioridad,
             "partner_id": partner.id if partner else None,
             "email": kwargs["email"],
             "email_cc": kwargs["email"],
         }
 
-        ticket = request.env["helpdesk.ticket"].sudo().create(ticket_values)
+        # Añadir los archivos a los valores del ticket
+        if sede_imagen and hasattr(sede_imagen, 'read'):
+            ticket_values["sede_imagen"] = sede_imagen.read()
+        if lugar_incidencia_imagen and hasattr(lugar_incidencia_imagen, 'read'):
+            ticket_values["lugar_incidencia_imagen"] = lugar_incidencia_imagen.read()
 
-        # Agregar el archivo adjunto, si existe
-        if attachment:
-            attachment_data = (
-                attachment.read() if hasattr(attachment, "read") else attachment
-            )
-            request.env["ir.attachment"].sudo().create(
-                {
-                    "name": attachment.filename,
-                    "datas": attachment_data.encode("base64"),
-                    "res_model": "helpdesk.ticket",
-                    "res_id": ticket.id,
-                }
-            )
+        ticket = request.env["helpdesk.ticket"].sudo().create(ticket_values)
 
         # Renderizar la vista con los datos pasados
         return request.render(
@@ -79,7 +58,7 @@ class CustomWebsiteHelpdesk(WebsiteHelpdesk):
                 "partner": partner,
                 "sede": kwargs.get("sede"),
                 "lugar": kwargs.get("lugar"),
-                "email_cc": kwargs.get("email")
+                "email_cc": kwargs.get("email"),
                 "ticket": ticket,
             },
         )
