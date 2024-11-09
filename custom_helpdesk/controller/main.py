@@ -37,7 +37,7 @@ class CustomWebsiteHelpdesk(WebsiteHelpdesk):
 
             kwargs["sede"] = partner.sede
             kwargs["lugar"] = partner.lugar
-            kwargs["email"] = partner.email or partner_email
+            kwargs["email"] = partner.email
         else:
             kwargs["sede"] = ""
             kwargs["lugar"] = ""
@@ -55,8 +55,8 @@ class CustomWebsiteHelpdesk(WebsiteHelpdesk):
             "lugar": kwargs["lugar"],
             "categoria": categoria,
             "partner_id": partner.id if partner else None,
-            "email": kwargs["partner_email"],
-            "email_cc": kwargs["partner_email"],
+            "email": kwargs["email"],
+            "email_cc": kwargs["email"],
         }
 
         # Añadir los archivos a los valores del ticket
