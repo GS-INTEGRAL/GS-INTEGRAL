@@ -7,8 +7,8 @@
             <field name="inherit_id" ref="base.view_partner_form"/>
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='vat']" position="after">
-                    <field name="sede" placeholder="Introduce la sede"/>
-                    <field name="lugar" placeholder="Introduce el lugar"/>
+                    <field name="sede" placeholder="Introduce la sede o la obra"/>
+                    <field name="lugar" placeholder="Introduce el la estancia o el capitulo"/>
                 </xpath>
             </field>
         </record>
