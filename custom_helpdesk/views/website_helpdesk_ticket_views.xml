@@ -21,10 +21,7 @@
                             <span class="s_website_form_label_content">Estancia/Capítulo</span>
                         </label>
                         <div class="col-sm">
-<<<<<<< HEAD
-                            <input type="text" class="form-control s_website_form_input" name="lugar" id="helpdesk_lugar" readonly="0" 
-=======
-                            <input type="text" class="form-control s_website_form_input" name="lugar" id="helpdesk_lugar" 
+                             <input type="text" class="form-control s_website_form_input" name="lugar" id="helpdesk_lugar" 
                                    value=""/>
                         </div>
                     </div>
