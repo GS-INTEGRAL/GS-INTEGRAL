@@ -54,7 +54,7 @@
                 
             </t>
         </xpath>
-        <xpath expr="//div[textarea[@name='description']]" position="after">
+        <!-- <xpath expr="//div[textarea[@name='description']]" position="after">
                            
                 <div class="mb-0 py-2 s_website_form_field col-12 s_website_form_custom" data-type="binary" data-name="Field">
                     <div class="row s_col_no_resize s_col_no_bgcolor">
@@ -76,8 +76,8 @@
                             <input type="file" class="form-control s_website_form_input" name="lugar_incidencia_imagen" id="lugar_incidencia_imagen"/>
                         </div>
                     </div>
-                </div>  
+                </div>   
                                   
-        </xpath>
+        </xpath> -->
     </template>
 </odoo>
