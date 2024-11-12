@@ -25,8 +25,7 @@
                             <input type="text" class="form-control s_website_form_input" name="lugar" id="helpdesk_lugar" readonly="0" 
 =======
                             <input type="text" class="form-control s_website_form_input" name="lugar" id="helpdesk_lugar" 
->>>>>>> 164d8e8469dd692b78f3ebe4741f390e09bf9ff8
-                                   t-att-value="request.env.user.partner_id.lugar or ''"/>
+                                   value=""/>
                         </div>
                     </div>
                 </div>
@@ -58,7 +57,7 @@
                 
             </t>
         </xpath>
-        <xpath expr="//div[textarea[@name='description']]" position="after">
+        <!-- <xpath expr="//div[textarea[@name='description']]" position="after">
                            
                 <div class="mb-0 py-2 s_website_form_field col-12 s_website_form_custom" data-type="binary" data-name="Field">
                     <div class="row s_col_no_resize s_col_no_bgcolor">
@@ -80,8 +79,8 @@
                             <input type="file" class="form-control s_website_form_input" name="lugar_incidencia_imagen" id="lugar_incidencia_imagen"/>
                         </div>
                     </div>
-                </div>  
+                </div>   
                                   
-        </xpath>
+        </xpath> -->
     </template>
 </odoo>

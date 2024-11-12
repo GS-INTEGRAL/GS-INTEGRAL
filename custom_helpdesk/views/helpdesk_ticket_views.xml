@@ -11,13 +11,13 @@
                     
             </xpath>
             <xpath expr="//field[@name='email_cc']" position="after">
-                    <field name="email"/>
-                    <field name="prioridad" />
+                    <!-- <field name="email"/> -->
+                    <!-- <field name="prioridad" /> -->
                     <field name="categoria"/>
-                    <field name="satisfaccion"/>
+                    <!-- <field name="satisfaccion"/> -->
             </xpath>             
             <xpath expr="//sheet/notebook" position="inside">
-                  <page string="Sede/Obra">
+                  <!-- <page string="Sede/Obra">
                         <group>
                             <field name="sede_imagen" widget="image" filename="sede_imagen_filename"/>
                         </group>
@@ -26,7 +26,7 @@
                         <group>
                             <field name="lugar_incidencia_imagen" widget="image" filename="lugar_incidencia_imagen_filename"/>
                         </group>
-                    </page>
+                    </page> -->
                     <page string="Sobre la Reparación">
                     <group>
                         <field name="comentario_reparacion"/>
@@ -45,11 +45,11 @@
                                 icon="fa-shopping-cart"/>
                         </group>
                     </page>
-                    <page string="Observaciones del Mantenimiento">
+                    <!-- <page string="Observaciones del Mantenimiento">
                         <group>
                             <field name="observacion_mantenimiento"/>
                         </group>
-                    </page>                     
+                    </page>                      -->
             </xpath>
         </field>
     </record>
@@ -62,8 +62,8 @@
         <tree>
             <field name="email" optional="show"/>
             <field name="fecha_fin" optional = "show"/>
-            <field name="prioridad" optional = "show"/>
-            <field name="satisfaccion" optional = "show"/>
+            <!-- <field name="prioridad" optional = "show"/> -->
+            <!-- <field name="satisfaccion" optional = "show"/> -->
         </tree>
     </field>
 </record>
