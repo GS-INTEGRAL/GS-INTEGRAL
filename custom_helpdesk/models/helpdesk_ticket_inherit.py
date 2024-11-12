@@ -6,8 +6,8 @@ from odoo.exceptions import UserError
 class HelpdeskTicketInherit(models.Model):
     _inherit = "helpdesk.ticket"
 
-    sede = fields.Char(string="Sede", related="partner_id.sede", store=True)
-    lugar = fields.Char(string="Lugar", related="partner_id.lugar", store=True)
+    sede = fields.Char(string="Sede/Obra", related="partner_id.sede", store=True)
+    lugar = fields.Char(string="Estancia/Capitulo", related="partner_id.lugar", store=True)
     comentario_reparacion = fields.Text(
         string="Comentario de Reparación",
         help="Comentarios positivos o negativos sobre la reparación realizada por el cliente",
@@ -55,12 +55,10 @@ class HelpdeskTicketInherit(models.Model):
     sede_imagen = fields.Binary(
         string="Imagen o Archivo de la Sede",
         attachment=True,
-        help="Sube una imagen o archivo de la sede donde ocurrió la incidencia (PNG, JPEG, PDF)",
     )
     lugar_incidencia_imagen = fields.Binary(
         string="Imagen o Archivo del Lugar de Incidencia",
         attachment=True,
-        help="Sube una imagen o archivo del lugar exacto de la incidencia (PNG, JPEG, PDF)",
     )
     fecha_fin = fields.Date(string="Fecha Finalización")
     email = fields.Char(
@@ -152,4 +150,3 @@ class HelpdeskTicketInherit(models.Model):
     #     }
     #     mail = self.env["mail.mail"].create(mail_values)
     #     mail.send()
-
