@@ -22,7 +22,7 @@
                         </label>
                         <div class="col-sm">
                             <input type="text" class="form-control s_website_form_input" name="lugar" id="helpdesk_lugar" 
-                                   t-att-value="request.env.user.partner_id.lugar or ''"/>
+                                   value=""/>
                         </div>
                     </div>
                 </div>
