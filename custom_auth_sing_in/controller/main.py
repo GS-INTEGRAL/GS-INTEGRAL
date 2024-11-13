@@ -11,8 +11,8 @@ class AuthSignupHomeCustom(AuthSignupHome):
         qcontext = super().get_auth_signup_qcontext()
 
         # Agrega los campos adicionales al contexto si están en request.params
-        qcontext["estancia_id"] = http.request.params.get("estancia_id")
-        qcontext["obra_id"] = http.request.params.get("obra_id")
+        qcontext["estancia_id"] = http.request.params.get("estancia_id") or None
+        qcontext["obra_id"] = http.request.params.get("obra_id") or None
 
         return qcontext
 
@@ -26,33 +26,58 @@ class AuthSignupHomeCustom(AuthSignupHome):
 
         return values
 
+
+class WebsiteHelpdesk(http.Controller):
+
     @http.route(
-        ["/helpdesk", '/helpdesk/<model("helpdesk.team"):team>'],
+        # ["/helpdesk", '/helpdesk/<model("helpdesk.team"):team>'],
+        ["/helpdesk"],
         type="http",
         auth="user",
         website=True,
     )
-    def website_helpdesk_teams(self, team=None, **kwargs):
-        # Verificar si el usuario está autenticado
+    def website_helpdesk(self, **kwargs):
         if request.env.user._is_public():
-            # Redirigir al login si no está autenticado
+            
             return request.redirect("/web/login?redirect=/helpdesk")
+        
+        user = request.env.user
+        # Asignamos los valores de obra_id y estancia_id si están presentes en el usuario
+        obra_id = user.partner_id.obra_id.id if user.partner_id.obra_id else None
+        estancia_id = (
+            user.partner_id.estancia_id.id if user.partner_id.estancia_id else None
+        )
 
-        # Aquí continuamos con la lógica para mostrar los equipos del helpdesk
-        teams_domain = [("use_website_helpdesk_form", "=", True)]
-        if not request.env.user.has_group("helpdesk.group_helpdesk_manager"):
-            if team and not team.is_published:
-                raise NotFound()
-            teams_domain.append(("website_published", "=", True))
+        # Ahora podemos pasar estos valores al formulario del ticket
+        return request.render(
+            "website_helpdesk.ticket_form",
+            {
+                "obra_id": obra_id,
+                "estancia_id": estancia_id,
+            },
+        )
 
-        teams = request.env["helpdesk.team"].search(teams_domain, order="id asc")
-        if not teams:
-            raise NotFound()
+    # def website_helpdesk_teams(self, team=None, **kwargs):
+    #     # Verificar si el usuario está autenticado
+    #     if request.env.user._is_public():
+    #         # Redirigir al login si no está autenticado
+    #         return request.redirect("/web/login?redirect=/helpdesk")
 
-        # Renderizamos la vista del equipo de helpdesk
-        result = {
-            "team": team or teams[0],
-            "multiple_teams": len(teams) > 1,
-            "main_object": team or teams[0],
-        }
-        return request.render("website_helpdesk.team", result)
+    #     # Aquí continuamos con la lógica para mostrar los equipos del helpdesk
+    #     teams_domain = [("use_website_helpdesk_form", "=", True)]
+    #     if not request.env.user.has_group("helpdesk.group_helpdesk_manager"):
+    #         if team and not team.is_published:
+    #             raise NotFound()
+    #         teams_domain.append(("website_published", "=", True))
+
+    #     teams = request.env["helpdesk.team"].search(teams_domain, order="id asc")
+    #     if not teams:
+    #         raise NotFound()
+
+    #     # Renderizamos la vista del equipo de helpdesk
+    #     result = {
+    #         "team": team or teams[0],
+    #         "multiple_teams": len(teams) > 1,
+    #         "main_object": team or teams[0],
+    #     }
+    #     return request.render("website_helpdesk.team", result)

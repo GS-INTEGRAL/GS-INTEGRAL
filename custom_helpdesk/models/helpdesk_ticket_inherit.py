@@ -66,6 +66,16 @@ class HelpdeskTicketInherit(models.Model):
         help="Correo electrónico ingresado en el formulario web",
     )
 
+    @api.model
+    def create(self, vals):
+        # Si el usuario tiene valores para obra_id y estancia_id, los asignamos al ticket
+        if self.env.user.partner_id.obra_id:
+            vals["obra_id"] = self.env.user.partner_id.obra_id.id
+        if self.env.user.partner_id.estancia_id:
+            vals["estancia_id"] = self.env.user.partner_id.estancia_id.id
+
+        return super(HelpdeskTicket, self).create(vals)
+
     @api.onchange("stage_id")
     def _onchange_stage_id(self):
         resolved_stage_id = self.env.ref("helpdesk.stage_solved").id
