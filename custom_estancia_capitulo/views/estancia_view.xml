@@ -31,7 +31,10 @@
         <field name="res_model">estancias.capitulo</field>
         <field name="view_mode">tree,form</field>
     </record>
-</odoo>
+
 
 <menuitem id="menu_estancias_capitulo" name="Estancias Capítulo" parent="base.menu_custom" sequence="10"/>
 <menuitem id="submenu_estancias" name="Estancias" parent="menu_estancias_capitulo" action="custom_estancia_capitulo.action_estancias"/>
+
+
+</odoo>
