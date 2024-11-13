@@ -1,2 +1,3 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_obra_user,access_obra_user,model_obra,base.group_user,1,1,1,1
 access_estancias_capitulo_user,access_estancias_capitulo_user,model_estancias_capitulo,base.group_user,1,1,1,1

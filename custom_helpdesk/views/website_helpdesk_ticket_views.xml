@@ -9,8 +9,8 @@
                             <span class="s_website_form_label_content">Sede/Obra</span>
                         </label>
                         <div class="col-sm">
-                            <input type="text" class="form-control s_website_form_input" name="sede" id="helpdesk_sede"  
-                                   t-att-value="request.env.user.partner_id.sede or ''"/>
+                            <input type="text" class="form-control s_website_form_input" name="obra_id" id="helpdesk_obra"  
+                                   t-att-value="request.env.user.partner_id.obra_id or ''"/>
                         </div>
                     </div>
                 </div>
@@ -21,8 +21,8 @@
                             <span class="s_website_form_label_content">Estancia/Capítulo</span>
                         </label>
                         <div class="col-sm">
-                             <input type="text" class="form-control s_website_form_input" name="lugar" id="helpdesk_lugar" 
-                                   value=""/>
+                             <input type="text" class="form-control s_website_form_input" name="estancia_id" id="helpdesk_estancia" 
+                                   t-att-value="request.env.user.partner_id.estancia_id or ''"/>
                         </div>
                     </div>
                 </div>

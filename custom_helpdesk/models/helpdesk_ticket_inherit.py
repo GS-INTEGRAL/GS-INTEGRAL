@@ -6,8 +6,8 @@ from odoo.exceptions import UserError
 class HelpdeskTicketInherit(models.Model):
     _inherit = "helpdesk.ticket"
 
-    sede = fields.Char(string="Sede/Obra", related="partner_id.sede", store=True)
-    lugar = fields.Char(string="Estancia/Capitulo", related="partner_id.lugar", store=True)
+    estancia_id = fields.Many2one("estancias.capitulo", string="Estancia")
+    obra_id = fields.Many2one("obra", string="Obra")
     comentario_reparacion = fields.Text(
         string="Comentario de Reparación",
         help="Comentarios positivos o negativos sobre la reparación realizada por el cliente",
@@ -76,6 +76,13 @@ class HelpdeskTicketInherit(models.Model):
                 self.fecha_fin = fields.Date.today()
         else:
             self.fecha_fin = False
+
+    @api.onchange("obra_id")
+    def _onchange_obra_id(self):
+        if self.obra_id:
+            return {"domain": {"estancia_id": [("obra_id", "=", self.obra_id.id)]}}
+        else:
+            return {"domain": {"estancia_id": []}}
 
     # def create(self, vals_list):
     #     # Asegúrate de que `vals_list` sea una lista
