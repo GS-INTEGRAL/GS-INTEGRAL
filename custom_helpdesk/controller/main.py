@@ -88,33 +88,4 @@ class CustomWebsiteHelpdesk(WebsiteHelpdesk):
             },
         )
 
-        # _logger.info(
-        #     "Datos enviados a la vista - Sede: %s, Lugar: %s",
-        #     kwargs.get("sede"),
-        #     kwargs.get("lugar"),
-        # )
-
-        # ticket = (
-        #     request.env["helpdesk.ticket"]
-        #     .sudo()
-        #     .create(
-        #         {
-        #             "sede": kwargs["sede"],
-        #             "lugar": kwargs["lugar"],
-        #             "categoria": categoria,
-        #             "prioridad": prioridad,
-        #             "partner_id": partner.id if partner else None,
-        #             "email": kwargs["email"],
-        #         }
-        #     )
-        # )
-
-        # return request.render(
-        #     "website_helpdesk.team_form_1",
-        #     {
-        #         "partner": partner,
-        #         "sede": kwargs.get("sede"),
-        #         "lugar": kwargs.get("lugar"),
-        #         "ticket": ticket,
-        #     },
-        # )
+        
