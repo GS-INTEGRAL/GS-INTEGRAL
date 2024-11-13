@@ -14,6 +14,11 @@ class AuthSignupHomeCustom(AuthSignupHome):
         qcontext["estancia_id"] = http.request.params.get("estancia_id") or None
         qcontext["obra_id"] = http.request.params.get("obra_id") or None
 
+        if qcontext["estancia_id"]:
+            qcontext["estancia_id"] = int(qcontext["estancia_id"])
+        if qcontext["obra_id"]:
+            qcontext["obra_id"] = int(qcontext["obra_id"])
+
         return qcontext
 
     def _prepare_signup_values(self, qcontext):
@@ -21,8 +26,10 @@ class AuthSignupHomeCustom(AuthSignupHome):
         values = super()._prepare_signup_values(qcontext)
 
         # Extrae y agrega los campos adicionales al diccionario de valores
-        values["estancia_id"] = qcontext.get("estancia_id")
-        values["obra_id"] = qcontext.get("obra_id")
+        if qcontext.get("estancia_id"):
+            values["estancia_id"] = qcontext["estancia_id"]
+        if qcontext.get("obra_id"):
+            values["obra_id"] = qcontext["obra_id"]
 
         return values
 

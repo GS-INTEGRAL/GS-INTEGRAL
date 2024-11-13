@@ -8,7 +8,6 @@
                     <group>
                         <field name="estancia"/>
                         <field name="plano" widget="image"/>
-                        <field name="plano_filename"/>
                         <field name="obra_id"/>
                         <field name="partner_id"/>
                     </group>
