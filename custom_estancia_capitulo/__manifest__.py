@@ -11,7 +11,7 @@
         'views/estancia_view.xml',
     ],
     "images": [
-        "static/description/image3.webp",
+        "static/description/icon_estancias_capitulo.png",
     ],
     "installable": True,
     "application": True,

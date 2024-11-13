@@ -14,6 +14,31 @@
         </field>
     </record>
 
+    <record id="view_estancia_kanban" model="ir.ui.view">
+    <field name="name">estancias.capitulo.kanban</field>
+    <field name="model">estancias.capitulo</field>
+    <field name="arch" type="xml">
+        <kanban class="o_kanban_example">
+            <field name="estancia"/>
+            <field name="plano"/>
+            <templates>
+                <t t-name="kanban-box">
+                    <div class="oe_kanban_global_click o_kanban_record">
+                        <div class="o_kanban_image">
+                            <img t-att-src="kanban_image('estancias.capitulo', 'plano', record.id)" 
+                                 t-att-title="record.estancia.value" 
+                                 class="img img-fluid"/>
+                            </div>
+                            <div class="o_kanban_details">
+                                <strong><t t-esc="record.estancia.value"/></strong>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
     <record id="view_estancia_tree" model="ir.ui.view">
         <field name="name">estancias.capitulo.tree</field>
         <field name="model">estancias.capitulo</field>
@@ -29,7 +54,7 @@
     <record id="action_estancias" model="ir.actions.act_window">
         <field name="name">Estancias</field>
         <field name="res_model">estancias.capitulo</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">kanban,tree,form</field>
     </record>
 
 
