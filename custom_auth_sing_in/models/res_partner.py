@@ -4,5 +4,5 @@ from odoo import fields, models
 class ResPartner(models.Model):
     _inherit = "res.partner"
 
-    sede = fields.Char(string="Sede/Obra")
-    lugar = fields.Char(string="Estancia/Capitulo")
+    obra_id = fields.Char(string="Sede/Obra")
+    estancia_id = fields.Char(string="Estancia/Capitulo")

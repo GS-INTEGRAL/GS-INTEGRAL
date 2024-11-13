@@ -11,8 +11,8 @@ class AuthSignupHomeCustom(AuthSignupHome):
         qcontext = super().get_auth_signup_qcontext()
 
         # Agrega los campos adicionales al contexto si están en request.params
-        qcontext["lugar"] = http.request.params.get("lugar")
-        qcontext["sede"] = http.request.params.get("sede")
+        qcontext["estancia_id"] = http.request.params.get("estancia_id")
+        qcontext["obra_id"] = http.request.params.get("obra_id")
 
         return qcontext
 
@@ -21,8 +21,8 @@ class AuthSignupHomeCustom(AuthSignupHome):
         values = super()._prepare_signup_values(qcontext)
 
         # Extrae y agrega los campos adicionales al diccionario de valores
-        values["lugar"] = qcontext.get("lugar")
-        values["sede"] = qcontext.get("sede")
+        values["estancia_id"] = qcontext.get("estancia_id")
+        values["obra_id"] = qcontext.get("obra_id")
 
         return values
 
