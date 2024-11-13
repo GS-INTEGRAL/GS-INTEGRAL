@@ -8,6 +8,7 @@
     "license": "LGPL-3",
     "depends": ["base", "website_helpdesk", "helpdesk"],
     "data": [
+        'security/ir.model.access.csv',
         'views/estancia_view.xml',
     ],
     "images": [
