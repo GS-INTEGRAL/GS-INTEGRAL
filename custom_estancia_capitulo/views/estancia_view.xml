@@ -6,8 +6,9 @@
             <form string="Estancia">
                 <sheet>
                     <group>
-                        <field name="name"/>
+                        <field name="estancia"/>
                         <field name="plano"/>
+                        <field name="plano_filename"
                         <field name="obra_id"/>
                         <field name="partner_id"/>
                     </group>
