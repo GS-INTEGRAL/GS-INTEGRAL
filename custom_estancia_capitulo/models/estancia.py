@@ -8,4 +8,4 @@ class Estancia(models.Model):
     estancia = fields.Char(string="Estancia", required=True)
     plano = fields.Binary(string="Plano", attachment=True)
     obra_id = fields.Many2one('obra', string="Obra")  
-    partner_ids = fields.One2many('res.partner', string="Asignado a")
+    partner_ids = fields.Many2many('res.partner', string="Asignados")

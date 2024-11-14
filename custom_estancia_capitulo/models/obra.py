@@ -6,5 +6,5 @@ class Obra(models.Model):
     _description = "Obra"
 
     name = fields.Char(string="Nombre de la Obra")
-    estancias_ids = fields.One2many("estancias.capitulo",  string="Estancias")
-    partner_ids = fields.One2many('res.partner',  string="Partners")
+    estancias_ids = fields.One2many("estancias.capitulo", 'obra_id', string="Estancias")
+    partner_ids = fields.One2many('res.partner', 'obra_id', string="Partners")
