@@ -8,10 +8,7 @@
     "license": "LGPL-3",
     "depends": [
         "base",
-        "website_helpdesk",
-        "helpdesk",
-        "custom_auth_sing_in",
-      ],
+    ],
     "data": [
         "security/ir.model.access.csv",
         "views/estancia_view.xml",
