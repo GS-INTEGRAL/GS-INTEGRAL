@@ -11,8 +11,7 @@
         "website_helpdesk",
         "helpdesk",
         "custom_auth_sing_in",
-        "custom_helpdesk",
-        ],
+      ],
     "data": [
         "security/ir.model.access.csv",
         "views/estancia_view.xml",

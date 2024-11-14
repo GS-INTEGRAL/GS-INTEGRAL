@@ -9,9 +9,7 @@
         "helpdesk",
         "website_helpdesk",
         "base",
-        "website",
-        "custom_auth_sing_in",
-        "custom_estancia_capitulo",
+        "website",        
     ],
     "data": [
         "views/helpdesk_ticket_views.xml",

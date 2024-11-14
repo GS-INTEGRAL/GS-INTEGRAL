@@ -11,8 +11,7 @@
         "auth_signup",
         "website_helpdesk",
         "custom_estancia_capitulo",
-        "custom_helpdesk",
-        ],
+     ],
     "data": [
         "views/auth_signup_login_inherit.xml",
         "views/view_partners_form_inherited.xml",
