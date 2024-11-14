@@ -7,3 +7,4 @@ class Obra(models.Model):
 
     name = fields.Char(string="Nombre de la Obra")
     estancias_ids = fields.One2many("estancias.capitulo", "obra_id", string="Estancias")
+    partner_ids = fields.One2many('res.partner', 'obra_id', string="Partners")
