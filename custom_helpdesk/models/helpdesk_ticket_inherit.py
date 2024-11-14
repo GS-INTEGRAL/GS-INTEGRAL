@@ -46,7 +46,7 @@ class HelpdeskTicketInherit(models.Model):
         if self.env.user.partner_id.estancia_id:
             vals["estancia_id"] = self.env.user.partner_id.estancia_id.id
 
-        return super(HelpdeskTicket, self).create(vals)
+        return super(HelpdeskTicketInherit, self).create(vals)
 
     @api.onchange("stage_id")
     def _onchange_stage_id(self):
