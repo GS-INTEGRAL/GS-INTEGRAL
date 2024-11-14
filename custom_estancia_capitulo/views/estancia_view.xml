@@ -21,7 +21,7 @@
     <field name="model">estancias.capitulo</field>
     <field name="arch" type="xml">
         <kanban class="o_kanban_example">
-            <field name="estancia"/>
+            <field name="name"/>
             <field name="plano" widget="image"/>
             <templates>
                 <t t-name="kanban-box">
