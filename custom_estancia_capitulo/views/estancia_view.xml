@@ -9,7 +9,7 @@
                         <field name="estancia"/>
                         <field name="plano" widget="image"/>
                         <field name="obra_id"/>
-                        <field name="partner_id"/>
+                        <field name="partner_ids"/>
                     </group>
                 </sheet>
             </form>
