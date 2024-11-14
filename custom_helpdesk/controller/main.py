@@ -9,7 +9,7 @@ _logger = logging.getLogger(__name__)
 class CustomWebsiteHelpdesk(WebsiteHelpdesk):
 
     @http.route(
-        "/website/helpdesk/create",
+        ["/helpdesk/create"],
         type="http",
         auth="public",
         website=True,
@@ -45,7 +45,7 @@ class CustomWebsiteHelpdesk(WebsiteHelpdesk):
 
         # Renderizar la vista con los datos pasados
         return request.render(
-            "helpdesk.helpdesk_ticket_view_form",
+            "website_helpdesk.team_form_1",
             {
                 "partner": partner,
                 "obra_id": kwargs["obra_id"],
