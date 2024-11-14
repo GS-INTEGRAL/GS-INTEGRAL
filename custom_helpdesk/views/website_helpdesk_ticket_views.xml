@@ -10,7 +10,7 @@
                         </label>
                         <div class="col-sm">
                             <input type="text" class="form-control s_website_form_input" name="obra_id" id="helpdesk_obra"  
-                                   t-att-value="request.env.user.partner_id.obra_id or ''"/>
+                                   t-att-value="request.env.user.partner_id.obra_id.display_name or ''"/>
                         </div>
                     </div>
                 </div>
@@ -22,7 +22,7 @@
                         </label>
                         <div class="col-sm">
                              <input type="text" class="form-control s_website_form_input" name="estancia_id" id="helpdesk_estancia" 
-                                   t-att-value="request.env.user.partner_id.estancia_id or ''"/>
+                                   t-att-value="request.env.user.partner_id.estancia_id.display_name or ''"/>
                         </div>
                     </div>
                 </div>
