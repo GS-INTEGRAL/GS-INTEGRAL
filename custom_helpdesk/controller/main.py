@@ -9,7 +9,7 @@ _logger = logging.getLogger(__name__)
 class CustomWebsiteHelpdesk(WebsiteHelpdesk):
 
     @http.route(
-        "/website/form/",
+        "/website/helpdesk/form/",
         type="http",
         auth="public",
         website=True,
