@@ -11,7 +11,7 @@
         "base",
         "website",
         "custom_estancia_capitulo",
-        "custom_auth_sing_in",
+        "custom_auth_sing_in"
     ],
     "data": [
         "views/helpdesk_ticket_views.xml",
