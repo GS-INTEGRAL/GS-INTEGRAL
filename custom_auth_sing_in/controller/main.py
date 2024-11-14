@@ -27,9 +27,24 @@ class AuthSignupHomeCustom(AuthSignupHome):
 
         # Extrae y agrega los campos adicionales al diccionario de valores
         if qcontext.get("estancia_id"):
-            values["estancia_id"] = qcontext["estancia_id"]
+            if qcontext["estancia_id"].isdigit():
+                qcontext["estancia_id"] = int(qcontext["estancia_id"])
+            else:
+                
+                estancia = self.env["estancias.capitulo"].search(
+                    [("name", "=", qcontext["estancia_id"])], limit=1
+                )
+                qcontext["estancia_id"] = estancia.id if estancia else None
+                
         if qcontext.get("obra_id"):
-            values["obra_id"] = qcontext["obra_id"]
+            if qcontext["obra_id"].isdigit():
+                qcontext["obra_id"] = int(qcontext["obra_id"])
+            else:
+
+                obra = self.env["obra"].search(
+                    [("name", "=", qcontext["obra_id"])], limit=1
+                )
+                qcontext["obra_id"] = obra.id if obra else None
 
         return values
 
@@ -45,9 +60,9 @@ class WebsiteHelpdesk(http.Controller):
     )
     def website_helpdesk(self, **kwargs):
         if request.env.user._is_public():
-            
+
             return request.redirect("/web/login?redirect=/helpdesk")
-        
+
         user = request.env.user
         # Asignamos los valores de obra_id y estancia_id si están presentes en el usuario
         obra_id = user.partner_id.obra_id.id if user.partner_id.obra_id else None
