@@ -42,10 +42,7 @@
     <field name="inherit_id" ref="helpdesk.helpdesk_tickets_view_tree"/> 
     <field name="arch" type="xml">
         <tree>
-            <field name="email" optional="show"/>
-            <field name="fecha_fin" optional = "show"/>
-            <!-- <field name="prioridad" optional = "show"/> -->
-            <!-- <field name="satisfaccion" optional = "show"/> -->
+            <field name="fecha_fin" optional = "show"/>            
         </tree>
     </field>
 </record>
