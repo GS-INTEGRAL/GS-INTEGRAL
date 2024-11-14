@@ -7,44 +7,32 @@ from werkzeug.exceptions import Forbidden, NotFound
 class AuthSignupHomeCustom(AuthSignupHome):
 
     def get_auth_signup_qcontext(self):
-        # Llama al método original para obtener el contexto
         qcontext = super().get_auth_signup_qcontext()
-
-        # Agrega los campos adicionales al contexto si están en request.params
-        qcontext["estancia_id"] = http.request.params.get("estancia_id") or None
-        qcontext["obra_id"] = http.request.params.get("obra_id") or None
-
-        if qcontext["estancia_id"]:
-            qcontext["estancia_id"] = int(qcontext["estancia_id"])
-        if qcontext["obra_id"]:
-            qcontext["obra_id"] = int(qcontext["obra_id"])
-
+        for field in ["estancia_id", "obra_id"]:
+            value = http.request.params.get(field)
+            if value:
+                try:
+                    qcontext[field] = int(value)
+                except ValueError:
+                    qcontext[field] = (
+                        value  
+                    )
         return qcontext
 
     def _prepare_signup_values(self, qcontext):
         # Llama al método original para obtener los valores básicos
         values = super()._prepare_signup_values(qcontext)
 
-        # Extrae y agrega los campos adicionales al diccionario de valores
-        if qcontext.get("estancia_id"):
-            if qcontext["estancia_id"].isdigit():
-                qcontext["estancia_id"] = int(qcontext["estancia_id"])
-            else:
-                
-                estancia = self.env["estancias.capitulo"].search(
-                    [("name", "=", qcontext["estancia_id"])], limit=1
-                )
-                qcontext["estancia_id"] = estancia.id if estancia else None
-                
-        if qcontext.get("obra_id"):
-            if qcontext["obra_id"].isdigit():
-                qcontext["obra_id"] = int(qcontext["obra_id"])
-            else:
+        def get_record_id(model, value):
+            if isinstance(value, int) or (isinstance(value, str) and value.isdigit()):
+                return int(value)
+            record = request.env[model].sudo().search([('name', '=', value)], limit=1)
+            return record.id if record else None
 
-                obra = self.env["obra"].search(
-                    [("name", "=", qcontext["obra_id"])], limit=1
-                )
-                qcontext["obra_id"] = obra.id if obra else None
+        if qcontext.get("estancia_id"):
+            values["estancia_id"] = get_record_id("estancias.capitulo", qcontext["estancia_id"])
+        if qcontext.get("obra_id"):
+            values["obra_id"] = 
 
         return values
 
@@ -78,28 +66,3 @@ class WebsiteHelpdesk(http.Controller):
                 "estancia_id": estancia_id,
             },
         )
-
-    # def website_helpdesk_teams(self, team=None, **kwargs):
-    #     # Verificar si el usuario está autenticado
-    #     if request.env.user._is_public():
-    #         # Redirigir al login si no está autenticado
-    #         return request.redirect("/web/login?redirect=/helpdesk")
-
-    #     # Aquí continuamos con la lógica para mostrar los equipos del helpdesk
-    #     teams_domain = [("use_website_helpdesk_form", "=", True)]
-    #     if not request.env.user.has_group("helpdesk.group_helpdesk_manager"):
-    #         if team and not team.is_published:
-    #             raise NotFound()
-    #         teams_domain.append(("website_published", "=", True))
-
-    #     teams = request.env["helpdesk.team"].search(teams_domain, order="id asc")
-    #     if not teams:
-    #         raise NotFound()
-
-    #     # Renderizamos la vista del equipo de helpdesk
-    #     result = {
-    #         "team": team or teams[0],
-    #         "multiple_teams": len(teams) > 1,
-    #         "main_object": team or teams[0],
-    #     }
-    #     return request.render("website_helpdesk.team", result)
