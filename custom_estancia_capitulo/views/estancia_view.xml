@@ -28,11 +28,11 @@
                     <div class="oe_kanban_global_click o_kanban_record">
                         <div class="o_kanban_image">
                             <img t-att-src="kanban_image('estancias.capitulo', 'plano', record.id)" 
-                                 t-att-title="record.estancia.value" 
+                                 t-att-title="record.name.value" 
                                  class="img img-fluid"/>
                             </div>
                             <div class="o_kanban_details">
-                                <strong><t t-esc="record.estancia.value"/></strong>
+                                <strong><t t-esc="record.name.value"/></strong>
                             </div>
                         </div>
                     </t>
