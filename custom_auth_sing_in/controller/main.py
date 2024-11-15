@@ -60,7 +60,7 @@ class WebsiteHelpdesk(http.Controller):
 
         # Ahora podemos pasar estos valores al formulario del ticket
         return request.render(
-            "website_helpdesk.ticket_form",
+            "website_helpdesk.ticket_form_1",
             {
                 "obra_id": obra_id,
                 "estancia_id": estancia_id,
