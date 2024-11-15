@@ -27,7 +27,7 @@ class CustomWebsiteHelpdesk(WebsiteHelpdesk):
             estancia_id = ""
 
         return request.render(
-            "website_helpdesk.ticket_form_1",
+            "website_helpdesk.team_form_1",
             {
                 "partner": partner,
                 "obra_id": obra_id,

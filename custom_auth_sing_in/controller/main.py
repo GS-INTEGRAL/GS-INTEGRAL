@@ -41,7 +41,7 @@ class WebsiteHelpdesk(http.Controller):
 
     @http.route(
         # ["/helpdesk", '/helpdesk/<model("helpdesk.team"):team>'],
-        ["/helpdesk"],
+        ["/helpdesk/create"],
         type="http",
         auth="user",
         website=True,
@@ -60,7 +60,7 @@ class WebsiteHelpdesk(http.Controller):
 
         # Ahora podemos pasar estos valores al formulario del ticket
         return request.render(
-            "website_helpdesk.ticket_form_1",
+            "website_helpdesk.team_form_1",
             {
                 "obra_id": obra_id,
                 "estancia_id": estancia_id,
