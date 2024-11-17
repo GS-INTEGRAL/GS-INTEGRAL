@@ -6,8 +6,9 @@ from odoo.exceptions import UserError
 class HelpdeskTicketInherit(models.Model):
     _inherit = "helpdesk.ticket"
 
-    estancia_id = fields.Many2one("estancias.capitulo", string="Estancia")
-    obra_id = fields.Many2one("obra", string="Obra")
+    partner_id = fields.Many2one("res.partner", string="Partner")
+    obra_id = fields.Selection(related="partner_id.obra_id", string="Sede-Obra")
+    estancia_id = fields.Selection(related="partner_id.estancia_id", string="Estancia")
     comentario_reparacion = fields.Text(
         string="Comentario de Reparación",
         help="Comentarios positivos o negativos sobre la reparación realizada por el cliente",
@@ -37,15 +38,14 @@ class HelpdeskTicketInherit(models.Model):
 
     fecha_fin = fields.Date(string="Fecha Finalización")
 
-    @api.model
-    def create(self, vals):
-        # Si el usuario tiene valores para obra_id y estancia_id, los asignamos al ticket
-        if self.env.user.partner_id.obra_id:
-            vals["obra_id"] = self.env.user.partner_id.obra_id.id
-        if self.env.user.partner_id.estancia_id:
-            vals["estancia_id"] = self.env.user.partner_id.estancia_id.id
+    # @api.model
+    # def create(self, vals):
+    #     if self.env.user.partner_id.obra_id:
+    #         vals["obra_id"] = self.env.user.partner_id.obra_id.id
+    #     if self.env.user.partner_id.estancia_id:
+    #         vals["estancia_id"] = self.env.user.partner_id.estancia_id.id
 
-        return super(HelpdeskTicketInherit, self).create(vals)
+    #     return super(HelpdeskTicketInherit, self).create(vals)
 
     @api.onchange("stage_id")
     def _onchange_stage_id(self):
@@ -58,9 +58,9 @@ class HelpdeskTicketInherit(models.Model):
         else:
             self.fecha_fin = False
 
-    @api.onchange("obra_id")
-    def _onchange_obra_id(self):
-        if self.obra_id:
-            return {"domain": {"estancia_id": [("obra_id", "=", self.obra_id.id)]}}
-        else:
-            return {"domain": {"estancia_id": []}}
+    # @api.onchange("obra_id")
+    # def _onchange_obra_id(self):
+    #     if self.obra_id:
+    #         return {"domain": {"estancia_id": [("obra_id", "=", self.obra_id.id)]}}
+    #     else:
+    #         return {"domain": {"estancia_id": []}}
