@@ -6,6 +6,7 @@
     "category": "Helpdesk",
     "license": "LGPL-3",
     "depends": [
+        "web",
         "helpdesk",
         "website_helpdesk",
         "base",
