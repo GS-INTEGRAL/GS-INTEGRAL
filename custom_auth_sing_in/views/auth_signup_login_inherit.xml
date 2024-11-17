@@ -7,7 +7,7 @@
                 <select name="obra_id" id="obra_id" class="form-control">
                     <option value="">Seleccione...</option>
                     <t t-foreach="obra_options" t-as="obra">
-                        <option t-att-value="obra.id"><t t-esc="obra.name"/></option>
+                        <option t-att-value="obra_id.id"><t t-esc="obra.name"/></option>
                     </t>
                 </select>
             </div>
@@ -17,7 +17,7 @@
                 <select name="estancia_id" id="estancia_id" class="form-control">
                     <option value="">Seleccione...</option>
                     <t t-foreach="estancia_options" t-as="estancia">
-                        <option t-att-value="estancia.id"><t t-esc="estancia.name"/></option>
+                        <option t-att-value="estancia_id.id"><t t-esc="estancia.name"/></option>
                     </t>
                 </select>
             </div>
