@@ -9,9 +9,7 @@
                     <field name="obra_id" placeholder="Selecciona la obra o sede"/>
 
                     <field name="obra_ids" 
-                        placeholder="Selecciona la obra específica" 
-                        domain="[( 'obra_ids.name', '!=', 'maristas' )]" 
-                        invisible="['|', ('obra_ids', '=', False)]"/>
+                        placeholder="Selecciona la obra específica"/>
 
                     <field name="estancia_id" 
                         placeholder="Selecciona la estancia"
