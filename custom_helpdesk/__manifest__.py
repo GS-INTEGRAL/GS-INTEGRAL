@@ -16,11 +16,6 @@
         "views/helpdesk_ticket_views.xml",
         "views/website_helpdesk_ticket_views.xml",
     ],
-    "assets": {
-        "web.assets_frontend": [
-            "custom_helpdesk/static/src/js/dynamic_helpdesk.js",
-        ],
-    },
     "installable": True,
     "application": False,
     "auto_install": False,

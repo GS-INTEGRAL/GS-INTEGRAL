@@ -50,19 +50,4 @@ class CustomWebsiteHelpdesk(WebsiteHelpdesk):
 
         # Redirigir al usuario a la página de confirmación o al ticket creado
         return request.redirect(f"/helpdesk/ticket/{ticket.id}")
-
-    @http.route("/get_estancias", type="json", auth="public")
-    def get_estancias(self, obra_id):
-        try:
-            # Buscar las estancias relacionadas
-            estancias = (
-                request.env["res.partner"]
-                .sudo()
-                .search([("obra_id", "=", int(obra_id))])
-            )
-            return [
-                {"id": estancia.id, "name": estancia.name} for estancia in estancias
-            ]
-        except Exception as e:
-            _logger.error(f"Error al obtener estancias: {e}")
-            return []
+    
