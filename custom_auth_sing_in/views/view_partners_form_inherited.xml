@@ -12,9 +12,7 @@
                         placeholder="Selecciona la obra específica"/>
 
                     <field name="estancia_id" 
-                        placeholder="Selecciona la estancia"
-                        domain="[(obra_ids, '!=', False)]"
-                        invisible="['|', ('obra_ids', '=', False)]"/>
+                        placeholder="Selecciona la estancia"/>
                 </xpath>
             </field>
         </record>
