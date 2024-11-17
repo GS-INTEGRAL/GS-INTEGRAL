@@ -13,7 +13,7 @@
         "website_helpdesk",
     ],
     "data": [
-        'static/assets.xml',
+        'static/xml/assets.xml',
         "views/auth_signup_login_inherit.xml",
         "views/view_partners_form_inherited.xml",
     ],
