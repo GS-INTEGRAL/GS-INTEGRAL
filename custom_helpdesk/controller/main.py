@@ -30,7 +30,7 @@ class CustomWebsiteHelpdesk(WebsiteHelpdesk):
             else None
         )
         estancia = (
-            request.env["estancias.capitulo"]
+            request.env["res.partner"]
             .sudo()
             .search([("name", "=", estancia_id)], limit=1)
             if estancia_id
@@ -56,7 +56,7 @@ class CustomWebsiteHelpdesk(WebsiteHelpdesk):
         try:
             # Buscar las estancias relacionadas
             estancias = (
-                request.env["estancias.capitulo"]
+                request.env["res.partner"]
                 .sudo()
                 .search([("obra_id", "=", int(obra_id))])
             )
