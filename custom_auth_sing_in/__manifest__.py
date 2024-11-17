@@ -7,13 +7,12 @@
     "author": "Pedo Mayor",
     "license": "LGPL-3",
     "depends": [
-        "web",
+        "website",
         "base",
         "auth_signup",
         "website_helpdesk",
     ],
     "data": [
-        'static/xml/assets.xml',
         "views/auth_signup_login_inherit.xml",
         "views/view_partners_form_inherited.xml",
     ],

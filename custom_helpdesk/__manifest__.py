@@ -6,7 +6,6 @@
     "category": "Helpdesk",
     "license": "LGPL-3",
     "depends": [
-        "web",
         "helpdesk",
         "website_helpdesk",
         "base",
@@ -14,7 +13,6 @@
         "custom_auth_sing_in",
     ],
     "data": [
-        "static/xml/assets.xml",
         "views/helpdesk_ticket_views.xml",
         "views/website_helpdesk_ticket_views.xml",
     ],

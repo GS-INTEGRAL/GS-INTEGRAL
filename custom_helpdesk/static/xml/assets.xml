@@ -1,9 +1,0 @@
-<odoo>
-    <data>
-        <template id="custom_helpdesk_assets" name="Dynamic Fields Assets" inherit_id="web.assets_frontend">
-            <xpath expr="." position="inside">
-                <script type="text/javascript" src="/custom_helpdesk/static/src/js/dynamic_helpdesk.js"></script>
-            </xpath>
-        </template>
-    </data>
-</odoo>
