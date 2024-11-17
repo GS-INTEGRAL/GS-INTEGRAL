@@ -12,7 +12,7 @@
                         placeholder="Selecciona la obra específica" 
                         attrs="{'invisible': [('obra_id', '!=', 'maristas')]}"/>
 
-                    <field name="estancias_id" 
+                    <field name="estancia_id" 
                         placeholder="Selecciona la estancia"
                         attrs="{'invisible': [('obra_ids', '=', False)]}"/>
                 </xpath>
