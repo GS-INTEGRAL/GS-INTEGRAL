@@ -13,7 +13,7 @@
         "custom_auth_sing_in",
     ],
     "data": [
-        "static/xml/assets.xml",
+        "static/assets.xml",
         "views/helpdesk_ticket_views.xml",
         "views/website_helpdesk_ticket_views.xml",
     ],
