@@ -1,28 +1,36 @@
 <odoo>
     <template id="auth_signup_login_inherit" inherit_id="auth_signup.fields">
         <xpath expr="//div[@class='mb-3 field-name']" position="after">
+            <!-- Campo Sede/Obra -->
             <div class="mb-3 field-obra_id">
                 <label for="obra_id">Sede/Obra</label>
                 <select name="obra_id" id="obra_id" class="form-control">
                     <option value="">Seleccione...</option>
-                    <option value="lavaqua">Lavaqua</option>
-                    <option value="legal_fincas">Legal Fincas</option>
-                    <option value="clientes_varios">Clientes Varios</option>
-                    <option value="maristas">Maristas</option>
+                    <t t-foreach="obra_options" t-as="obra">
+                        <option t-att-value="obra.id"><t t-esc="obra.name"/></option>
+                    </t>
                 </select>
             </div>
+
+            <!-- Campo Obra Específica (dependiente de obra_id) -->
             <div class="mb-3 field-obra_ids" t-attf-class="mb-3 field-obra_ids #{'d-none' if request.params.get('obra_id') != 'maristas'}">
                 <label for="obra_ids">Obra Específica</label>
                 <select name="obra_ids" id="obra_ids" class="form-control">
                     <option value="">Seleccione...</option>
-                    <option value="fuensanta">Fuensanta</option>
-                    <option value="merced">Merced</option>
+                    <t t-foreach="obra_ids_options" t-as="obra_id">
+                        <option t-att-value="obra_id.id"><t t-esc="obra_id.name"/></option>
+                    </t>
                 </select>
             </div>
+
+            <!-- Campo Estancia/Capítulo (dependiente de obra_ids) -->
             <div class="mb-3 field-estancia_id" t-attf-class="mb-3 field-estancia_id #{'d-none' if not request.params.get('obra_ids')}">
                 <label for="estancia_id">Estancia/Capítulo</label>
                 <select name="estancia_id" id="estancia_id" class="form-control">
                     <option value="">Seleccione...</option>
+                    <t t-foreach="estancia_options" t-as="estancia">
+                        <option t-att-value="estancia.id"><t t-esc="estancia.name"/></option>
+                    </t>
                 </select>
             </div>
         </xpath>

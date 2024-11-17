@@ -177,3 +177,26 @@ class WebsiteHelpdesk(http.Controller):
                 "estancia_id": estancia_id,
             },
         )
+
+
+class DynamicFieldsController(http.Controller):
+    @http.route("/get_obra_options", type="json", auth="public")
+    def get_obra_options(self):
+        """Devuelve las opciones de obra_id dinámicamente."""
+        obras = request.env["custom.obra"].search([])
+        return [{"id": obra.id, "name": obra.name} for obra in obras]
+
+    @http.route("/get_obra_ids_options", type="json", auth="public")
+    def get_obra_ids_options(self, obra_id):
+        """Devuelve las opciones de obra_ids basado en obra_id."""
+        if obra_id == "maristas":
+            obras = request.env["custom.obra"].search([])
+        else:
+            obras = []
+        return [{"id": obra.id, "name": obra.name} for obra in obras]
+
+    @http.route("/get_estancia_options", type="json", auth="public")
+    def get_estancia_options(self, obra_ids):
+        """Devuelve las opciones de estancia_id basado en obra_ids."""
+        estancias = request.env["custom.estancia"].search([])
+        return [{"id": estancia.id, "name": estancia.name} for estancia in estancias]

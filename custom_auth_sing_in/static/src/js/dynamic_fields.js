@@ -1,12 +1,12 @@
-odoo.define('custom_auth_sing_in.dynamic_fields', function (require) {
+odoo.define('custom_auth_sign_in.dynamic_fields', function (require) {
     'use strict';
 
-    // Cuando obra_id cambia, actualiza las opciones de obra_ids
+    // Cuando obra_id cambia
     $('#obra_id').on('change', function () {
         const obra_id = $(this).val();
-        if (obra_id === 'maristas') {
+        if (obra_id) {
             $.ajax({
-                url: '/get_obra_options',
+                url: '/get_obra_ids_options',
                 type: 'POST',
                 contentType: 'application/json',
                 data: JSON.stringify({ obra_id }),
@@ -25,23 +25,27 @@ odoo.define('custom_auth_sing_in.dynamic_fields', function (require) {
         }
     });
 
-    // Cuando obra_ids cambia, actualiza las opciones de estancias_id
+    // Cuando obra_ids cambia
     $('#obra_ids').on('change', function () {
         const obra_ids = $(this).val();
-        $.ajax({
-            url: '/get_estancias_options',
-            type: 'POST',
-            contentType: 'application/json',
-            data: JSON.stringify({ obra_ids }),
-            success: function (response) {
-                const estanciasSelect = $('#estancias_id');
-                estanciasSelect.empty();
-                estanciasSelect.append('<option value="">Seleccione...</option>');
-                response.forEach(option => {
-                    estanciasSelect.append(`<option value="${option.id}">${option.name}</option>`);
-                });
-                $('#estancias_id').parent().show();
-            }
-        });
+        if (obra_ids) {
+            $.ajax({
+                url: '/get_estancia_options',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({ obra_ids }),
+                success: function (response) {
+                    const estanciaSelect = $('#estancia_id');
+                    estanciaSelect.empty();
+                    estanciaSelect.append('<option value="">Seleccione...</option>');
+                    response.forEach(option => {
+                        estanciaSelect.append(`<option value="${option.id}">${option.name}</option>`);
+                    });
+                    $('#estancia_id').parent().show();
+                }
+            });
+        } else {
+            $('#estancia_id').parent().hide();
+        }
     });
 });
