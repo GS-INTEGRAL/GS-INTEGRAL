@@ -10,11 +10,13 @@
 
                     <field name="obra_ids" 
                         placeholder="Selecciona la obra específica" 
-                        attrs="{'invisible': [('obra_id', '!=', 'maristas')]}"/>
+                        domain="[(obra_ids, '!=', 'maristas')]"
+                        invisible="['|', ('obra_ids', '=', False)]"/>
 
                     <field name="estancia_id" 
                         placeholder="Selecciona la estancia"
-                        attrs="{'invisible': [('obra_ids', '=', False)]}"/>
+                        domain="[(obra_ids, '!=', False)]"
+                        invisible="['|', ('obra_ids', '=', False)]"/>
                 </xpath>
             </field>
         </record>
