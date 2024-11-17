@@ -10,7 +10,7 @@
 
                     <field name="obra_ids" 
                         placeholder="Selecciona la obra específica" 
-                        domain="[( 'name', '!=', 'maristas' )]" 
+                        domain="[( 'obra_ids.name', '!=', 'maristas' )]" 
                         invisible="['|', ('obra_ids', '=', False)]"/>
 
                     <field name="estancia_id" 
