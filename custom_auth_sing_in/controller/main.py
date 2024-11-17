@@ -147,9 +147,9 @@ class AuthSignupHomeCustom(AuthSignupHome):
 
         if qcontext.get("estancia_id"):
             values["estancia_id"] = get_record_id(
-                "estancias.capitulo", qcontext["estancia_id"]
+                "res_partner", qcontext["estancia_id"]
             )
         if qcontext.get("obra_id"):
-            values["obra_id"] = get_record_id("obra", qcontext["obra_id"])
+            values["obra_id"] = get_record_id("res_partner", qcontext["obra_id"])
 
         return values
