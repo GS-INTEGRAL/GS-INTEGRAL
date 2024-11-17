@@ -8,7 +8,9 @@ class AuthSignupHomeCustom(AuthSignupHome):
 
     def get_auth_signup_qcontext(self):
         # Llama al método original para obtener el contexto de la autenticación
-        qcontext = super().get_auth_signup_qcontext() or {}
+        qcontext = super().get_auth_signup_qcontext()
+        if qcontext is None:
+            qcontext = {}
 
         for field in ["estancia_id", "obra_id"]:
             value = http.request.params.get(field)
