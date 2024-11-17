@@ -7,7 +7,9 @@ from werkzeug.exceptions import Forbidden, NotFound
 class AuthSignupHomeCustom(AuthSignupHome):
 
     def get_auth_signup_qcontext(self):
-        qcontext = super().get_auth_signup_qcontext()
+        # Llama al método original para obtener el contexto de la autenticación
+        qcontext = super().get_auth_signup_qcontext() or {}
+
         for field in ["estancia_id", "obra_id"]:
             value = http.request.params.get(field)
             if value:
@@ -16,14 +18,16 @@ class AuthSignupHomeCustom(AuthSignupHome):
                 except ValueError:
                     qcontext[field] = value
 
+        # Configuración específica para 'obra_id' igual a "maristas"
         if qcontext.get("obra_id") == "maristas":
             obra_id = (
                 request.env["res.partner"]
                 .sudo()
                 .search([("id", "=", qcontext["obra_id"])])
             )
-            if obra_id.name == "Maristas":
-                if http.request.params.get("obra_secundaria") == "fuensanta":
+            if obra_id and obra_id.name == "Maristas":
+                obra_secundaria = http.request.params.get("obra_secundaria")
+                if obra_secundaria == "fuensanta":
                     qcontext["estancia_options"] = [
                         ("infantil_2_a", "Infantil 2 años - A"),
                         ("infantil_2_a", "Infantil 2 años - A"),
@@ -81,7 +85,7 @@ class AuthSignupHomeCustom(AuthSignupHome):
                         ("laboratorio", "Laboratorio"),
                         ("danza", "Danza"),
                     ]
-                elif http.request.params.get("obra_secundaria") == "merced":
+                elif obra_secundaria == "merced":
                     qcontext["estancia_options"] = [
                         ("eso_1_a", "1º ESO - A"),
                         ("eso_1_b", "1º ESO - B"),
@@ -121,17 +125,14 @@ class AuthSignupHomeCustom(AuthSignupHome):
                 return qcontext
 
     def _prepare_signup_values(self, qcontext):
-        # Llamar al método original para obtener los valores básicos
         values = super()._prepare_signup_values(qcontext)
 
-        # Función para obtener el id de un registro basado en su nombre o id
         def get_record_id(model, value):
             if isinstance(value, int) or (isinstance(value, str) and value.isdigit()):
                 return int(value)
             record = request.env[model].sudo().search([("name", "=", value)], limit=1)
             return record.id if record else None
 
-        # Obtener los valores de obra_id y estancia_id
         if qcontext.get("estancia_id"):
             values["estancia_id"] = get_record_id(
                 "estancias.capitulo", qcontext["estancia_id"]
