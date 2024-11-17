@@ -19,18 +19,50 @@ class CustomWebsiteHelpdesk(WebsiteHelpdesk):
         user = request.env.user
         partner = user.partner_id if user.partner_id else None
 
-        if partner:
-            obra_id = partner.obra_id.display_name if partner.obra_id else ""
-            estancia_id = partner.estancia_id.display_name if partner.estancia_id else ""
-        else:
-            obra_id = ""
-            estancia_id = ""
+        obra_id = kwargs.get("obra_id")
+        estancia_id = kwargs.get("estancia_id")
+        categoria = kwargs.get("categoria")
+        description = kwargs.get("description", "Sin descripción")
 
-        return request.render(
-            "website_helpdesk.team_form_1",
-            {
-                "partner": partner,
-                "obra_id": obra_id,
-                "estancia_id": estancia_id,
-            },
+        obra = (
+            request.env["obra"].sudo().search([("name", "=", obra_id)], limit=1)
+            if obra_id
+            else None
         )
+        estancia = (
+            request.env["estancias.capitulo"]
+            .sudo()
+            .search([("name", "=", estancia_id)], limit=1)
+            if estancia_id
+            else None
+        )
+
+        ticket_vals = {
+            "name": "Ticket desde la Web",
+            "description": description,
+            "partner_id": partner.id,
+            "obra_id": obra.id if obra else None,
+            "estancia_id": estancia.id if estancia else None,
+            "categoria": categoria,
+        }
+
+        ticket = request.env["helpdesk.ticket"].sudo().create(ticket_vals)
+
+        # Redirigir al usuario a la página de confirmación o al ticket creado
+        return request.redirect(f"/helpdesk/ticket/{ticket.id}")
+
+    @http.route("/get_estancias", type="json", auth="public")
+    def get_estancias(self, obra_id):
+        try:
+            # Buscar las estancias relacionadas
+            estancias = (
+                request.env["estancias.capitulo"]
+                .sudo()
+                .search([("obra_id", "=", int(obra_id))])
+            )
+            return [
+                {"id": estancia.id, "name": estancia.name} for estancia in estancias
+            ]
+        except Exception as e:
+            _logger.error(f"Error al obtener estancias: {e}")
+            return []

@@ -1,14 +1,20 @@
 <odoo>
     <data>
-        <!-- Inheritance of the res.users form view to add custom fields -->
         <record id="view_partner_form_inherited" model="ir.ui.view">
             <field name="name">res.partner.inherited.form</field>
             <field name="model">res.partner</field>
             <field name="inherit_id" ref="base.view_partner_form"/>
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='vat']" position="after">
-                    <field name="obra_id" placeholder="Introduce la obra_id o la obra"/>
-                    <field name="estancia_id" placeholder="Introduce el la estancia o el capitulo"/>
+                    <field name="obra_id" placeholder="Selecciona la obra o sede"/>
+
+                    <field name="obra_ids" 
+                        placeholder="Selecciona la obra específica" 
+                        attrs="{'invisible': [('obra_id', '!=', 'maristas')]}"/>
+
+                    <field name="estancias_id" 
+                        placeholder="Selecciona la estancia"
+                        attrs="{'invisible': [('obra_ids', '=', False)]}"/>
                 </xpath>
             </field>
         </record>

@@ -34,9 +34,8 @@ class HelpdeskTicketInherit(models.Model):
         ],
         string="Categoría",
     )
-    
+
     fecha_fin = fields.Date(string="Fecha Finalización")
-    
 
     @api.model
     def create(self, vals):

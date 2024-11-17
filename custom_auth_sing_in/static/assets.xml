@@ -1,0 +1,10 @@
+<odoo>
+    <data>
+        <template id="assets_frontend" name="Dynamic Fields Assets" inherit_id="web.assets_frontend">
+            <xpath expr="." position="inside">
+                <!-- Añadimos nuestro archivo JS -->
+                <script type="text/javascript" src="/custom_auth_sing_in/static/src/js/dynamic_fields.js"></script>
+            </xpath>
+        </template>
+    </data>
+</odoo>
