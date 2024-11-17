@@ -7,7 +7,6 @@
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='vat']" position="after">
                     <field name="obra_id" widget="selection" placeholder="Selecciona la obra o sede"/>
-                    <field name="obra_ids" placeholder="Selecciona la obra específica"/>
                     <field name="estancia_id" placeholder="Selecciona la estancia"/>
                 </xpath>
             </field>
