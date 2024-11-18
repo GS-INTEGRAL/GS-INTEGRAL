@@ -11,141 +11,145 @@ class ResPartner(models.Model):
             ("clientes varios", "Clientes Varios"),
             ("maristas", "Maristas"),
         ],
-        string="Sede-Obra",
+        string="Sede/Obra",
+    )
+
+    obra_secundaria = fields.Selection(
+        [
+            ("fuensanta", "Fuensanta"),
+            ("merced", "Merced"),
+        ],
+        string="Obra Secundaria",
     )
 
     estancia_id = fields.Selection(
         selection=[],
-        string="Estancias",
+        string="Estancia",
     )
 
-    @api.onchange("obra_id")
+
+    @api.onchange('obra_id')
     def _onchange_obra_id(self):
-
-        if self.obra_id == "maristas":
-            self.estancia_id = False
-            return {
-                "domain": {"estancia_id": [("value", "in", ["fuensanta", "merced"])]}
-            }
+        """
+        Activa `obra_secundaria` solo si `obra_id` es 'maristas'.
+        """
+        if self.obra_id == 'maristas':
+            self.obra_secundaria = False  # Reinicia para evitar inconsistencias
         else:
-            self.estancia_id = False
-            return {"domain": {"estancia_id": []}}
+            self.obra_secundaria = False  # Limpia el campo si cambia a otra obra
+            self.estancia_id = False     # Limpia el campo de estancias
 
-    @api.onchange("obra_id", "estancia_id")
-    def _onchange_estancia_conditions(self):
-
-        if self.obra_id == "maristas":
-            if self.estancia_id == "merced":
-                self.estancia_id = False
+    @api.onchange('obra_secundaria')
+    def _onchange_obra_secundaria(self):
+        """
+        Actualiza las opciones de `estancia_id` dependiendo de la obra secundaria.
+        """
+        if self.obra_id == 'maristas':
+            if self.obra_secundaria == 'fuensanta':
+                self.estancia_id = False  # Resetea el valor para evitar inconsistencias
                 return {
-                    "domain": {
-                        "estancia_id": [
-                            (
-                                "value",
-                                "in",
-                                [
-                                    "Infantil 2 años - A",
-                                    "1º Infantil 3 años - A",
-                                    "1º Infantil 3 años - B",
-                                    "1º Infantil 3 años - C",
-                                    "1º Infantil 3 años - D",
-                                    "1º Infantil 3 años - E",
-                                    "2º Infantil 4 años - A",
-                                    "2º Infantil 4 años - B",
-                                    "2º Infantil 4 años - C",
-                                    "2º Infantil 4 años - D",
-                                    "2º Infantil 4 años - E",
-                                    "3º Infantil 5 años - A",
-                                    "3º Infantil 5 años - B",
-                                    "3º Infantil 5 años - C",
-                                    "3º Infantil 5 años - D",
-                                    "3º Infantil 5 años - E",
-                                    "1º Primaria - A",
-                                    "1º Primaria - B",
-                                    "1º Primaria - C",
-                                    "1º Primaria - D",
-                                    "1º Primaria - E",
-                                    "2º Primaria - A",
-                                    "2º Primaria - B",
-                                    "2º Primaria - C",
-                                    "2º Primaria - D",
-                                    "2º Primaria - E",
-                                    "3º Primaria - A",
-                                    "3º Primaria - B",
-                                    "3º Primaria - C",
-                                    "3º Primaria - D",
-                                    "3º Primaria - E",
-                                    "4º Primaria - A",
-                                    "4º Primaria - B",
-                                    "4º Primaria - C",
-                                    "4º Primaria - D",
-                                    "4º Primaria - E",
-                                    "5º Primaria - A",
-                                    "5º Primaria - B",
-                                    "5º Primaria - C",
-                                    "5º Primaria - D",
-                                    "5º Primaria - E",
-                                    "6º Primaria - A",
-                                    "6º Primaria - B",
-                                    "6º Primaria - C",
-                                    "6º Primaria - D",
-                                    "6º Primaria - E",
-                                    "Pabellón Aseos/Vestuarios",
-                                    "Pabellón General",
-                                    "Pabellón Judo",
-                                    "Pabellón Terrazas y Trasteros",
-                                    "Capilla",
-                                    "Sala de Medios",
-                                    "Laboratorio",
-                                    "Danza",
-                                ],
+                    'domain': {
+                        'estancia_id': [
+                            ('value', 'in', [
+                                ('infantil_2_a', 'Infantil 2 años - A'),
+                                ('infantil_3_a', '1º Infantil 3 años - A'),
+                                ('infantil_3_b', '1º Infantil 3 años - B'),
+                                ('infantil_3_c', '1º Infantil 3 años - C'),
+                                ('infantil_3_d', '1º Infantil 3 años - D'),
+                                ('infantil_3_e', '1º Infantil 3 años - E'),
+                                ('infantil_4_a', '2º Infantil 4 años - A'),
+                                ('infantil_4_b', '2º Infantil 4 años - B'),
+                                ('infantil_4_c', '2º Infantil 4 años - C'),
+                                ('infantil_4_d', '2º Infantil 4 años - D'),
+                                ('infantil_4_e', '2º Infantil 4 años - E'),
+                                ('infantil_5_a', '3º Infantil 5 años - A'),
+                                ('infantil_5_b', '3º Infantil 5 años - B'),
+                                ('infantil_5_c', '3º Infantil 5 años - C'),
+                                ('infantil_5_d', '3º Infantil 5 años - D'),
+                                ('infantil_5_e', '3º Infantil 5 años - E'),
+                                ('primaria_1_a', '1º Primaria - A'),
+                                ('primaria_1_b', '1º Primaria - B'),
+                                ('primaria_1_c', '1º Primaria - C'),
+                                ('primaria_1_d', '1º Primaria - D'),
+                                ('primaria_1_e', '1º Primaria - E'),
+                                ('primaria_2_a', '2º Primaria - A'),
+                                ('primaria_2_b', '2º Primaria - B'),
+                                ('primaria_2_c', '2º Primaria - C'),
+                                ('primaria_2_d', '2º Primaria - D'),
+                                ('primaria_2_e', '2º Primaria - E'),
+                                ('primaria_3_a', '3º Primaria - A'),
+                                ('primaria_3_b', '3º Primaria - B'),
+                                ('primaria_3_c', '3º Primaria - C'),
+                                ('primaria_3_d', '3º Primaria - D'),
+                                ('primaria_3_e', '3º Primaria - E'),
+                                ('primaria_4_a', '4º Primaria - A'),
+                                ('primaria_4_b', '4º Primaria - B'),
+                                ('primaria_4_c', '4º Primaria - C'),
+                                ('primaria_4_d', '4º Primaria - D'),
+                                ('primaria_4_e', '4º Primaria - E'),
+                                ('primaria_5_a', '5º Primaria - A'),
+                                ('primaria_5_b', '5º Primaria - B'),
+                                ('primaria_5_c', '5º Primaria - C'),
+                                ('primaria_5_d', '5º Primaria - D'),
+                                ('primaria_5_e', '5º Primaria - E'),
+                                ('primaria_6_a', '6º Primaria - A'),
+                                ('primaria_6_b', '6º Primaria - B'),
+                                ('primaria_6_c', '6º Primaria - C'),
+                                ('primaria_6_d', '6º Primaria - D'),
+                                ('primaria_6_e', '6º Primaria - E'),
+                                ('pab_aseos', 'Pabellón Aseos/Vestuarios'),
+                                ('pab_general', 'Pabellón General'),
+                                ('pab_judo', 'Pabellón Judo'),
+                                ('pab_terrazas', 'Pabellón Terrazas y Trasteros'),
+                                ('capilla', 'Capilla'),
+                                ('sala_medios', 'Sala de Medios'),
+                                ('laboratorio', 'Laboratorio'),
+                                ('danza', 'Danza'),
+                            ]
                             )
                         ]
                     }
                 }
-            elif self.estancia_id == "fuensanta":
+            elif self.obra_secundaria == 'merced':
                 self.estancia_id = False
                 return {
-                    "domain": {
-                        "estancia_id": [
-                            (
-                                "value",
-                                "in",
-                                [
-                                    "1º ESO - A",
-                                    "1º ESO - B",
-                                    "1º ESO - C",
-                                    "1º ESO - D",
-                                    "1º ESO - E",
-                                    "1º ESO - F",
-                                    "2º ESO - A",
-                                    "2º ESO - B",
-                                    "2º ESO - C",
-                                    "2º ESO - D",
-                                    "2º ESO - E",
-                                    "2º ESO - F",
-                                    "3º ESO - A",
-                                    "3º ESO - B",
-                                    "3º ESO - C",
-                                    "3º ESO - D",
-                                    "3º ESO - E",
-                                    "3º ESO - F",
-                                    "4º ESO - A",
-                                    "4º ESO - B",
-                                    "4º ESO - C",
-                                    "4º ESO - D",
-                                    "4º ESO - E",
-                                    "4º ESO - F",
-                                    "1º Bachillerato - A",
-                                    "1º Bachillerato - B",
-                                    "1º Bachillerato - C",
-                                    "1º Bachillerato - D",
-                                    "1º Bachillerato - E",
-                                    "2º Bachillerato - A",
-                                    "2º Bachillerato - B",
-                                    "2º Bachillerato - C",
-                                    "2º Bachillerato - D",
-                                    "2º Bachillerato - E",
+                    'domain': {
+                        'estancia_id': [
+                            ('value', 'in', [
+                                ('eso_1_a', '1º ESO - A'),
+                                ('eso_1_b', '1º ESO - B'),
+                                ('eso_1_c', '1º ESO - C'),
+                                ('eso_1_d', '1º ESO - D'),
+                                ('eso_1_e', '1º ESO - E'),
+                                ('eso_1_f', '1º ESO - F'),
+                                ('eso_2_a', '2º ESO - A'),
+                                ('eso_2_b', '2º ESO - B'),
+                                ('eso_2_c', '2º ESO - C'),
+                                ('eso_2_d', '2º ESO - D'),
+                                ('eso_2_e', '2º ESO - E'),
+                                ('eso_2_f', '2º ESO - F'),
+                                ('eso_3_a', '3º ESO - A'),
+                                ('eso_3_b', '3º ESO - B'),
+                                ('eso_3_c', '3º ESO - C'),
+                                ('eso_3_d', '3º ESO - D'),
+                                ('eso_3_e', '3º ESO - E'),
+                                ('eso_3_f', '3º ESO - F'),
+                                ('eso_4_a', '4º ESO - A'),
+                                ('eso_4_b', '4º ESO - B'),
+                                ('eso_4_c', '4º ESO - C'),
+                                ('eso_4_d', '4º ESO - D'),
+                                ('eso_4_e', '4º ESO - E'),
+                                ('eso_4_f', '4º ESO - F'),
+                                ('bach_1_a', '1º Bachillerato - A'),
+                                ('bach_1_b', '1º Bachillerato - B'),
+                                ('bach_1_c', '1º Bachillerato - C'),
+                                ('bach_1_d', '1º Bachillerato - D'),
+                                ('bach_1_e', '1º Bachillerato - E'),
+                                ('bach_2_a', '2º Bachillerato - A'),
+                                ('bach_2_b', '2º Bachillerato - B'),
+                                ('bach_2_c', '2º Bachillerato - C'),
+                                ('bach_2_d', '2º Bachillerato - D'),
+                                ('bach_2_e', '2º Bachillerato - E'),
                                 ],
                             )
                         ]
