@@ -22,9 +22,9 @@ class AuthSignupHomeCustom(AuthSignupHome):
                 self.do_signup(qcontext)
                 # Send an account creation confirmation email
                 if qcontext.get("token"):
-                    User = request.env["res.users"]
+                    Partner = request.env["res.partner"]
                     user_sudo = User.sudo().search(
-                        User._get_login_domain(qcontext.get("login")),
+                        Partner._get_login_domain(qcontext.get("login")),
                         order=User._get_login_order(),
                         limit=1,
                     )

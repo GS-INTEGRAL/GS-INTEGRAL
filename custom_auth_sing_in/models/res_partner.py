@@ -34,11 +34,11 @@ class ResPartner(models.Model):
 
         estancias = []
 
-        if self.obra_id and self.obra_id.name == "maristas":
+        if self.obra_id and self.obra_id.name == "Maristas":
 
             obra_secundaria = self.obra_id.obra_secundaria
 
-            if obra_secundaria == "fuensanta":
+            if obra_secundaria == "Fuensanta":
                 estancias = [
                     "Infantil 2 años - A",
                     "1º Infantil 3 años - A",
@@ -95,7 +95,7 @@ class ResPartner(models.Model):
                     "Laboratorio",
                     "Danza",
                 ]
-            elif obra_secundaria == "merced":
+            elif obra_secundaria == "Merced":
                 estancias = [
                     "1º ESO - A",
                     "1º ESO - B",
