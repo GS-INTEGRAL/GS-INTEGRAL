@@ -34,10 +34,11 @@ class ResPartner(models.Model):
         Activa `obra_secundaria` solo si `obra_id` es 'maristas'.
         """
         if self.obra_id == 'maristas':
-            self.obra_secundaria = False  # Reinicia para evitar inconsistencias
+            self.force_save()
         else:
-            self.obra_secundaria = False  # Limpia el campo si cambia a otra obra
-            self.estancia_id = False     # Limpia el campo de estancias
+            self.obra_secundaria = False
+            self.estancia_id = False
+            self.force_save()   # Limpia el campo de estancias
 
     @api.onchange('obra_secundaria')
     def _onchange_obra_secundaria(self):
