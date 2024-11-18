@@ -10,7 +10,7 @@
                     <field name="obra_id" />
 
                     <!-- Campo oculto que se muestra solo si obra_id es 'maristas' -->
-                    <field name="obra_secundaria" invisible="[(obra_id, '!=', 'maristas')]" domain="[('obra_id', '=', 'maristas')]" />
+                    <field name="obra_secundaria" invisible="[(obra_id, '!=', 'maristas')]"/>
                     <!-- Campo de estancia -->
                     <field name="estancia_id" />
                 </xpath>
