@@ -91,7 +91,6 @@ class AuthSignupHomeCustom(AuthSignupHome):
                 return [
                     ("infantil_2_a", "Infantil 2 años - A"),
                     ("infantil_3_a", "1º Infantil 3 años - A"),
-                    ("infantil_3_a", "1º Infantil 3 años - A"),
                     ("infantil_3_b", "1º Infantil 3 años - B"),
                     ("infantil_3_c", "1º Infantil 3 años - C"),
                     ("infantil_3_d", "1º Infantil 3 años - D"),
