@@ -1,44 +1,36 @@
 <odoo>
     <template id="auth_signup_login_inherit" inherit_id="auth_signup.fields">
     <xpath expr="//div[@class='mb-3 field-name']" position="after">
-        <!-- Campo Sede/Obra -->
         <div class="mb-3 field-obra_id">
             <label for="obra_id">Sede/Obra</label>
-            <select name="obra_id" id="obra_id" class="form-control">
+            <select name="obra_id" id="obra_id" class="form-control" t-att-value="obra_id">
                 <option value="">Seleccione...</option>
-                <t t-foreach="obra_options" t-as="obra">
-                    <option t-att-value="obra[0]"><t t-esc="obra[1]"/></option>
-                </t>
+                <option value="lavaqua" t-att-selected="obra_id == 'lavaqua'">Lavaqua</option>
+                <option value="legal fincas" t-att-selected="obra_id == 'legal fincas'">Legal Fincas</option>
+                <option value="clientes varios" t-att-selected="obra_id == 'clientes varios'">Clientes Varios</option>
+                <option value="maristas" t-att-selected="obra_id == 'maristas'">Maristas</option>
             </select>
         </div>
 
-        <!-- Campo Obra Secundaria -->
         <div class="mb-3 field-obra_secundaria" t-if="obra_id == 'maristas'">
             <label for="obra_secundaria">Obra Secundaria</label>
-            <select name="obra_secundaria" id="obra_secundaria" class="form-control">
+            <select name="obra_secundaria" id="obra_secundaria" class="form-control" t-att-value="obra_secundaria">
                 <option value="">Seleccione...</option>
-                <t t-foreach="obra_secundaria_options" t-as="secundaria">
-                    <option t-att-value="secundaria[0]"><t t-esc="secundaria[1]"/></option>
-                </t>
+                <option value="fuensanta" t-att-selected="obra_secundaria == 'fuensanta'">Fuensanta</option>
+                <option value="merced" t-att-selected="obra_secundaria == 'merced'">Merced</option>
             </select>
         </div>
 
-        <!-- Campo Estancia -->
-        <div class="mb-3 field-estancia_id">
+        <div class="mb-3 field-estancia_id" t-if="obra_id == 'maristas' and obra_secundaria">
             <label for="estancia_id">Estancia/Capítulo</label>
-            <select name="estancia_id" id="estancia_id" class="form-control">
-                <option value="">Seleccione...</option>
-                <t t-foreach="estancia_options" t-as="estancia">
-                    <option t-att-value="estancia[0]"><t t-esc="estancia[1]"/></option>
-                </t>
-            </select>
+            <input type="text" name="estancia_id" id="estancia_id" class="form-control" t-att-value="estancia_id"/>
         </div>
     </xpath>
 </template>
 
 <template id="extend_assets_frontend" inherit_id="web.assets_frontend" name="Include Signup Custom JS">
         <xpath expr="." position="inside">
-            <script type="text/javascript" src="/your_module_name/static/src/js/signup_custom.js"></script>
+            <script type="text/javascript" src="/custom_auth_sing_in/static/src/js/signup_custom.js"></script>
         </xpath>
 </template>
 

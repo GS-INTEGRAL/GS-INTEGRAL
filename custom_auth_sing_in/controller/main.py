@@ -14,43 +14,52 @@ class AuthSignupHomeCustom(AuthSignupHome):
         _logger.info("Iniciando web_auth_signup personalizado")
         qcontext = self.get_auth_signup_qcontext()
 
-        if not qcontext.get("token") and not qcontext.get("signup_enabled"):
-            raise NotFound()
-
         if "error" not in qcontext and request.httprequest.method == "POST":
             try:
                 self.do_signup(qcontext)
-
-                # Asociar datos personalizados al socio
+                # Obtener el partner recién creado
                 user = (
                     request.env["res.users"]
                     .sudo()
-                    .search([("login", "=", qcontext.get("login"))], limit=1)
+                    .search([("login", "=", qcontext.get("login"))])
                 )
-                if user:
-                    partner = user.partner_id
-                    if partner:
-                        partner.sudo().write(
-                            {
-                                "obra_id": qcontext.get("obra_id"),
-                                "estancia_id": qcontext.get("estancia_id"),
-                            }
-                        )
+                partner = user.partner_id
+
+                # Actualizar los campos personalizados
+                partner.sudo().write(
+                    {
+                        "obra_id": qcontext.get("obra_id"),
+                        "obra_secundaria": qcontext.get("obra_secundaria"),
+                        "estancia_id": qcontext.get("estancia_id"),
+                    }
+                )
 
                 return self.web_login(*args, **kw)
-
             except Exception as e:
-                _logger.error("Error durante el registro: %s", e)
-                qcontext["error"] = _(
-                    "Could not create a new account. Please try again."
-                )
+                qcontext["error"] = str(e)
+
+        # Proporcionar opciones para los campos de selección
+        qcontext.update(
+            {
+                "obra_options": [
+                    ("lavaqua", "Lavaqua"),
+                    ("legal fincas", "Legal Fincas"),
+                    ("clientes varios", "Clientes Varios"),
+                    ("maristas", "Maristas"),
+                ],
+                "obra_secundaria_options": [
+                    ("fuensanta", "Fuensanta"),
+                    ("merced", "Merced"),
+                ],
+            }
+        )
 
         response = request.render("auth_signup.signup", qcontext)
         response.headers["X-Frame-Options"] = "DENY"
         return response
 
     def get_auth_signup_qcontext(self):
-        
+
         qcontext = super(AuthSignupHomeCustom, self).get_auth_signup_qcontext()
 
         obra_options = (
@@ -145,7 +154,7 @@ class AuthSignupHomeCustom(AuthSignupHome):
 
     @http.route("/get_estancias", type="json", auth="public", methods=["POST"])
     def get_estancias(self):
-        
+
         obra_id = request.jsonrequest.get("obra_id")
         obra_secundaria = request.jsonrequest.get("obra_secundaria")
         if not obra_id:

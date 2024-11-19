@@ -1,21 +1,19 @@
 <odoo>
     <data>
-        <record id="view_partner_form_inherited" model="ir.ui.view">
-            <field name="name">res.partner.inherited.form</field>
+        <record id="view_partner_form_inherit_obra" model="ir.ui.view">
+            <field name="name">res.partner.form.inherit.obra</field>
             <field name="model">res.partner</field>
             <field name="inherit_id" ref="base.view_partner_form"/>
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='vat']" position="after">
-                    <!-- Campo de obra principal -->
-                    <field name="obra_id" />
-
-                    <!-- Campo oculto que se muestra solo si obra_id es 'maristas' -->
-                    <field name="obra_secundaria" invisible="[(obra_id, '!=', 'maristas')]"/>
-                    <!-- Campo de estancia -->
-                    <field name="estancia_id" />
+                    <field name="obra_id"/>
+                    <field name="obra_secundaria" 
+                        invisible="obra_id != 'maristas'" 
+                        required="obra_id == 'maristas'"/>
+                    <field name="estancia_id" 
+                        readonly="obra_secundaria == False"/>
                 </xpath>
             </field>
         </record>
-
     </data>
 </odoo>
