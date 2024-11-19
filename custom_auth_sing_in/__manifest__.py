@@ -17,7 +17,7 @@
         "views/view_partners_form_inherited.xml",
     ],
     'assets': {
-        'web.assets_frontend': [
+        'web.assets_page': [
             '/custom_auth_sing_in/static/src/js/signup_custom.js',
         ],
     },

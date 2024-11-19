@@ -28,10 +28,4 @@
     </xpath>
 </template>
 
-<template id="extend_assets_frontend" inherit_id="website.assets_frontend" name="Include Signup Custom JS">
-        <xpath expr="." position="inside">
-            <script type="text/javascript" src="/custom_auth_sing_in/static/src/js/signup_custom.js"></script>
-        </xpath>
-</template>
-
 </odoo>
