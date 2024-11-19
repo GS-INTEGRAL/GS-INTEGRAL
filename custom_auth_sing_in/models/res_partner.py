@@ -22,7 +22,10 @@ class ResPartner(models.Model):
         string="Obra Secundaria",
     )
 
-    estancia_id = fields.Char(string="Estancia")
+    estancia_id = fields.Selection(
+        selection=[],
+        string="Estancia",
+    )
 
     @api.onchange("obra_id")
     def _onchange_obra_id(self):
@@ -31,21 +34,36 @@ class ResPartner(models.Model):
 
     @api.onchange("obra_secundaria")
     def _onchange_obra_secundaria(self):
-        self.estancia_id = False
+        self.estancia_id = False  # Resetea estancia al cambiar obra secundaria
         if self.obra_id == "maristas":
             if self.obra_secundaria == "fuensanta":
+                self.estancia_id = False
                 return {
                     "domain": {
-                        "estancia_id": [("id", "in", self._get_fuensanta_estancias())]
+                        "estancia_id": [
+                            (
+                                "value",
+                                "in",
+                                [x[0] for x in self._get_fuensanta_estancias()],
+                            )
+                        ]
                     }
                 }
             elif self.obra_secundaria == "merced":
                 return {
                     "domain": {
-                        "estancia_id": [("id", "in", self._get_merced_estancias())]
+                        "estancia_id": [
+                            (
+                                "value",
+                                "in",
+                                [x[0] for x in self._get_merced_estancias()],
+                            )
+                        ]
                     }
                 }
-        return {"domain": {"estancia_id": []}}
+        else:
+            self.estancia_id = False
+            return {"domain": {"estancia_id": []}}
 
     def _get_fuensanta_estancias(self):
         return [

@@ -8,10 +8,9 @@
                 <xpath expr="//field[@name='vat']" position="after">
                     <field name="obra_id"/>
                     <field name="obra_secundaria" 
-                        invisible="obra_id != 'maristas'" 
-                        required="obra_id == 'maristas'"/>
+                        attrs="{'invisible': [('obra_id', '!=', 'maristas')], 'required': [('obra_id', '=', 'maristas')]}"/>
                     <field name="estancia_id" 
-                        readonly="obra_secundaria == False"/>
+                        attrs="{'readonly': [('obra_secundaria', '=', False)]}"/>
                 </xpath>
             </field>
         </record>
