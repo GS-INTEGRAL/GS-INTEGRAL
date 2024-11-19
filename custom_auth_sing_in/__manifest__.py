@@ -16,6 +16,11 @@
         "views/auth_signup_login_inherit.xml",
         "views/view_partners_form_inherited.xml",
     ],
+    'assets': {
+        'web.assets_frontend': [
+            '/custom_auth_sing_in/static/src/js/signup_custom.js',
+        ],
+    },
     "installable": True,
     "application": False,
     "auto_install": False,
