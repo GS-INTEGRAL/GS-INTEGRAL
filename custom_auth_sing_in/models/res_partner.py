@@ -116,10 +116,10 @@ class ResPartner(models.Model):
         string="Estancias",
     )
 
-    @api.onchange("obra_id")
-    def _onchange_obra_id(self):
-        self.obra_secundaria = False
-        self.estancia_id = False
+    # @api.onchange("obra_id")
+    # def _onchange_obra_id(self):
+    #     self.obra_secundaria = False
+    #     self.estancia_id = False
 
     # @api.onchange("obra_secundaria")
     # def _onchange_obra_secundaria(self):
