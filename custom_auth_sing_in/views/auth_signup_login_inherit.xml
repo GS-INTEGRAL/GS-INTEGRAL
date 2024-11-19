@@ -1,39 +1,38 @@
 <odoo>
     <template id="auth_signup_login_inherit" inherit_id="auth_signup.fields">
-    <xpath expr="//div[@class='mb-3 field-name']" position="after">
-        <!-- Campo Sede/Obra -->
-        <div class="mb-3 field-obra_id">
-            <label for="obra_id">Sede/Obra</label>
-            <select name="obra_id" id="obra_id" class="form-control">
-                <option value="">Seleccione...</option>
-                <t t-foreach="obra_options" t-as="obra">
-                    <option t-att-value="obra[0]"><t t-esc="obra[1]"/></option>
-                </t>
-            </select>
-        </div>
+        <xpath expr="//div[@class='mb-3 field-name']" position="after">
+            <!-- Campo Sede/Obra -->
+            <div class="mb-3 field-obra_id">
+                <label for="obra_id">Sede/Obra</label>
+                <select name="obra_id" id="obra_id" class="form-control" t-att-data-value="obra_id">
+                    <option value="">Seleccione...</option>
+                    <t t-foreach="obra_options" t-as="obra">
+                        <option t-att-value="obra[0]" t-att-selected="obra[0] == obra_id"><t t-esc="obra[1]"/></option>
+                    </t>
+                </select>
+            </div>
 
-        <!-- Campo Obra Secundaria -->
-        <div class="mb-3 field-obra_secundaria" t-if="obra_id == 'maristas'">
-            <label for="obra_secundaria">Obra Secundaria</label>
-            <select name="obra_secundaria" id="obra_secundaria" class="form-control">
-                <option value="">Seleccione...</option>
-                <t t-foreach="obra_secundaria_options" t-as="secundaria">
-                    <option t-att-value="secundaria[0]"><t t-esc="secundaria[1]"/></option>
-                </t>
-            </select>
-        </div>
+            <!-- Campo Obra Secundaria -->
+            <div class="mb-3 field-obra_secundaria" t-att-style="'display: ' + ('block' if obra_id == 'maristas' else 'none')">
+                <label for="obra_secundaria">Obra Secundaria</label>
+                <select name="obra_secundaria" id="obra_secundaria" class="form-control" t-att-data-value="obra_secundaria">
+                    <option value="">Seleccione...</option>
+                    <t t-foreach="obra_secundaria_options" t-as="secundaria">
+                        <option t-att-value="secundaria[0]" t-att-selected="secundaria[0] == obra_secundaria"><t t-esc="secundaria[1]"/></option>
+                    </t>
+                </select>
+            </div>
 
-        <!-- Campo Estancia -->
-        <div class="mb-3 field-estancia_id">
-            <label for="estancia_id">Estancia/Capítulo</label>
-            <select name="estancia_id" id="estancia_id" class="form-control">
-                <option value="">Seleccione...</option>
-                <t t-foreach="estancia_options" t-as="estancia">
-                    <option t-att-value="estancia[0]"><t t-esc="estancia[1]"/></option>
-                </t>
-            </select>
-        </div>
-    </xpath>
-</template>
-
+            <!-- Campo Estancia -->
+            <div class="mb-3 field-estancia_id" t-att-style="'display: ' + ('block' if obra_id == 'maristas' and obra_secundaria else 'none')">
+                <label for="estancia_id">Estancia/Capítulo</label>
+                <select name="estancia_id" id="estancia_id" class="form-control" t-att-data-value="estancia_id">
+                    <option value="">Seleccione...</option>
+                    <t t-foreach="estancia_options" t-as="estancia">
+                        <option t-att-value="estancia[0]" t-att-selected="estancia[0] == estancia_id"><t t-esc="estancia[1]"/></option>
+                    </t>
+                </select>
+            </div>
+        </xpath>
+    </template>
 </odoo>
