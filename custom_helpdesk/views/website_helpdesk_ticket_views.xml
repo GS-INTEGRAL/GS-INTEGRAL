@@ -33,13 +33,9 @@
                         </label>
                         <div class="col-sm">
                             <select class="form-control s_website_form_input" name="estancia_id" id="helpdesk_estancia_id">
-                                <option value="">Seleccione...</option>
-                                <t t-foreach="dict(request.env['res.partner'].fields_get(allfields=['estancia_id'])['estancia_id']['selection'])" t-as="estancia">
-                                    <option t-att-value="estancia[0]" 
-                                            t-att-selected="'selected' if estancia[0] == (request.env.user.partner_id.estancia_id or None) else None">
-                                        <t t-esc="estancia[1]"/>
-                                    </option>
-                                </t>
+                                <option t-att-value="request.env.user.partner_id.estancia_id">
+                                    <t t-esc="request.env.user.partner_id.estancia_id or 'Seleccione...'"/>
+                                </option>
                             </select>
                         </div>
                         <!-- <div class="col-sm">

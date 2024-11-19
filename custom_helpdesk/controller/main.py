@@ -29,20 +29,20 @@ class CustomWebsiteHelpdesk(WebsiteHelpdesk):
             if obra_id
             else None
         )
-        estancia = (
-            request.env["res.partner"]
-            .sudo()
-            .search([("name", "=", estancia_id)], limit=1)
-            if estancia_id
-            else None
-        )
+        # estancia = (
+        #     request.env["res.partner"]
+        #     .sudo()
+        #     .search([("name", "=", estancia_id)], limit=1)
+        #     if estancia_id
+        #     else None
+        # )
 
         ticket_vals = {
             "name": "Ticket desde la Web",
             "description": description,
             "partner_id": partner.id,
             "obra_id": obra.id if obra else None,
-            "estancia_id": estancia.id if estancia else None,
+            "estancia_id": estancia_id,
             "categoria": categoria,
         }
 
@@ -50,4 +50,3 @@ class CustomWebsiteHelpdesk(WebsiteHelpdesk):
 
         # Redirigir al usuario a la página de confirmación o al ticket creado
         return request.redirect(f"/helpdesk/ticket/{ticket.id}")
-    
