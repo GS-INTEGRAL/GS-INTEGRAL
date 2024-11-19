@@ -1,6 +1,5 @@
 <odoo>
     <template id="auth_signup_login_inherit" inherit_id="auth_signup.fields">
-    <script type="text/javascript" src="/custom_auth_sing_in/static/src/js/auth_sing_in.js"></script>
     <xpath expr="//div[@class='mb-3 field-name']" position="after">
         <div class="mb-3 field-obra_id">
             <label for="obra_id">Sede/Obra</label>
