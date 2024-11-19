@@ -23,7 +23,97 @@
 
         <div class="mb-3 field-estancia_id" t-if="obra_id == 'maristas' and obra_secundaria">
             <label for="estancia_id">Estancia/Capítulo</label>
-            <input type="text" name="estancia_id" id="estancia_id" class="form-control" t-att-value="estancia_id"/>
+            <select name="estancia_id" id="estancia_id" class="form-control" t-att-value="estancia_id">
+                <option value="">Seleccione...</option>
+                <option value="infantil_2_a" t-att-selected="estancia_id == 'infantil_2_a'">Infantil 2 años - A</option>
+                <option value="infantil_3_a" t-att-selected="estancia_id == 'infantil_3_a'">1º Infantil 3 años - A</option>
+                <option value="infantil_3_b" t-att-selected="estancia_id == 'infantil_3_b'">1º Infantil 3 años - B</option>
+                <option value="infantil_3_c" t-att-selected="estancia_id == 'infantil_3_c'">1º Infantil 3 años - C</option>
+                <option value="infantil_3_d" t-att-selected="estancia_id == 'infantil_3_d'">1º Infantil 3 años - D</option>
+                <option value="infantil_3_e" t-att-selected="estancia_id == 'infantil_3_e'">1º Infantil 3 años - E</option>
+                <option value="infantil_4_a" t-att-selected="estancia_id == 'infantil_4_a'">2º Infantil 4 años - A</option>
+                <option value="infantil_4_b" t-att-selected="estancia_id == 'infantil_4_b'">2º Infantil 4 años - B</option>
+                <option value="infantil_4_c" t-att-selected="estancia_id == 'infantil_4_c'">2º Infantil 4 años - C</option>
+                <option value="infantil_4_d" t-att-selected="estancia_id == 'infantil_4_d'">2º Infantil 4 años - D</option>
+                <option value="infantil_4_e" t-att-selected="estancia_id == 'infantil_4_e'">2º Infantil 4 años - E</option>
+                <option value="infantil_5_a" t-att-selected="estancia_id == 'infantil_5_a'">3º Infantil 5 años - A</option>
+                <option value="infantil_5_b" t-att-selected="estancia_id == 'infantil_5_b'">3º Infantil 5 años - B</option>
+                <option value="infantil_5_c" t-att-selected="estancia_id == 'infantil_5_c'">3º Infantil 5 años - C</option>
+                <option value="infantil_5_d" t-att-selected="estancia_id == 'infantil_5_d'">3º Infantil 5 años - D</option>
+                <option value="infantil_5_e" t-att-selected="estancia_id == 'infantil_5_e'">3º Infantil 5 años - E</option>
+                <option value="primaria_1_a" t-att-selected="estancia_id == 'primaria_1_a'">1º Primaria - A</option>
+                <option value="primaria_1_b" t-att-selected="estancia_id == 'primaria_1_b'">1º Primaria - B</option>
+                <option value="primaria_1_c" t-att-selected="estancia_id == 'primaria_1_c'">1º Primaria - C</option>
+                <option value="primaria_1_d" t-att-selected="estancia_id == 'primaria_1_d'">1º Primaria - D</option>
+                <option value="primaria_1_e" t-att-selected="estancia_id == 'primaria_1_e'">1º Primaria - E</option>
+                <option value="primaria_2_a" t-att-selected="estancia_id == 'primaria_2_a'">2º Primaria - A</option>
+                <option value="primaria_2_b" t-att-selected="estancia_id == 'primaria_2_b'">2º Primaria - B</option>
+                <option value="primaria_2_c" t-att-selected="estancia_id == 'primaria_2_c'">2º Primaria - C</option>
+                <option value="primaria_2_d" t-att-selected="estancia_id == 'primaria_2_d'">2º Primaria - D</option>
+                <option value="primaria_2_e" t-att-selected="estancia_id == 'primaria_2_e'">2º Primaria - E</option>
+                <option value="primaria_3_a" t-att-selected="estancia_id == 'primaria_3_a'">3º Primaria - A</option>
+                <option value="primaria_3_b" t-att-selected="estancia_id == 'primaria_3_b'">3º Primaria - B</option>
+                <option value="primaria_3_c" t-att-selected="estancia_id == 'primaria_3_c'">3º Primaria - C</option>
+                <option value="primaria_3_d" t-att-selected="estancia_id == 'primaria_3_d'">3º Primaria - D</option>
+                <option value="primaria_3_e" t-att-selected="estancia_id == 'primaria_3_e'">3º Primaria - E</option>
+                <option value="primaria_4_a" t-att-selected="estancia_id == 'primaria_4_a'">4º Primaria - A</option>
+                <option value="primaria_4_b" t-att-selected="estancia_id == 'primaria_4_b'">4º Primaria - B</option>
+                <option value="primaria_4_c" t-att-selected="estancia_id == 'primaria_4_c'">4º Primaria - C</option>
+                <option value="primaria_4_d" t-att-selected="estancia_id == 'primaria_4_d'">4º Primaria - D</option>
+                <option value="primaria_4_e" t-att-selected="estancia_id == 'primaria_4_e'">4º Primaria - E</option>
+                <option value="primaria_5_a" t-att-selected="estancia_id == 'primaria_5_a'">5º Primaria - A</option>
+                <option value="primaria_5_b" t-att-selected="estancia_id == 'primaria_5_b'">5º Primaria - B</option>
+                <option value="primaria_5_c" t-att-selected="estancia_id == 'primaria_5_c'">5º Primaria - C</option>
+                <option value="primaria_5_d" t-att-selected="estancia_id == 'primaria_5_d'">5º Primaria - D</option>
+                <option value="primaria_5_e" t-att-selected="estancia_id == 'primaria_5_e'">5º Primaria - E</option>
+                <option value="primaria_6_a" t-att-selected="estancia_id == 'primaria_6_a'">6º Primaria - A</option>
+                <option value="primaria_6_b" t-att-selected="estancia_id == 'primaria_6_b'">6º Primaria - B</option>
+                <option value="primaria_6_c" t-att-selected="estancia_id == 'primaria_6_c'">6º Primaria - C</option>
+                <option value="primaria_6_d" t-att-selected="estancia_id == 'primaria_6_d'">6º Primaria - D</option>
+                <option value="primaria_6_e" t-att-selected="estancia_id == 'primaria_6_e'">6º Primaria - E</option>
+                <option value="pab_aseos" t-att-selected="estancia_id == 'pab_aseos'">Pabellón Aseos/Vestuarios</option>
+                <option value="pab_general" t-att-selected="estancia_id == 'pab_general'">Pabellón General</option>
+                <option value="pab_judo" t-att-selected="estancia_id == 'pab_judo'">Pabellón Judo</option>
+                <option value="pab_terrazas" t-att-selected="estancia_id == 'pab_terrazas'">Pabellón Terrazas y Trasteros</option>
+                <option value="capilla" t-att-selected="estancia_id == 'capilla'">Capilla</option>
+                <option value="sala_medios" t-att-selected="estancia_id == 'sala_medios'">Sala de Medios</option>
+                <option value="laboratorio" t-att-selected="estancia_id == 'laboratorio'">Laboratorio</option>
+                <option value="danza" t-att-selected="estancia_id == 'danza'">Danza</option>
+                <option value="eso_1_a" t-att-selected="estancia_id == 'eso_1_a'">1º ESO - A</option>
+                <option value="eso_1_b" t-att-selected="estancia_id == 'eso_1_b'">1º ESO - B</option>
+                <option value="eso_1_c" t-att-selected="estancia_id == 'eso_1_c'">1º ESO - C</option>
+                <option value="eso_1_d" t-att-selected="estancia_id == 'eso_1_d'">1º ESO - D</option>
+                <option value="eso_1_e" t-att-selected="estancia_id == 'eso_1_e'">1º ESO - E</option>
+                <option value="eso_1_f" t-att-selected="estancia_id == 'eso_1_f'">1º ESO - F</option>
+                <option value="eso_2_a" t-att-selected="estancia_id == 'eso_2_a'">2º ESO - A</option>
+                <option value="eso_2_b" t-att-selected="estancia_id == 'eso_2_b'">2º ESO - B</option>
+                <option value="eso_2_c" t-att-selected="estancia_id == 'eso_2_c'">2º ESO - C</option>
+                <option value="eso_2_d" t-att-selected="estancia_id == 'eso_2_d'">2º ESO - D</option>
+                <option value="eso_2_e" t-att-selected="estancia_id == 'eso_2_e'">2º ESO - E</option>
+                <option value="eso_2_f" t-att-selected="estancia_id == 'eso_2_f'">2º ESO - F</option>
+                <option value="eso_3_a" t-att-selected="estancia_id == 'eso_3_a'">3º ESO - A</option>
+                <option value="eso_3_b" t-att-selected="estancia_id == 'eso_3_b'">3º ESO - B</option>
+                <option value="eso_3_c" t-att-selected="estancia_id == 'eso_3_c'">3º ESO - C</option>
+                <option value="eso_3_d" t-att-selected="estancia_id == 'eso_3_d'">3º ESO - D</option>
+                <option value="eso_3_e" t-att-selected="estancia_id == 'eso_3_e'">3º ESO - E</option>
+                <option value="eso_3_f" t-att-selected="estancia_id == 'eso_3_f'">3º ESO - F</option>
+                <option value="eso_4_a" t-att-selected="estancia_id == 'eso_4_a'">4º ESO - A</option>
+                <option value="eso_4_b" t-att-selected="estancia_id == 'eso_4_b'">4º ESO - B</option>
+                <option value="eso_4_c" t-att-selected="estancia_id == 'eso_4_c'">4º ESO - C</option>
+                <option value="eso_4_d" t-att-selected="estancia_id == 'eso_4_d'">4º ESO - D</option>
+                <option value="eso_4_e" t-att-selected="estancia_id == 'eso_4_e'">4º ESO - E</option>
+                <option value="eso_4_f" t-att-selected="estancia_id == 'eso_4_f'">4º ESO - F</option>
+                <option value="bach_1_a" t-att-selected="estancia_id == 'bach_1_a'">1º Bachillerato - A</option>
+                <option value="bach_1_b" t-att-selected="estancia_id == 'bach_1_b'">1º Bachillerato - B</option>
+                <option value="bach_1_c" t-att-selected="estancia_id == 'bach_1_c'">1º Bachillerato - C</option>
+                <option value="bach_1_d" t-att-selected="estancia_id == 'bach_1_d'">1º Bachillerato - D</option>
+                <option value="bach_1_e" t-att-selected="estancia_id == 'bach_1_e'">1º Bachillerato - E</option>
+                <option value="bach_2_a" t-att-selected="estancia_id == 'bach_2_a'">2º Bachillerato - A</option>
+                <option value="bach_2_b" t-att-selected="estancia_id == 'bach_2_b'">2º Bachillerato - B</option>
+                <option value="bach_2_c" t-att-selected="estancia_id == 'bach_2_c'">2º Bachillerato - C</option>
+                <option value="bach_2_d" t-att-selected="estancia_id == 'bach_2_d'">2º Bachillerato - D</option>
+                <option value="bach_2_e" t-att-selected="estancia_id == 'bach_2_e'">2º Bachillerato - E</option>
+            </select>
         </div>
     </xpath>
 </template>
