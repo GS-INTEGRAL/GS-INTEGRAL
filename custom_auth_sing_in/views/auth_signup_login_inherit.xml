@@ -12,7 +12,7 @@
             </select>
         </div>
 
-        <div class="mb-3 field-obra_secundaria" t-if="obra_id == 'maristas'">
+        <div class="mb-3 field-obra_secundaria">
             <label for="obra_secundaria">Obra Secundaria</label>
             <select name="obra_secundaria" id="obra_secundaria" class="form-control" t-att-value="obra_secundaria">
                 <option value="">Seleccione...</option>
@@ -21,7 +21,7 @@
             </select>
         </div>
 
-        <div class="mb-3 field-estancia_id" t-if="obra_id == 'maristas' and obra_secundaria">
+        <div class="mb-3 field-estancia_id">
             <label for="estancia_id">Estancia/Capítulo</label>
             <select name="estancia_id" id="estancia_id" class="form-control" t-att-value="estancia_id">
                 <option value="">Seleccione...</option>
