@@ -35,7 +35,8 @@ class AuthSignupHome(http.Controller):
         return response
 
     def get_auth_signup_qcontext(self):
-        qcontext = super(AuthSignupHome, self).get_auth_signup_qcontext()
+        qcontext = request.params.copy()
+        
         qcontext.update(
             {
                 "obra_id": request.params.get("obra_id"),
