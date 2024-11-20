@@ -20,8 +20,8 @@ class CustomWebsiteHelpdesk(WebsiteHelpdesk):
         partner = user.partner_id if user.partner_id else None
        
         if request.env.user._is_public():
-                    # Redirigir al login si no está autenticado
-                    return request.redirect("/web/login?redirect=/helpdesk")
+                   
+            return request.redirect("/web/login?redirect=/helpdesk")
                 
         obra_id = partner.obra_id
         estancia_id = partner.estancia_id
