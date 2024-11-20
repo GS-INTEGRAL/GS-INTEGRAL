@@ -16,7 +16,7 @@ class CustomWebsiteHelpdesk(WebsiteHelpdesk):
         csrf=False,
     )
     def website_create(self, **kwargs):
-        if request.env.user._is_public():
+        if request.env.user.has_group("base.group_public"):
    
             return request.redirect("/web/login?redirect=/helpdesk")
         
