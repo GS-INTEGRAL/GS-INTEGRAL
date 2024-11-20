@@ -16,13 +16,13 @@ class CustomWebsiteHelpdesk(WebsiteHelpdesk):
         csrf=False,
     )
     def website_create(self, **kwargs):
+        if request.env.user._is_public():
+   
+            return request.redirect("/web/login?redirect=/helpdesk")
+        
         user = request.env.user
         partner = user.partner_id if user.partner_id else None
-       
-        if request.env.user._is_public():
-                   
-            return request.redirect("/web/login?redirect=/helpdesk")
-                
+                  
         obra_id = partner.obra_id
         estancia_id = partner.estancia_id
         categoria = kwargs.get("categoria")
