@@ -6,6 +6,7 @@
         <field name="arch" type="xml">
              <xpath expr="//field[@name='tag_ids']" position="after">
                     <field name="obra_id"/>
+                    <field name="obra_secundaria"/>
                     <field name="estancia_id"/>
                     <field name="fecha_fin"/>
                     

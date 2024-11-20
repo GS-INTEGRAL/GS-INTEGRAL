@@ -25,11 +25,9 @@ class CustomWebsiteHelpdesk(WebsiteHelpdesk):
         obra_id = partner.obra_id
         estancia_id = partner.estancia_id
         categoria = kwargs.get("categoria")
-        description = kwargs.get("description")
-        
+                
         ticket_vals = {
             "name": "Ticket desde la Web",
-            "description": description,
             "partner_id": partner.id,
             "obra_id": obra_id,
             "estancia_id": estancia_id,
