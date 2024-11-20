@@ -1,4 +1,5 @@
 from odoo import http
+from odoo.addons.auth_signup.controllers.main import AuthSignupHome as BaseAuthSignupHome
 from odoo.http import request
 
 
