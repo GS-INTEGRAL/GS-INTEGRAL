@@ -73,7 +73,7 @@ class CustomAuthSignupHome(AuthSignupHome):
 
         request.session.authenticate(request.session.db, user.login, values.get('password'))
         
-        return request.redirect('/web')
+        return request.redirect('/web/login')
     
     def _prepare_signup_values(self, qcontext):
         values = super()._prepare_signup_values(qcontext)
