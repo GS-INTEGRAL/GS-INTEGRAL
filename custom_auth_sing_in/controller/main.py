@@ -57,12 +57,22 @@ class CustomAuthSignupHome(AuthSignupHome):
             'estancia_id': values.get('estancia_id'),
         })
 
+        User = request.env['res.users'].sudo()
+        user = User.create({
+            'partner_id': partner.id,
+            'login': values.get('login'),
+            'password': values.get('password'),
+            'name': values.get('name'),
+        })
+
         template = request.env.ref('custom_auth_sing_in.email_template_welcome', raise_if_not_found=False)
         if partner and template:
             template.sudo().with_context(lang=partner.lang).send_mail(partner.id, force_send=True)
-            
+
         request.env.cr.commit()
 
+        request.session.authenticate(request.session.db, user.login, values.get('password'))
+        
         return request.redirect('/web')
     
     def _prepare_signup_values(self, qcontext):
