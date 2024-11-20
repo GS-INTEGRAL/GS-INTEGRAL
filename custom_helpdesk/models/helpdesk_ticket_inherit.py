@@ -58,7 +58,7 @@ class HelpdeskTicketInherit(models.Model):
             for ticket in self:
                 if ticket.partner_id and ticket.images:
                     # Enviar correo con imágenes adjuntas
-                    template = self.env.ref("mail_template_ticket_closed_copy")
+                    template = self.env.ref("mail_template_ticket_closed")
                     template.attachment_ids = [(6, 0, ticket.images.ids)]
                     template.send_mail(ticket.id, force_send=True)
 
