@@ -19,29 +19,19 @@ class CustomWebsiteHelpdesk(WebsiteHelpdesk):
         user = request.env.user
         partner = user.partner_id if user.partner_id else None
 
-        obra_id = kwargs.get("obra_id")
-        estancia_id = kwargs.get("estancia_id")
+        if not partner:
+            return request.redirect('/web/login')
+        
+        obra_id = partner.obra_id
+        estancia_id = partner.estancia_id
         categoria = kwargs.get("categoria")
-        description = kwargs.get("description", "Sin descripción")
-
-        obra = (
-            request.env["obra"].sudo().search([("name", "=", obra_id)], limit=1)
-            if obra_id
-            else None
-        )
-        # estancia = (
-        #     request.env["res.partner"]
-        #     .sudo()
-        #     .search([("name", "=", estancia_id)], limit=1)
-        #     if estancia_id
-        #     else None
-        # )
-
+        description = kwargs.get("description")
+        
         ticket_vals = {
             "name": "Ticket desde la Web",
             "description": description,
             "partner_id": partner.id,
-            "obra_id": obra.id if obra else None,
+            "obra_id": obra_id,
             "estancia_id": estancia_id,
             "categoria": categoria,
         }
