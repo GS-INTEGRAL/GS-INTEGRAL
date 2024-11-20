@@ -57,10 +57,23 @@ class HelpdeskTicketInherit(models.Model):
         if vals.get("stage_id") == resolved_stage_id:
             for ticket in self:
                 if ticket.partner_id and ticket.images:
-                    # Enviar correo con imágenes adjuntas
-                    template = self.env.ref("mail_template_ticket_closed")
-                    template.attachment_ids = [(6, 0, ticket.images.ids)]
-                    template.send_mail(ticket.id, force_send=True)
+                    # Obtener la plantilla de correo
+                    template = self.env.ref(
+                        "helpdesk.solved_ticket_request_email_template",
+                        raise_if_not_found=False,
+                    )
+                    if not template:
+                        raise UserError(
+                            "No se encontró la plantilla 'Helpdesk: Ticket Closed'."
+                        )
+
+                    # Crear una copia dinámica de la plantilla y enviar el correo
+                    email_values = {
+                        "attachment_ids": [(6, 0, ticket.images.ids)],
+                    }
+                    template.send_mail(
+                        ticket.id, email_values=email_values, force_send=True
+                    )
 
         return res
 
