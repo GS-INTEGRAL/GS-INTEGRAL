@@ -57,13 +57,15 @@ class CustomAuthSignupHome(AuthSignupHome):
             'estancia_id': values.get('estancia_id'),
         })
 
+        portal_group = request.env.ref('base.group_portal')
         User = request.env['res.users'].sudo()
         user = User.create({
             'partner_id': partner.id,
             'login': values.get('login'),
             'password': values.get('password'),
             'name': values.get('name'),
-        })
+            'groups_id': [(6, 0, [portal_group.id])],
+            })
 
         template = request.env.ref('custom_auth_sing_in.email_template_welcome', raise_if_not_found=False)
         if partner and template:
