@@ -3,7 +3,7 @@ from odoo.addons.auth_signup.controllers.main import AuthSignupHome as BaseAuthS
 from odoo.http import request
 
 
-class AuthSignupHome(http.Controller):
+class CustomAuthSignupHome(AuthSignupHome):
 
     @http.route("/web/signup", type="http", auth="public", website=True, sitemap=False)
     def web_auth_signup(self, *args, **kw):
@@ -35,8 +35,7 @@ class AuthSignupHome(http.Controller):
         return response
 
     def get_auth_signup_qcontext(self):
-        qcontext = request.params.copy()
-        
+        qcontext = super(CustomAuthSignupHome, self).get_auth_signup_qcontext()
         qcontext.update(
             {
                 "obra_id": request.params.get("obra_id"),
@@ -46,16 +45,15 @@ class AuthSignupHome(http.Controller):
         )
         return qcontext
 
+    def _prepare_signup_values(self, qcontext):
+        values = super(CustomAuthSignupHome, self)._prepare_signup_values(qcontext)
+        values.update({
+            'obra_id': qcontext.get('obra_id'),
+            'obra_secundaria': qcontext.get('obra_secundaria'),
+            'estancia_id': qcontext.get('estancia_id'),
+        })
+        return values
+
     def do_signup(self, qcontext):
-        values = {
-            key: qcontext.get(key)
-            for key in (
-                "login",
-                "name",
-                "password",
-                "obra_id",
-                "obra_secundaria",
-                "estancia_id",
-            )
-        }
-        request.env["res.users"].sudo().signup(values, qcontext.get("token"))
+        values = {key: qcontext.get(key) for key in ('login', 'name', 'password', 'obra_id', 'obra_secundaria', 'estancia_id')}
+        request.env['res.users'].sudo().signup(values, qcontext.get('token'))
