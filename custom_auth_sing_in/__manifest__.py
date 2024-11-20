@@ -15,6 +15,7 @@
     "data": [
         "views/auth_signup_login_inherit.xml",
         "views/view_partners_form_inherited.xml",
+        "data/email_template_welcome.xml",
     ],
     # 'assets': {
     #     'web.assets_page': [

@@ -45,15 +45,31 @@ class CustomAuthSignupHome(AuthSignupHome):
         )
         return qcontext
 
+    def do_signup(self, qcontext):
+        values = self._prepare_signup_values(qcontext)
+        
+        Partner = request.env['res.partner'].sudo()
+        partner = Partner.create({
+            'name': values.get('name'),
+            'email': values.get('login'),  
+            'obra_id': values.get('obra_id'),
+            'obra_secundaria': values.get('obra_secundaria'),
+            'estancia_id': values.get('estancia_id'),
+        })
+
+        template = request.env.ref('custom_auth_sing_in.email_template_welcome', raise_if_not_found=False)
+        if partner and template:
+            template.sudo().with_context(lang=partner.lang).send_mail(partner.id, force_send=True)
+            
+        request.env.cr.commit()
+
+        return request.redirect('/web')
+    
     def _prepare_signup_values(self, qcontext):
-        values = super(CustomAuthSignupHome, self)._prepare_signup_values(qcontext)
+        values = super()._prepare_signup_values(qcontext)
         values.update({
             'obra_id': qcontext.get('obra_id'),
             'obra_secundaria': qcontext.get('obra_secundaria'),
             'estancia_id': qcontext.get('estancia_id'),
         })
         return values
-
-    def do_signup(self, qcontext):
-        values = {key: qcontext.get(key) for key in ('login', 'name', 'password', 'obra_id', 'obra_secundaria', 'estancia_id')}
-        request.env['res.users'].sudo().signup(values, qcontext.get('token'))
