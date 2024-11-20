@@ -11,17 +11,18 @@ class CustomWebsiteHelpdesk(WebsiteHelpdesk):
     @http.route(
         ["/helpdesk/create"],
         type="http",
-        auth="public",
+        auth="user",
         website=True,
         csrf=False,
     )
     def website_create(self, **kwargs):
         user = request.env.user
         partner = user.partner_id if user.partner_id else None
-
-        if not partner:
-            return request.redirect('/web/login')
-        
+       
+        if request.env.user._is_public():
+                    # Redirigir al login si no está autenticado
+                    return request.redirect("/web/login?redirect=/helpdesk")
+                
         obra_id = partner.obra_id
         estancia_id = partner.estancia_id
         categoria = kwargs.get("categoria")
