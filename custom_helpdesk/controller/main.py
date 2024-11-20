@@ -1,7 +1,6 @@
 from odoo import http
 from odoo.http import request
 from odoo.addons.website_helpdesk.controllers.main import WebsiteHelpdesk
-from lxml.html.clean import Cleaner
 from odoo.tools import html_sanitize
 import logging
 
@@ -17,30 +16,27 @@ class CustomWebsiteHelpdesk(WebsiteHelpdesk):
         website=True,
         csrf=False,
     )
-    def website_create(self, **kwargs):
-        if not request.env.user or request.env.user._is_public():
-            return request.redirect("/web/login?redirect=/helpdesk")
-
+    def helpdesk_ticket_create(self, **kwargs):
         user = request.env.user
         partner = user.partner_id if user.partner_id else None
 
-        obra_id = partner.obra_id
-        estancia_id = partner.estancia_id
-        categoria = kwargs.get("categoria")
+        if partner:
 
-        raw_description = kwargs.get("description", "")
-        clean_description = html_sanitize(raw_description)
-        
-        ticket_vals = {
-            "name": "Ticket desde la Web",
-            "partner_id": partner.id,
-            "obra_id": obra_id,
-            "estancia_id": estancia_id,
-            "categoria": categoria,
-            "description": clean_description,
-        }
+            kwargs["obra_id"] = partner.obra_id
+            kwargs["estancia_id"] = partner.estancia_id
+        else:
 
-        ticket = request.env["helpdesk.ticket"].sudo().create(ticket_vals)
+            kwargs["obra_id"] = ""
+            kwargs["estancia_id"] = ""
 
-        # Redirigir al usuario a la página de confirmación o al ticket creado
-        return request.redirect(f"/helpdesk/ticket/{ticket.id}")
+        # raw_description = kwargs.get("description", "")
+        # clean_description = html_sanitize(raw_description)
+
+        return request.render(
+            "website_helpdesk.team_form_1",
+            {
+                "partner": partner,
+                "obra_id": kwargs.get("obra_id"),
+                "estancia_id": kwargs.get("estancia_id"),
+            },
+        )
