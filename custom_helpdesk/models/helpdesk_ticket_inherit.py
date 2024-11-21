@@ -59,7 +59,7 @@ class HelpdeskTicketInherit(models.Model):
                 if ticket.partner_id and ticket.images:
                     # Obtener la plantilla de correo
                     template = self.env['mail.template'].search(
-                        [('name', '=', 'Ticket cerrado con adjunto - GS Integral')], 
+                        [('name', '=', 'Servicio de asistencia: ticket cerrado (copia)')], 
                         limit=1
                     )
                     if not template:
