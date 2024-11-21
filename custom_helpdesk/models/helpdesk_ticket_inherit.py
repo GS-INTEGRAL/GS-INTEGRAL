@@ -58,9 +58,9 @@ class HelpdeskTicketInherit(models.Model):
             for ticket in self:
                 if ticket.partner_id and ticket.images:
                     # Obtener la plantilla de correo
-                    template = self.env.ref(
-                        "helpdesk.solved_ticket_request_email_template",
-                        raise_if_not_found=False,
+                    template = self.env['mail.template'].search(
+                        [('name', '=', 'Servicio de asistencia: ticket cerrado (copia)')], 
+                        limit=1
                     )
                     if not template:
                         raise UserError(
