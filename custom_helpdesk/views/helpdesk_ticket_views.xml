@@ -15,7 +15,7 @@
                     <field name="categoria"/>
                      <field name="images" widget="many2many_binary" options="{'filename': 'attachment_name'}"/>
             </xpath>             
-            <xpath expr="//sheet/notebook" position="inside">
+            <!-- <xpath expr="//sheet/notebook" position="inside">
                     <page string="Sobre la Reparación">
                     <group>
                         <field name="comentario_reparacion"/>
@@ -34,7 +34,7 @@
                                 icon="fa-shopping-cart"/>
                         </group>
                     </page>
-                </xpath>
+                </xpath> -->
         </field>
     </record>
 
