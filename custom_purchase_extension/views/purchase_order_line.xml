@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_purchase_order_form_inherited" model="ir.ui.view">
+            <field name="name">purchase.order.form.inherited</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_form"/>
+            <field name="arch" type="xml">
+                <!-- Primera ubicación: Dentro del formulario de línea de producto -->
+                <!-- <xpath expr="//form//group/group/field[@name='product_id']" position="after"> -->
+                <xpath expr="//notebook/page[@name='products']//field[@name='order_line']//tree//field[@name='display_type']" position="before">
+                    <field name="product_image" widget="image" class="oe_avatar" optional="show"/>
+                </xpath>
+        
+                <!-- Segunda ubicación: Después del campo partner_id en la cabecera del formulario -->
+                <!-- <xpath expr="//group/field[@name='partner_id']" position="after"> -->
+                <xpath expr="//notebook/page[@name='products']//field[@name='order_line']//form//field[@name='qty_received_method']" position="before">
+                    <field name="product_image" widget="image" class="oe_avatar" optional="show"/>
+                </xpath>
+            </field>
+        </record>
+        
+    </data>
+</odoo>
+
+    

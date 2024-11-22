@@ -13,28 +13,9 @@
             </xpath>
             <xpath expr="//field[@name='email_cc']" position="after">
                     <field name="categoria"/>
-                     <field name="images" widget="many2many_binary" options="{'filename': 'attachment_name'}"/>
-            </xpath>             
-            <!-- <xpath expr="//sheet/notebook" position="inside">
-                    <page string="Sobre la Reparación">
-                    <group>
-                        <field name="comentario_reparacion"/>
-                        <field name="product_id"/>
-                        <field name="name"/>
-                        <field name="product_qty"/>
-                        <field name="attachment" widget="image"/>
-                        <button name="download_attachment"
-                                string="Descargar Imagen"
-                                type="object"
-                                class="btn-secondary"/>
-                        <button name="create_purchase_order_line"
-                                string="Crear Compra"
-                                type="object"
-                                class="btn-primary"
-                                icon="fa-shopping-cart"/>
-                        </group>
-                    </page>
-                </xpath> -->
+                    <field name="images" widget="many2many_binary" options="{'filename': 'attachment_name'}"/>
+            </xpath>     
+            
         </field>
     </record>
 

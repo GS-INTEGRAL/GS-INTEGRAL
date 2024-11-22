@@ -1,6 +1,6 @@
 {
     "name": "Custom Helpdesk Extension",
-    "version": "1.0",
+    "version": "17.0.0",
     "summary": "Extensión del módulo de Helpdesk con campos personalizados",
     "author": "Pedro Mayor",
     "category": "Helpdesk",
