@@ -1,6 +1,6 @@
 {
     "name": "Custom auth sing in",
-    "version": "1.0",
+    "version": "17.0.1.0.0",
     "summary": "Custom auth sing in",
     "description": "Campos en el sign in",
     "category": "Website",
