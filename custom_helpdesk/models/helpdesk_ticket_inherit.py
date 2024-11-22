@@ -56,7 +56,7 @@ class HelpdeskTicketInherit(models.Model):
         resolved_stage_id = self.env.ref("helpdesk.stage_solved").id
         if vals.get("stage_id") == resolved_stage_id:
             for ticket in self:
-                if ticket.partner_id and ticket.images:
+                if ticket.partner_id:
                     # Obtener la plantilla de correo
                     template = self.env['mail.template'].search(
                         [('name', '=', 'Servicio de asistencia: ticket cerrado (copia)')], 
