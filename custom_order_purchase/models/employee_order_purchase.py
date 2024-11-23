@@ -14,8 +14,8 @@ class Employee_order_purchasePy(models.Model):
     product_id = fields.Many2one(
         "product.product",
         string="Producto",
-        required=True,
-        # domain=[("purchase_ok", "=", True)],  
+        # required=True,
+        # domain=[("purchase_ok", "=", True)],
     )
     product_qty = fields.Float(string="Cantidad", required=True, default=1.0)
     purchase_order_id = fields.Many2one(
@@ -63,3 +63,11 @@ class Employee_order_purchasePy(models.Model):
             "res_id": purchase_order.id,
             "target": "new",  # Abrir en una ventana modal
         }
+
+    @api.onchange("product_id")
+    def _onchange_product_id(self):
+        """
+        Método de depuración para verificar qué productos están disponibles.
+        """
+        products = self.env["product.product"].search([("purchase_ok", "=", True)])
+        _logger.info(f"Productos disponibles para compra: {products}")
