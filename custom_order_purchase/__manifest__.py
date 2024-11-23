@@ -8,8 +8,7 @@
     'category': 'Implements',
     'depends': ['base', 'web', 'helpdesk', 'purchase'],
     "data": [
-        "security/ir.model.access.csv",
-        "views/view_helpdesk_ticket_form_inherit_purchase.xml",
+            "views/view_helpdesk_ticket_form_inherit_purchase.xml",
     ],
     'assets': {
               'web.assets_backend': [

@@ -1,3 +1,0 @@
-id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
-access_employee_order_purchase_py_manager,employee_order_purchase_py_manager,model_employee_order_purchase_py,,1,1,1,1
-access_purchase_order_manager,purchase_order_manager,model_purchase_order,,1,1,1,1
