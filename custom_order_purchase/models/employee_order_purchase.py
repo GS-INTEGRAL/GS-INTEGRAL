@@ -8,8 +8,6 @@ _logger = logging.getLogger(__name__)
 
 class Employee_order_purchasePy(models.Model):
     _inherit = "helpdesk.ticket"
-    _name = "employee_order_purchase.py"
-    _description = "Employee_order_purchasePy"
 
     purchase_order_ids = fields.One2many(
         "purchase.order", "helpdesk_ticket_id", string="Órdenes de Compra"
