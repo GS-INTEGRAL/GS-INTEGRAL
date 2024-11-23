@@ -15,7 +15,7 @@
                         class="btn-primary"/>
                     </group>
                     <group>
-                      <field name="purchase_order_draft_ids">
+                      <field name="purchase_order_ids">
                         <tree>
                           <field name="name"/>
                           <field name="date_order"/>
