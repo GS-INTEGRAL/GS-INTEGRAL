@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+  <odoo>
+    
+  <record id="view_helpdesk_ticket_form_inherit_purchase" model="ir.ui.view">
+      <field name="name">helpdesk.ticket.form.inherit.purchase</field>
+      <field name="model">helpdesk.ticket</field>
+      <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_form"/>
+      <field name="arch" type="xml">                 
+           <xpath expr="//sheet/notebook" position="inside">
+              <page string="Pedido de material">
+                    <group>
+                        <button name="action_create_purchase_order"
+                        string="Crear Orden de Compra"
+                        type="object"
+                        class="btn-primary"/>
+                    </group>
+                    <group>
+                      <field name="purchase_order_draft_ids">
+                        <tree>
+                          <field name="name"/>
+                          <field name="date_order"/>
+                          <field name="state"/>
+                        </tree>
+                      </field>
+                    </group>
+                </page>
+            </xpath> 
+        </field>
+    </record>       
+  </odoo>

@@ -6,10 +6,10 @@
     'author': 'Pedro Mayor',
     'website': '',
     'category': 'Implements',
-    'depends': ['base', 'web'],
+    'depends': ['base', 'web', 'helpdesk', 'purchase'],
     "data": [
         "security/ir.model.access.csv",
-        "views/employee_order_purchase_views.xml"
+        "views/view_helpdesk_ticket_form_inherit_purchase.xml",
     ],
     'assets': {
               'web.assets_backend': [
