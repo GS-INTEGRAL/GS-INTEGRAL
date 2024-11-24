@@ -8,8 +8,8 @@
       <field name="arch" type="xml">                 
            <!-- <xpath expr="//sheet/notebook" position="inside"> -->
           <xpath expr="//field[@name='email_cc']" position="after">
-              <page string="Pedido de material">
-                    <group>
+              <!-- <page string="Pedido de material">
+                    <group> -->
                       <field name="product_id" domain="[('purchase_ok', '=', True)]"/>
                       <field name="product_qty"/>
                       <field name="purchase_order_id" readonly="1"/>
@@ -17,8 +17,8 @@
                               string="Pedido"
                               type="object"
                               class="btn-primary"/>
-                    </group>
-                </page>
+                    <!-- </group>
+                </page> -->
             </xpath> 
         </field>
     </record>       
