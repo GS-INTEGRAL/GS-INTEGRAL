@@ -34,7 +34,7 @@ class Employee_order_purchasePy(models.Model):
                 "Debes seleccionar un producto y una cantidad antes de enviar el pedido."
             )
 
-        partner = self.product_id.seller_ids and self.product_id.seller_ids[0].name
+        partner = self.product_id.seller_ids and self.product_id.seller_ids[0].partner_id
         if not partner:
             raise UserError(
                 "El producto seleccionado no tiene un proveedor asignado. Configura un proveedor en el producto."
