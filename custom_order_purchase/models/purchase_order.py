@@ -10,4 +10,4 @@ class Purchase_order(models.Model):
     _inherit = "purchase.order"
 
     helpdesk_ticket_id = fields.Many2one("helpdesk.ticket", string="Ticket de Helpdesk")
-    user_id = fields.Many2one("helpdesk.ticket", string="Pedido por")
+    user_id = fields.Many2one("res.users", string="Pedido por")
