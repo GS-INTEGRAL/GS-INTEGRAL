@@ -6,10 +6,11 @@
       <field name="model">helpdesk.ticket</field>
       <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_form"/>
       <field name="arch" type="xml">                 
-           <xpath expr="//sheet/notebook" position="inside">
+           <!-- <xpath expr="//sheet/notebook" position="inside"> -->
+          <xpath expr="//field[@name='email_cc']" position="after">
               <page string="Pedido de material">
                     <group>
-                      <field name="product_id"/>
+                      <field name="product_id" domain="[('purchase_ok', '=', True)]"/>
                       <field name="product_qty"/>
                       <field name="purchase_order_id" readonly="1"/>
                       <button name="action_create_draft_purchase_order"
