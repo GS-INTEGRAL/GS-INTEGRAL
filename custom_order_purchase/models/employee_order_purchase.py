@@ -34,9 +34,16 @@ class Employee_order_purchasePy(models.Model):
                 "Debes seleccionar un producto y una cantidad antes de enviar el pedido."
             )
 
+        partner = self.product_id.seller_ids and self.product_id.seller_ids[0].name
+        if not partner:
+            raise UserError(
+                "El producto seleccionado no tiene un proveedor asignado. Configura un proveedor en el producto."
+            )
+
         # Crear una nueva orden de compra
         purchase_order = self.env["purchase.order"].create(
             {
+                "partner_id": partner.id,
                 "helpdesk_ticket_id": self.id,  # Enlace con el ticket
                 "origin": self.name,  # Nombre del ticket como referencia
             }
