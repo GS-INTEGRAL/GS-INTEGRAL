@@ -15,7 +15,7 @@ class Employee_order_purchasePy(models.Model):
         "product.product",
         string="Producto",
         # required=True,
-        domain=[("purchase_ok", "=", True)],
+        domain=[("id", "!=", 0)],
     )
     product_qty = fields.Float(string="Cantidad", required=True, default=1.0)
     purchase_order_id = fields.Many2one(
