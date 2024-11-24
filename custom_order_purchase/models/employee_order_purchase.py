@@ -11,17 +11,17 @@ _logger = logging.getLogger(__name__)
 class Employee_order_purchasePy(models.Model):
     _inherit = "helpdesk.ticket"
 
-    # product_id = fields.Many2one(
-    #     "product.product",
-    #     string="Producto",
-    #     # required=True,
-    #     domain=[("id", "!=", 0)],
-    # )
-    # product_qty = fields.Float(string="Cantidad", required=True, default=1.0)
-    #
-    purchase_line_ids = fields.One2many(
-        "helpdesk.purchase.line", "ticket_id", string="Líneas de Pedido"
+    product_id = fields.Many2one(
+        "product.product",
+        string="Producto",
+        # required=True,
+        domain=[("id", "!=", 0)],
     )
+    product_qty = fields.Float(string="Cantidad", required=True, default=1.0)
+    
+    # purchase_line_ids = fields.One2many(
+    #     "helpdesk.purchase.line", "ticket_id", string="Líneas de Pedido"
+    # )
 
     def action_create_draft_purchase_order(self):
         """

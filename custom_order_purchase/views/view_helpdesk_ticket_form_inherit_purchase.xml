@@ -6,7 +6,7 @@
       <field name="model">helpdesk.ticket</field>
       <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_form"/>
       <field name="arch" type="xml">                 
-        <xpath expr="//sheet/notebook" position="inside">
+        <!-- <xpath expr="//sheet/notebook" position="inside">
             <page string="Pedido de Material">
                 <field name="purchase_line_ids">
                     <tree editable="bottom">
@@ -16,18 +16,18 @@
                         <field name="subtotal"/>
                     </tree>
                 </field>
-            </page>
+            </page> -->
                    <!-- <xpath expr="//sheet/notebook" position="inside"> -->
-          <!-- <xpath expr="//field[@name='email_cc']" position="after"> -->
+          <xpath expr="//field[@name='email_cc']" position="after">
               <!-- <page string="Pedido de material">
                     <group> -->
-                      <!-- <field name="product_id" domain="[('purchase_ok', '=', True)]"/>
+                      <field name="product_id" domain="[('purchase_ok', '=', True)]"/>
                       <field name="product_qty"/>
                       <field name="purchase_order_id" readonly="1"/>
                       <button name="action_create_draft_purchase_order"
                               string="Pedido"
                               type="object"
-                              class="btn-primary"/> -->
+                              class="btn-primary"/>
                     <!-- </group>
                 </page> -->
             </xpath> 
