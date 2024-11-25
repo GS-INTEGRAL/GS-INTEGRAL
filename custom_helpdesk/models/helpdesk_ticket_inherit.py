@@ -44,7 +44,7 @@ class HelpdeskTicketInherit(models.Model):
             ("carpinteria", "Carpintería"),
             ("cristaleria", "Cristalería"),
         ],
-        string="Categoría",
+        string="Categoría", store=True, store=True,
     )
 
     fecha_fin = fields.Date(string="Fecha Finalización")
