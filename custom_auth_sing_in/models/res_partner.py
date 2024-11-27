@@ -11,7 +11,7 @@ class ResPartner(models.Model):
             ("clientes varios", "Clientes Varios"),
             ("maristas", "Maristas"),
         ],
-        string="Sede/Obra",
+        string="Cliente",
     )
 
     obra_secundaria = fields.Selection(
@@ -19,7 +19,7 @@ class ResPartner(models.Model):
             ("fuensanta", "Fuensanta"),
             ("merced", "Merced"),
         ],
-        string="Obra Secundaria",
+        string="Sede/Obra",
     )
 
     estancia_id = fields.Selection(
@@ -113,5 +113,5 @@ class ResPartner(models.Model):
             ("bach_2_d", "2º Bachillerato - D"),
             ("bach_2_e", "2º Bachillerato - E"),
         ],
-        string="Estancias",
+        string="Lugar/Estancias",
     )
