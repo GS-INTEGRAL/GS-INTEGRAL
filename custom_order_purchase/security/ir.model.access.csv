@@ -1,2 +1,2 @@
 id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
-access_employee_order_purchase_py_manager,employee_order_purchase_py_manager,model_employee_order_purchase_py,,1,1,1,1
+access_helpdesk_purchase_line_manager,helpdesk_purchase_line_manager,model_helpdesk_purchase_line,,1,1,1,1

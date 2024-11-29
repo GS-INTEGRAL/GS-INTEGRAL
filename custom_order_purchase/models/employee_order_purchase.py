@@ -1,85 +1,85 @@
 # -*- coding: utf-8 -*-
 import logging
 
-from odoo import models, fields, api, _
-from odoo.exceptions import UserError, ValidationError
+from odoo import models, fields, api
+from odoo.exceptions import UserError
+
 
 _logger = logging.getLogger(__name__)
 
 
 class Employee_order_purchasePy(models.Model):
     _inherit = "helpdesk.ticket"
-    _name = 'employee_order_purchase.py'
-    _description = 'Employee_order_purchasePy'
 
-    _id = fields.Many2one(
+    product_id = fields.Many2one(
         "product.product",
         string="Producto",
-        help="Producto que se necesita para la obra",
+        # required=True,
+        domain=[("id", "!=", 0)],
     )
-    name = fields.Char(
-        string="Descripción del Producto",
-        help="Descripción detallada del producto que se necesita",
-    )
-    product_qty = fields.Float(
-        string="Cantidad", default=1.0, help="Cantidad de producto requerida"
-    )
-    attachment = fields.Binary(
-        string="Imagen del Producto",
-        help="Adjunta una imagen del producto necesario",
-    )
-    attachment_filename = fields.Char("Nombre de Archivo de la Imagen")
+    product_qty = fields.Float(string="Cantidad", required=True, default=1.0)
+    
+    # purchase_line_ids = fields.One2many(
+    #     "helpdesk.purchase.line", "ticket_id", string="Líneas de Pedido"
+    # )
 
-    @api.model
-    def create_purchase_order_line(self, _=None):
-        """Método para crear una línea de orden de compra desde el ticket."""
-        if not self.product_id or self.product_qty <= 0:
+    def action_create_draft_purchase_order(self):
+        """
+        Crea una orden de compra en estado borrador con el producto y cantidad.
+        """
+        self.ensure_one()
+
+        if not self.purchase_line_ids:
             raise UserError(
-                _("Debe especificar un producto y una cantidad válida para la compra.")
+                "Debes agregar al menos una línea de pedido antes de continuar."
             )
 
-        # Crear la orden de compra
+        partner = (
+            self.purchase_line_ids[0].product_id.seller_ids
+            and self.purchase_line_ids[0].product_id.seller_ids[0].partner_id
+        )
+        if not partner:
+            raise UserError(
+                "El producto seleccionado no tiene un proveedor asignado. Configura un proveedor en el producto."
+            )
+
+        # Crear una nueva orden de compra
         purchase_order = self.env["purchase.order"].create(
             {
-                "partner_id": self.env.user.company_id.partner_id.id,
-                "origin": self.name or _("Ticket de Helpdesk: %s") % self.id,
+                "partner_id": partner.id,
+                "helpdesk_ticket_id": self.id,
+                "ticket_user_id": self.user_id.id,
+                "origin": self.name,
             }
         )
 
-        # Crear la línea de orden de compra
-        self.env["purchase.order.line"].create(
-            {
-                "order_id": purchase_order.id,
-                "product_id": self.product_id.id,
-                "name": self.name or self.product_id.name,
-                "product_qty": self.product_qty,
-                "price_unit": self.product_id.standard_price,
-                "date_planned": fields.Date.today(),
-            }
-        )
+        # Añadir una línea de pedido con el producto y la cantidad
+        for line in self.purchase_line_ids:
+            self.env["purchase.order.line"].create(
+                {
+                    "order_id": purchase_order.id,
+                    "product_id": line.product_id.id,
+                    "product_qty": line.product_qty,
+                    "price_unit": line.price_unit,
+                }
+            )
 
-        # Confirmar la orden de compra
-        purchase_order.button_confirm()
+        # Enlazar el ticket con la orden creada
+        self.purchase_order_id = purchase_order.id
 
-        # Abrir la orden de compra generada
         return {
             "type": "ir.actions.act_window",
-            "name": _("Orden de Compra"),
+            "name": "Orden de Compra",
             "res_model": "purchase.order",
             "view_mode": "form",
             "res_id": purchase_order.id,
-            "target": "current",
+            "target": "new",  # Abrir en una ventana modal
         }
 
-    def download_attachment(self):
-        if not self.attachment:
-            raise UserError(_("No hay ninguna imagen adjunta para descargar."))
-
-        if not self.attachment_filename:
-            raise UserError(_("El nombre del archivo de la imagen no está definido."))
-
-        return {
-            "type": "ir.actions.act_url",
-            "url": f"/web/content/{self._name}/{self.id}/attachment/{self.attachment_filename}",
-            "target": "self",
-        }
+    @api.onchange("product_id")
+    def _onchange_product_id(self):
+        """
+        Método de depuración para verificar qué productos están disponibles.
+        """
+        products = self.env["product.product"].search([("purchase_ok", "=", True)])
+        _logger.info(f"Productos disponibles para compra: {products}")

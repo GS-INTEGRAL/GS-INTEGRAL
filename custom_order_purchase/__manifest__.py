@@ -1,23 +1,28 @@
 # -*- coding: utf-8 -*-
 {
-    'name': 'Custom_order_purchase',
-    'version': '17.0.1.0.0',
-    'summary': """ Custom_order_purchase Summary """,
-    'author': 'Pedro Mayor',
-    'website': '',
-    'category': 'Implements',
-    'depends': ['base', 'web'],
-    "data": [
-        "security/ir.model.access.csv",
-        "views/employee_order_purchase_views.xml"
+    "name": "Custom_order_purchase",
+    "version": "17.0.1.0.0",
+    "summary": """ Custom_order_purchase Summary """,
+    "author": "Pedro Mayor",
+    "website": "",
+    "category": "Implements",
+    "depends": [
+        "base",
+        "web",
+        "helpdesk",
+        "purchase",
+        "product",
     ],
-    'assets': {
-              'web.assets_backend': [
-                  'custom_order_purchase/static/src/**/*'
-              ],
-          },
-    'application': True,
-    'installable': True,
-    'auto_install': False,
-    'license': 'LGPL-3',
+    "data": [
+        "views/view_helpdesk_ticket_form_inherit_purchase.xml",
+        "views/helpdesk_purchase_line_views.xml",
+        "security/ir.model.access.csv"
+    ],
+    "assets": {
+        "web.assets_backend": ["custom_order_purchase/static/src/**/*"],
+    },
+    "application": True,
+    "installable": True,
+    "auto_install": False,
+    "license": "LGPL-3",
 }
