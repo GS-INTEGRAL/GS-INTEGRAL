@@ -3,33 +3,24 @@
 
    <record id="view_sedes_tree" model="ir.ui.view">
     <field name="name">sedes.tree</field>
-    <field name="model">sedes</field>
+    <field name="model">sedes_estancias</field>
     <field name="arch" type="xml">
         <tree>
-            <field name="name"/>
-            <field name="partner_id"/>
+            <field name="obra_secundaria"/>
         </tree>
     </field>
 </record>
 
 <record id="view_sedes_form" model="ir.ui.view">
     <field name="name">sedes.form</field>
-    <field name="model">sedes</field>
+    <field name="model">sedes_estancias</field>
     <field name="arch" type="xml">
         <form>
             <sheet>
                 <div class="oe_title">
-                    <label for="name"/>
-                    <h1><field name="name"/></h1>
-                </div>
-                <group>
-                    <field name="partner_id"/>
-                    <field name="estancias_ids">
-                        <tree editable="bottom">
-                            <field name="name"/>
-                        </tree>
-                    </field>
-                </group>
+                    <label for="obra_secundaria"/>
+                    <h1><field name="obra_secundaria"/></h1>
+                </div>                
             </sheet>
         </form>
     </field>
@@ -37,34 +28,24 @@
 
 <record id="view_estancias_tree" model="ir.ui.view">
     <field name="name">estancias.tree</field>
-    <field name="model">estancias</field>
+    <field name="model">sedes_estancias</field>
     <field name="arch" type="xml">
         <tree>
-            <field name="name"/>
-            <field name="sede_id"/>
+            <field name="estancia_id"/>
         </tree>
     </field>
 </record>
 
 <record id="view_estancias_form" model="ir.ui.view">
     <field name="name">estancias.form</field>
-    <field name="model">estancias</field>
+    <field name="model">sedes_estancias</field>
     <field name="arch" type="xml">
         <form>
             <sheet>
                 <div class="oe_title">
-                    <label for="name"/>
-                    <h1><field name="name"/></h1>
+                    <label for="estancia_id"/>
+                    <h1><field name="estancia_id"/></h1>
                 </div>
-                <group>
-                    <field name="sede_id"/>
-                    <field name="ticket_ids">
-                        <tree editable="bottom">
-                            <field name="name"/>
-                            <field name="partner_id"/>
-                        </tree>
-                    </field>
-                </group>
             </sheet>
         </form>
     </field>
@@ -72,13 +53,13 @@
 
 <record id="action_sedes" model="ir.actions.act_window">
     <field name="name">Sedes</field>
-    <field name="res_model">sedes</field>
+    <field name="res_model">sedes_estancias</field>
     <field name="view_mode">tree,form</field>
 </record>
 
 <record id="action_estancias" model="ir.actions.act_window">
     <field name="name">Estancias</field>
-    <field name="res_model">estancias</field>
+    <field name="res_model">sedes_estancias</field>
     <field name="view_mode">tree,form</field>
 </record>
 
