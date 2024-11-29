@@ -9,7 +9,6 @@
     'depends': ['base', 'helpdesk'],
     "data": [
         "views/sedes_estancias_views.xml",
-        "security/ir.model.access.csv",
     ],
     'application': True,
     'installable': True,
