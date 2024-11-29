@@ -3,7 +3,7 @@
 
    <record id="view_sedes_tree" model="ir.ui.view">
     <field name="name">sedes.tree</field>
-    <field name="model">sedes_estancias</field>
+    <field name="model">sedes</field>
     <field name="arch" type="xml">
         <tree>
             <field name="obra_secundaria"/>
@@ -13,7 +13,7 @@
 
 <record id="view_sedes_form" model="ir.ui.view">
     <field name="name">sedes.form</field>
-    <field name="model">sedes_estancias</field>
+    <field name="model">sedes</field>
     <field name="arch" type="xml">
         <form>
             <sheet>
@@ -28,7 +28,7 @@
 
 <record id="view_estancias_tree" model="ir.ui.view">
     <field name="name">estancias.tree</field>
-    <field name="model">sedes_estancias</field>
+    <field name="model">estancias</field>
     <field name="arch" type="xml">
         <tree>
             <field name="estancia_id"/>
@@ -38,7 +38,7 @@
 
 <record id="view_estancias_form" model="ir.ui.view">
     <field name="name">estancias.form</field>
-    <field name="model">sedes_estancias</field>
+    <field name="model">estancias</field>
     <field name="arch" type="xml">
         <form>
             <sheet>
@@ -53,13 +53,13 @@
 
 <record id="action_sedes" model="ir.actions.act_window">
     <field name="name">Sedes</field>
-    <field name="res_model">sedes_estancias</field>
+    <field name="res_model">sedes</field>
     <field name="view_mode">tree,form</field>
 </record>
 
 <record id="action_estancias" model="ir.actions.act_window">
     <field name="name">Estancias</field>
-    <field name="res_model">sedes_estancias</field>
+    <field name="res_model">estancias</field>
     <field name="view_mode">tree,form</field>
 </record>
 
