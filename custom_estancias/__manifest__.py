@@ -6,7 +6,7 @@
     'author': 'Pedro Mayor',
     'website': '',
     'category': '',
-    'depends': ['base', 'res.partner', 'helpdesk'],
+    'depends': ['base', 'helpdesk'],
     "data": [
         "views/sedes_estancias_views.xml",
         "security/ir.model.access.csv",

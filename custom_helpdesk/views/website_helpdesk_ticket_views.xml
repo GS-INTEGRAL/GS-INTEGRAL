@@ -127,6 +127,7 @@
                                 <option value="bach_2_e">2º Bachillerato - E</option>   
                             </select>
                         </div>
+                       </div>
                     </div>
                 </div>
                 
@@ -153,10 +154,8 @@
                             </select>
                         </div>
                     </div>
-                </div>     
-                
+                </div>               
             </t>
-        </xpath>
-        
+        </xpath>        
     </template>
 </odoo>
