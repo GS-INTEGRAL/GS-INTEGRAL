@@ -6,9 +6,9 @@
             <field name="inherit_id" ref="base.view_partner_form"/>
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='vat']" position="after">
-                    <field name="obra_id" options="{'no_create_edit': False}" context="{'default_estancias_ids': []}"/>
-                    <field name="obra_secundaria" options="{'no_create_edit': False}" context="{'default_estancias_ids': []}"/>
-                    <field name="estancia_id" options="{'no_create_edit': False}" context="{'default_sede_id': obra_id}"/>
+                    <field name="obra_id"/>
+                    <field name="obra_secundaria"/>
+                    <field name="estancia_id"/>
                     <!-- <field name="obra_id" id="obra_id"/>
                     <field name="obra_secundaria" id="obra_secundaria"/>
                     <field name="estancia_id" id="estancia_id"/> -->
