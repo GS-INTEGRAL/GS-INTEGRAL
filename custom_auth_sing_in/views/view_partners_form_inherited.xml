@@ -8,10 +8,7 @@
                 <xpath expr="//field[@name='vat']" position="after">
                     <field name="obra_id"/>
                     <field name="obra_secundaria"/>
-                    <field name="estancia_id"/>
-                    <!-- <field name="obra_id" id="obra_id"/>
-                    <field name="obra_secundaria" id="obra_secundaria"/>
-                    <field name="estancia_id" id="estancia_id"/> -->
+                    <field name="estancia_id"/>                   
                 </xpath>
             </field>
         </record>
