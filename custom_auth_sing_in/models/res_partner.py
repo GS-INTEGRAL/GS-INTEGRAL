@@ -1,4 +1,4 @@
-from odoo import fields, models, api
+from odoo import fields, models
 
 
 class ResPartner(models.Model):
@@ -14,7 +14,15 @@ class ResPartner(models.Model):
         string="Cliente",
     )
     obra_secundaria = fields.Many2one("res.partner.obra_secundaria", string="Obra/sede")
-    estancia_id = fields.Char(string="Estancia/Capítulo")
+    estancia_id = fields.Many2one("res.partner.estancia_id", string="Estancia/Capítulo")
+
+
+class PartnerEstancia(models.Model):
+    _name = "res.partner.estancia_id"
+    _order = "name"
+    _description = "Partner Estancia"
+
+    name = fields.Char(string="Estancia/Capítulo", required=True, translate=True)
 
 
 class PartnerObraSecundaria(models.Model):
