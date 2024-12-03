@@ -1,4 +1,3 @@
-import string
 from odoo import models, fields, api
 from odoo.exceptions import UserError
 
@@ -13,13 +12,9 @@ class HelpdeskTicketInherit(models.Model):
         domain=[("mimetype", "like", "image/")],
     )
     partner_id = fields.Many2one("res.partner", string="Partner")
-    obra_id = fields.Selection(related="partner_id.obra_id", string="Sede-Obra", store=True)
-    obra_secundaria = fields.Selection(
-        related="partner_id.obra_secundaria", string="Obra Secundaria", store=True
-    )
-    estancia_id = fields.Selection(
-        related="partner_id.estancia_id", string="Estancia-Capítulo", store=True
-    )
+    obra_id = fields.Selection(related="partner_id.obra_id", string="Sede-Obra")
+    obra_secundaria = fields.Char(string="Sede/Obra")
+    estancia_id = fields.Char(string="Estancia/Capítulo")
     comentario_reparacion = fields.Text(
         string="Comentario de Reparación",
         help="Comentarios positivos o negativos sobre la reparación realizada por el cliente",
@@ -56,11 +51,11 @@ class HelpdeskTicketInherit(models.Model):
         resolved_stage_id = self.env.ref("helpdesk.stage_solved").id
         if vals.get("stage_id") == resolved_stage_id:
             for ticket in self:
-                if ticket.partner_id and ticket.images:
+                if ticket.partner_id:
                     # Obtener la plantilla de correo
-                    template = self.env.ref(
-                        "helpdesk.solved_ticket_request_email_template",
-                        raise_if_not_found=False,
+                    template = self.env['mail.template'].search(
+                        [('name', '=', 'Servicio de asistencia: ticket cerrado (copia)')], 
+                        limit=1
                     )
                     if not template:
                         raise UserError(

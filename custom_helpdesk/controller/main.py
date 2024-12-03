@@ -65,6 +65,12 @@ class CustomWebsiteHelpdesk(WebsiteHelpdesk):
         # Obtener datos del usuario
         user = request.env.user
         partner = user.partner_id if user.partner_id else None
+
+        # Verificar si el usuario tiene un campo obra_id
+        if not getattr(partner, "obra_id", False):
+            message = "No tiene permiso para crear un ticket. Por favor, contacte con el administrador."
+            return request.render("website_helpdesk.no_obra_id", {"message": message})
+
         obra_id = getattr(partner, "obra_id", False)
         estancia_id = getattr(partner, "estancia_id", False)
         categoria = kwargs.get("categoria").strip()
