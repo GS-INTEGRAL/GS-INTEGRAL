@@ -5,12 +5,9 @@
         <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_form"/>
         <field name="arch" type="xml">
              <xpath expr="//field[@name='tag_ids']" position="after">
-                    <field name="obra_id" options="{'no_create_edit': False}"/>
-                    <field name="obra_secundaria_id" options="{'no_create_edit': False}"/>
-                    <field name="estancia_id" options="{'no_create_edit': False}" context="{'default_sede_id': obra_id}"/>      
-                    <!-- <field name="obra_id"/>
+                    <field name="obra_id"/>
                     <field name="obra_secundaria"/>
-                    <field name="estancia_id"/> -->
+                    <field name="estancia_id"/>
                     <field name="fecha_fin"/>
                     
             </xpath>

@@ -9,8 +9,6 @@
         "helpdesk",
         "website_helpdesk",
         "base",
-        "website",
-        "custom_auth_sing_in",
     ],
     "data": [
         "views/helpdesk_ticket_views.xml",
