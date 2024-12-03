@@ -7,9 +7,7 @@
     "author": "Pedo Mayor",
     "license": "LGPL-3",
     "depends": [
-        "website",
         "base",
-        "auth_signup",
         "website_helpdesk",
     ],
     "data": [
