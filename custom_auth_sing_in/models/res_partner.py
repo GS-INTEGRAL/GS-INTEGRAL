@@ -13,15 +13,16 @@ class ResPartner(models.Model):
         ],
         string="Cliente",
     )
-    obra_secundaria = fields.Many2one('res.partner.obra_secundaria' string="Obra/sede")
+    obra_secundaria = fields.Many2one("res.partner.obra_secundaria", string="Obra/sede")
     estancia_id = fields.Char(string="Estancia/Capítulo")
-    
-class PartnerObraSecundaria(models.Model):
-    _name = 'res.partner.obra_secundaria'
-    _order = 'name'
-    _description = 'Partner Obra Secundaria'
 
-    name = fields.Char(string='Obra/sede', required=True, translate=True)
+
+class PartnerObraSecundaria(models.Model):
+    _name = "res.partner.obra_secundaria"
+    _order = "name"
+    _description = "Partner Obra Secundaria"
+
+    name = fields.Char(string="Obra/sede", required=True, translate=True)
     # obra_secundaria = fields.Selection(
     #     [
     #         ("fuensanta", "Fuensanta"),
