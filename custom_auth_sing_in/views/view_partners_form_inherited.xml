@@ -14,7 +14,9 @@
                 </xpath>
             </field>
         </record>
+    </data>
 
+    <data>
         
         <record id="view_partner_obra_secundaria_tree" model="ir.ui.view">
             <field name="name">res.partner.obra_secundaria.tree</field>
