@@ -12,12 +12,12 @@ class HelpdeskTicketInherit(models.Model):
         domain=[("mimetype", "like", "image/")],
     )
     partner_id = fields.Many2one("res.partner", string="Partner")
-    obra_id = fields.Selection(related="partner_id.obra_id", string="Cliente")
-    obra_secundaria = fields.Selection(
-        related="partner_id.obra_secundaria", string="Sede/Obra"
+    obra_id = fields.Selection(related="partner_id.obra_id", string="Sede-Obra")
+    obra_secundaria = fields.Many2one(
+        "sedes", string="Sede/Obra"
     )
-    estancia_id = fields.Selection(
-        related="partner_id.estancia_id", string="Estancia-Capítulo"
+    estancia_id = fields.Many2one(
+        "estancias", string="Estancia/Capítulo"
     )
     comentario_reparacion = fields.Text(
         string="Comentario de Reparación",
