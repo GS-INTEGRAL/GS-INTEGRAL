@@ -7,11 +7,7 @@
              <xpath expr="//field[@name='tag_ids']" position="after">
                     <field name="obra_id"/>
                     <field name="obra_secundaria"/>
-<<<<<<< HEAD
                     <field name="estancia_id"/>
-=======
-                    <field name="estancia_id"/>      
->>>>>>> 1e9dad91543a6fc25d21caab6a81fa53524b37c0
                     <field name="fecha_fin"/>
                     
             </xpath>
