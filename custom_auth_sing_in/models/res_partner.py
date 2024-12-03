@@ -13,7 +13,11 @@ class ResPartner(models.Model):
         ],
         string="Clientes",
     )
+<<<<<<< HEAD
     obra_secundaria = fields.Char(string="Obra Secundaria")
+=======
+    obra_secundaria = fields.Char(string="Obra/Sede")
+>>>>>>> 1e9dad91543a6fc25d21caab6a81fa53524b37c0
     estancia_id = fields.Char(string="Estancia/Capítulo")
     # obra_secundaria = fields.Selection(
     #     [
