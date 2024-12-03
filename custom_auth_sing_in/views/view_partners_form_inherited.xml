@@ -6,9 +6,11 @@
             <field name="inherit_id" ref="base.view_partner_form"/>
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='vat']" position="after">
+                <div>
                     <field name="obra_id" string="Cliente"/>
                     <field name="obra_secundaria" string="Obra/Sede"/>
-                    <field name="estancia_id" string="Estancia"/>                   
+                    <field name="estancia_id" string="Estancia"/>  
+                </div>                 
                 </xpath>
             </field>
         </record>
