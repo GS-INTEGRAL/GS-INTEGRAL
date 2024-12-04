@@ -8,17 +8,10 @@
         <notebook position="inside">
             <page string="Productos relacionados">
                 <field name="purchase_order_ids" context="{'default_ticket_id': id}">
-                    <tree editable="bottom">
-                        <field name="product_id"/>
-                        <field name="product_qty"/>
-                        <field name="price_unit"/>
-                        <field name="taxes_id"/>
-                    </tree>
                     <form string="Línea de producto">
                         <group>
                             <field name="product_id"/>
                             <field name="product_qty"/>
-                            <field name="price_unit"/>
                             <field name="taxes_id"/>
                         </group>
                         <button name="action_create_purchase_order"
