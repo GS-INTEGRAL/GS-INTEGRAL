@@ -13,19 +13,35 @@ class CustomPurchaseOrderLine(models.Model):
         related="product_id.image_1920", string="Product Image", store=False
     )
 
-    # def action_create_purchase_order(self):
-    #     purchase_order = self.env['purchase.order'].create({
-    #         'partner_id': self.partner_id.id,
-    #         'order_line': [(0, 0, {
-    #             'product_id': line.product_id.id,
-    #             'product_qty': line.product_qty,
-    #             'price_unit': line.price_unit,
-    #             'taxes_id': [(6, 0, line.taxes_id.ids)],
-    #         }) for line in self.purchase_order_ids],
-    #     })
-    #     return {
-    #         'type': 'ir.actions.act_window',
-    #         'res_model': 'purchase.order',
-    #         'view_mode': 'form',
-    #         'res_id': purchase_order.id,
-    #     }
+    partner_id = fields.Many2one("res.partner", string="Proveedor")
+    order_line = fields.One2many(
+        "your.model.line", "order_id", string="Líneas de pedido"
+    )
+
+    @api.multi
+    def create_purchase_order(self):
+        purchase_order = self.env["purchase.order"].create(
+            {
+                "partner_id": self.partner_id.id,
+                "order_line": [
+                    (
+                        0,
+                        0,
+                        {
+                            "product_id": line.product_id.id,
+                            "product_qty": line.quantity,
+                            "price_unit": line.price_unit,
+                        },
+                    )
+                    for line in self.order_line
+                ],
+            }
+        )
+
+        return {
+            "type": "ir.actions.act_window",
+            "res_model": "purchase.order",
+            "view_mode": "form",
+            "res_id": purchase_order.id,
+            "target": "current",
+        }

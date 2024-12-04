@@ -14,6 +14,7 @@
                                 <field name="product_qty"/>
                             </tree>
                         </field>
+                        <button name="create_purchase_order" string="Crear orden de compra" type="object" class="oe_highlight"/>
                     </page>
                 </xpath>
             </field>
