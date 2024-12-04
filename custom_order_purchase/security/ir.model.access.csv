@@ -1,2 +1,2 @@
 id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
-access_helpdesk_purchase_line_manager,helpdesk_purchase_line_manager,model_helpdesk_purchase_line,,1,1,1,1
+access_custom_purchase_order_line,access.custom.purchase.order.line,model_custom_purchase_order_line,base.group_user,1,1,1,1
