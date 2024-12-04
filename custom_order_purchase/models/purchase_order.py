@@ -4,6 +4,9 @@ from odoo import models, fields
 class PurchaseOrderLine(models.Model):
     _inherit = "purchase.order.line"
 
+    product_id = fields.Many2one('product.product', string="Producto")
+    product_qty = fields.Float(string="Cantidad", required=True)
+    price_unit = fields.Float(string="Precio Unitario", required=True)
     ticket_id = fields.Many2one("helpdesk.ticket", string="Ticket relacionado")
 
     def action_create_purchase_order(self):
