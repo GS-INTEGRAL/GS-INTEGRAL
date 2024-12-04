@@ -7,10 +7,8 @@
     "website": "",
     "category": "Implements",
     "depends": [
-        "base",
         "helpdesk",
         "purchase",
-        "product",
     ],
     "data": [
         "views/view_helpdesk_ticket_form_inherit_purchase.xml",
