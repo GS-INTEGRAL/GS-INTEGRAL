@@ -5,6 +5,9 @@
             <field name="model">helpdesk.ticket</field>
             <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_form"/>
             <field name="arch" type="xml">
+                <xpath expr="//header" position="inside">
+                    <button name="create_purchase_order" string="Crear Orden de Compra" type="object" class="oe_highlight"/>
+                </xpath>
                 <xpath expr="//notebook" position="inside">
                     <page string="Pedido Productos">
                         <field name="custom_purchase_order_ids">
@@ -14,7 +17,6 @@
                                 <field name="product_qty"/>
                             </tree>
                         </field>
-                        <button name="create_purchase_order" string="Crear orden de compra" type="object" class="oe_highlight"/>
                     </page>
                 </xpath>
             </field>

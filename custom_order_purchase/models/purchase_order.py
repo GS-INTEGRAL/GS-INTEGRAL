@@ -1,4 +1,4 @@
-from odoo import models, fields, api
+from odoo import models, fields
 
 
 class CustomPurchaseOrderLine(models.Model):
@@ -17,30 +17,3 @@ class CustomPurchaseOrderLine(models.Model):
     order_line = fields.One2many(
         "custom.purchase.order.line.detail", "order_id", string="Líneas de pedido"
     )
-
-    def create_purchase_order(self):
-        purchase_order = self.env["purchase.order"].create(
-            {
-                "partner_id": self.partner_id.id,
-                "order_line": [
-                    (
-                        0,
-                        0,
-                        {
-                            "product_id": line.product_id.id,
-                            "product_qty": line.quantity,
-                            "price_unit": line.price_unit,
-                        },
-                    )
-                    for line in self.order_line
-                ],
-            }
-        )
-
-        return {
-            "type": "ir.actions.act_window",
-            "res_model": "purchase.order",
-            "view_mode": "form",
-            "res_id": purchase_order.id,
-            "target": "current",
-        }
