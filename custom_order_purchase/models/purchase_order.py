@@ -9,7 +9,9 @@ class CustomPurchaseOrderLine(models.Model):
     product_id = fields.Many2one("product.product", string="Producto")
     product_qty = fields.Float(string="Cantidad", required=True)
     ticket_id = fields.Many2one("helpdesk.ticket", string="Ticket relacionado")
-    taxes_id = fields.Many2many("account.tax", string="Taxes")
+    product_image = fields.Image(
+        related="product_id.image_1920", string="Product Image", store=False
+    )
 
     # def action_create_purchase_order(self):
     #     purchase_order = self.env['purchase.order'].create({
