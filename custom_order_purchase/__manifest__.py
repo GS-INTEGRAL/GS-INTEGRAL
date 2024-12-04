@@ -15,11 +15,11 @@
     ],
     "data": [
         "views/view_helpdesk_ticket_form_inherit_purchase.xml",
-        "views/helpdesk_purchase_line_views.xml",
+        # "views/helpdesk_purchase_line_views.xml",
         "security/ir.model.access.csv"
     ],
     "assets": {
-        "web.assets_backend": ["custom_order_purchase/static/src/**/*"],
+        # "web.assets_backend": ["custom_order_purchase/static/src/**/*"],
     },
     "application": True,
     "installable": True,

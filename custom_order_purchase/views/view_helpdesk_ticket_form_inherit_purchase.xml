@@ -6,21 +6,8 @@
       <field name="model">helpdesk.ticket</field>
       <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_form"/>
       <field name="arch" type="xml">                 
-        <!-- <xpath expr="//sheet/notebook" position="inside">
-            <page string="Pedido de Material">
-                <field name="purchase_line_ids">
-                    <tree editable="bottom">
-                        <field name="product_id"/>
-                        <field name="product_qty"/>
-                        <field name="price_unit"/>
-                        <field name="subtotal"/>
-                    </tree>
-                </field>
-            </page> -->
-                   <!-- <xpath expr="//sheet/notebook" position="inside"> -->
-          <xpath expr="//field[@name='email_cc']" position="after">
-              <!-- <page string="Pedido de material">
-                    <group> -->
+             <xpath expr="//field[@name='display_extra_info']" position="after">
+                  <page> 
                       <field name="product_id" domain="[('purchase_ok', '=', True)]"/>
                       <field name="product_qty"/>
                       <field name="purchase_order_id" readonly="1"/>
@@ -28,8 +15,8 @@
                               string="Pedido"
                               type="object"
                               class="btn-primary"/>
-                    <!-- </group>
-                </page> -->
+              
+                  </page> 
             </xpath> 
         </field>
     </record>       
