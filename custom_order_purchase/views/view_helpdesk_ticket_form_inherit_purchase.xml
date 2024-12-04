@@ -14,6 +14,7 @@
                             <tree editable="bottom">
                                 <field name="product_image" widget="image" class="oe_avatar" optional="show"/>
                                 <field name="product_id"/>
+                                <field name="name"/>
                                 <field name="product_qty"/>
                             </tree>
                         </field>
