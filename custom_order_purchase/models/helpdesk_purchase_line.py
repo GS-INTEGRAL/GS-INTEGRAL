@@ -1,19 +1,9 @@
-# -*- coding: utf-8 -*-
-import logging
-
-from odoo import models, fields, api, _
-from odoo.exceptions import UserError, ValidationError
-
-_logger = logging.getLogger(__name__)
+from odoo import models, fields
 
 
-class Helpdesk_purchase_line(models.Model):
-    _name = 'helpdesk_purchase_line'
-    _description = 'Helpdesk_purchase_line'
+class HelpdeskTicket(models.Model):
+    _inherit = "helpdesk.ticket"
 
-    ticket_id = fields.Many2one(
-        "helpdesk.ticket", string="Ticket", ondelete="cascade"
+    purchase_order_ids = fields.One2many(
+        "purchase.order.line", "ticket_id", string="Líneas de compra"
     )
-    product_id = fields.Many2one("product.product", string="Producto", required=True)
-    product_qty = fields.Float(string="Cantidad", default=1.0, required=True)
-    

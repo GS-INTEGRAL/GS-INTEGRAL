@@ -1,7 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
   <odoo>
+  <record id="view_helpdesk_ticket_form_inherit" model="ir.ui.view">
+    <field name="name">helpdesk.ticket.form.inherit</field>
+    <field name="model">helpdesk.ticket</field>
+    <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_form"/>
+    <field name="arch" type="xml">
+        <notebook position="inside">
+            <page string="Productos relacionados">
+                <field name="purchase_order_ids" context="{'default_ticket_id': id}">
+                    <tree editable="bottom">
+                        <field name="product_id"/>
+                        <field name="product_qty"/>
+                        <field name="price_unit"/>
+                        <field name="taxes_id"/>
+                    </tree>
+                    <form string="Línea de producto">
+                        <group>
+                            <field name="product_id"/>
+                            <field name="product_qty"/>
+                            <field name="price_unit"/>
+                            <field name="taxes_id"/>
+                        </group>
+                        <button name="action_create_purchase_order"
+                        class="oe_highlight"/>
+                    </form>
+                </field>
+            </page>
+        </notebook>
+    </field>
+</record>
     
-  <record id="view_helpdesk_ticket_form_inherit_purchase" model="ir.ui.view">
+  <!-- <record id="view_helpdesk_ticket_form_inherit_purchase" model="ir.ui.view">
       <field name="name">helpdesk.ticket.form.inherit.purchase</field>
       <field name="model">helpdesk.ticket</field>
       <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_form"/>
@@ -18,5 +47,5 @@
                   </page> 
             </xpath> 
         </field>
-    </record>       
+    </record>        -->
   </odoo>
