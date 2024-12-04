@@ -18,7 +18,7 @@ class CustomPurchaseOrderLine(models.Model):
         "your.model.line", "order_id", string="Líneas de pedido"
     )
 
-    @api.multi
+    
     def create_purchase_order(self):
         purchase_order = self.env["purchase.order"].create(
             {
