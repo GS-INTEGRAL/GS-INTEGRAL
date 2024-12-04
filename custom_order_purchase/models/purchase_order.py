@@ -15,10 +15,9 @@ class CustomPurchaseOrderLine(models.Model):
 
     partner_id = fields.Many2one("res.partner", string="Proveedor")
     order_line = fields.One2many(
-        "your.model.line", "order_id", string="Líneas de pedido"
+        "custom.purchase.order.line.detail", "order_id", string="Líneas de pedido"
     )
 
-    
     def create_purchase_order(self):
         purchase_order = self.env["purchase.order"].create(
             {
