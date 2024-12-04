@@ -10,7 +10,6 @@
                   <page> 
                       <field name="product_id" domain="[('purchase_ok', '=', True)]"/>
                       <field name="product_qty"/>
-                      <field name="purchase_order_id" readonly="1"/>
                       <button name="action_create_draft_purchase_order"
                               string="Pedido"
                               type="object"
