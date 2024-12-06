@@ -13,7 +13,7 @@ class ResPartner(models.Model):
         ],
         string="Clientes",
     )
-    obra_secundaria = fields.Char(string="Obra Secundaria")
+    obra_secundaria = fields.Char(string="Obra/Sede")
     estancia_id = fields.Char(string="Estancia/Capítulo")
     # obra_secundaria = fields.Selection(
     #     [
