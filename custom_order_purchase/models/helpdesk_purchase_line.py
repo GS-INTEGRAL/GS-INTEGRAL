@@ -12,19 +12,27 @@ class HelpdeskTicket(models.Model):
 
     def create_purchase_order(self):
         self.ensure_one()
-        
 
-            # Validar que haya líneas de compra
+        # Validar que haya líneas de compra
         if not self.custom_purchase_order_ids:
             raise UserError(_("No hay productos para crear la orden de compra."))
         
-        # Validar que tenga un proveedor
-        if not self.partner_id:
-            raise UserError(_("Debe seleccionar un proveedor antes de crear la orden de compra."))
-    
+        # Buscar o crear un proveedor genérico
+        Partner = self.env['res.partner']
+        generic_partner = Partner.search([('name', '=', 'Proveedor Genérico')], limit=1)
+        if not generic_partner:
+            generic_partner = Partner.create({
+                'name': 'Proveedor Genérico',
+                'is_company': True,
+                'supplier_rank': 1,  # Esto lo marca como proveedor
+            })
+
+        # Asignar proveedor genérico si no se ha seleccionado uno
+        partner_id = self.partner_id.id if self.partner_id else generic_partner.id
+
         purchase_order = self.env["purchase.order"].create(
             {
-                "partner_id": self.partner_id.id,
+                "partner_id": partner_id,
                 "helpdesk_ticket_id": self.id,
                 "user_id": self.user_id.id,
                 "order_line": [
@@ -49,11 +57,11 @@ class HelpdeskTicket(models.Model):
             "target": "new",
             "context": {
                 'default_ticket_id': self.id,
-                'default_partner_id': self.partner_id.id,
+                'default_partner_id': partner_id,
                 'default_purchase_order_id': purchase_order.id 
                 }   
             }
-        
+
 
     @api.depends("custom_purchase_order_ids.product_id")
     def _compute_product_ids(self):
