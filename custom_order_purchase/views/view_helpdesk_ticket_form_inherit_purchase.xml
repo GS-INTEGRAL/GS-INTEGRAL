@@ -9,7 +9,7 @@
                     <button name="create_purchase_order" string="Hacer pedido" type="object" class="oe_highlight"/>
                 </xpath>
                 <xpath expr="//notebook" position="inside">
-                    <page string="Pedido Productos">
+                    <page string="Pedido de Productos">
                         <field name="custom_purchase_order_ids">
                             <tree editable="bottom">
                                 <field name="product_image" widget="image" class="oe_avatar" optional="show"/>

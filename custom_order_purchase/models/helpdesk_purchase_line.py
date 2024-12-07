@@ -7,7 +7,7 @@ class HelpdeskTicket(models.Model):
     custom_purchase_order_ids = fields.One2many(
         "custom.purchase.order.line",
         "ticket_id",
-        string="Líneas de compra personalizadas",
+        string="Líneas de pedido",
     )
 
     def create_purchase_order(self):
@@ -49,6 +49,8 @@ class HelpdeskTicket(models.Model):
         
         self.stage_id = self.env['helpdesk.stage'].search([('name', '=', 'compra en proceso')], limit=1)
 
+        self.clear_custom_purchase_order_lines()
+
         return {
             "type": "ir.actions.act_window",
             'name': 'Confirmar Orden de Compra',
@@ -74,3 +76,7 @@ class HelpdeskTicket(models.Model):
         compute="_compute_product_ids",
         store=True,
     )
+
+    def clear_custom_purchase_order_lines(self):
+    # Eliminar todas las líneas de pedido personalizadas asociadas a este ticket
+        self.custom_purchase_order_ids.unlink()

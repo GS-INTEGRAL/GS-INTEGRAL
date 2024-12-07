@@ -8,7 +8,7 @@
         <field name="arch" type="xml">
             <xpath expr="//field[@name='partner_ref']" position="after">
                 <field name="helpdesk_ticket_id"/>
-                <field name="user_id"/>                
+                <field name="helpdesk_user_id" string="Empleado Asignado" readonly="1"/>
             </xpath>                    
         </field>
     </record>   
