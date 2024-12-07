@@ -2,18 +2,20 @@
     <template id="portal_helpdesk_form_inherit" inherit_id="website_helpdesk.team_form_1">
         <xpath expr="//div[input[@name='partner_email']]" position="after">
             <t t-if="request.env.user.partner_id">
-                <!-- Campo Sede/Obra -->
                 <div class="mb-0 py-2 s_website_form_field col-12" data-type="many2one" data-name="obra_secundaria">
                     <div class="row s_col_no_resize s_col_no_bgcolor">
                         <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px" for="helpdesk_obra_secundaria">
                             <span class="s_website_form_label_content">Sede/Obra</span>
                         </label>
                         <div class="col-sm">
-                            <select class="form-control s_website_form_input" name="obra_secundaria" id="helpdesk_obra_secundaria" t-options="request.env['res.partner.obra_secundaria'].search([])">
+                            <select class="form-control s_website_form_input" name="obra_secundaria" id="helpdesk_obra_secundaria">
                                 <option t-foreach="request.env['res.partner.obra_secundaria'].search([])" t-as="obra" t-key="obra.id" t-att-value="obra.id">
                                     <t t-esc="obra.display_name"/>
                                 </option>
                             </select>
+                            <button class="btn btn-link" type="button" data-toggle="modal" data-target="#create_obra_secundaria_modal">
+                                Crear nueva
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -25,27 +27,19 @@
                             <span class="s_website_form_label_content">Estancia</span>
                         </label>
                         <div class="col-sm">
-                            <select class="form-control s_website_form_input" name="estancia_id" id="helpdesk_estancia_id" t-options="request.env['res.partner.estancia_id'].search([])">
+                            <select class="form-control s_website_form_input" name="estancia_id" id="helpdesk_estancia_id">
                                 <option t-foreach="request.env['res.partner.estancia_id'].search([])" t-as="estancia" t-key="estancia.id" t-att-value="estancia.id">
                                     <t t-esc="estancia.display_name"/>
                                 </option>
                             </select>
+                            <button class="btn btn-link" type="button" data-toggle="modal" data-target="#create_estancia_modal">
+                                Crear nueva
+                            </button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Campo Cliente -->
-                <div class="mb-0 py-2 s_website_form_field col-12" data-type="related" data-name="obra_id">
-                    <div class="row s_col_no_resize s_col_no_bgcolor">
-                        <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px" for="helpdesk_obra_id">
-                            <span class="s_website_form_label_content">Cliente</span>
-                        </label>
-                        <div class="col-sm">
-                            <input type="text" class="form-control s_website_form_input" name="obra_id" id="helpdesk_obra_id" t-value="request.env.user.partner_id.obra_id"/>
-                        </div>
-                    </div>
-                </div>
-
+               
                 <!-- Campo Categoría -->
                 <div class="mb-0 py-2 s_website_form_field col-12" data-type="selection" data-name="categoria">
                     <div class="row s_col_no_resize s_col_no_bgcolor">
