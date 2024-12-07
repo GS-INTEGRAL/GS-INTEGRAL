@@ -6,7 +6,7 @@
             <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_form"/>
             <field name="arch" type="xml">
                 <xpath expr="//header" position="inside">
-                    <button name="create_purchase_order" string="Crear Orden de Compra" type="object" class="oe_highlight"/>
+                    <button name="create_purchase_order" string="Hacer pedido" type="object" class="oe_highlight"/>
                 </xpath>
                 <xpath expr="//notebook" position="inside">
                     <page string="Pedido Productos">
@@ -22,25 +22,4 @@
                 </xpath>
             </field>
         </record>
-
-
-    
-  <!-- <record id="view_helpdesk_ticket_form_inherit_purchase" model="ir.ui.view">
-      <field name="name">helpdesk.ticket.form.inherit.purchase</field>
-      <field name="model">helpdesk.ticket</field>
-      <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_form"/>
-      <field name="arch" type="xml">                 
-             <xpath expr="//field[@name='display_extra_info']" position="after">
-                  <page> 
-                      <field name="product_id" domain="[('purchase_ok', '=', True)]"/>
-                      <field name="product_qty"/>
-                      <button name="action_create_draft_purchase_order"
-                              string="Pedido"
-                              type="object"
-                              class="btn-primary"/>
-              
-                  </page> 
-            </xpath> 
-        </field>
-    </record>        -->
   </odoo>
