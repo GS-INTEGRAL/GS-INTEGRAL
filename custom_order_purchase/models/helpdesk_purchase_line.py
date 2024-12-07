@@ -47,7 +47,7 @@ class HelpdeskTicket(models.Model):
                 ]
             })
         
-        self.stage_id = self.env['helpdesk.stage'].search([('name', '=', 'compra en proceso')], limit=1)
+        # self.stage_id = self.env['helpdesk.stage'].search([('name', '=', 'compra en proceso')], limit=1)
 
         self.clear_custom_purchase_order_lines()
 
