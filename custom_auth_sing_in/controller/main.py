@@ -1,58 +1,99 @@
 from odoo import _, http
 from odoo.addons.auth_signup.controllers.main import AuthSignupHome
 from odoo.http import request
-from werkzeug.exceptions import Forbidden, NotFound
 
 
-class AuthSignupHomeCustom(AuthSignupHome):
+class CustomAuthSignupHome(AuthSignupHome):
+
+    @http.route("/web/signup", type="http", auth="public", website=True, sitemap=False)
+    def web_auth_signup(self, *args, **kw):
+        qcontext = self.get_auth_signup_qcontext()
+
+        if "error" not in qcontext and request.httprequest.method == "POST":
+            try:
+                self.do_signup(qcontext)
+                user = (
+                    request.env["res.users"]
+                    .sudo()
+                    .search([("login", "=", qcontext.get("login"))])
+                )
+                if user:
+                    partner = user.partner_id
+                    partner.write(
+                        {
+                            "obra_id": qcontext.get("obra_id"),
+                            "obra_secundaria": qcontext.get("obra_secundaria"),
+                            "estancia_id": qcontext.get("estancia_id"),
+                        }
+                    )
+                return self.web_login(*args, **kw)
+            except Exception as e:
+                qcontext["error"] = str(e)
+
+        response = request.render("auth_signup.signup", qcontext)
+        response.headers["X-Frame-Options"] = "DENY"
+        return response
 
     def get_auth_signup_qcontext(self):
-        # Llama al método original para obtener el contexto
-        qcontext = super().get_auth_signup_qcontext()
-
-        # Agrega los campos adicionales al contexto si están en request.params
-        qcontext["lugar"] = http.request.params.get("lugar")
-        qcontext["sede"] = http.request.params.get("sede")
-
+        qcontext = super(CustomAuthSignupHome, self).get_auth_signup_qcontext()
+        qcontext.update(
+            {
+                "obra_id": request.params.get("obra_id"),
+                "obra_secundaria": request.params.get("obra_secundaria"),
+                "estancia_id": request.params.get("estancia_id"),
+            }
+        )
         return qcontext
 
+    def do_signup(self, qcontext):
+        values = self._prepare_signup_values(qcontext)
+
+        Partner = request.env["res.partner"].sudo()
+        partner = Partner.create(
+            {
+                "name": values.get("name"),
+                "email": values.get("login"),
+                "obra_id": values.get("obra_id"),
+                "obra_secundaria": values.get("obra_secundaria"),
+                "estancia_id": values.get("estancia_id"),
+            }
+        )
+
+        portal_group = request.env.ref("base.group_portal")
+        User = request.env["res.users"].sudo()
+        user = User.create(
+            {
+                "partner_id": partner.id,
+                "login": values.get("login"),
+                "password": values.get("password"),
+                "name": values.get("name"),
+                "groups_id": [(6, 0, [portal_group.id])],
+            }
+        )
+
+        template = request.env.ref(
+            "custom_auth_sing_in.email_template_welcome", raise_if_not_found=False
+        )
+        if partner and template:
+            template.sudo().with_context(lang=partner.lang).send_mail(
+                partner.id, force_send=True
+            )
+
+        request.env.cr.commit()
+
+        request.session.authenticate(
+            request.session.db, user.login, values.get("password")
+        )
+
+        return request.redirect("/web/login")
+
     def _prepare_signup_values(self, qcontext):
-        # Llama al método original para obtener los valores básicos
         values = super()._prepare_signup_values(qcontext)
-
-        # Extrae y agrega los campos adicionales al diccionario de valores
-        values["lugar"] = qcontext.get("lugar")
-        values["sede"] = qcontext.get("sede")
-
+        values.update(
+            {
+                "obra_id": qcontext.get("obra_id"),
+                "obra_secundaria": qcontext.get("obra_secundaria"),
+                "estancia_id": qcontext.get("estancia_id"),
+            }
+        )
         return values
-
-    @http.route(
-        ["/helpdesk", '/helpdesk/<model("helpdesk.team"):team>'],
-        type="http",
-        auth="user",
-        website=True,
-    )
-    def website_helpdesk_teams(self, team=None, **kwargs):
-        # Verificar si el usuario está autenticado
-        if request.env.user._is_public():
-            # Redirigir al login si no está autenticado
-            return request.redirect("/web/login?redirect=/helpdesk")
-
-        # Aquí continuamos con la lógica para mostrar los equipos del helpdesk
-        teams_domain = [("use_website_helpdesk_form", "=", True)]
-        if not request.env.user.has_group("helpdesk.group_helpdesk_manager"):
-            if team and not team.is_published:
-                raise NotFound()
-            teams_domain.append(("website_published", "=", True))
-
-        teams = request.env["helpdesk.team"].search(teams_domain, order="id asc")
-        if not teams:
-            raise NotFound()
-
-        # Renderizamos la vista del equipo de helpdesk
-        result = {
-            "team": team or teams[0],
-            "multiple_teams": len(teams) > 1,
-            "main_object": team or teams[0],
-        }
-        return request.render("website_helpdesk.team", result)

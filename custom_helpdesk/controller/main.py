@@ -1,120 +1,98 @@
 from odoo import http
 from odoo.http import request
 from odoo.addons.website_helpdesk.controllers.main import WebsiteHelpdesk
+from odoo.tools import html_sanitize
+
+from werkzeug.exceptions import NotFound
 import logging
 
 _logger = logging.getLogger(__name__)
 
 
+def ensure_authenticated_user():
+    if not request.env.user or request.env.user._is_public():
+        return request.redirect("/web/login?redirect=/helpdesk")
+    return None
+
+
+class CustomWebsiteHelpdeskTeams(http.Controller):
+
+    @http.route(
+        ["/helpdesk", '/helpdesk/<model("helpdesk.team"):team>'],
+        type="http",
+        auth="user",
+        website=True,
+    )
+    def website_helpdesk_teams(self, team=None, **kwargs):
+        if request.env.user._is_public():
+
+            return request.redirect("/web/login?redirect=/helpdesk")
+
+        teams_domain = [("use_website_helpdesk_form", "=", True)]
+        if not request.env.user.has_group("helpdesk.group_helpdesk_manager"):
+            if team and not team.is_published:
+                raise NotFound()
+            teams_domain.append(("website_published", "=", True))
+
+        teams = request.env["helpdesk.team"].search(teams_domain, order="id asc")
+        if not teams:
+            raise NotFound()
+
+        # Renderizamos la vista del equipo de helpdesk
+        result = {
+            "team": team or teams[0],
+            "multiple_teams": len(teams) > 1,
+            "main_object": team or teams[0],
+        }
+        return request.render("website_helpdesk.team", result)
+
+
 class CustomWebsiteHelpdesk(WebsiteHelpdesk):
 
     @http.route(
-        "/website/form/",
+        ["/custom_helpdesk/create"],
         type="http",
-        auth="public",
+        auth="user",
         website=True,
         csrf=False,
     )
-    def website_form(self, **kwargs):
+    def website_create(self, **kwargs):
+        # Verificar autenticación
+        redirection = ensure_authenticated_user()
+        if redirection:
+            return redirection
+
+        # Obtener datos del usuario
         user = request.env.user
         partner = user.partner_id if user.partner_id else None
 
-        categoria = kwargs.get("categoria")
-        partner_email = kwargs.get("partner_email")
-        _logger.info("Email recibido en controlador: %s", partner_email)
-        sede_imagen = kwargs.get("sede_imagen")
-        lugar_incidencia_imagen = kwargs.get("lugar_incidencia_imagen")
+        # Verificar si el usuario tiene un campo obra_id
+        if not getattr(partner, "obra_id", False):
+            message = "No tiene permiso para crear un ticket. Por favor, contacte con el administrador."
+            return request.render("website_helpdesk.no_obra_id", {"message": message})
 
-        _logger.info(
-            "Valores recibidos: categoria=%s, email=%s, sede_imagen=%s, lugar_incidencia_imagen=%s",
-            categoria,
-            partner_email,
-            sede_imagen,
-            lugar_incidencia_imagen,
-        )
+        obra_id = getattr(partner, "obra_id", False)
+        estancia_id = getattr(partner, "estancia_id", False)
+        categoria = kwargs.get("categoria").strip()
 
-        if partner:
+        # Limpiar descripción
+        raw_description = kwargs.get("description", "")
+        clean_description = html_sanitize(raw_description)
 
-            kwargs["sede"] = partner.sede
-            kwargs["lugar"] = partner.lugar
-            kwargs["email"] = partner.email
-        else:
-            kwargs["sede"] = ""
-            kwargs["lugar"] = ""
-            kwargs["email"] = partner_email
-
-        _logger.info(
-            "Valores de sede y lugar asignados: sede=%s, lugar=%s, email=%s",
-            kwargs["sede"],
-            kwargs["lugar"],
-            kwargs["email"],
-        )
-
-        ticket_values = {
-            "sede": kwargs["sede"],
-            "lugar": kwargs["lugar"],
+        # Crear ticket
+        ticket_vals = {
+            "name": "Ticket desde la Web",
+            "partner_id": partner.id,
+            "obra_id": obra_id,
+            "estancia_id": estancia_id,
             "categoria": categoria,
-            "partner_id": partner.id if partner else None,
-            "email": kwargs["email"],
-            "email_cc": kwargs["email"],
+            "description": clean_description,
         }
 
-        # Añadir los archivos a los valores del ticket
-        if sede_imagen and hasattr(sede_imagen, "read"):
-            ticket_values["sede_imagen"] = sede_imagen.read()
-            _logger.info("Imagen de la sede cargada correctamente.")
-        else:
-            _logger.warning("No se encontró imagen para la sede.")
+        try:
+            ticket = request.env["helpdesk.ticket"].sudo().create(ticket_vals)
+        except Exception as e:
+            _logger.error("Error creando el ticket: %s", str(e))
+            return request.redirect("/helpdesk?error=creation_failed")
 
-        if lugar_incidencia_imagen and hasattr(lugar_incidencia_imagen, "read"):
-            ticket_values["lugar_incidencia_imagen"] = lugar_incidencia_imagen.read()
-            _logger.info("Imagen del lugar de incidencia cargada correctamente.")
-        else:
-            _logger.warning("No se encontró imagen para el lugar de incidencia.")
-
-        _logger.info("Datos del ticket antes de crear: %s", ticket_values)
-
-        ticket = request.env["helpdesk.ticket"].sudo().create(ticket_values)
-
-        # Renderizar la vista con los datos pasados
-        return request.render(
-            "helpdesk.helpdesk_ticket_view_form",
-            {
-                "partner": partner,
-                "sede": kwargs.get("sede"),
-                "lugar": kwargs.get("lugar"),
-                "email_cc": kwargs.get("email"),
-                "ticket": ticket,
-            },
-        )
-
-        # _logger.info(
-        #     "Datos enviados a la vista - Sede: %s, Lugar: %s",
-        #     kwargs.get("sede"),
-        #     kwargs.get("lugar"),
-        # )
-
-        # ticket = (
-        #     request.env["helpdesk.ticket"]
-        #     .sudo()
-        #     .create(
-        #         {
-        #             "sede": kwargs["sede"],
-        #             "lugar": kwargs["lugar"],
-        #             "categoria": categoria,
-        #             "prioridad": prioridad,
-        #             "partner_id": partner.id if partner else None,
-        #             "email": kwargs["email"],
-        #         }
-        #     )
-        # )
-
-        # return request.render(
-        #     "website_helpdesk.team_form_1",
-        #     {
-        #         "partner": partner,
-        #         "sede": kwargs.get("sede"),
-        #         "lugar": kwargs.get("lugar"),
-        #         "ticket": ticket,
-        #     },
-        # )
+        return request.redirect(f"/helpdesk/ticket/{ticket.id}")
