@@ -32,7 +32,7 @@ class HelpdeskTicket(models.Model):
 
         purchase_order = self.env["purchase.order"].create(
             {
-                "partner_id": partner_id,
+                # "partner_id": partner_id,
                 "helpdesk_ticket_id": self.id,
                 "user_id": self.user_id.id,
                 "order_line": [
