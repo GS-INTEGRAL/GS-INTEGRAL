@@ -11,6 +11,7 @@
         "purchase",
     ],
     "data": [
+        'wizard/purchase_order_confirmation_wizard_view.xml',
         "views/view_helpdesk_ticket_form_inherit_purchase.xml",
         # "views/helpdesk_purchase_line_views.xml",
         "security/ir.model.access.csv",
