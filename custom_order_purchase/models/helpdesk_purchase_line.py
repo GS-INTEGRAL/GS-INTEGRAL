@@ -28,11 +28,11 @@ class HelpdeskTicket(models.Model):
             })
 
         # Asignar proveedor genérico si no se ha seleccionado uno
-        partner_id = self.partner_id.id if self.partner_id else generic_partner.id
+        partner_id = generic_partner.id
 
         purchase_order = self.env["purchase.order"].create(
             {
-                # "partner_id": partner_id,
+                "partner_id": partner_id,
                 "helpdesk_ticket_id": self.id,
                 "user_id": self.user_id.id,
                 "order_line": [
