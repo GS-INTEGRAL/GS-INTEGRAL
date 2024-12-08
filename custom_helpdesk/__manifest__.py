@@ -19,7 +19,8 @@
     ],
     "assets":{
         "web.assets_frontend": [
-            'custom_helpdesk/static/src/js/form.js',            
+            'custom_helpdesk/static/src/js/form.js', 
+        ]           
     },
     "installable": True,
     "application": False,
