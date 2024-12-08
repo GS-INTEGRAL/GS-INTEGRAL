@@ -65,76 +65,73 @@
             </t>
         </xpath>
 
+        <!-- Script JavaScript -->
         <xpath expr="//form" position="after">
-    <script type="text/javascript">
-        odoo.define('your_module_name.script_name', function(require) {
-            "use strict";
-            var $ = require('jquery');
+            <script type="text/javascript">
+                $(document).ready(function() {
+                    $('#helpdesk_obra_secundaria').change(function() {
+                        if ($(this).val() === 'new') {
+                            $('#new_obra_secundaria').removeClass('d-none');
+                        } else {
+                            $('#new_obra_secundaria').addClass('d-none');
+                        }
+                    });
 
-            $(document).ready(function() {
-                $('#helpdesk_obra_secundaria').change(function() {
-                    if ($(this).val() === 'new') {
-                        $('#new_obra_secundaria').removeClass('d-none');
-                    } else {
-                        $('#new_obra_secundaria').addClass('d-none');
-                    }
+                    $('#helpdesk_estancia_id').change(function() {
+                        if ($(this).val() === 'new') {
+                            $('#new_estancia').removeClass('d-none');
+                        } else {
+                            $('#new_estancia').addClass('d-none');
+                        }
+                    });
+
+                    $('form').on('submit', function(e) {
+                        var obraId = $('#helpdesk_obra_secundaria').val();
+                        var estanciaId = $('#helpdesk_estancia_id').val();
+
+                        if (obraId === 'new') {
+                            e.preventDefault();
+                            var newObraName = $('#new_obra_secundaria').val();
+                            $.ajax({
+                                url: '/custom_helpdesk/create_obra',
+                                type: 'POST',
+                                data: JSON.stringify({name: newObraName}),
+                                contentType: 'application/json',
+                                dataType: 'json',
+                                success: function(result) {
+                                    alert('Nueva Sede/Obra creada: ' + result.name);
+                                    // Aquí puedes actualizar la lista o hacer otra acción si es necesario
+                                    $('form').submit(); // Enviar el formulario después de crear la obra
+                                },
+                                error: function() {
+                                    alert('Error al crear la nueva Sede/Obra.');
+                                }
+                            });
+                        }
+
+                        if (estanciaId === 'new') {
+                            e.preventDefault();
+                            var newEstanciaName = $('#new_estancia').val();
+                            $.ajax({
+                                url: '/custom_helpdesk/create_estancia',
+                                type: 'POST',
+                                data: JSON.stringify({name: newEstanciaName}),
+                                contentType: 'application/json',
+                                dataType: 'json',
+                                success: function(result) {
+                                    alert('Nueva Estancia creada: ' + result.name);
+                                    // Aquí puedes actualizar la lista o hacer otra acción si es necesario
+                                    $('form').submit(); // Enviar el formulario después de crear la estancia
+                                },
+                                error: function() {
+                                    alert('Error al crear la nueva Estancia.');
+                                }
+                            });
+                        }
+                    });
                 });
-
-                $('#helpdesk_estancia_id').change(function() {
-                    if ($(this).val() === 'new') {
-                        $('#new_estancia').removeClass('d-none');
-                    } else {
-                        $('#new_estancia').addClass('d-none');
-                    }
-                });
-
-                $('form').on('submit', function(e) {
-                    if ($('#helpdesk_obra_secundaria').val() === 'new') {
-                        e.preventDefault();
-                        var newObraName = $('#new_obra_secundaria').val();
-                        $.ajax({
-                            url: '/custom_helpdesk/create_obra',
-                            type: 'POST',
-                            data: JSON.stringify({name: newObraName}),
-                            contentType: 'application/json',
-                            dataType: 'json',
-                            success: function(result) {
-                                $('#helpdesk_obra_secundaria').append($('<option>', {
-                                    value: result.id,
-                                    text: result.name
-                                }));
-                                $('#helpdesk_obra_secundaria').val(result.id);
-                                $('#new_obra_secundaria').addClass('d-none');
-                                $('form').submit();
-                            }
-                        });
-                    }
-
-                    if ($('#helpdesk_estancia_id').val() === 'new') {
-                        e.preventDefault();
-                        var newEstanciaName = $('#new_estancia').val();
-                        $.ajax({
-                            url: '/custom_helpdesk/create_estancia',
-                            type: 'POST',
-                            data: JSON.stringify({name: newEstanciaName}),
-                            contentType: 'application/json',
-                            dataType: 'json',
-                            success: function(result) {
-                                $('#helpdesk_estancia_id').append($('<option>', {
-                                    value: result.id,
-                                    text: result.name
-                                }));
-                                $('#helpdesk_estancia_id').val(result.id);
-                                $('#new_estancia').addClass('d-none');
-                                $('form').submit();
-                            }
-                        });
-                    }
-                });
-            });
-        });
-    </script>
-</xpath>
+            </script>
+        </xpath>
 
   </template>
     
