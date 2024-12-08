@@ -66,25 +66,26 @@ class CustomWebsiteHelpdesk(WebsiteHelpdesk):
         user = request.env.user
         partner = user.partner_id if user.partner_id else None
 
-        # Verificar si el usuario tiene un campo obra_id
-        if not getattr(partner, "obra_id", False):
-            message = "No tiene permiso para crear un ticket. Por favor, contacte con el administrador."
-            return request.render("website_helpdesk.no_obra_id", {"message": message})
+        # Validar que el partner tiene permisos necesarios
+        obra_id = kwargs.get("obra_secundaria")
+        estancia_id = kwargs.get("estancia_id")
+        categoria = kwargs.get("categoria", "").strip()
 
-        obra_id = getattr(partner, "obra_id", False)
-        estancia_id = getattr(partner, "estancia_id", False)
-        categoria = kwargs.get("categoria").strip()
-
+       
         # Limpiar descripción
         raw_description = kwargs.get("description", "")
         clean_description = html_sanitize(raw_description)
 
+        if not obra_id or not estancia_id:
+            # Retorna un error si no se seleccionaron valores válidos
+            return request.redirect("/helpdesk?error=missing_required_fields")
+        
         # Crear ticket
         ticket_vals = {
-            "name": "Ticket desde la Web",
-            "partner_id": partner.id,
-            "obra_id": obra_id,
-            "estancia_id": estancia_id,
+            "name": kwargs.get("subject", "Ticket desde la Web"),
+            "partner_id": partner.id if partner else None,
+            "obra_secundaria": int(obra_id),  # Convertimos a int porque viene como string del formulario
+            "estancia_id": int(estancia_id),
             "categoria": categoria,
             "description": clean_description,
         }
@@ -96,3 +97,25 @@ class CustomWebsiteHelpdesk(WebsiteHelpdesk):
             return request.redirect("/helpdesk?error=creation_failed")
 
         return request.redirect(f"/helpdesk/ticket/{ticket.id}")
+
+    @http.route(
+            ["/custom_helpdesk/form"],
+            type="http",
+            auth="user",
+            website=True,
+        )
+    def custom_helpdesk_form(self, **kwargs):
+        # Verificar autenticación
+        redirection = ensure_authenticated_user()
+        if redirection:
+            return redirection
+
+        # Obtener datos para poblar el formulario
+        obras = request.env["res.partner.obra_secundaria"].sudo().search([])
+        estancias = request.env["res.partner.estancia_id"].sudo().search([])
+
+        # Renderizar el formulario con opciones dinámicas
+        return request.render("custom_helpdesk.template_helpdesk_form", {
+            "obras": obras,
+            "estancias": estancias,
+        })
