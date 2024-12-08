@@ -7,15 +7,21 @@
     <field name="name">Obras Secundarias - Portal</field>
     <field name="model_id" ref="model_res_partner_obra_secundaria"/>
     <field name="groups" eval="[(4, ref('base.group_portal'))]"/>
-    <!-- <field name="domain_force">[('id', '!=', False)]</field> -->
-</record>
+    <field name="perm_read" eval="1"/>
+    <field name="perm_write" eval="1"/>
+    <field name="perm_create" eval="1"/>
+    <field name="perm_unlink" eval="0"/>
+    </record>
 
 <record id="estancia_portal_access" model="ir.rule">
     <field name="name">Estancias - Portal</field>
     <field name="model_id" ref="model_res_partner_estancia_id"/>
     <field name="groups" eval="[(4, ref('base.group_portal'))]"/>
-    <!-- <field name="domain_force">[('id', '!=', False)]</field> -->
-</record>
+    <field name="perm_read" eval="1"/>
+    <field name="perm_write" eval="1"/>
+    <field name="perm_create" eval="1"/>
+    <field name="perm_unlink" eval="0"/>
+    </record>
 
 </data>
 </odoo>
