@@ -9,6 +9,7 @@
         "helpdesk",
         "website_helpdesk",
         "base",
+        "web",
     ],
     "data": [
         "security/ir.model.access.csv",
