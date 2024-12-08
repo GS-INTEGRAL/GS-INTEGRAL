@@ -81,12 +81,11 @@
                             <span class="s_website_form_label_content">Sede/Obra</span>
                         </label>
                         <div class="col-sm">
-                            <!-- <select class="form-control s_website_form_input" name="obra_secundaria" id="helpdesk_obra_secundaria">
+                            <select class="form-control s_website_form_input" name="obra_secundaria" id="helpdesk_obra_secundaria">
                                 <t t-foreach="obras" t-as="obra">
                                     <option t-att-value="obra.id"><t t-esc="obra.name" /></option>
                                 </t>
-                            </select>                        -->
-                            <field name="obra_secundaria" widget="many2one" options="{'no_create_edit': False, 'no_open': True}" />
+                            </select>                
                         </div>
                     </div>
                 </div>
@@ -98,12 +97,11 @@
                             <span class="s_website_form_label_content">Estancia</span>
                         </label>
                         <div class="col-sm">
-                            <!-- <select class="form-control s_website_form_input" name="estancia_id" id="helpdesk_estancia_id">
+                           <select class="form-control s_website_form_input" name="estancia_id" id="helpdesk_estancia_id">
                                 <t t-foreach="estancias" t-as="estancia">
                                     <option t-att-value="estancia.id"><t t-esc="estancia.name" /></option>
                                 </t>
-                            </select> -->
-                            <field name="estancia_id" widget="many2one" options="{'no_create_edit': False, 'no_open': True}" />
+                            </select>
                         </div>
                     </div>
                 </div>
