@@ -15,12 +15,13 @@
         "security/helpdesk_permission.xml",
         "views/helpdesk_ticket_views.xml",
         'views/website_helpdesk_ticket_views.xml',
-        'views/upload_progress_toast.xml',
+
     ],
     "assets":{
         "web.assets_frontend": [
-            'custom_helpdesk/static/src/js/form.js', 
-        ]           
+            'custom_helpdesk/static/src/js/form.js',
+            'views/upload_progress_toast.xml',
+        ]
     },
     "installable": True,
     "application": False,
