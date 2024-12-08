@@ -1,4 +1,75 @@
 <odoo>
+
+<record id="view_helpdesk_obra_secundaria_tree" model="ir.ui.view">
+    <field name="name">helpdesk.obra_secundaria.tree</field>
+    <field name="model">res.partner.obra_secundaria</field>
+    <field name="arch" type="xml">
+        <tree string="Obra/Sede" editable="bottom">
+            <field name="name"/>
+        </tree>
+    </field>
+</record>
+
+<record id="view_helpdesk_estancia_tree" model="ir.ui.view">
+    <field name="name">helpdesk.estancia.tree</field>
+    <field name="model">res.partner.estancia_id</field>
+    <field name="arch" type="xml">
+        <tree string="Estancia" editable="bottom">
+            <field name="name"/>
+        </tree>
+    </field>
+</record>
+
+<record id="action_helpdesk_obra_secundaria" model="ir.actions.act_window">
+    <field name="name">Obra/Sede</field>
+    <field name="res_model">res.partner.obra_secundaria</field>
+    <field name="view_mode">tree,form</field>
+    <field name="help" type="html">
+        <p class="o_view_nocontent_smiling_face">
+            Create a new Obra/Sede
+        </p>
+    </field>
+</record>
+
+<record id="view_helpdesk_estancia_form" model="ir.ui.view">
+    <field name="name">helpdesk.estancia.form</field>
+    <field name="model">res.partner.estancia_id</field>
+    <field name="arch" type="xml">
+        <form string="Estancia">
+            <sheet>
+                <group>
+                    <field name="name"/>
+                </group>
+            </sheet>
+        </form>
+    </field>
+</record>
+
+<record id="view_helpdesk_obra_secundaria_form" model="ir.ui.view">
+    <field name="name">helpdesk.obra_secundaria.form</field>
+    <field name="model">res.partner.obra_secundaria</field>
+    <field name="arch" type="xml">
+        <form string="Obra/Sede">
+            <sheet>
+                <group>
+                    <field name="name"/>
+                </group>
+            </sheet>
+        </form>
+    </field>
+</record>
+
+<record id="action_helpdesk_estancia" model="ir.actions.act_window">
+    <field name="name">Estancia</field>
+    <field name="res_model">res.partner.estancia_id</field>
+    <field name="view_mode">tree,form</field>
+    <field name="help" type="html">
+        <p class="o_view_nocontent_smiling_face">
+            Create a new Estancia
+        </p>
+    </field>
+</record>
+
     <template id="portal_helpdesk_form_inherit" inherit_id="website_helpdesk.team_form_1">
         <xpath expr="//div[input[@name='partner_email']]" position="after">
             <t t-if="request.env.user.partner_id">
@@ -9,11 +80,7 @@
                             <span class="s_website_form_label_content">Sede/Obra</span>
                         </label>
                         <div class="col-sm">
-                            <select class="form-control s_website_form_input" name="obra_secundaria" id="helpdesk_obra_secundaria">
-                                <option t-foreach="request.env['res.partner.obra_secundaria'].search([])" t-as="obra" t-key="obra.id" t-att-value="obra.id">
-                                    <t t-esc="obra.display_name"/>
-                                </option>
-                            </select>
+                           <field name="obra_secundaria" widget="many2one" options="{'no_create': False}" class="form-control s_website_form_input"/>
                         </div>
                     </div>
                 </div>
@@ -25,11 +92,7 @@
                             <span class="s_website_form_label_content">Estancia</span>
                         </label>
                         <div class="col-sm">
-                            <select class="form-control s_website_form_input" name="estancia_id" id="helpdesk_estancia_id">
-                                <option t-foreach="request.env['res.partner.estancia_id'].search([])" t-as="estancia" t-key="estancia.id" t-att-value="estancia.id">
-                                    <t t-esc="estancia.display_name"/>
-                                </option>
-                            </select>
+                            <field name="estancia_id" widget="many2one" options="{'no_create': False}" class="form-control s_website_form_input"/>
                         </div>
                     </div>
                 </div>
