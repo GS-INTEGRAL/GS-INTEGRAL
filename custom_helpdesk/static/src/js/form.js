@@ -1,4 +1,4 @@
-odoo.define('custom_helpdesk.form', ['web.public.widget'], function (require) {
+odoo.define('custom_helpdesk.form', function (require) {
     "use strict";
 
     var publicWidget = require('web.public.widget');

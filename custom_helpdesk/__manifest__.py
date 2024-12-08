@@ -18,12 +18,12 @@
         'views/website_helpdesk_ticket_views.xml',
 
     ],
-    "assets":{
-        "web.assets_frontend": [
-            'custom_helpdesk/static/src/js/form.js',
-            'views/upload_progress_toast.xml',
-        ]
-    },
+    # "assets":{
+    #     "web.assets_frontend": [
+    #         'custom_helpdesk/static/src/js/form.js',
+    #         'views/upload_progress_toast.xml',
+    #     ]
+    # },
     "installable": True,
     "application": False,
     "auto_install": False,
