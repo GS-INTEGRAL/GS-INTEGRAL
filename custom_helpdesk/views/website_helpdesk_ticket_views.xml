@@ -20,7 +20,8 @@
                                 <t t-foreach="request.env['res.partner.obra_secundaria'].sudo().search([])" t-as="obra">
                                     <option t-att-value="obra.id"><t t-esc="obra.name"/></option>
                                 </t>
-                            </select>        
+                            </select>  
+                           <input type="text" class="form-control mt-2 d-none" id="new_obra_secundaria" name="new_obra_secundaria" placeholder="Nombre de la nueva Sede/Obra"/>      
                         </div>
                     </div>
                 </div>
@@ -43,7 +44,7 @@
                                     <option t-att-value="estancia.id"><t t-esc="estancia.name"/></option>
                                 </t>
                             </select>
-
+                            <input type="text" class="form-control mt-2 d-none" id="new_estancia" name="new_estancia" placeholder="Nombre de la nueva Estancia"/>
                         </div>
                     </div>
                 </div>
@@ -75,6 +76,70 @@
                 </div>
             </t>
         </xpath>
+        <xpath expr="//form" position="after">
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $('#helpdesk_obra_secundaria').change(function() {
+                    if ($(this).val() === 'new') {
+                        $('#new_obra_secundaria').removeClass('d-none');
+                    } else {
+                        $('#new_obra_secundaria').addClass('d-none');
+                    }
+                });
+                
+                $('#helpdesk_estancia_id').change(function() {
+                    if ($(this).val() === 'new') {
+                        $('#new_estancia').removeClass('d-none');
+                    } else {
+                        $('#new_estancia').addClass('d-none');
+                    }
+                });
+
+                $('form').on('submit', function(e) {
+                    if ($('#helpdesk_obra_secundaria').val() === 'new') {
+                        e.preventDefault();
+                        var newObraName = $('#new_obra_secundaria').val();
+                        $.ajax({
+                            url: '/custom_helpdesk/create_obra',
+                            type: 'POST',
+                            data: JSON.stringify({name: newObraName}),
+                            contentType: 'application/json',
+                            dataType: 'json',
+                            success: function(result) {
+                                $('#helpdesk_obra_secundaria').append($('<option>', {
+                                    value: result.id,
+                                    text: result.name
+                                }));
+                                $('#helpdesk_obra_secundaria').val(result.id);
+                                $('#new_obra_secundaria').addClass('d-none');
+                                $('form').submit();
+                            }
+                        });
+                    }
+                    if ($('#helpdesk_estancia_id').val() === 'new') {
+                        e.preventDefault();
+                        var newEstanciaName = $('#new_estancia').val();
+                        $.ajax({
+                            url: '/custom_helpdesk/create_estancia',
+                            type: 'POST',
+                            data: JSON.stringify({name: newEstanciaName}),
+                            contentType: 'application/json',
+                            dataType: 'json',
+                            success: function(result) {
+                                $('#helpdesk_estancia_id').append($('<option>', {
+                                    value: result.id,
+                                    text: result.name
+                                }));
+                                $('#helpdesk_estancia_id').val(result.id);
+                                $('#new_estancia').addClass('d-none');
+                                $('form').submit();
+                            }
+                        });
+                    }
+                });
+            });
+        </script>
+    </xpath>
     </template>
     
 </odoo>
