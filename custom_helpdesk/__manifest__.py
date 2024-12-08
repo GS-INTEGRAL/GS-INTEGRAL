@@ -19,6 +19,7 @@
         "web.assets_frontend": [
             'custom_helpdesk/static/src/js/form.js',
             'custom_helpdesk/static/src/xml/website_helpdesk_ticket_views.xml',
+            'custom_helpdesk/static/src/xml/upload_progress_toast.xml',
         ]
     },
     "installable": True,

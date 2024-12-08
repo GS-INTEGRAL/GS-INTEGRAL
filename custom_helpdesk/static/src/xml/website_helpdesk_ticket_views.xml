@@ -66,15 +66,5 @@
             </t>
         </xpath>
     </template>
-
-    <templates id="template" xml:space="preserve">
-        <t t-name="web_editor.UploadProgressToast">
-            <!-- Contenido de la plantilla UploadProgressToast -->
-            <div class="o_upload_progress_toast">
-                <div class="o_upload_progress_bar" role="progressbar"/>
-                <p class="o_upload_progress_text"/>
-            </div>
-        </t>
-    </templates>
     
 </odoo>
