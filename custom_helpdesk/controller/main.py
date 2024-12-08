@@ -109,7 +109,7 @@ class CustomWebsiteHelpdesk(WebsiteHelpdesk):
         redirection = ensure_authenticated_user()
         if redirection:
             return redirection
-
+       
         # Obtener datos para poblar el formulario
         obras = request.env["res.partner.obra_secundaria"].sudo().search([])
         estancias = request.env["res.partner.estancia_id"].sudo().search([])
@@ -119,3 +119,13 @@ class CustomWebsiteHelpdesk(WebsiteHelpdesk):
             "obras": obras,
             "estancias": estancias,
         })
+    
+    @http.route(['/custom_helpdesk/create_obra'], type='json', auth="user", website=True)
+    def create_obra(self, name):
+        obra = request.env['res.partner.obra_secundaria'].sudo().create({'name': name})
+        return {'id': obra.id, 'name': obra.name}
+
+    @http.route(['/custom_helpdesk/create_estancia'], type='json', auth="user", website=True)
+    def create_estancia(self, name):
+        estancia = request.env['res.partner.estancia_id'].sudo().create({'name': name})
+        return {'id': estancia.id, 'name': estancia.name}
