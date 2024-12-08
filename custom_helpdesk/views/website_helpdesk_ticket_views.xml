@@ -33,8 +33,7 @@
                                     <option t-att-value="estancia.id"><t t-esc="estancia.name"/></option>
                                 </t>
                             </select>
-                            <input type="text" class="form-control mt-2 d-none" id="new_estancia" name="new_estancia" placeholder="Nombre de la nueva Estancia"/>
-                        </div>
+                            <input type="text" class="form-control mt-2 d-none" id="new_estancia" name="new_estancia" placeholder="Nombre de la nueva Estancia"/>                        </div>
                     </div>
                 </div>
 
@@ -70,6 +69,7 @@
         <xpath expr="//form" position="after">
             <script type="text/javascript">
                 $(document).ready(function() {
+                    console.log("JavaScript cargado y listo");
                     $('#helpdesk_obra_secundaria').change(function() {
                         if ($(this).val() === 'new') {
                             $('#new_obra_secundaria').removeClass('d-none');
