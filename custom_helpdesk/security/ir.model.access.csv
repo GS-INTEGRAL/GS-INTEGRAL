@@ -1,3 +1,4 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_helpdesk_ticket_user,access_helpdesk_ticket_user,model_helpdesk_ticket,base.group_user,1,1,1,1
+access_res_partner,access_res_partner,model_res_partner,base.group_user,1,1,1,1
 access_res_partner_portal,access_res_partner_portal,model_res_partner,base.group_portal,1,0,0,0
