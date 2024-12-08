@@ -11,7 +11,7 @@
         "base",
     ],
     "data": [
-        "security/ir_model_acces.csv",
+        "security/ir.model.access.csv",
         "security/helpdesk_permission.xml",
         "views/helpdesk_ticket_views.xml",
         "views/website_helpdesk_ticket_views.xml",
