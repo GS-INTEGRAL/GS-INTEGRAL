@@ -65,7 +65,8 @@
                 </div>
             </t>
         </xpath>
-        
+
+        <!-- Script JavaScript -->
         <xpath expr="//form" position="after">
             <script type="text/javascript">
                 $(document).ready(function() {
@@ -86,7 +87,10 @@
                     });
 
                     $('form').on('submit', function(e) {
-                        if ($('#helpdesk_obra_secundaria').val() === 'new') {
+                        var obraId = $('#helpdesk_obra_secundaria').val();
+                        var estanciaId = $('#helpdesk_estancia_id').val();
+
+                        if (obraId === 'new') {
                             e.preventDefault();
                             var newObraName = $('#new_obra_secundaria').val();
                             $.ajax({
@@ -96,17 +100,16 @@
                                 contentType: 'application/json',
                                 dataType: 'json',
                                 success: function(result) {
-                                    $('#helpdesk_obra_secundaria').append($('<option>', {
-                                        value: result.id,
-                                        text: result.name
-                                    }));
-                                    $('#helpdesk_obra_secundaria').val(result.id);
-                                    $('#new_obra_secundaria').addClass('d-none');
-                                    $('form').submit();
+                                    // Aquí puedes manejar el resultado si es necesario
+                                    // Por ejemplo, podrías mostrar un mensaje de éxito
+                                    alert('Nueva Sede/Obra creada: ' + result.name);
+                                    // Opcionalmente, puedes redirigir o actualizar el formulario
+                                    $('form').submit(); // Enviar el formulario después de crear la obra
                                 }
                             });
                         }
-                        if ($('#helpdesk_estancia_id').val() === 'new') {
+
+                        if (estanciaId === 'new') {
                             e.preventDefault();
                             var newEstanciaName = $('#new_estancia').val();
                             $.ajax({
@@ -116,13 +119,10 @@
                                 contentType: 'application/json',
                                 dataType: 'json',
                                 success: function(result) {
-                                    $('#helpdesk_estancia_id').append($('<option>', {
-                                        value: result.id,
-                                        text: result.name
-                                    }));
-                                    $('#helpdesk_estancia_id').val(result.id);
-                                    $('#new_estancia').addClass('d-none');
-                                    $('form').submit();
+                                    // Aquí puedes manejar el resultado si es necesario
+                                    alert('Nueva Estancia creada: ' + result.name);
+                                    // Opcionalmente, puedes redirigir o actualizar el formulario
+                                    $('form').submit(); // Enviar el formulario después de crear la estancia
                                 }
                             });
                         }
@@ -130,6 +130,7 @@
                 });
             </script>
         </xpath>
+
   </template>
     
 </odoo>
