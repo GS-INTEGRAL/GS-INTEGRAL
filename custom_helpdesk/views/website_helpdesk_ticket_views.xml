@@ -17,7 +17,7 @@
                                 </t>
                             </select>  -->
                             <select class="form-control s_website_form_input" name="obra_secundaria" id="helpdesk_obra_secundaria">
-                                <t t-foreach="request.env['res.partner'].sudo().search([('is_company', '=', True), ('obra_secundaria', '!=', False)])" t-as="obra">
+                                <t t-foreach="request.env['res.partner.obra_secundaria'].sudo().search([])" t-as="obra">
                                     <option t-att-value="obra.id"><t t-esc="obra.name"/></option>
                                 </t>
                             </select>        
@@ -39,7 +39,7 @@
                             </select> -->
                             
                             <select class="form-control s_website_form_input" name="estancia_id" id="helpdesk_estancia_id">
-                                  <t t-foreach="request.env['res.partner'].sudo().search([('is_company', '=', True), ('estancia_id', '!=', False)])" t-as="estancia">
+                                  <t t-foreach="request.env['res.partner.estancia_id'].sudo().search([])" t-as="estancia">
                                     <option t-att-value="estancia.id"><t t-esc="estancia.name"/></option>
                                 </t>
                             </select>
