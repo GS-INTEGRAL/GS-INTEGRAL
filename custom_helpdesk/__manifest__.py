@@ -18,7 +18,7 @@
 
     ],
     "assets":{
-        "web.assets_frontend": [
+        "web.assets_backend": [
             'custom_helpdesk/static/src/js/form.js',
             'custom_helpdesk/static/src/xml/upload_progress_toast.xml',
         ]
