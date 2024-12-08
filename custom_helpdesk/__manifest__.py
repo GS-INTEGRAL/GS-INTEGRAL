@@ -9,6 +9,7 @@
         "helpdesk",
         "website_helpdesk",
         "base",
+        "website",
         "web",
     ],
     "data": [
@@ -16,14 +17,13 @@
         "security/helpdesk_permission.xml",
         "views/helpdesk_ticket_views.xml",
         'views/website_helpdesk_ticket_views.xml',
-
+        'views/assets.xml',
     ],
-    # "assets":{
-    #     "web.assets_frontend": [
-    #         'custom_helpdesk/static/src/js/form.js',
-    #         'views/upload_progress_toast.xml',
-    #     ]
-    # },
+    'assets': {
+        'web.assets_frontend': [
+            'custom_helpdesk/static/src/js/form.js',  # Ruta al archivo JS
+        ],
+    },
     "installable": True,
     "application": False,
     "auto_install": False,

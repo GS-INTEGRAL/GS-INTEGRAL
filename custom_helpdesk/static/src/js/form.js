@@ -1,4 +1,4 @@
-odoo.define('custom_helpdesk.form', function (require) {
+odoo.define('custom_helpdesk.form', ['web.public.widget'], function (require) {
     "use strict";
 
     var publicWidget = require('web.public.widget');
@@ -10,10 +10,9 @@ odoo.define('custom_helpdesk.form', function (require) {
             'click .create_estancia': '_onCreateEstancia',
         },
 
-        start: function () {
-            return this._super.apply(this, arguments);
-        },
-
+        /**
+         * Método para manejar la creación de una nueva Obra/Sede.
+         */
         _onCreateObra: function (ev) {
             ev.preventDefault();
             var self = this;
@@ -25,13 +24,16 @@ odoo.define('custom_helpdesk.form', function (require) {
                         name: name,
                     },
                 }).then(function (result) {
-                    var select = self.$('select[name="obra_secundaria"]');
+                    var select = self.$('#helpdesk_obra_secundaria');
                     select.append(new Option(result.name, result.id));
                     select.val(result.id);
                 });
             }
         },
 
+        /**
+         * Método para manejar la creación de una nueva Estancia.
+         */
         _onCreateEstancia: function (ev) {
             ev.preventDefault();
             var self = this;
@@ -43,7 +45,7 @@ odoo.define('custom_helpdesk.form', function (require) {
                         name: name,
                     },
                 }).then(function (result) {
-                    var select = self.$('select[name="estancia_id"]');
+                    var select = self.$('#helpdesk_estancia_id');
                     select.append(new Option(result.name, result.id));
                     select.val(result.id);
                 });
