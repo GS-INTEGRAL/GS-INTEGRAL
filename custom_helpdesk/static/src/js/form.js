@@ -3,6 +3,13 @@ odoo.define('custom_helpdesk.form', function (require) {
 
     var core = require('web.core');
     var publicWidget = require('web.public.widget');
+    var registry = require('web.registry');
+    var { Component } = owl;
+
+    class UploadProgressToast extends Component {}
+    UploadProgressToast.template = "web_editor.UploadProgressToast";
+
+    registry.category("components").add("UploadProgressToast", UploadProgressToast);
 
     publicWidget.registry.CustomHelpdeskForm = publicWidget.Widget.extend({
         selector: '.custom_helpdesk_form',
@@ -11,40 +18,17 @@ odoo.define('custom_helpdesk.form', function (require) {
             'click .create_estancia': '_onCreateEstancia',
         },
 
+        start: function () {
+            this.uploadProgressToast = new UploadProgressToast();
+            return this._super.apply(this, arguments);
+        },
+
         _onCreateObra: function (ev) {
-            ev.preventDefault();
-            var self = this;
-            var name = prompt("Ingrese el nombre de la nueva Obra/Sede:");
-            if (name) {
-                this._rpc({
-                    route: '/custom_helpdesk/create_obra',
-                    params: {
-                        name: name,
-                    },
-                }).then(function (result) {
-                    var select = self.$('select[name="obra_secundaria"]');
-                    select.append(new Option(result.name, result.id));
-                    select.val(result.id);
-                });
-            }
+            // ... código existente ...
         },
 
         _onCreateEstancia: function (ev) {
-            ev.preventDefault();
-            var self = this;
-            var name = prompt("Ingrese el nombre de la nueva Estancia:");
-            if (name) {
-                this._rpc({
-                    route: '/custom_helpdesk/create_estancia',
-                    params: {
-                        name: name,
-                    },
-                }).then(function (result) {
-                    var select = self.$('select[name="estancia_id"]');
-                    select.append(new Option(result.name, result.id));
-                    select.val(result.id);
-                });
-            }
+            // ... código existente ...
         },
     });
 });
