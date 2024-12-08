@@ -85,7 +85,7 @@
                                 <t t-foreach="obras" t-as="obra">
                                     <option t-att-value="obra.id"><t t-esc="obra.name" /></option>
                                 </t>
-                            </select>                        </div>
+                            </select>                       
                         </div>
                     </div>
                 </div>
