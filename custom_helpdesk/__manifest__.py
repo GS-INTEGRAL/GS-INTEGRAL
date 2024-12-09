@@ -13,6 +13,7 @@
         "web",
     ],
     "data": [
+        "data/helpdesk_fields_extension.xml",
         "security/ir.model.access.csv",
         "security/helpdesk_permission.xml",
         "views/helpdesk_ticket_views.xml",

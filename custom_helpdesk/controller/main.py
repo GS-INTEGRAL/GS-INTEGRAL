@@ -72,36 +72,42 @@ class CustomWebsiteHelpdesk(WebsiteHelpdesk):
         # categoria = kwargs.get("categoria", "").strip()
         # Convertir campos Many2one 
         try:
-            obra_id = int(kwargs.get("obra_secundaria"))
-            estancia_id = int(kwargs.get("estancia_id"))
+            obra_secundaria = int(kwargs.get("obra_secundaria", 0))
+            estancia_id = int(kwargs.get("estancia_id", 0))
         except (ValueError, TypeError):
             return request.redirect("/helpdesk?error=invalid_selection")
-        
-        categoria = kwargs.get("categoria", "").strip()
-       
-        # Limpiar descripción
-        raw_description = kwargs.get("description", "")
-        clean_description = html_sanitize(raw_description)
 
-        if not obra_id or not estancia_id:
-            # Retorna un error si no se seleccionaron valores válidos
+        # Validar campos personalizados
+        if not obra_secundaria or not estancia_id:
             return request.redirect("/helpdesk?error=missing_required_fields")
-        
-        # Crear ticket
+       
+        # Preparar valores para el ticket
         ticket_vals = {
             "name": kwargs.get("subject", "Ticket desde la Web"),
             "partner_id": partner.id if partner else None,
-            "obra_secundaria": obra_id, 
+            "description": html_sanitize(kwargs.get("description", "")),
+            "obra_secundaria": obra_secundaria,
             "estancia_id": estancia_id,
-            "categoria": categoria,
-            "description": clean_description,
+            "categoria": kwargs.get("categoria", "").strip(),
         }
 
         try:
+            # Crear ticket
             ticket = request.env["helpdesk.ticket"].sudo().create(ticket_vals)
+
+            # Manejar archivos adjuntos (opcional)
+            if kwargs.get('attachment'):
+                Attachment = request.env['ir.attachment']
+                for attachment in kwargs.get('attachment'):
+                    Attachment.sudo().create({
+                        'name': attachment.filename,
+                        'datas': base64.b64encode(attachment.read()),
+                        'res_model': 'helpdesk.ticket',
+                        'res_id': ticket.id,
+                    })
+
         except Exception as e:
             _logger.error("Error creando el ticket: %s", str(e))
             return request.redirect("/helpdesk?error=creation_failed")
 
         return request.redirect(f"/helpdesk/ticket/{ticket.id}")
-  
