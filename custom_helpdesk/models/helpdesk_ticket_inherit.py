@@ -3,7 +3,7 @@ from odoo.exceptions import UserError
 
 
 class HelpdeskTicketInherit(models.Model):
-    _inherit =["helpdesk.ticket", "website.helpdesk"]
+    _inherit =["helpdesk.ticket", "website"]
 
     images = fields.Many2many(
         "ir.attachment",
