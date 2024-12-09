@@ -24,7 +24,7 @@
                         </label>
                         <div class="col-sm">
                                                      
-                            <input type="text" class="form-control mt-2 d-none" id="new_estancia" name="new_estancia" placeholder="Nombre de la nueva Estancia"/>                        </div>
+                            <input type="text" class="form-control s_website_form_input" id="new_estancia" name="new_estancia" placeholder="Nombre de la nueva Estancia"/>                        </div>
                     </div>
                 </div>
 
