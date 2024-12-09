@@ -66,11 +66,18 @@ class CustomWebsiteHelpdesk(WebsiteHelpdesk):
         user = request.env.user
         partner = user.partner_id if user.partner_id else None
 
-        # Validar que el partner tiene permisos necesarios
-        obra_id = kwargs.get("obra_secundaria")
-        estancia_id = kwargs.get("estancia_id")
+        # # Validar que el partner tiene permisos necesarios
+        # obra_id = kwargs.get("obra_secundaria")
+        # estancia_id = kwargs.get("estancia_id")
+        # categoria = kwargs.get("categoria", "").strip()
+        # Convertir campos Many2one 
+        try:
+            obra_id = int(kwargs.get("obra_secundaria"))
+            estancia_id = int(kwargs.get("estancia_id"))
+        except (ValueError, TypeError):
+            return request.redirect("/helpdesk?error=invalid_selection")
+        
         categoria = kwargs.get("categoria", "").strip()
-
        
         # Limpiar descripción
         raw_description = kwargs.get("description", "")

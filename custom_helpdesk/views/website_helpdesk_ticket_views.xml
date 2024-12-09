@@ -11,7 +11,7 @@
                             <span class="s_website_form_label_content">Sede/Obra</span>
                         </label>
                         <div class="col-sm">                          
-                           <input type="text" class="form-control s_website_form_input" id="new_obra_secundaria" name="new_obra_secundaria" placeholder="Sede/Obra"/>      
+                           <input type="text" class="form-control s_website_form_input" id="obra_secundaria" name="obra" placeholder="Sede/Obra"/>      
                         </div>
                     </div>
                 </div>
@@ -23,7 +23,7 @@
                             <span class="s_website_form_label_content">Estancia/Capítulo</span>
                         </label>
                         <div class="col-sm">                                                     
-                            <input type="text" class="form-control s_website_form_input" id="new_estancia" name="new_estancia" placeholder="Estancia/Capítulo"/>                
+                            <input type="text" class="form-control s_website_form_input" id="estancia_id" name="Estancia" placeholder="Estancia/Capítulo"/>                
                         </div>
                     </div>
                 </div>
@@ -35,7 +35,7 @@
                             <span class="s_website_form_label_content">Categoría</span>
                         </label>
                         <div class="col-sm">
-                            <select class="form-control s_website_form_input" name="categoria" id="helpdesk_categoria">
+                            <select class="form-control " name="Categoría" id="helpdesk_categoria">
                                 <option value="bricolage">Bricolaje</option>
                                 <option value="fontaneria">Fontanería</option>
                                 <option value="climatizacion">Climatización</option>
