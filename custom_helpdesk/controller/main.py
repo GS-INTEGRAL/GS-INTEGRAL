@@ -71,15 +71,7 @@ class CustomWebsiteHelpdesk(WebsiteHelpdesk):
         # estancia_id = kwargs.get("estancia_id")
         # categoria = kwargs.get("categoria", "").strip()
         # Convertir campos Many2one 
-        try:
-            obra_secundaria = int(kwargs.get("obra_secundaria", 0))
-            estancia_id = int(kwargs.get("estancia_id", 0))
-        except (ValueError, TypeError):
-            return request.redirect("/helpdesk?error=invalid_selection")
-
-        # Validar campos personalizados
-        if not obra_secundaria or not estancia_id:
-            return request.redirect("/helpdesk?error=missing_required_fields")
+        
        
         # Preparar valores para el ticket
         ticket_vals = {
