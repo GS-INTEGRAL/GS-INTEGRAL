@@ -25,6 +25,7 @@ class HelpdeskTicket(models.Model):
                 'name': 'Proveedor Genérico',
                 'is_company': True,
                 'supplier_rank': 1,  # Esto lo marca como proveedor
+                'team_id': False,
             })
 
         # Asignar proveedor genérico si no se ha seleccionado uno
