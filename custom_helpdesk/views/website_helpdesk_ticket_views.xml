@@ -1,6 +1,7 @@
 <odoo>
     <template id="portal_helpdesk_form_inherit" inherit_id="website_helpdesk.team_form_1">
         <xpath expr="//div[input[@name='partner_email']]" position="after">
+            <div id="custom_fields_container">
             <t t-if="request.env.user.partner_id">
                
                  <!-- Campo Sede/Obra -->
@@ -9,9 +10,8 @@
                         <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px">
                             <span class="s_website_form_label_content">Sede/Obra</span>
                         </label>
-                        <div class="col-sm">
-                          
-                           <input type="text" class="form-control s_website_form_input" id="new_obra_secundaria" name="new_obra_secundaria" placeholder="Nombre de la nueva Sede/Obra"/>      
+                        <div class="col-sm">                          
+                           <input type="text" class="form-control s_website_form_input" id="new_obra_secundaria" name="new_obra_secundaria" placeholder="Sede/Obra"/>      
                         </div>
                     </div>
                 </div>
@@ -20,11 +20,11 @@
                 <div class="mb-0 py-2 s_website_form_field col-12">
                     <div class="row s_col_no_resize s_col_no_bgcolor">
                         <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px">
-                            <span class="s_website_form_label_content">Estancia</span>
+                            <span class="s_website_form_label_content">Estancia/Capítulo</span>
                         </label>
-                        <div class="col-sm">
-                                                     
-                            <input type="text" class="form-control s_website_form_input" id="new_estancia" name="new_estancia" placeholder="Nombre de la nueva Estancia"/>                        </div>
+                        <div class="col-sm">                                                     
+                            <input type="text" class="form-control s_website_form_input" id="new_estancia" name="new_estancia" placeholder="Estancia/Capítulo"/>                
+                        </div>
                     </div>
                 </div>
 
@@ -54,10 +54,7 @@
                     </div>
                 </div>
             </t>
-        </xpath>
-
-        
-
-  </template>
-    
+        </div>
+    </xpath>
+  </template>    
 </odoo>
