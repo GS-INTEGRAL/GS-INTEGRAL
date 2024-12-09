@@ -13,8 +13,8 @@ class ResPartner(models.Model):
         ],
         string="Cliente",
     )
-    obra_secundaria = fields.Many2one("res.partner.obra_secundaria", string="Obra/sede")
-    estancia_id = fields.Many2one("res.partner.estancia_id", string="Estancia/Capítulo")
+    obra_secundaria = fields.Char("res.partner.obra_secundaria", string="Obra/sede")
+    estancia_id = fields.Char("res.partner.estancia_id", string="Estancia/Capítulo")
 
 
 class PartnerEstancia(models.Model):
