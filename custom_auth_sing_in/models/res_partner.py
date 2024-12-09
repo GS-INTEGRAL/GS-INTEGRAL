@@ -16,20 +16,20 @@ class ResPartner(models.Model):
     estancia_id = fields.Char( string="Estancia/Capítulo")
 
 
-# class PartnerEstancia(models.Model):
-#     _name = "res.partner.estancia_id"
-#     _order = "name"
-#     _description = "Partner Estancia"
+class PartnerEstancia(models.Model):
+    _name = "res.partner.estancia_id"
+    _order = "name"
+    _description = "Partner Estancia"
 
-#     name = fields.Char(string="Estancia/Capítulo", required=True, translate=True)
+    name = fields.Char(string="Estancia/Capítulo", required=True, translate=True)
 
 
-# class PartnerObraSecundaria(models.Model):
-#     _name = "res.partner.obra_secundaria"
-#     _order = "name"
-#     _description = "Partner Obra Secundaria"
+class PartnerObraSecundaria(models.Model):
+    _name = "res.partner.obra_secundaria"
+    _order = "name"
+    _description = "Partner Obra Secundaria"
 
-#     name = fields.Char(string="Obra/sede", required=True, translate=True)
+    name = fields.Char(string="Obra/sede", required=True, translate=True)
     # obra_secundaria = fields.Selection(
     #     [
     #         ("fuensanta", "Fuensanta"),
