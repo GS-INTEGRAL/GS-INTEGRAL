@@ -19,8 +19,8 @@
         'views/website_helpdesk_ticket_views.xml',
     ],
     'assets': {
-        'web.assets_frontend': [
-            'custom_helpdesk/static/src/js/custom_helpdesk_form.js',
+        'website.assets_frontend': [
+           "/custom_helpdesk/static/src/js/custom_helpdesk_form.js",
          ],
     },
     "installable": True,

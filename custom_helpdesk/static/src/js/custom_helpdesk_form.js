@@ -1,15 +1,13 @@
 /** @odoo-module **/
-
 import { _t } from "@web/core/l10n/translation";
-import { formEditorRegistry } from "@website/js/form_editor_registry";
+import { formEditorRegistry } from "@website/js/form_editor_registry.js";
 
 const existingCreateTicket = formEditorRegistry.get('create_ticket');
-
 formEditorRegistry.add('create_ticket', {
     ...existingCreateTicket,
     formFields: [
         ...existingCreateTicket.formFields,
-    {
+        {
         type: 'char',
         name: 'obra_secundaria',
         string: _t('Sede/Obra'),
