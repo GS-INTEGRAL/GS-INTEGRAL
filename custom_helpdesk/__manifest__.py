@@ -20,12 +20,8 @@
     ],
     'assets': {
         'web.assets_frontend': [
-            'custom_helpdesk/static/**/*',
-            ('remove', 'custom_helpdesk/static/src/js/custom_helpdesk_form.js'),
-        ],
-        'website.assets_wysiwyg': [
             'custom_helpdesk/static/src/js/custom_helpdesk_form.js',
-        ],
+         ],
     },
     "installable": True,
     "application": False,
