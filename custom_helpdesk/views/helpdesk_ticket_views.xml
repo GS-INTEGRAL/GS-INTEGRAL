@@ -6,12 +6,8 @@
         <field name="arch" type="xml">
              <xpath expr="//field[@name='tag_ids']" position="after">
                     <!-- <field name="obra_id"/> -->
-                    <field name="obra_secundaria"
-                    domain="[('is_obra_secundaria', '=', True)]" 
-                   options="{'no_create': True, 'no_open': True}"/>
-                    <field name="estancia_id"  
-                    domain="[('is_estancia', '=', True)]" 
-                   options="{'no_create': True, 'no_open': True}"/>
+                    <field name="obra_secundaria"/>
+                    <field name="estancia_id"/>
                     <field name="fecha_fin"/>
                     
             </xpath>

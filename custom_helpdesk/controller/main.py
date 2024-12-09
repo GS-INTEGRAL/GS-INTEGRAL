@@ -66,21 +66,19 @@ class CustomWebsiteHelpdesk(WebsiteHelpdesk):
         user = request.env.user
         partner = user.partner_id if user.partner_id else None
 
-        # # Validar que el partner tiene permisos necesarios
-        # obra_id = kwargs.get("obra_secundaria")
-        # estancia_id = kwargs.get("estancia_id")
-        # categoria = kwargs.get("categoria", "").strip()
-        # Convertir campos Many2one 
-        
-       
+        # Validar que el partner tiene permisos necesarios
+        obra_id = kwargs.get("obra_secundaria")
+        estancia_id = kwargs.get("estancia_id")
+        categoria = kwargs.get("categoria", "").strip()
+              
         # Preparar valores para el ticket
         ticket_vals = {
             "name": kwargs.get("subject", "Ticket desde la Web"),
             "partner_id": partner.id if partner else None,
             "description": html_sanitize(kwargs.get("description", "")),
-            "obra_secundaria": obra_secundaria,
+            "obra_secundaria": obra_id,
             "estancia_id": estancia_id,
-            "categoria": kwargs.get("categoria", "").strip(),
+            "categoria": categoria,
         }
 
         try:

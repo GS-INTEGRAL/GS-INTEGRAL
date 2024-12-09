@@ -13,8 +13,10 @@ class HelpdeskTicketInherit(models.Model):
     )
     partner_id = fields.Many2one("res.partner", string="Partner")
     obra_id = fields.Selection(related="partner_id.obra_id", string="Cliente")
-    obra_secundaria = fields.Many2one("res.partner.obra_secundaria", string="Obra/sede")
-    estancia_id = fields.Many2one("res.partner.estancia_id", string="Estancia/Capítulo")
+    # obra_secundaria = fields.Many2one("res.partner.obra_secundaria", string="Obra/sede")
+    # estancia_id = fields.Many2one("res.partner.estancia_id", string="Estancia/Capítulo")
+    obra_secundaria = fields.Char(string="Obra/sede")
+    estancia_id = fields.Char(string="Estancia/Capítulo")
     comentario_reparacion = fields.Text(
         string="Comentario de Reparación",
         help="Comentarios positivos o negativos sobre la reparación realizada por el cliente",
