@@ -14,7 +14,7 @@
         # "views/auth_signup_login_inherit.xml",
         "views/view_partners_form_inherited.xml",
         "data/email_template_welcome.xml",
-        #'security/ir.model.access.csv',
+        'security/ir.model.access.csv',
     ],
     # 'assets': {
     #     'web.assets_page': [

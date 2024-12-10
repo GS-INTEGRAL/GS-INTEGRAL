@@ -1,3 +1,3 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_res_partner_obra_secundaria_all,res.partner.obra_secundaria_all,model_res_partner_obra_secundaria,,1,1,1,1
-access_res_partner_estancia_id_all,res.partner.estancia_id_all,model_res_partner_estancia_id,,1,1,1,1
+custom_auth_sing_in.access_res_partner_estancia_id,access_res_partner_estancia_id,custom_auth_sing_in.model_res_partner_estancia_id,base.group_user,1,0,0,0
+custom_auth_sing_in.access_res_partner_obra_secundaria,access_res_partner_obra_secundaria,custom_auth_sing_in.model_res_partner_obra_secundaria,base.group_user,1,0,0,0
