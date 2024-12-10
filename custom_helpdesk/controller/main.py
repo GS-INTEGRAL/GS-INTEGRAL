@@ -29,10 +29,10 @@ class CustomWebsiteHelpdeskTeams(http.Controller):
             return request.redirect("/web/login?redirect=/helpdesk")
 
         teams_domain = [("use_website_helpdesk_form", "=", True)]
-        if not request.env.user.has_group("helpdesk.group_helpdesk_manager"):
-            if team and not team.is_published:
-                raise NotFound()
-            teams_domain.append(("website_published", "=", True))
+        # if not request.env.user.has_group("helpdesk.group_helpdesk_manager"):
+        #     if team and not team.is_published:
+        #         raise NotFound()
+        #     teams_domain.append(("website_published", "=", True))
 
         teams = request.env["helpdesk.team"].search(teams_domain, order="id asc")
         if not teams:
@@ -44,7 +44,7 @@ class CustomWebsiteHelpdeskTeams(http.Controller):
             "multiple_teams": len(teams) > 1,
             "main_object": team or teams[0],
         }
-        return request.render("website_helpdesk.team_form_1", result)
+        return request.render("website_helpdesk.team", result)
 
 
 class CustomWebsiteHelpdesk(WebsiteHelpdesk):
