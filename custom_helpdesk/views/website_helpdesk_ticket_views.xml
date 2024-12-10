@@ -1,5 +1,5 @@
 <odoo>
-    <template id="portal_helpdesk_form_inherit" inherit_id="website_helpdesk.team_form_6">
+    <template id="portal_helpdesk_form_inherit" inherit_id="website_helpdesk.team_form_1">
         <xpath expr="//div[input[@name='partner_email']]" position="after">
             <div id="custom_fields_container">
             <t t-if="request.env.user.partner_id">

@@ -44,7 +44,7 @@ class CustomWebsiteHelpdeskTeams(http.Controller):
             "multiple_teams": len(teams) > 1,
             "main_object": team or teams[0],
         }
-        return request.render("website_helpdesk.team_form_6", result)
+        return request.render("website_helpdesk.team_form_1", result)
 
 
 class CustomWebsiteHelpdesk(WebsiteHelpdesk):
