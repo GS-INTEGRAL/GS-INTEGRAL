@@ -102,7 +102,7 @@ class CustomWebsiteHelpdesk(WebsiteHelpdesk):
 
         return request.redirect(f"/helpdesk/ticket/{ticket.id}")
     
-     @http.route(
+    @http.route(
         ["/my/ticket"],
         type="http",
         auth="user",
