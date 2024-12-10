@@ -11,7 +11,7 @@
                             <span class="s_website_form_label_content">Sede/Obra</span>
                         </label>
                         <div class="col-sm">                          
-                           <input type="text" class="form-control s_website_form" id="obra_secundaria" name="Obra" placeholder="Sede/Obra"/>      
+                           <input type="text" class="form-control s_website_form" id="obra_secundaria" name="obra_secundaria" placeholder="Sede/Obra"/>      
                         </div>
                     </div>
                 </div>
@@ -23,7 +23,7 @@
                             <span class="s_website_form_label_content">Estancia/Capítulo</span>
                         </label>
                         <div class="col-sm">                                                     
-                            <input type="text" class="form-control s_website_form" id="estancia_id" name="Estancia" placeholder="Estancia/Capítulo"/>                
+                            <input type="text" class="form-control s_website_form" id="estancia_id" name="estancia_id" placeholder="Estancia/Capítulo"/>                
                         </div>
                     </div>
                 </div>

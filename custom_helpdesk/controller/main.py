@@ -67,7 +67,7 @@ class CustomWebsiteHelpdesk(WebsiteHelpdesk):
         partner = user.partner_id if user.partner_id else None
 
         # Validar que el partner tiene permisos necesarios
-        obra_id = kwargs.get("obra_secundaria")
+        obra_secundaria = kwargs.get("obra_secundaria")
         estancia_id = kwargs.get("estancia_id")
         categoria = kwargs.get("categoria", "").strip()
               
@@ -76,7 +76,7 @@ class CustomWebsiteHelpdesk(WebsiteHelpdesk):
             "name": kwargs.get("subject", "Ticket desde la Web"),
             "partner_id": partner.id if partner else None,
             "description": html_sanitize(kwargs.get("description", "")),
-            "obra_secundaria": obra_id,
+            "obra_secundaria": obra_secundaria,
             "estancia_id": estancia_id,
             "categoria": categoria,
         }
