@@ -20,7 +20,7 @@ class CustomWebsiteHelpdeskTeams(http.Controller):
     @http.route(
         ["/helpdesk", '/helpdesk/<model("helpdesk.team"):team>'],
         type="http",
-        auth="user",
+        auth="public",
         website=True,
     )
     def website_helpdesk_teams(self, team=None, **kwargs):
@@ -52,7 +52,7 @@ class CustomWebsiteHelpdesk(WebsiteHelpdesk):
     @http.route(
         ["/custom_helpdesk/create"],
         type="http",
-        auth="user",
+        auth="public",
         website=True,
         csrf=False,
     )
@@ -101,3 +101,12 @@ class CustomWebsiteHelpdesk(WebsiteHelpdesk):
             return request.redirect("/helpdesk?error=creation_failed")
 
         return request.redirect(f"/helpdesk/ticket/{ticket.id}")
+    
+     @http.route(
+        ["/my/ticket"],
+        type="http",
+        auth="user",
+        website=True,
+    )
+    def redirect_my_ticket(self, **kwargs):
+        return request.redirect("/helpdesk")
