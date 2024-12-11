@@ -10,7 +10,9 @@ _logger = logging.getLogger(__name__)
 
 
 def ensure_authenticated_user():
+    _logger.info("Verificando autenticación para el usuario %s", request.env.user.name)
     if not request.env.user or request.env.user._is_public():
+        _logger.info("Redirigiendo al login")
         return request.redirect("/web/login?redirect=/helpdesk")
     return None
 
