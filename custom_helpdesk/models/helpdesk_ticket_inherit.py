@@ -146,7 +146,7 @@ class HelpdeskTicketInherit(models.Model):
     )
 
     fecha_fin = fields.Date(string="Fecha Finalización")
-    
+
     is_maristas = fields.Boolean(
         string="Es Maristas",
         compute="_compute_is_maristas",
@@ -157,7 +157,9 @@ class HelpdeskTicketInherit(models.Model):
     @api.depends("company_id")
     def _compute_is_maristas(self):
         for record in self:
-            record.is_maristas = record.company_id and record.company_id.name == "Maristas"
+            record.is_maristas = (
+                record.company_id and record.company_id.name == "Maristas"
+            )
 
     def write(self, vals):
         res = super().write(vals)
