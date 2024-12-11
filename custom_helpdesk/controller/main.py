@@ -24,19 +24,19 @@ class CustomWebsiteHelpdeskTeams(http.Controller):
         website=True,
     )
     def website_helpdesk_teams(self, team=None, **kwargs):
-        
+
         if request.env.user._is_public():
             return request.redirect("/web/login?redirect=/helpdesk")
 
+        if not request.env.user.company_id:
+            return request.render("website_helpdesk.no_company_error", {
+                'admin_email': 'fran@gs-integral.com'
+            })
+        
         teams_domain = [("use_website_helpdesk_form", "=", True)]
 
-        can_create_ticket = bool(request.env.user.company_id)
-
-        if team and not team.is_published:
-            raise NotFound()
-        teams_domain.append(("website_published", "=", True))
-
         teams = request.env["helpdesk.team"].search(teams_domain, order="id asc")
+
         if not teams:
             raise NotFound()
 
@@ -45,8 +45,6 @@ class CustomWebsiteHelpdeskTeams(http.Controller):
             "team": team or teams[0],
             "multiple_teams": len(teams) > 1,
             "main_object": team or teams[0],
-            "can_create_ticket": can_create_ticket,
-            "admin_email": 'fran@gs-integral.com'
         }
         return request.render("website_helpdesk.team", result)
 
@@ -74,7 +72,7 @@ class CustomWebsiteHelpdesk(WebsiteHelpdesk):
         obra_secundaria = kwargs.get("obra_secundaria")
         estancia_id = kwargs.get("estancia_id")
         categoria = kwargs.get("categoria", "").strip()
-              
+
         # Preparar valores para el ticket
         ticket_vals = {
             "name": kwargs.get("subject", "Ticket desde la Web"),
@@ -90,15 +88,17 @@ class CustomWebsiteHelpdesk(WebsiteHelpdesk):
             ticket = request.env["helpdesk.ticket"].sudo().create(ticket_vals)
 
             # Manejar archivos adjuntos (opcional)
-            if kwargs.get('attachment'):
-                Attachment = request.env['ir.attachment']
-                for attachment in kwargs.get('attachment'):
-                    Attachment.sudo().create({
-                        'name': attachment.filename,
-                        'datas': base64.b64encode(attachment.read()),
-                        'res_model': 'helpdesk.ticket',
-                        'res_id': ticket.id,
-                    })
+            if kwargs.get("attachment"):
+                Attachment = request.env["ir.attachment"]
+                for attachment in kwargs.get("attachment"):
+                    Attachment.sudo().create(
+                        {
+                            "name": attachment.filename,
+                            "datas": base64.b64encode(attachment.read()),
+                            "res_model": "helpdesk.ticket",
+                            "res_id": ticket.id,
+                        }
+                    )
 
         except Exception as e:
             _logger.error("Error creando el ticket: %s", str(e))
