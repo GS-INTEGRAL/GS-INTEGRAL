@@ -58,16 +58,4 @@
     </xpath>
   </template>    
 
-
- <template id="no_company_error" name="No Company Error">
-        <t t-call="website.layout">
-            <div class="container mt32 mb32">
-                <div class="alert alert-danger" role="alert">
-                    <h4 class="alert-heading">Error: No se puede acceder a los tickets</h4>
-                    <p>No se le ha asignado una compañía a su cuenta de usuario.</p>
-                    <p>Por favor, póngase en contacto con el administrador en <a t-att-href="'mailto:' + admin_email" t-esc="admin_email"/> para obtener acceso a los tickets.</p>
-                </div>
-            </div>
-        </t>
-    </template>
 </odoo>

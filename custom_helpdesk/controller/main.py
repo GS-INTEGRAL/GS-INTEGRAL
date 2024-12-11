@@ -29,9 +29,7 @@ class CustomWebsiteHelpdeskTeams(http.Controller):
             return request.redirect("/web/login?redirect=/helpdesk")
 
         if not request.env.user.company_id:
-            return request.render("website_helpdesk.no_company_error", {
-                'admin_email': 'fran@gs-integral.com'
-            })
+            raise NotFound()
         
         teams_domain = [("use_website_helpdesk_form", "=", True)]
 
