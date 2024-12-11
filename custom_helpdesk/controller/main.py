@@ -66,9 +66,9 @@ class CustomWebsiteHelpdesk(WebsiteHelpdesk):
             return redirection
 
         #  # Validar que el usuario tiene asignada una compañía
-        # if not request.env.user.company_id:
-        #     _logger.warning("El usuario %s no tiene compañía asignada.", request.env.user.name)
-        #     raise NotFound()
+        if not request.env.user.company_id:
+            _logger.warning("El usuario %s no tiene compañía asignada.", request.env.user.name)
+            raise NotFound()
 
         # Obtener datos del usuario
         user = request.env.user

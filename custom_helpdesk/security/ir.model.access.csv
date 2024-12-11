@@ -3,3 +3,5 @@ access_helpdesk_ticket_user,access_helpdesk_ticket_user,model_helpdesk_ticket,ba
 access_res_partner,access_res_partner,base.model_res_partner,base.group_user,1,1,1,1
 access_res_partner_portal,access_res_partner_portal,base.model_res_partner,base.group_portal,1,1,1,1
 access_helpdesk_ticket_portal,access_helpdesk_ticket_portal,model_helpdesk_ticket,base.group_portal,1,0,1,0
+custom_helpdesk.access_res_partner_estancia_id,access_res_partner_estancia_id,custom_helpdesk.model_res_partner_estancia_id,base.group_user,1,0,0,0
+custom_helpdesk.access_res_partner_obra_secundaria,access_res_partner_obra_secundaria,custom_helpdesk.model_res_partner_obra_secundaria,base.group_user,1,0,0,0 
