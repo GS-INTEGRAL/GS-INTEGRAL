@@ -29,14 +29,13 @@ class CustomWebsiteHelpdeskTeams(http.Controller):
 
         if not request.env.user.company_id:
             raise NotFound()
-        
+
         teams_domain = [("use_website_helpdesk_form", "=", True)]
         # if not request.env.user.has_group("helpdesk.group_helpdesk_manager"):
         #     if team and not team.is_published:
         #         raise NotFound()
         #     teams_domain.append(("website_published", "=", True))
 
-        
         teams = request.env["helpdesk.team"].search(teams_domain, order="id asc")
         if not teams:
             raise NotFound()
@@ -64,6 +63,11 @@ class CustomWebsiteHelpdesk(WebsiteHelpdesk):
         redirection = ensure_authenticated_user()
         if redirection:
             return redirection
+        
+         # Validar que el usuario tiene asignada una compañía
+        if not request.env.user.company_id:
+            _logger.warning("El usuario %s no tiene compañía asignada.", request.env.user.name)
+            raise NotFound()
 
         # Obtener datos del usuario
         user = request.env.user
@@ -73,7 +77,7 @@ class CustomWebsiteHelpdesk(WebsiteHelpdesk):
         obra_secundaria = kwargs.get("obra_secundaria")
         estancia_id = kwargs.get("estancia_id")
         categoria = kwargs.get("categoria", "").strip()
-              
+
         # Preparar valores para el ticket
         ticket_vals = {
             "name": kwargs.get("subject", "Ticket desde la Web"),
@@ -89,22 +93,24 @@ class CustomWebsiteHelpdesk(WebsiteHelpdesk):
             ticket = request.env["helpdesk.ticket"].sudo().create(ticket_vals)
 
             # Manejar archivos adjuntos (opcional)
-            if kwargs.get('attachment'):
-                Attachment = request.env['ir.attachment']
-                for attachment in kwargs.get('attachment'):
-                    Attachment.sudo().create({
-                        'name': attachment.filename,
-                        'datas': base64.b64encode(attachment.read()),
-                        'res_model': 'helpdesk.ticket',
-                        'res_id': ticket.id,
-                    })
+            if kwargs.get("attachment"):
+                Attachment = request.env["ir.attachment"]
+                for attachment in kwargs.get("attachment"):
+                    Attachment.sudo().create(
+                        {
+                            "name": attachment.filename,
+                            "datas": base64.b64encode(attachment.read()),
+                            "res_model": "helpdesk.ticket",
+                            "res_id": ticket.id,
+                        }
+                    )
 
         except Exception as e:
             _logger.error("Error creando el ticket: %s", str(e))
             return request.redirect("/helpdesk?error=creation_failed")
 
         return request.redirect(f"/helpdesk/ticket/{ticket.id}")
-    
+
     @http.route(
         ["/my/ticket"],
         type="http",
