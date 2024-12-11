@@ -31,8 +31,8 @@ class CustomWebsiteHelpdeskTeams(http.Controller):
             return request.redirect("/web/login?redirect=/helpdesk")
 
         if not request.env.user.company_id:
-            raise NotFound()
-        
+            return request.redirect("/helpdesk?error=no_company")
+
         teams_domain = [("use_website_helpdesk_form", "=", True)]
 
         teams = request.env["helpdesk.team"].search(teams_domain, order="id asc")
@@ -66,42 +66,42 @@ class CustomWebsiteHelpdesk(WebsiteHelpdesk):
 
         # Obtener datos del usuario
         user = request.env.user
-        partner = user.partner_id if user.partner_id else None
+        if not user.company_id:
+            return request.redirect("/helpdesk?error=no_company")
 
-        # Validar que el partner tiene permisos necesarios
-        obra_secundaria = kwargs.get("obra_secundaria")
-        estancia_id = kwargs.get("estancia_id")
-        categoria = kwargs.get("categoria", "").strip()
+        # Determinar si es Maristas
+        is_maristas = user.company_id.name == "Maristas"
+
+        # Validar campos según la compañía
+        if is_maristas:
+            required_fields = ["obras", "estanciasid"]
+        else:
+            required_fields = ["obra_secundaria", "estancia_id"]
+
+        missing_fields = [field for field in required_fields if not kwargs.get(field)]
+        if missing_fields:
+            _logger.warning("Campos faltantes al crear el ticket: %s", missing_fields)
+            return request.redirect("/custom_helpdesk/create?error=missing_fields")
 
         # Preparar valores para el ticket
         ticket_vals = {
             "name": kwargs.get("subject", "Ticket desde la Web"),
-            "partner_id": partner.id if partner else None,
+            "partner_id": user.partner_id.id if user.partner_id else None,
             "description": html_sanitize(kwargs.get("description", "")),
-            "obra_secundaria": obra_secundaria,
-            "estancia_id": estancia_id,
-            "categoria": categoria,
+            "obra_secundaria": kwargs.get("obra_secundaria"),
+            "estancia_id": kwargs.get("estancia_id"),
+            "categoria": kwargs.get("categoria").strip(),
+            "obras": kwargs.get("obras"),
+            "estanciasid": kwargs.get("estanciasid"),
         }
 
+        # Crear ticket
         try:
-            # Crear ticket
+            # Crear el ticket
             ticket = request.env["helpdesk.ticket"].sudo().create(ticket_vals)
-
-            # Manejar archivos adjuntos (opcional)
-            if kwargs.get("attachment"):
-                Attachment = request.env["ir.attachment"]
-                for attachment in kwargs.get("attachment"):
-                    Attachment.sudo().create(
-                        {
-                            "name": attachment.filename,
-                            "datas": base64.b64encode(attachment.read()),
-                            "res_model": "helpdesk.ticket",
-                            "res_id": ticket.id,
-                        }
-                    )
-
         except Exception as e:
             _logger.error("Error creando el ticket: %s", str(e))
             return request.redirect("/helpdesk?error=creation_failed")
 
+        # Redirigir al ticket creado
         return request.redirect(f"/helpdesk/ticket/{ticket.id}")
