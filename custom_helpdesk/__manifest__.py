@@ -18,6 +18,7 @@
         "security/helpdesk_permission.xml",
         "views/helpdesk_ticket_views.xml",
         'views/website_helpdesk_ticket_views.xml',
+       
     ],
     'assets': {
         'website.assets_frontend': [

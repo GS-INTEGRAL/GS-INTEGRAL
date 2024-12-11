@@ -24,15 +24,17 @@ class CustomWebsiteHelpdeskTeams(http.Controller):
         website=True,
     )
     def website_helpdesk_teams(self, team=None, **kwargs):
+        
         if request.env.user._is_public():
-
             return request.redirect("/web/login?redirect=/helpdesk")
 
         teams_domain = [("use_website_helpdesk_form", "=", True)]
-        if not request.env.user.has_group("helpdesk.group_helpdesk_manager"):
-            if team and not team.is_published:
-                raise NotFound()
-            teams_domain.append(("website_published", "=", True))
+
+        can_create_ticket = bool(request.env.user.company_id)
+
+        if team and not team.is_published:
+            raise NotFound()
+        teams_domain.append(("website_published", "=", True))
 
         teams = request.env["helpdesk.team"].search(teams_domain, order="id asc")
         if not teams:
@@ -43,6 +45,8 @@ class CustomWebsiteHelpdeskTeams(http.Controller):
             "team": team or teams[0],
             "multiple_teams": len(teams) > 1,
             "main_object": team or teams[0],
+            "can_create_ticket": can_create_ticket,
+            "admin_email": 'fran@gs-integral.com'
         }
         return request.render("website_helpdesk.team", result)
 
