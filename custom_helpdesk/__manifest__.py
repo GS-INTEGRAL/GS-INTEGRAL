@@ -24,6 +24,7 @@
         'website.assets_frontend': [
            "/custom_helpdesk/static/src/js/custom_helpdesk_form.js",
            "/custom_helpdesk/static/src/js/dynamic_fields.js",
+           '/custom_helpdesk/static/src/css/dynamic_fields.css',
          ],
     },
     "installable": True,

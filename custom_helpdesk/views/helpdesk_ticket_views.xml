@@ -5,11 +5,19 @@
         <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_form"/>
         <field name="arch" type="xml">
              <xpath expr="//field[@name='tag_ids']" position="after">
-                <field name="obras" attrs="{'invisible': [('is_maristas', '=', False)]}" placeholder="Seleccione la obra" />
-                <field name="estanciasid" attrs="{'invisible': [('is_maristas', '=', False)]}" placeholder="Seleccione la estancia" />
-                <field name="obra_secundaria" attrs="{'invisible': [('is_maristas', '=', True)]}" placeholder="Ingrese la obra secundaria" />
-                <field name="estancia_id" attrs="{'invisible': [('is_maristas', '=', True)]}" placeholder="Ingrese la estancia/capítulo" />
-                <field name="fecha_fin"/>                    
+                <div class="o_dynamic_fields">
+                    <!-- Campos para Maristas -->
+                    <div class="o_maristas_fields o_field_group">
+                        <field name="obras" placeholder="Seleccione la obra" />
+                        <field name="estanciasid" placeholder="Seleccione la estancia" />
+                    </div>
+                    <!-- Campos para otras compañías -->
+                    <div class="o_other_company_fields o_field_group">
+                        <field name="obra_secundaria" placeholder="Ingrese la obra secundaria" />
+                        <field name="estancia_id" placeholder="Ingrese la estancia/capítulo" />
+                    </div>
+                </div>
+                <field name="fecha_fin"/>                 
             </xpath>
             <xpath expr="//field[@name='email_cc']" position="after">
                     <field name="categoria"/>

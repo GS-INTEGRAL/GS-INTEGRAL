@@ -1,37 +1,33 @@
-odoo.define('custom_helpdesk.dynamic_fields', function (require) {
+odoo.define('custom_helpdesk.DynamicFields', function (require) {
     'use strict';
 
-    const publicWidget = require('web.public.widget');
+    const { Component } = owl;
+    const { useState } = owl.hooks;
 
-    publicWidget.registry.DynamicFields = publicWidget.Widget.extend({
-        selector: 'form', // El selector que engloba los campos (ajustar según la vista)
-        events: {
-            'change [name="company_id"]': '_onCompanyChange',
-        },
+    class DynamicFields extends Component {
+        setup() {
+            this.state = useState({
+                isMaristas: false, // Por defecto no es Maristas
+            });
 
-        start: function () {
-            this._super.apply(this, arguments);
-            this._toggleFields(); // Inicializa los campos al cargar la página
-        },
-
-        _onCompanyChange: function () {
-            this._toggleFields(); // Actualiza los campos cuando cambia company_id
-        },
-
-        _toggleFields: function () {
-            const companyField = this.$('[name="company_id"]');
-            const companyName = companyField.val();
-
-            const maristasFields = this.$('.maristas-only');
-            const noMaristasFields = this.$('.no-maristas');
-
-            if (companyName === 'Maristas') {
-                maristasFields.show();
-                noMaristasFields.hide();
-            } else {
-                maristasFields.hide();
-                noMaristasFields.show();
+            // Actualizar estado según la compañía
+            const companyId = this.props.record.company_id || null;
+            if (companyId) {
+                this.env.services.rpc({
+                    model: 'res.company',
+                    method: 'read',
+                    args: [[companyId], ['name']],
+                }).then((company) => {
+                    if (company && company.length && company[0].name === 'Maristas') {
+                        this.state.isMaristas = true;
+                    }
+                });
             }
-        },
-    });
+        }
+    }
+
+    DynamicFields.template = 'custom_helpdesk.DynamicFields';
+    owl.Component.env = odoo.__DEBUG__.services;
+
+    return DynamicFields;
 });

@@ -1,0 +1,15 @@
+.o_maristas_fields {
+    display: none;
+}
+
+.o_other_company_fields {
+    display: none;
+}
+
+.o_dynamic_fields .is-maristas .o_maristas_fields {
+    display: block;
+}
+
+.o_dynamic_fields .is-other .o_other_company_fields {
+    display: block;
+}
