@@ -59,12 +59,14 @@
   </template>    
 
   <template id="team" name="Helpdesk Team" inherit_id="website_helpdesk.team">
-    <xpath expr="//div[hasclass('o_website_helpdesk_team')]" position="before">
+    <xpath expr="//t[@t-call='website.layout']" position="inside">
         <t t-if="not can_create_ticket">
-            <div class="alert alert-warning" role="alert">
-                <h4 class="alert-heading">Aviso: No se pueden crear tickets</h4>
-                <p>No se le ha asignado una compañía a su cuenta de usuario.</p>
-                <p>Por favor, póngase en contacto con el administrador en <a t-att-href="'mailto:' + admin_email" t-esc="admin_email"/> para obtener acceso a la creación de tickets.</p>
+            <div class="container mt-3">
+                <div class="alert alert-warning" role="alert">
+                    <h4 class="alert-heading">Aviso: No se pueden crear tickets</h4>
+                    <p>No se le ha asignado una compañía a su cuenta de usuario.</p>
+                    <p>Por favor, póngase en contacto con el administrador en <a t-att-href="'mailto:' + admin_email" t-esc="admin_email"/> para obtener acceso a la creación de tickets.</p>
+                </div>
             </div>
         </t>
     </xpath>
@@ -72,5 +74,6 @@
         <attribute name="t-if">can_create_ticket</attribute>
     </xpath>
 </template>
+
 
 </odoo>
