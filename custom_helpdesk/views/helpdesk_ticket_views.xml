@@ -5,18 +5,10 @@
         <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_form"/>
         <field name="arch" type="xml">
              <xpath expr="//field[@name='tag_ids']" position="after">
-                <div class="o_dynamic_fields">
-                    <!-- Campos para Maristas -->
-                    <div class="o_maristas_fields o_field_group">
-                        <field name="obras" modifiers="{'invisible': [('partner_id.company_id.name', '!=', 'Maristas')]}"/>
-                        <field name="estanciasid" modifiers="{'invisible': [('partner_id.company_id.name', '!=', 'Maristas')]}"/>
-                    </div>
-                    <!-- Campos para otras compañías -->
-                    <div class="o_other_company_fields o_field_group">
-                        <field name="obra_secundaria" modifiers="{'invisible': [('partner_id.company_id.name', '=', 'Maristas')]}"/>
-                        <field name="estancia_id" modifiers="{'invisible': [('partner_id.company_id.name', '=', 'Maristas')]}"/>
-                    </div>
-                </div>
+                    <field name="obras" invisible="partner_id.company_id.name != 'Maristas'"/>
+                    <field name="estanciasid" invisible="partner_id.company_id.name != 'Maristas'"/>
+                    <field name="obra_secundaria" invisible="partner_id.company_id.name == 'Maristas'"/>
+                    <field name="estancia_id" invisible="partner_id.company_id.name == 'Maristas'"/>
                 <field name="fecha_fin"/>                 
             </xpath>
             <xpath expr="//field[@name='email_cc']" position="after">
