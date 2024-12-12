@@ -19,6 +19,11 @@ def ensure_authenticated_user():
 
 class CustomWebsiteHelpdeskTeams(http.Controller):
 
+    def __init__(self):
+        super().__init__()
+        _logger.info("CustomWebsiteHelpdeskTeams controller loaded")
+
+
     @http.route(
         ["/helpdesk", '/helpdesk/<model("helpdesk.team"):team>'],
         type="http",
@@ -26,6 +31,7 @@ class CustomWebsiteHelpdeskTeams(http.Controller):
         website=True,
     )
     def website_helpdesk_teams(self, team=None, **kwargs):
+        _logger.info("website_helpdesk_teams method called")
 
         if request.env.user._is_public():
             return request.redirect("/web/login?redirect=/helpdesk")
