@@ -4,7 +4,7 @@
              <t t-if="request.env.partner_id.company_id">
                 <!-- Contenedor dinámico -->
                  <div id="custom_fields_container">
-                    <t t-if="request.env.user.partner_id.company_id == 'Maristas'">
+                        <t t-if="request.env.user.partner_id.company_id.name == 'Maristas'">
 
                             <div class="mb-0 py-2 s_website_form_field col-12">
                                 <div class="row s_col_no_resize s_col_no_bgcolor">
