@@ -10,44 +10,57 @@ odoo.define('custom_helpdesk.DynamicFields', function (require) {
         },
 
         start: function () {
+            console.log('DynamicFields Widget has started'); // Confirmación de inicio
             var self = this;
             return this._super.apply(this, arguments).then(function () {
+                console.log('DynamicFields Widget initialization completed'); // Confirmación de finalización de inicialización
                 self._updateFields();
             });
         },
 
         _updateFields: function () {
+            console.log('Updating fields based on Maristas company');
             var isMaristas = this.$el.data('is-maristas');
+            console.log('Is Maristas:', isMaristas); // Verificar si es de Maristas
+
             if (isMaristas) {
                 this.$('.maristas-only').show();
                 this.$('.no-maristas').hide();
+                console.log('Showing Maristas-specific fields');
             } else {
                 this.$('.maristas-only').hide();
                 this.$('.no-maristas').show();
+                console.log('Showing non-Maristas fields');
             }
         },
 
         _onObrasChange: function (ev) {
             var obra = $(ev.target).val();
+            console.log('Obra selected:', obra); // Mostrar la obra seleccionada
             this._updateEstancias(obra);
         },
 
         _updateEstancias: function (obra) {
+            console.log('Updating estancias for obra:', obra); // Mostrar la obra actual
             var $estancias = this.$('#estanciasid');
             $estancias.empty();
 
-            // Aquí deberías agregar las opciones de estancias según la obra seleccionada
-            // Este es solo un ejemplo, ajusta según tus necesidades
+            // Agregar opciones dinámicamente con base en la obra seleccionada
             if (obra === 'fuensanta') {
+                console.log('Adding estancias for Fuensanta');
                 $estancias.append(new Option('Estancia Fuensanta 1', 'fuensanta_1'));
                 $estancias.append(new Option('Estancia Fuensanta 2', 'fuensanta_2'));
             } else if (obra === 'merced') {
+                console.log('Adding estancias for Merced');
                 $estancias.append(new Option('Estancia Merced 1', 'merced_1'));
                 $estancias.append(new Option('Estancia Merced 2', 'merced_2'));
+            } else {
+                console.log('No estancias available for selected obra');
             }
         }
     });
 });
+
 
 
 // odoo.define('custom_helpdesk.DynamicFields', function (require) {
