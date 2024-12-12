@@ -17,64 +17,64 @@ def ensure_authenticated_user():
     return None
 
 
-class CustomWebsiteHelpdesk(WebsiteHelpdesk):
+# class CustomWebsiteHelpdesk(WebsiteHelpdesk):
 
-    @http.route(
-        ["/helpdesk/create"],
-        type="http",
-        auth="user",
-        website=True,
-        csrf=False,
-    )
-    def website_create(self, **kwargs):
-        _logger.info("CustomWebsiteHelpdesk create method called")
-        # Verificar autenticación
-        redirection = ensure_authenticated_user()
-        if redirection:
-            _logger.info("Redirigiendo al login")
-            return redirection
+#     @http.route(
+#         ["/helpdesk/create"],
+#         type="http",
+#         auth="user",
+#         website=True,
+#         csrf=False,
+#     )
+#     def website_create(self, **kwargs):
+#         _logger.info("CustomWebsiteHelpdesk create method called")
+#         # Verificar autenticación
+#         redirection = ensure_authenticated_user()
+#         if redirection:
+#             _logger.info("Redirigiendo al login")
+#             return redirection
 
-        # Obtener datos del usuario
-        user = request.env.partner_id
-        if not user.company_id:
-            return request.redirect("/helpdesk?error=no_company")
+#         # Obtener datos del usuario
+#         user = request.env.partner_id
+#         if not user.company_id:
+#             return request.redirect("/helpdesk?error=no_company")
 
-        # Determinar si es Maristas
-        is_maristas = user.company_id.name == "Maristas"
+#         # Determinar si es Maristas
+#         is_maristas = user.company_id.name == "Maristas"
 
-        # Validar campos según la compañía
-        if is_maristas:
-            required_fields = ["obras", "estanciasid"]
-        else:
-            required_fields = ["obra_secundaria", "estancia_id"]
+#         # Validar campos según la compañía
+#         if is_maristas:
+#             required_fields = ["obras", "estanciasid"]
+#         else:
+#             required_fields = ["obra_secundaria", "estancia_id"]
 
-        missing_fields = [field for field in required_fields if not kwargs.get(field)]
-        if missing_fields:
-            _logger.warning("Campos faltantes al crear el ticket: %s", missing_fields)
-            return request.redirect("/custom_helpdesk/create?error=missing_fields")
+#         missing_fields = [field for field in required_fields if not kwargs.get(field)]
+#         if missing_fields:
+#             _logger.warning("Campos faltantes al crear el ticket: %s", missing_fields)
+#             return request.redirect("/custom_helpdesk/create?error=missing_fields")
 
-        # Preparar valores para el ticket
-        ticket_vals = {
-            "name": kwargs.get("subject", "Ticket desde la Web"),
-            "partner_id": user.partner_id.id if user.partner_id else None,
-            "description": html_sanitize(kwargs.get("description", "")),
-            "obra_secundaria": kwargs.get("obra_secundaria"),
-            "estancia_id": kwargs.get("estancia_id"),
-            "categoria": kwargs.get("categoria").strip(),
-            "obras": kwargs.get("obras"),
-            "estanciasid": kwargs.get("estanciasid"),
-        }
+#         # Preparar valores para el ticket
+#         ticket_vals = {
+#             "name": kwargs.get("subject", "Ticket desde la Web"),
+#             "partner_id": user.partner_id.id if user.partner_id else None,
+#             "description": html_sanitize(kwargs.get("description", "")),
+#             "obra_secundaria": kwargs.get("obra_secundaria"),
+#             "estancia_id": kwargs.get("estancia_id"),
+#             "categoria": kwargs.get("categoria").strip(),
+#             "obras": kwargs.get("obras"),
+#             "estanciasid": kwargs.get("estanciasid"),
+#         }
 
-        # Crear ticket
-        try:
-            # Crear el ticket
-            ticket = request.env["helpdesk.ticket"].sudo().create(ticket_vals)
-        except Exception as e:
-            _logger.error("Error creando el ticket: %s", str(e))
-            return request.redirect("/helpdesk?error=creation_failed")
+#         # Crear ticket
+#         try:
+#             # Crear el ticket
+#             ticket = request.env["helpdesk.ticket"].sudo().create(ticket_vals)
+#         except Exception as e:
+#             _logger.error("Error creando el ticket: %s", str(e))
+#             return request.redirect("/helpdesk?error=creation_failed")
 
-        # Redirigir al ticket creado
-        return request.redirect(f"/helpdesk/ticket/{ticket.id}")
+#         # Redirigir al ticket creado
+#         return request.redirect(f"/helpdesk/ticket/{ticket.id}")
 
 
 class CustomWebsiteHelpdeskTeamsStaging(http.Controller):
