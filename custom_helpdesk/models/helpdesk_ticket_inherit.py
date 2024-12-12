@@ -213,8 +213,8 @@ class HelpdeskTicketInherit(models.Model):
                 "No tiene asignada una compañía. Por favor, contacte con el administrador al correo fran@gs-integral.com."
             )
         
-        if isinstance(vals_list, dict):  
-            vals_list = [vals_list]
+        if isinstance(vals, dict):  
+            vals = [vals]
 
-        records = super().create(vals_list)
+        records = super().create(vals)
         return records
