@@ -18,12 +18,13 @@
         "security/helpdesk_permission.xml",
         "views/helpdesk_ticket_views.xml",
         'views/website_helpdesk_ticket_views.xml',
+        "views/assets.xml",
        
     ],
     'assets': {
         'webs.assets_frontend': [
            "custom_helpdesk/static/src/js/custom_helpdesk_form.js",
-           "custom_helpdesk/static/src/js/dynamic_fields.js",
+           
            'custom_helpdesk/static/src/css/dynamic_fields.css',
          ],
     },
