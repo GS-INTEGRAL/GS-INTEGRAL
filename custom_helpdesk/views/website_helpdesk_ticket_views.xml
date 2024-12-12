@@ -32,8 +32,7 @@
                                         </select>
                                     </div>
                                 </div>
-                           </div>
-                       
+                           </div>                       
                     </t>
 
                     <t t-else="">
@@ -86,7 +85,8 @@
                         </div>
                     </div>
                 </div>
-            </t>             
+            </t> 
+            </div>            
             <t t-else="">
                         <!-- Si el usuario no tiene compañía, mostramos un mensaje de error -->
                 <div class="alert alert-danger mt-3">
