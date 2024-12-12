@@ -2,9 +2,14 @@
     <template id="portal_helpdesk_form_inherit" inherit_id="website_helpdesk.team_form_6">
         <xpath expr="//div[input[@name='partner_email']]" position="after">
             <div>
-                <p><strong>Usuario:</strong> <t t-esc="request.env.user.name" /></p>
+                <!-- <p><strong>Usuario:</strong> <t t-esc="request.env.user.name" /></p>
                 <p><strong>Partner:</strong> <t t-esc="request.env.user.partner_id.name" /></p>
-                <p><strong>Compañía:</strong> <t t-esc="request.env.user.partner_id.company_id.name if request.env.user.partner_id and request.env.user.partner_id.company_id else 'Sin Compañía'" /></p>
+                <p><strong>Compañía:</strong> <t t-esc="request.env.user.partner_id.company_id.name if request.env.user.partner_id and request.env.user.partner_id.company_id else 'Sin Compañía'" /></p> -->
+                <p><strong>Usuario:</strong> <t t-esc="request.env.user.name" /></p>
+                <p><strong>Partner:</strong> <t t-esc="request.env.user.partner_id.name if request.env.user.partner_id else 'Sin Partner'" /></p>
+                <t t-if="request.env.user.partner_id and request.env.user.partner_id.company_id">
+                    <p><strong>Compañía:</strong> <t t-esc="request.env.user.partner_id.company_id.name" /></p>
+                </t>               
             </div>
 
             <t t-if="request.env.user.partner_id and request.env.user.partner_id.company_id and request.env.user.partner_id.company_id.name == 'Maristas'">                <!-- Contenedor para usuarios de la compañía 'Maristas' -->
@@ -39,7 +44,7 @@
                 </div>
             </t>
 
-            <t t-elif="request.env.user.partner_id and request.env.user.partner_id.company_id">
+            <t t-elif="request.env.user.partner_id ">
                             <!-- Contenedor para usuarios con compañía diferente a 'Maristas' -->
                 <div id="custom_fields_container_alternative">
                     <div class="mb-0 py-2 s_website_form_field col-12">
