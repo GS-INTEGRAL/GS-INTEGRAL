@@ -13,7 +13,7 @@ class HelpdeskTicketInherit(models.Model):
     )
     partner_id = fields.Many2one("res.partner", string="Partner")
     obra_id = fields.Selection(related="partner_id.obra_id", string="Cliente")
-    obra_secundaria = fields.Char(string="Obra/Sede")
+    obra_secundaria = fields.Char(string="Sedes")
     obras = fields.Selection(
         [
             ("fuensanta", "Fuensanta"),
@@ -116,7 +116,7 @@ class HelpdeskTicketInherit(models.Model):
         string="Estancias",
     )
 
-    estancia_id = fields.Char(string="Estancia/Capítulo")
+    estancia_id = fields.Char(string="Estancias/Capítulo")
     comentario_reparacion = fields.Text(
         string="Comentario de Reparación",
         help="Comentarios positivos o negativos sobre la reparación realizada por el cliente",
@@ -215,6 +215,6 @@ class HelpdeskTicketInherit(models.Model):
         
         if isinstance(vals_list, dict):  
             vals_list = [vals_list]
-            
+
         records = super().create(vals_list)
         return records
