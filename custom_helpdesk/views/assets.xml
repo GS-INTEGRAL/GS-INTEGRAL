@@ -1,9 +1,9 @@
 <odoo>
-    <data>
+ 
         <template id="assets_backend" name="custom_helpdesk assets" inherit_id="web.assets_backend">
             <xpath expr="." position="inside">
                 <script type="text/javascript" src="/custom_helpdesk/static/src/js/dynamic_fields.js"/>
             </xpath>
         </template>
-    </data>
+  
 </odoo>
