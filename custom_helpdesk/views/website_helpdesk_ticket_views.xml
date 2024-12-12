@@ -86,7 +86,7 @@
                     </div>
                 </div>
             </t> 
-            </div>            
+                       
             <t t-else="">
                         <!-- Si el usuario no tiene compañía, mostramos un mensaje de error -->
                 <div class="alert alert-danger mt-3">
@@ -95,6 +95,8 @@
                             <a href="mailto:fran@gs-integral.com">fran@gs-integral.com</a>.
                     </p>
                 </div>
+            </t>
+            </div>
             </t>
         </xpath>
     </template> 
