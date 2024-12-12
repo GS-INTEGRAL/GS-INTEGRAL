@@ -77,38 +77,38 @@ class CustomWebsiteHelpdesk(WebsiteHelpdesk):
         return request.redirect(f"/helpdesk/ticket/{ticket.id}")
 
 
-# class CustomWebsiteHelpdeskTeamsStaging(http.Controller):
+class CustomWebsiteHelpdeskTeamsStaging(http.Controller):
 
-#     def __init__(self):
-#         super().__init__()
-#         _logger.info("CustomWebsiteHelpdeskTeams controller loaded")
+    def __init__(self):
+        super().__init__()
+        _logger.info("CustomWebsiteHelpdeskTeams controller loaded")
 
-#     @http.route(
-#         ["/helpdesk_stag", '/helpdesk_stag/<model("helpdesk.team"):team>'],
-#         type="http",
-#         auth="user",
-#         website=True,
-#     )
-#     def website_helpdesk_teams(self, team=None, **kwargs):
-#         _logger.info("website_helpdesk_teams method called")
+    @http.route(
+        ["/helpdesk_stag", '/helpdesk_stag/<model("helpdesk.team"):team>'],
+        type="http",
+        auth="user",
+        website=True,
+    )
+    def website_helpdesk_teams(self, team=None, **kwargs):
+        _logger.info("website_helpdesk_teams method called")
 
-#         if request.env.user._is_public():
-#             return request.redirect("/web/login?redirect=/helpdesk")
+        if request.env.user._is_public():
+            return request.redirect("/web/login?redirect=/helpdesk")
 
-#         if not request.env.partner_id.company_id:
-#             return request.redirect("/helpdesk?error=no_company")
+        if not request.env.partner_id.company_id:
+            return request.redirect("/helpdesk?error=no_company")
 
-#         teams_domain = [("use_website_helpdesk_form", "=", True)]
+        teams_domain = [("use_website_helpdesk_form", "=", True)]
 
-#         teams = request.env["helpdesk.team"].search(teams_domain, order="id asc")
+        teams = request.env["helpdesk.team"].search(teams_domain, order="id asc")
 
-#         if not teams:
-#             raise NotFound()
+        if not teams:
+            raise NotFound()
 
-#         # Renderizamos la vista del equipo de helpdesk
-#         result = {
-#             "team": team or teams[0],
-#             "multiple_teams": len(teams) > 1,
-#             "main_object": team or teams[0],
-#         }
-#         return request.render("website_helpdesk.team", result)
+        # Renderizamos la vista del equipo de helpdesk
+        result = {
+            "team": team or teams[0],
+            "multiple_teams": len(teams) > 1,
+            "main_object": team or teams[0],
+        }
+        return request.render("website_helpdesk.team", result)
