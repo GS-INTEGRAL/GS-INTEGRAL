@@ -6,6 +6,8 @@
             'obra_secundaria',
             'estancia_id',
             'categoria',
+            'estanciasid',
+            'obras',
         ]"/>
     </function>
 </odoo>

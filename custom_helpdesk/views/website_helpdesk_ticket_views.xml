@@ -2,7 +2,7 @@
     <template id="portal_helpdesk_form_inherit" inherit_id="website_helpdesk.team_form_6">
         <xpath expr="//div[input[@name='partner_email']]" position="after">
           <t t-if="request.env.user.company_id">
-            <div id="custom_fields_container">
+            <div id="custom_fields_container" t-att-data-is-maristas="request.env.user.company_id.name == 'Maristas'">
             <t t-if="request.env.user.partner_id">
                
             <div class="dynamic-group no-maristas" style="display: none;">
