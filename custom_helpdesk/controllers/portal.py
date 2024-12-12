@@ -17,56 +17,21 @@ def ensure_authenticated_user():
     return None
 
 
-class CustomWebsiteHelpdeskTeamsStaging(http.Controller):
-
-    def __init__(self):
-        super().__init__()
-        _logger.info("CustomWebsiteHelpdeskTeams controller loaded")
-
-    @http.route(
-        ["/helpdesk_stag", '/helpdesk_stag/<model("helpdesk.team"):team>'],
-        type="http",
-        auth="user",
-        website=True,
-    )
-    def website_helpdesk_teams(self, team=None, **kwargs):
-        _logger.info("website_helpdesk_teams method called")
-
-        if request.env.user._is_public():
-            return request.redirect("/web/login?redirect=/helpdesk")
-
-        if not request.env.user.company_id:
-            return request.redirect("/helpdesk?error=no_company")
-
-        teams_domain = [("use_website_helpdesk_form", "=", True)]
-
-        teams = request.env["helpdesk.team"].search(teams_domain, order="id asc")
-
-        if not teams:
-            raise NotFound()
-
-        # Renderizamos la vista del equipo de helpdesk
-        result = {
-            "team": team or teams[0],
-            "multiple_teams": len(teams) > 1,
-            "main_object": team or teams[0],
-        }
-        return request.render("website_helpdesk.team", result)
-
-
 class CustomWebsiteHelpdesk(WebsiteHelpdesk):
 
     @http.route(
-        ["/custom_helpdesk/create"],
+        ["/helpdesk/create"],
         type="http",
         auth="user",
         website=True,
         csrf=False,
     )
     def website_create(self, **kwargs):
+        _logger.info("CustomWebsiteHelpdesk create method called")
         # Verificar autenticación
         redirection = ensure_authenticated_user()
         if redirection:
+            _logger.info("Redirigiendo al login")
             return redirection
 
         # Obtener datos del usuario
@@ -110,3 +75,40 @@ class CustomWebsiteHelpdesk(WebsiteHelpdesk):
 
         # Redirigir al ticket creado
         return request.redirect(f"/helpdesk/ticket/{ticket.id}")
+
+
+class CustomWebsiteHelpdeskTeamsStaging(http.Controller):
+
+    def __init__(self):
+        super().__init__()
+        _logger.info("CustomWebsiteHelpdeskTeams controller loaded")
+
+    @http.route(
+        ["/helpdesk_stag", '/helpdesk_stag/<model("helpdesk.team"):team>'],
+        type="http",
+        auth="user",
+        website=True,
+    )
+    def website_helpdesk_teams(self, team=None, **kwargs):
+        _logger.info("website_helpdesk_teams method called")
+
+        if request.env.user._is_public():
+            return request.redirect("/web/login?redirect=/helpdesk")
+
+        if not request.env.user.company_id:
+            return request.redirect("/helpdesk?error=no_company")
+
+        teams_domain = [("use_website_helpdesk_form", "=", True)]
+
+        teams = request.env["helpdesk.team"].search(teams_domain, order="id asc")
+
+        if not teams:
+            raise NotFound()
+
+        # Renderizamos la vista del equipo de helpdesk
+        result = {
+            "team": team or teams[0],
+            "multiple_teams": len(teams) > 1,
+            "main_object": team or teams[0],
+        }
+        return request.render("website_helpdesk.team", result)

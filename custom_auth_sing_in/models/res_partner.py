@@ -1,5 +1,6 @@
 from odoo import fields, models
 
+
 class ResPartner(models.Model):
     _inherit = "res.partner"
 
@@ -12,8 +13,8 @@ class ResPartner(models.Model):
         ],
         string="Cliente",
     )
-    obra_secundaria = fields.Char( string="Obra/sede")
-    estancia_id = fields.Char( string="Estancia/Capítulo")
+    obra_secundaria = fields.Char(string="Obra/sede")
+    estancia_id = fields.Char(string="Estancia/Capítulo")
 
 
 class PartnerEstancia(models.Model):
@@ -30,4 +31,3 @@ class PartnerObraSecundaria(models.Model):
     _description = "Partner Obra Secundaria"
 
     name = fields.Char(string="Obra/sede", required=True, translate=True)
-    
