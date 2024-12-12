@@ -17,15 +17,14 @@ def ensure_authenticated_user():
     return None
 
 
-class CustomWebsiteHelpdeskTeams(http.Controller):
+class CustomWebsiteHelpdeskTeamsStaging(http.Controller):
 
     def __init__(self):
         super().__init__()
         _logger.info("CustomWebsiteHelpdeskTeams controller loaded")
 
-
     @http.route(
-        ["/helpdesk", '/helpdesk/<model("helpdesk.team"):team>'],
+        ["/helpdesk_stag", '/helpdesk_stag/<model("helpdesk.team"):team>'],
         type="http",
         auth="user",
         website=True,
