@@ -1,65 +1,69 @@
 <odoo>
     <template id="portal_helpdesk_form_inherit" inherit_id="website_helpdesk.team_form_6">
         <xpath expr="//div[input[@name='partner_email']]" position="after">
-          <t t-if="request.env.user.company_id">
-            <div id="custom_fields_container" t-att-data-is-maristas="request.env.user.company_id.name == 'Maristas'">
-            <t t-if="request.env.user.partner_id">
-               
-            <div class="dynamic-group no-maristas" style="display: none;">
-                 <div class="mb-0 py-2 s_website_form_field col-12" data-name="Field" data-type="char">
-                    <div class="row s_col_no_resize s_col_no_bgcolor">
-                        <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px">
-                            <span class="s_website_form_label_content">Sede/Obra</span>
-                        </label>
-                        <div class="col-sm">                          
-                           <input type="text" class="form-control s_website_form" id="obra_secundaria" name="obra_secundaria" placeholder="Sede/Obra"/>      
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="dynamic-group maristas-only" style="display: none;">
-                        <!-- Campo Obras -->
-                        <div class="mb-0 py-2 s_website_form_field col-12">
-                            <div class="row s_col_no_resize s_col_no_bgcolor">
-                                <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px">
-                                    <span class="s_website_form_label_content">Obras</span>
-                                </label>
-                                <div class="col-sm">
-                                    <select class="form-control s_website_form" name="obras" id="obras">
-                                        <option value="fuensanta">Fuensanta</option>
-                                        <option value="merced">Merced</option>
-                                    </select>
+             <t t-if="request.env.user.company_id">
+                <!-- Contenedor dinámico -->
+                <div id="custom_fields_container" t-att-data-is-maristas="request.env.user.company_id.name == 'Maristas'">
+                    <t t-if="request.env.user.partner_id">
+                        <!-- Campo Sede/Obra para todos los usuarios -->
+                        <div class="dynamic-group no-maristas" style="display: none;">
+                            <div class="mb-0 py-2 s_website_form_field col-12" data-name="Field" data-type="char">
+                                <div class="row s_col_no_resize s_col_no_bgcolor">
+                                    <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px">
+                                        <span class="s_website_form_label_content">Sede/Obra</span>
+                                    </label>
+                                    <div class="col-sm">                          
+                                        <input type="text" class="form-control s_website_form" id="obra_secundaria" name="obra_secundaria" placeholder="Sede/Obra"/>      
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Campo Estancias -->
-                        <div class="mb-0 py-2 s_website_form_field col-12">
-                            <div class="row s_col_no_resize s_col_no_bgcolor">
-                                <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px">
-                                    <span class="s_website_form_label_content">Estancias</span>
-                                </label>
-                                <div class="col-sm">
-                                    <select class="form-control s_website_form" name="estanciasid" id="estanciasid">
-                                        <!-- Opciones específicas -->
-                                    </select>
+                        <!-- Campo Obras (Solo para "Maristas") -->
+                        <div class="dynamic-group maristas-only" style="display: none;">
+                            <div class="mb-0 py-2 s_website_form_field col-12">
+                                <div class="row s_col_no_resize s_col_no_bgcolor">
+                                    <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px">
+                                        <span class="s_website_form_label_content">Obras</span>
+                                    </label>
+                                    <div class="col-sm">
+                                        <select class="form-control s_website_form" name="obras" id="obras">
+                                            <option value="fuensanta">Fuensanta</option>
+                                            <option value="merced">Merced</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Campo Estancias (dependiendo de la obra seleccionada) -->
+                            <div class="mb-0 py-2 s_website_form_field col-12">
+                                <div class="row s_col_no_resize s_col_no_bgcolor">
+                                    <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px">
+                                        <span class="s_website_form_label_content">Estancias</span>
+                                    </label>
+                                    <div class="col-sm">
+                                        <select class="form-control s_website_form" name="estanciasid" id="estanciasid">
+                                            <!-- Opciones de estancias se actualizan dinámicamente con JS -->
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-            
-                <!-- Campo Estancia -->
-                <div class="mb-0 py-2 s_website_form_field col-12">
-                    <div class="row s_col_no_resize s_col_no_bgcolor">
-                        <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px">
-                            <span class="s_website_form_label_content">Estancia/Capítulo</span>
-                        </label>
-                        <div class="col-sm">                                                     
-                            <input type="text" class="form-control s_website_form" id="estancia_id" name="estancia_id" placeholder="Estancia/Capítulo"/>                
+
+                    </t>
+                    <!-- Campo Estancia/Capítulo para todos los usuarios -->
+                    <div class="mb-0 py-2 s_website_form_field col-12">
+                        <div class="row s_col_no_resize s_col_no_bgcolor">
+                            <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px">
+                                <span class="s_website_form_label_content">Estancia/Capítulo</span>
+                            </label>
+                            <div class="col-sm">                                                     
+                                <input type="text" class="form-control s_website_form" id="estancia_id" name="estancia_id" placeholder="Estancia/Capítulo"/>                
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+
                 <!-- Campo Categoría -->
                 <div class="mb-0 py-2 s_website_form_field col-12" data-type="selection" data-name="categoria">
                     <div class="row s_col_no_resize s_col_no_bgcolor">
@@ -85,19 +89,16 @@
                         </div>
                     </div>
                 </div>
-            </t>
-        </div>
-    </t>
-    <t t-else="">
-                <!-- Si el usuario no tiene compañía, mostramos un mensaje de error -->
+            </t>             
+            <t t-else="">
+                        <!-- Si el usuario no tiene compañía, mostramos un mensaje de error -->
                 <div class="alert alert-danger mt-3">
                     <p>
                         <strong>Error:</strong> No tiene asignada una compañía. Por favor, póngase en contacto con el administrador al correo 
-                        <a href="mailto:fran@gs-integral.com">fran@gs-integral.com</a>.
+                            <a href="mailto:fran@gs-integral.com">fran@gs-integral.com</a>.
                     </p>
                 </div>
             </t>
-  </xpath>
-</template>    
-
+        </xpath>
+    </template> 
 </odoo>
