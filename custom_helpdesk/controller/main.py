@@ -1,6 +1,6 @@
 from odoo import http
 from odoo.http import request
-from odoo.addons.website_helpdesk.controller.main import WebsiteHelpdesk
+from odoo.addons.website_helpdesk.controllers.main import WebsiteHelpdesk
 from odoo.tools import html_sanitize
 
 from werkzeug.exceptions import NotFound
