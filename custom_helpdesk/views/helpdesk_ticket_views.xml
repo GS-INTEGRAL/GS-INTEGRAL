@@ -8,13 +8,13 @@
                 <div class="o_dynamic_fields">
                     <!-- Campos para Maristas -->
                     <div class="o_maristas_fields o_field_group">
-                        <field name="obras" attrs="{'invisible': [('partner_id.company_id.name', '!=', 'Maristas')]}"/>
-                        <field name="estanciasid" attrs="{'invisible': [('partner_id.company_id.name', '!=', 'Maristas')]}"/>
+                        <field name="obras" modifiers="{'invisible': [('partner_id.company_id.name', '!=', 'Maristas')]}"/>
+                        <field name="estanciasid" modifiers="{'invisible': [('partner_id.company_id.name', '!=', 'Maristas')]}"/>
                     </div>
                     <!-- Campos para otras compañías -->
                     <div class="o_other_company_fields o_field_group">
-                        <field name="obra_secundaria" attrs="{'invisible': [('partner_id.company_id.name', '=', 'Maristas')]}"/>
-                        <field name="estancia_id" attrs="{'invisible': [('partner_id.company_id.name', '=', 'Maristas')]}"/>
+                        <field name="obra_secundaria" modifiers="{'invisible': [('partner_id.company_id.name', '=', 'Maristas')]}"/>
+                        <field name="estancia_id" modifiers="{'invisible': [('partner_id.company_id.name', '=', 'Maristas')]}"/>
                     </div>
                 </div>
                 <field name="fecha_fin"/>                 
