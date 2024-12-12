@@ -2,14 +2,7 @@
     <template id="portal_helpdesk_form_inherit" inherit_id="website_helpdesk.team_form_6">
         <xpath expr="//div[input[@name='partner_email']]" position="after">
             <div>
-                <!-- <p><strong>Usuario:</strong> <t t-esc="request.env.user.name" /></p>
-                <p><strong>Partner:</strong> <t t-esc="request.env.user.partner_id.name" /></p>
-                <p><strong>Compañía:</strong> <t t-esc="request.env.user.partner_id.parent_id.name if request.env.user.partner_id and request.env.user.partner_id.parent_id else 'Sin Compañía'" /></p> -->
-                <p><strong>Usuario:</strong> <t t-esc="request.env.user.name" /></p>
-                <p><strong>Partner:</strong> <t t-esc="request.env.user.partner_id.name if request.env.user.partner_id else 'Sin Partner'" /></p>
-                <t t-if="request.env.user.partner_id and request.env.user.partner_id.parent_id">
-                    <p><strong>Compañía:</strong> <t t-esc="request.env.user.partner_id.parent_id.name" /></p>
-                </t>               
+                               
             </div>
 
             <t t-if="request.env.user.partner_id and request.env.user.partner_id.parent_id and request.env.user.partner_id.parent_id.name == 'Maristas'">                <!-- Contenedor para usuarios de la compañía 'Maristas' -->
@@ -36,7 +29,99 @@
                             </label>
                             <div class="col-sm">
                                 <select class="form-control s_website_form" name="estanciasid" id="estanciasid">
-                                    <!-- Opciones de estancias se actualizarán dinámicamente -->
+                                    <option value="infantil_2_a">Infantil 2 años - A</option>
+                                    <option value="infantil_3_a">1º Infantil 3 años - A</option>
+                                    <option value="infantil_3_b">1º Infantil 3 años - B</option>
+                                    <option value="infantil_3_c">1º Infantil 3 años - C</option>
+                                    <option value="infantil_3_d">1º Infantil 3 años - D</option>
+                                    <option value="infantil_3_e">1º Infantil 3 años - E</option>
+                                    <option value="infantil_4_a">2º Infantil 4 años - A</option>
+                                    <option value="infantil_4_b">2º Infantil 4 años - B</option>
+                                    <option value="infantil_4_c">2º Infantil 4 años - C</option>
+                                    <option value="infantil_4_d">2º Infantil 4 años - D</option>
+                                    <option value="infantil_4_e">2º Infantil 4 años - E</option>
+                                    <option value="infantil_5_a">3º Infantil 5 años - A</option>
+                                    <option value="infantil_5_b">3º Infantil 5 años - B</option>
+                                    <option value="infantil_5_c">3º Infantil 5 años - C</option>
+                                    <option value="infantil_5_d">3º Infantil 5 años - D</option>
+                                    <option value="infantil_5_e">3º Infantil 5 años - E</option>
+                                    <option value="primaria_1_a">1º Primaria - A</option>
+                                    <option value="primaria_1_b">1º Primaria - B</option>
+                                    <option value="primaria_1_c">1º Primaria - C</option>
+                                    <option value="primaria_1_d">1º Primaria - D</option>
+                                    <option value="primaria_1_e">1º Primaria - E</option>
+                                    <option value="primaria_2_a">2º Primaria - A</option>
+                                    <option value="primaria_2_b">2º Primaria - B</option>
+                                    <option value="primaria_2_c">2º Primaria - C</option>
+                                    <option value="primaria_2_d">2º Primaria - D</option>
+                                    <option value="primaria_2_e">2º Primaria - E</option>
+                                    <option value="primaria_3_a">3º Primaria - A</option>
+                                    <option value="primaria_3_b">3º Primaria - B</option>
+                                    <option value="primaria_3_c">3º Primaria - C</option>
+                                    <option value="primaria_3_d">3º Primaria - D</option>
+                                    <option value="primaria_3_e">3º Primaria - E</option>
+                                    <option value="primaria_4_a">4º Primaria - A</option>
+                                    <option value="primaria_4_b">4º Primaria - B</option>
+                                    <option value="primaria_4_c">4º Primaria - C</option>
+                                    <option value="primaria_4_d">4º Primaria - D</option>
+                                    <option value="primaria_4_e">4º Primaria - E</option>
+                                    <option value="primaria_5_a">5º Primaria - A</option>
+                                    <option value="primaria_5_b">5º Primaria - B</option>
+                                    <option value="primaria_5_c">5º Primaria - C</option>
+                                    <option value="primaria_5_d">5º Primaria - D</option>
+                                    <option value="primaria_5_e">5º Primaria - E</option>
+                                    <option value="primaria_6_a">6º Primaria - A</option>
+                                    <option value="primaria_6_b">6º Primaria - B</option>
+                                    <option value="primaria_6_c">6º Primaria - C</option>
+                                    <option value="primaria_6_d">6º Primaria - D</option>
+                                    <option value="primaria_6_e">6º Primaria - E</option>
+
+                                    <!-- Opciones adicionales -->
+                                    <option value="pab_aseos">Pabellón Aseos/Vestuarios</option>
+                                    <option value="pab_general">Pabellón General</option>
+                                    <option value="pab_judo">Pabellón Judo</option>
+                                    <option value="pab_terrazas">Pabellón Terrazas y Trasteros</option>
+                                    <option value="capilla">Capilla</option>
+                                    <option value="sala_medios">Sala de Medios</option>
+                                    <option value="laboratorio">Laboratorio</option>
+                                    <option value="danza">Danza</option>
+
+                                    <!-- Opciones para ESO -->
+                                    <option value="eso_1_a">1º ESO - A </option>
+                                    <option value="eso_1_b">1º ESO – B </option>
+                                    <option value="eso_1_c">1º ESO – C </option>
+                                    <option value="eso_1_d">1º ESO – D </option>
+                                    <option value="eso_1_e">1º ESO – E </option>
+                                    <option value="eso_1_f">1º ESO – F </option>
+                                    <option value="eso_2_a">2º ESO – A </option>
+                                    <option value="eso_2_b">2º ESO – B </option>
+                                    <option value="eso_2_c">2º ESO – C </option>
+                                    <option value="eso_2_d">2º ESO – D </option>
+                                    <option value="eso_2_e">2º ESO – E </option>
+                                    <option value="eso_2_f">2º ESO – F </option>
+                                    <option value="eso_3_a">3º ESO – A </option>
+                                    <option value="eso_3_b">3º ESO – B </option>
+                                    <option value="eso_3_c">3º ESO – C </option>
+                                    <option value="eso_3_d">3º ESO – D </option>
+                                    <option value="eso_3_e">3º ESO – E </option>
+                                    <option value="eso_3_f">3º ESO – F </option>
+                                    <option value="eso_4_a">4º ESO – A </option>
+                                    <option value="eso_4_b">4º ESO – B </option>
+                                    <option value="eso_4_c">4º ESO – C </option>
+                                    <option value="eso_4_d">4º ESO – D </option>
+                                    <option value="eso_4_e">4° ESO – E </opción>
+
+                                    <!-- Opciones para Bachillerato -->
+                                    <option value="bach_1_a">1°Bachillerato–A</opción>
+                                    <opción value="bach_1_b">1°Bachillerato–B</opción>
+                                    <opción value="bach_1_c">1°Bachillerato–C</opción>
+                                    <opción value="bach_1_d">1°Bachillerato–D</opción>
+                                    <opción value="bach_1_e">1°Bachillerato–E</opción>
+                                    <opción value="bach_2_a">2°Bachillerato–A</opción>
+                                    <opción value="bach_2_b">2°Bachillerato–B</opción>
+                                    <opción value="bach_2_c">2°Bachillerato–C</opción>
+                                    <opción value="bach_2_d">2°Bachillerato–D</opción>
+                                    <opción value="bach_2_e">2°Bachillerato–E</opción>
                                 </select>
                             </div>
                         </div>
