@@ -14,7 +14,7 @@ formEditorRegistry.add('create_ticket', {
     }, {
         type: 'char',
         name: 'estancia_id',
-        string: _t('Estancia'),
+        string: _t('Estancia/Capitulo'),
     }, {
         type: 'selection',
         name: 'estanciasid',
@@ -113,7 +113,7 @@ formEditorRegistry.add('create_ticket', {
     {
         type: 'selection',
         name: 'obras',
-        string: _t('Obra/Sede'),
+        string: _t('Sede'),
         selection: [
             ["fuensanta", "Fuensanta"],
             ["merced", "Merced"],

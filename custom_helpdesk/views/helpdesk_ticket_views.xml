@@ -13,7 +13,7 @@
                     </div>
                     <!-- Campos para otras compañías -->
                     <div class="o_other_company_fields o_field_group">
-                        <field name="obra_secundaria" placeholder="Ingrese la obra secundaria" />
+                        <field name="obra_secundaria" placeholder="Ingrese la obra " />
                         <field name="estancia_id" placeholder="Ingrese la estancia/capítulo" />
                     </div>
                 </div>
