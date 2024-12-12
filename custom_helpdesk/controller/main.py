@@ -27,14 +27,15 @@ class CustomWebsiteHelpdeskTeams(http.Controller):
         if request.env.user._is_public():
             return request.redirect("/web/login?redirect=/helpdesk")
 
-        # if not request.env.user.company_id:
-        #     raise NotFound()
-
+        
         teams_domain = [("use_website_helpdesk_form", "=", True)]
         # if not request.env.user.has_group("helpdesk.group_helpdesk_manager"):
         #     if team and not team.is_published:
         #         raise NotFound()
         #     teams_domain.append(("website_published", "=", True))
+
+        if not request.env.user.company_id:
+            raise NotFound()
 
         teams = request.env["helpdesk.team"].search(teams_domain, order="id asc")
         if not teams:
@@ -65,9 +66,9 @@ class CustomWebsiteHelpdesk(WebsiteHelpdesk):
             return redirection
 
         #  # Validar que el usuario tiene asignada una compañía
-        # if not request.env.user.company_id:
-        #     _logger.warning("El usuario %s no tiene compañía asignada.", request.env.user.name)
-        #     raise NotFound()
+        if not request.env.user.company_id:
+            _logger.warning("El usuario %s no tiene compañía asignada.", request.env.user.name)
+            raise NotFound()
 
         # Obtener datos del usuario
         user = request.env.user
