@@ -85,43 +85,39 @@
                                     <option value="sala_medios">Sala de Medios</option>
                                     <option value="laboratorio">Laboratorio</option>
                                     <option value="danza">Danza</option>
-
-                                    <!-- Opciones para ESO -->
-                                    <option value="eso_1_a">1º ESO - A </option>
-                                    <option value="eso_1_b">1º ESO – B </option>
-                                    <option value="eso_1_c">1º ESO – C </option>
-                                    <option value="eso_1_d">1º ESO – D </option>
-                                    <option value="eso_1_e">1º ESO – E </option>
-                                    <option value="eso_1_f">1º ESO – F </option>
-                                    <option value="eso_2_a">2º ESO – A </option>
-                                    <option value="eso_2_b">2º ESO – B </option>
-                                    <option value="eso_2_c">2º ESO – C </option>
-                                    <option value="eso_2_d">2º ESO – D </option>
-                                    <option value="eso_2_e">2º ESO – E </option>
-                                    <option value="eso_2_f">2º ESO – F </option>
-                                    <option value="eso_3_a">3º ESO – A </option>
-                                    <option value="eso_3_b">3º ESO – B </option>
-                                    <option value="eso_3_c">3º ESO – C </option>
-                                    <option value="eso_3_d">3º ESO – D </option>
-                                    <option value="eso_3_e">3º ESO – E </option>
-                                    <option value="eso_3_f">3º ESO – F </option>
-                                    <option value="eso_4_a">4º ESO – A </option>
-                                    <option value="eso_4_b">4º ESO – B </option>
-                                    <option value="eso_4_c">4º ESO – C </option>
-                                    <option value="eso_4_d">4º ESO – D </option>
-                                    <option value="eso_4_e">4° ESO – E </opción>
-
-                                    <!-- Opciones para Bachillerato -->
-                                    <option value="bach_1_a">1°Bachillerato–A</opción>
-                                    <opción value="bach_1_b">1°Bachillerato–B</opción>
-                                    <opción value="bach_1_c">1°Bachillerato–C</opción>
-                                    <opción value="bach_1_d">1°Bachillerato–D</opción>
-                                    <opción value="bach_1_e">1°Bachillerato–E</opción>
-                                    <opción value="bach_2_a">2°Bachillerato–A</opción>
-                                    <opción value="bach_2_b">2°Bachillerato–B</opción>
-                                    <opción value="bach_2_c">2°Bachillerato–C</opción>
-                                    <opción value="bach_2_d">2°Bachillerato–D</opción>
-                                    <opción value="bach_2_e">2°Bachillerato–E</opción>
+                                    <option value="eso_1_a">1º ESO-A</option>
+                                    <option value="eso_1_b">1º ESO–B</option>
+                                    <option value="eso_1_c">1º ESO–C</option>
+                                    <option value="eso_1_d">1º ESO–D</option>
+                                    <option value="eso_1_e">1º ESO–E</option>
+                                    <option value="eso_1_f">1º ESO–F</option>
+                                    <option value="eso_2_a">2º ESO–A</option>
+                                    <option value="eso_2_b">2º ESO–B</option>
+                                    <option value="eso_2_c">2º ESO–C</option>
+                                    <option value="eso_2_d">2º ESO–D</option>
+                                    <option value="eso_2_e">2º ESO–E</option>
+                                    <option value="eso_2_f">2º ESO–F</option>
+                                    <option value="eso_3_a">3º ESO–A</option>
+                                    <option value="eso_3_b">3º ESO–B</option>
+                                    <option value="eso_3_c">3º ESO–C</option>
+                                    <option value="eso_3_d">3º ESO–D</option>
+                                    <option value="eso_3_e">3º ESO–E</option>
+                                    <option value="eso_3_f">3º ESO–F</option>
+                                    <option value="eso_4_a">4º ESO–A</option>
+                                    <option value="eso_4_b">4º ESO–B</option>
+                                    <option value="eso_4_c">4º ESO–C</option>
+                                    <option value="eso_4_d">4º ESO–D</option>
+                                    <option value="eso_4_e">4° ESO–E</option>
+                                    <option value="bach_1_a">1°Bachillerato–A</option>
+                                    <option value="bach_1_b">1°Bachillerato–B</option>
+                                    <option value="bach_1_c">1°Bachillerato–C</option>
+                                    <option value="bach_1_d">1°Bachillerato–D</option>
+                                    <option value="bach_1_e">1°Bachillerato–E</option>
+                                    <option value="bach_2_a">2°Bachillerato–A</option>
+                                    <option value="bach_2_b">2°Bachillerato–B</option>
+                                    <option value="bach_2_c">2°Bachillerato–C</option>
+                                    <option value="bach_2_d">2°Bachillerato–D</option>
+                                    <option value="bach_2_e">2°Bachillerato–E</option>
                                 </select>
                             </div>
                         </div>
