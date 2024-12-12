@@ -35,7 +35,7 @@ class CustomWebsiteHelpdesk(WebsiteHelpdesk):
             return redirection
 
         # Obtener datos del usuario
-        user = request.env.user
+        user = request.env.partner_id
         if not user.company_id:
             return request.redirect("/helpdesk?error=no_company")
 
@@ -95,7 +95,7 @@ class CustomWebsiteHelpdeskTeamsStaging(http.Controller):
         if request.env.user._is_public():
             return request.redirect("/web/login?redirect=/helpdesk")
 
-        if not request.env.user.company_id:
+        if not request.env.partner_id.company_id:
             return request.redirect("/helpdesk?error=no_company")
 
         teams_domain = [("use_website_helpdesk_form", "=", True)]
