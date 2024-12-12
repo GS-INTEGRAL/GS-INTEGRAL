@@ -1,102 +1,101 @@
 <odoo>
     <template id="portal_helpdesk_form_inherit" inherit_id="website_helpdesk.team_form_6">
         <xpath expr="//div[input[@name='partner_email']]" position="after">
-             <t t-if="request.env.partner_id.company_id">
-                <!-- Contenedor dinámico -->
-                 <div id="custom_fields_container">
-                        <t t-if="request.env.user.partner_id and request.env.user.partner_id.company_id and request.env.user.partner_id.company_id.name == 'Maristas'">
-                            <div class="mb-0 py-2 s_website_form_field col-12">
-                                <div class="row s_col_no_resize s_col_no_bgcolor">
-                                    <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px">
-                                        <span class="s_website_form_label_content">Obras</span>
-                                    </label>
-                                    <div class="col-sm">
-                                        <select class="form-control s_website_form" name="obras" id="obras">
-                                            <option value="fuensanta">Fuensanta</option>
-                                            <option value="merced">Merced</option>
-                                        </select>
-                                    </div>
-                                </div>
+            <t t-if="request.env.user.partner_id and request.env.user.partner_id.company_id and request.env.user.partner_id.company_id.name == 'Maristas'">
+                <!-- Contenedor para usuarios de la compañía 'Maristas' -->
+                <div id="custom_fields_container">
+                    <div class="mb-0 py-2 s_website_form_field col-12">
+                        <div class="row s_col_no_resize s_col_no_bgcolor">
+                            <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px">
+                                <span class="s_website_form_label_content">Obras</span>
+                            </label>
+                            <div class="col-sm">
+                                <select class="form-control s_website_form" name="obras" id="obras">
+                                    <option value="fuensanta">Fuensanta</option>
+                                    <option value="merced">Merced</option>
+                                </select>
                             </div>
+                        </div>
+                    </div>
 
-                            <!-- Campo Estancias (dependiendo de la obra seleccionada) -->
-                            <div class="mb-0 py-2 s_website_form_field col-12">
-                                <div class="row s_col_no_resize s_col_no_bgcolor">
-                                    <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px">
-                                        <span class="s_website_form_label_content">Estancias</span>
-                                    </label>
-                                    <div class="col-sm">
-                                        <select class="form-control s_website_form" name="estanciasid" id="estanciasid">
-                                            <!-- Opciones de estancias se actualizan dinámicamente con JS -->
-                                        </select>
-                                    </div>
-                                </div>
-                           </div>                       
-                    </t>
-
-                    <t t-elif="">
-
-                            <div class="mb-0 py-2 s_website_form_field col-12">
-                                <div class="row s_col_no_resize s_col_no_bgcolor">
-                                    <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px">
-                                        <span class="s_website_form_label_content">Estancia/Capítulo</span>
-                                    </label>
-                                    <div class="col-sm">                                                     
-                                        <input type="text" class="form-control s_website_form" id="estancia_id" name="estancia_id" placeholder="Estancia/Capítulo"/>                
-                                    </div>
-                                </div>
+                    <!-- Campo Estancias -->
+                    <div class="mb-0 py-2 s_website_form_field col-12">
+                        <div class="row s_col_no_resize s_col_no_bgcolor">
+                            <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px">
+                                <span class="s_website_form_label_content">Estancias</span>
+                            </label>
+                            <div class="col-sm">
+                                <select class="form-control s_website_form" name="estanciasid" id="estanciasid">
+                                    <!-- Opciones de estancias se actualizarán dinámicamente -->
+                                </select>
                             </div>
-                      
-                        <div class="mb-0 py-2 s_website_form_field col-12" data-name="Field" data-type="char">
-                            <div class="row s_col_no_resize s_col_no_bgcolor">
-                                    <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px">
-                                        <span class="s_website_form_label_content">Sede/Obra</span>
-                                    </label>
-                                    <div class="col-sm">                          
-                                        <input type="text" class="form-control s_website_form" id="obra_secundaria" name="obra_secundaria" placeholder="Sede/Obra"/>      
-                                    </div>
-                                </div>
-                            </div>
-                        
-                        
-                <!-- Campo Categoría -->
-                <div class="mb-0 py-2 s_website_form_field col-12" data-type="selection" data-name="categoria">
-                    <div class="row s_col_no_resize s_col_no_bgcolor">
-                        <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px" for="helpdesk_categoria">
-                            <span class="s_website_form_label_content">Categoría</span>
-                        </label>
-                        <div class="col-sm">
-                            <select class="form-control s_website_form" name="categoria" id="helpdesk_categoria">
-                                <option value="bricolage">Bricolaje</option>
-                                <option value="fontaneria">Fontanería</option>
-                                <option value="climatizacion">Climatización</option>
-                                <option value="electricidad">Electricidad</option>
-                                <option value="albañileria">Albañilería</option>
-                                <option value="varios">Varios</option>
-                                <option value="tic-ordenadores">Tic-Ordenadores</option>
-                                <option value="mantenimiento">Mantenimiento</option>
-                                <option value="pintura">Pintura</option>
-                                <option value="herreria">Herrería</option>
-                                <option value="jardineria">Jardinería</option>
-                                <option value="carpinteria">Carpintería</option>
-                                <option value="cristaleria">Cristalería</option>
-                            </select>
                         </div>
                     </div>
                 </div>
-            </t> 
-                       
+            </t>
+
+            <t t-elif="request.env.user.partner_id and request.env.user.partner_id.company_id">
+                <!-- Contenedor para usuarios con compañía diferente a 'Maristas' -->
+                <div id="custom_fields_container_alternative">
+                    <div class="mb-0 py-2 s_website_form_field col-12">
+                        <div class="row s_col_no_resize s_col_no_bgcolor">
+                            <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px">
+                                <span class="s_website_form_label_content">Estancia/Capítulo</span>
+                            </label>
+                            <div class="col-sm">
+                                <input type="text" class="form-control s_website_form" id="estancia_id" name="estancia_id" placeholder="Estancia/Capítulo"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-0 py-2 s_website_form_field col-12">
+                        <div class="row s_col_no_resize s_col_no_bgcolor">
+                            <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px">
+                                <span class="s_website_form_label_content">Sede/Obra</span>
+                            </label>
+                            <div class="col-sm">
+                                <input type="text" class="form-control s_website_form" id="obra_secundaria" name="obra_secundaria" placeholder="Sede/Obra"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Campo Categoría -->
+                    <div class="mb-0 py-2 s_website_form_field col-12" data-type="selection" data-name="categoria">
+                        <div class="row s_col_no_resize s_col_no_bgcolor">
+                            <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px" for="helpdesk_categoria">
+                                <span class="s_website_form_label_content">Categoría</span>
+                            </label>
+                            <div class="col-sm">
+                                <select class="form-control s_website_form" name="categoria" id="helpdesk_categoria">
+                                    <option value="bricolage">Bricolaje</option>
+                                    <option value="fontaneria">Fontanería</option>
+                                    <option value="climatizacion">Climatización</option>
+                                    <option value="electricidad">Electricidad</option>
+                                    <option value="albañileria">Albañilería</option>
+                                    <option value="varios">Varios</option>
+                                    <option value="tic-ordenadores">Tic-Ordenadores</option>
+                                    <option value="mantenimiento">Mantenimiento</option>
+                                    <option value="pintura">Pintura</option>
+                                    <option value="herreria">Herrería</option>
+                                    <option value="jardineria">Jardinería</option>
+                                    <option value="carpinteria">Carpintería</option>
+                                    <option value="cristaleria">Cristalería</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </t>
+
             <t t-else="">
-                        <!-- Si el usuario no tiene compañía, mostramos un mensaje de error -->
+                <!-- Si el usuario no tiene compañía -->
                 <div class="alert alert-danger mt-3">
                     <p>
                         <strong>Error:</strong> No tiene asignada una compañía. Por favor, póngase en contacto con el administrador al correo 
-                            <a href="mailto:fran@gs-integral.com">fran@gs-integral.com</a>.
+                        <a href="mailto:fran@gs-integral.com">fran@gs-integral.com</a>.
                     </p>
                 </div>
             </t>
-            </div>
-            </t>
         </xpath>
-    </template> 
+    </template>
 </odoo>
