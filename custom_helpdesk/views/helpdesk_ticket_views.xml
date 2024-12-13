@@ -5,15 +5,11 @@
         <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_form"/>
         <field name="arch" type="xml">
              <xpath expr="//field[@name='tag_ids']" position="after">
-                    <div t-if="partner_id and partner_id.parent_id and partner_id.parent_id.name != 'Maristas'">
-                        <field name="obras" />
-                        <field name="estanciasid" />
-                    </div>
-                    <div t-if="partner_id and partner_id.parent_id and partner_id.parent_id.name == 'Maristas'">
-                        <field name="obra_secundaria" />
-                        <field name="estancia_id" />
-                    </div>
-                    <field name="fecha_fin" />               
+                <field name="obras" invisible="not partner_id or not partner_id.parent_id or partner_id.parent_id.name == 'Maristas'" />
+                <field name="estanciasid" invisible="not partner_id or not partner_id.parent_id or partner_id.parent_id.name == 'Maristas'" />
+                <field name="obra_secundaria" invisible="not partner_id or not partner_id.parent_id or partner_id.parent_id.name != 'Maristas'" />
+                <field name="estancia_id" invisible="not partner_id or not partner_id.parent_id or partner_id.parent_id.name != 'Maristas'" />
+                <field name="fecha_fin"/>
             </xpath>
             <xpath expr="//field[@name='email_cc']" position="after">
                     <field name="categoria"/>
