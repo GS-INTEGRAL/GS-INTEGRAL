@@ -151,16 +151,16 @@ class HelpdeskTicketInherit(models.Model):
 
     fecha_fin = fields.Date(string="Fecha Finalización")
 
-    is_maristas = fields.Boolean(
-        compute="_compute_is_maristas",
-        store=True,
-        help="Determina si la compañía asociada es Maristas.",
-    )
+    # is_maristas = fields.Boolean(
+    #     compute="_compute_is_maristas",
+    #     store=True,
+    #     help="Determina si la compañía asociada es Maristas.",
+    # )
 
-    @api.depends("partner_id.parent_id.name")
-    def _compute_is_maristas(self):
-        for ticket in self:
-            ticket.is_maristas = ticket.partner_id.parent_id.name == "Maristas"
+    # @api.depends("partner_id.parent_id.name")
+    # def _compute_is_maristas(self):
+    #     for ticket in self:
+    #         ticket.is_maristas = ticket.partner_id.parent_id.name == "Maristas"
 
     def write(self, vals):
         res = super().write(vals)
@@ -207,18 +207,28 @@ class HelpdeskTicketInherit(models.Model):
         else:
             self.fecha_fin = False
 
+
     @api.model
-    def create(self, vals_list):
-        if not isinstance(vals_list, list):
-            vals_list = [vals_list]
+    def create(self, vals):
+        record = super().create(vals)
+        if record.is_maristas:
+            record.env.user.sudo().write({'groups_id': [(4, self.env.ref('your_module.group_maristas').id)]})
+        else:
+            record.env.user.sudo().write({'groups_id': [(4, self.env.ref('your_module.group_non_maristas').id)]})
+        return record
 
-        for vals in vals_list:
+    # @api.model
+    # def create(self, vals_list):
+    #     if not isinstance(vals_list, list):
+    #         vals_list = [vals_list]
 
-            if vals.get("estanciasid") == "otra":
-                vals["estancia_id"] = vals.pop(
-                    "estancia_id", "Especifique una estancia"
-                )
-                vals.pop("estanciasid", None)
+    #     for vals in vals_list:
 
-        records = super().create(vals_list)
-        return records
+    #         if vals.get("estanciasid") == "otra":
+    #             vals["estancia_id"] = vals.pop(
+    #                 "estancia_id", "Especifique una estancia"
+    #             )
+    #             vals.pop("estanciasid", None)
+
+    #     records = super().create(vals_list)
+    #     return records

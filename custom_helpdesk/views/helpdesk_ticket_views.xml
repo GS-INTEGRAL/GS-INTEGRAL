@@ -5,11 +5,16 @@
         <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_form"/>
         <field name="arch" type="xml">
              <xpath expr="//field[@name='tag_ids']" position="after">
-                <field name="is_maristas" invisible="0"/>
+                <field name="obras" groups="your_module.group_maristas"/>
+                <field name="estanciasid" groups="your_module.group_maristas"/>
+                <field name="obra_secundaria" groups="your_module.group_non_maristas"/>
+                <field name="estancia_id" groups="your_module.group_non_maristas"/>
+
+                <!-- <field name="is_maristas" invisible="0"/>
                 <field name="obras"/>
                 <field name="estanciasid"/>
                 <field name="obra_secundaria"/>
-                <field name="estancia_id"/> 
+                <field name="estancia_id"/>  -->
                 <field name="fecha_fin"/>
             </xpath>
             <xpath expr="//field[@name='email_cc']" position="after">
@@ -18,6 +23,14 @@
             </xpath>     
             
         </field>
+    </record>
+
+    <record id="group_maristas" model="res.groups">
+        <field name="name">Maristas</field>
+    </record>
+
+    <record id="group_non_maristas" model="res.groups">
+        <field name="name">Non-Maristas</field>
     </record>
 
     <record id="view_helpdesk_ticket_tree_inherit" model="ir.ui.view">
