@@ -161,13 +161,8 @@ class HelpdeskTicketInherit(models.Model):
     def _compute_is_maristas(self):
         for ticket in self:
             ticket.is_maristas = ticket.partner_id.parent_id.name == "Maristas"
-            # Opcional: establecer un contexto para la vista
-            ticket.with_context(is_maristas=ticket.is_maristas)
-    # @api.depends("partner_id.parent_id.name")
-    # def _compute_is_maristas(self):
-    #     for ticket in self:
-    #         ticket.is_maristas = ticket.partner_id.parent_id.name == "Maristas"
-
+            
+   
     def write(self, vals):
         res = super().write(vals)
 
