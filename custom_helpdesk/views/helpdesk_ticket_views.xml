@@ -6,14 +6,10 @@
         <field name="arch" type="xml">
              <xpath expr="//field[@name='tag_ids']" position="after">
                 <field name="is_maristas" invisible="0"/>
-                <!-- <field name="obras"/>
+                <field name="obras"/>
                 <field name="estanciasid"/>
                 <field name="obra_secundaria"/>
-                <field name="estancia_id"/> -->
-                <field name="obras" invisible="eval('not is_maristas')"/>
-                <field name="estanciasid" invisible="eval('not is_maristas')"/>
-                <field name="obra_secundaria" invisible="eval('is_maristas')"/>
-                <field name="estancia_id" invisible="eval('not is_maristas')"/>
+                <field name="estancia_id"/> 
                 <field name="fecha_fin"/>
             </xpath>
             <xpath expr="//field[@name='email_cc']" position="after">
