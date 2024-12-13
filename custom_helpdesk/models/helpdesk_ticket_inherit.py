@@ -1,5 +1,8 @@
 from odoo import models, fields, api
 from odoo.exceptions import UserError
+import logging
+
+_logger = logging.getLogger(__name__)
 
 
 class HelpdeskTicketInherit(models.Model):
@@ -154,10 +157,10 @@ class HelpdeskTicketInherit(models.Model):
         help="Determina si la compañía asociada es Maristas.",
     )
 
-    @api.depends("partner_id.name")
+    @api.depends("partner_id.parent_id.name")
     def _compute_is_maristas(self):
         for ticket in self:
-            ticket.is_maristas = ticket.partner_id.name and ticket.partner_id.name.startswith("Maristas")
+            ticket.is_maristas = ticket.partner_id.parent_id.name == "Maristas"
 
     def write(self, vals):
         res = super().write(vals)
