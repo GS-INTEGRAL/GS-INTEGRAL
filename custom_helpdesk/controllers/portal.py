@@ -27,6 +27,13 @@ class CustomWebsiteHelpdeskTeams(http.Controller):
         if request.env.user._is_public():
             return request.redirect("/web/login?redirect=/helpdesk")
 
+        if not request.env.partner_id.parent_id:
+            return request.render(
+                "website_helpdesk.not_authorized",
+                {
+                    "error_message": "No tiene asignada una compañía. Por favor, póngase en contacto con el administrador."
+                },
+            )
         teams_domain = [("use_website_helpdesk_form", "=", True)]
         teams = request.env["helpdesk.team"].search(teams_domain, order="id asc")
         if not teams:
