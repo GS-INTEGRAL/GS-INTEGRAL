@@ -62,7 +62,7 @@ class CustomWebsiteHelpdeskTeams(http.Controller):
                         <p style="color: red;">
                             Ha ocurrido un error al procesar su solicitud. Por favor, contacte con el administrador.
                         </p>
-                        <a href="/helpdesk" style="text-decoration: none; color: blue;">Volver</a>
+                        <a href="/" style="text-decoration: none; color: blue;">Volver</a>
                     </body>
                 </html>
                 """,

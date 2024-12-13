@@ -213,11 +213,11 @@ class HelpdeskTicketInherit(models.Model):
             vals_list = [vals_list]
         
         for vals in vals_list:
-            partner = self.env.user.partner_id
-            if not partner or not partner.parent_id:
-                raise UserError(
-                    "No tiene asignada una compañía. Por favor, contacte con el administrador al correo fran@gs-integral.com."
-                )
+            # partner = self.env.user.partner_id
+            # if not partner or not user.partner.parent_id:
+            #     raise UserError(
+            #         "No tiene asignada una compañía. Por favor, contacte con el administrador al correo fran@gs-integral.com."
+            #     )
             
             if vals.get("estanciasid") == "otra":
                 vals["estancia_personalizada"] = vals.pop("estancia_id", "")
