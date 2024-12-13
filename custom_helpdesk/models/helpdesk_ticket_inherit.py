@@ -160,9 +160,9 @@ class HelpdeskTicketInherit(models.Model):
     @api.depends("partner_id.parent_id.name")
     def _compute_is_maristas(self):
         for ticket in self:
-            company_name = ticket.partner_id.parent_id.name if ticket.partner_id.parent_id else False
-            _logger.info(f"Company Name: {company_name}")
-            ticket.is_maristas = company_name == "Maristas"
+            ticket.is_maristas = ticket.partner_id.parent_id.name == "Maristas"
+            # Opcional: establecer un contexto para la vista
+            ticket.with_context(is_maristas=ticket.is_maristas)
     # @api.depends("partner_id.parent_id.name")
     # def _compute_is_maristas(self):
     #     for ticket in self:
@@ -229,6 +229,11 @@ class HelpdeskTicketInherit(models.Model):
             _logger.info(f"Adding group Non-Maristas: {group_non_maristas.name}")
             record.env.user.sudo().write({'groups_id': [(4, group_non_maristas.id)]})
 
+            _logger.info(f"Partner Name: {record.partner_id.parent_id.name}")
+            _logger.info(f"Is Maristas: {record.is_maristas}")
+            _logger.info(f"User Groups: {record.env.user.groups_id.mapped('name')}")
+
+        record = record.with_context(is_maristas=record.is_maristas)
         return record
 
     # @api.model
