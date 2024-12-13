@@ -213,7 +213,8 @@ class HelpdeskTicketInherit(models.Model):
             vals_list = [vals_list]
         
         for vals in vals_list:
-            if not self.env.user.partner_id.parent_id.name:
+            partner = self.env.user.partner_id
+            if not partner or not partner.parent_id:
                 raise UserError(
                     "No tiene asignada una compañía. Por favor, contacte con el administrador al correo fran@gs-integral.com."
                 )

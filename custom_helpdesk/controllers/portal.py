@@ -114,7 +114,7 @@ class CustomWebsiteHelpdesk(WebsiteHelpdesk):
                             <p style="color: red;">
                                 No tiene asignada una compañía. Por favor, contacte con el administrador para más información.
                             </p>
-                            <a href="/helpdesk" style="text-decoration: none; color: blue;">Volver</a>
+                            <a href="/" style="text-decoration: none; color: blue;">Volver</a>
                         </body>
                     </html>
                     """,
@@ -133,7 +133,7 @@ class CustomWebsiteHelpdesk(WebsiteHelpdesk):
                         <p style="color: red;">
                             Ha ocurrido un error al procesar su solicitud. Por favor, contacte con el administrador.
                         </p>
-                        <a href="/helpdesk" style="text-decoration: none; color: blue;">Volver</a>
+                        <a href="/" style="text-decoration: none; color: blue;">Volver</a>
                     </body>
                 </html>
                 """,

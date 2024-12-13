@@ -21,6 +21,23 @@
                         </div>
                     </div>
 
+                    <script>
+                        document.addEventListener("DOMContentLoaded", function () {
+                            const estanciasSelect = document.getElementById("estanciasid");
+                            const customField = document.getElementById("custom_estancia_field");
+
+                            estanciasSelect.addEventListener("change", function () {
+                                if (estanciasSelect.value === "otra") {
+                                    customField.classList.remove("d-none");
+                                    customField.classList.add("d-block");
+                                } else {
+                                    customField.classList.remove("d-block");
+                                    customField.classList.add("d-none");
+                                }
+                            });
+                        });
+                    </script>
+
                     <!-- Campo Estancias -->
                     <div class="mb-0 py-2 s_website_form_field col-12">
                         <div class="row s_col_no_resize s_col_no_bgcolor">
@@ -124,7 +141,7 @@
                     </div>
                 </div>
                 <!--nuevo campo-->
-                <div t-attf-class="mb-0 py-2 s_website_form_field col-12 #{estanciasid == 'otra' and 'd-block' or 'd-none'}" id="custom_estancia_field">
+                <div id="custom_estancia_field" class="mb-0 py-2 s_website_form_field col-12 d-none">
                     <div class="row s_col_no_resize s_col_no_bgcolor">
                         <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px">
                             <span class="s_website_form_label_content">Especifique otra estancia</span>
