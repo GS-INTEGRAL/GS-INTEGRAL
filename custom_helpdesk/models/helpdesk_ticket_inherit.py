@@ -112,6 +112,7 @@ class HelpdeskTicketInherit(models.Model):
             ("bach_2_c", "2º Bachillerato - C"),
             ("bach_2_d", "2º Bachillerato - D"),
             ("bach_2_e", "2º Bachillerato - E"),
+            ("otra", "Otra"),
         ],
         string="Estancias",
     )
@@ -207,14 +208,20 @@ class HelpdeskTicketInherit(models.Model):
             self.fecha_fin = False
 
     @api.model
-    def create(self, vals):
-        if not self.env.user.company_id:
-            raise UserError(
-                "No tiene asignada una compañía. Por favor, contacte con el administrador al correo fran@gs-integral.com."
-            )
+    def create(self, vals_list):
+        if not isinstance(vals_list, list):
+            vals_list = [vals_list]
         
-        if isinstance(vals, dict):  
-            vals = [vals]
-
-        records = super().create(vals)
+        for vals in vals_list:
+            if not self.env.user.partner_id.parent_id:
+                raise UserError(
+                    "No tiene asignada una compañía. Por favor, contacte con el administrador al correo fran@gs-integral.com."
+                )
+            
+            if vals.get("estanciasid") == "otra":
+                vals["estancia_personalizada"] = vals.pop("estancia_id", "")
+                vals.pop("estanciasid")
+        
+        records = super().create(vals_list)
         return records
+
