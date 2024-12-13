@@ -157,30 +157,10 @@ class HelpdeskTicketInherit(models.Model):
         help="Determina si la compañía asociada es Maristas.",
     )
 
-    obras_visible = fields.Boolean(compute='_compute_visibility_fields', store=True)
-    estanciasid_visible = fields.Boolean(compute='_compute_visibility_fields', store=True)
-    obra_secundaria_visible = fields.Boolean(compute='_compute_visibility_fields', store=True)
-    estancia_id_visible = fields.Boolean(compute='_compute_visibility_fields', store=True)
-
-
     @api.depends("partner_id.parent_id.name")
     def _compute_is_maristas(self):
         for ticket in self:
             ticket.is_maristas = ticket.partner_id.parent_id.name == "Maristas"
-
-    @api.depends('is_maristas')
-    def _compute_visibility_fields(self):
-        for ticket in self:
-            if ticket.is_maristas:
-                ticket.obras_visible = False
-                ticket.estanciasid_visible = False
-                ticket.obra_secundaria_visible = True
-                ticket.estancia_id_visible = False
-            else:
-                ticket.obras_visible = True
-                ticket.estanciasid_visible = True
-                ticket.obra_secundaria_visible = False
-                ticket.estancia_id_visible = True
 
     def write(self, vals):
         res = super().write(vals)
