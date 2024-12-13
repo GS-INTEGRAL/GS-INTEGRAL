@@ -5,9 +5,7 @@
         <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_form"/>
         <field name="arch" type="xml">
              <xpath expr="//field[@name='tag_ids']" position="after">
-                <div class="alert alert-info">
-                    <p>Debug: User Partner Parent Name: <t t-esc="request.env.user.partner_id.parent_id.name or 'No parent company'"/></p>
-                </div>
+                <field name="is_maristas" invisible="1"/>
                 <!-- <field name="obras"/>
                 <field name="estanciasid"/>
                 <field name="obra_secundaria"/>
