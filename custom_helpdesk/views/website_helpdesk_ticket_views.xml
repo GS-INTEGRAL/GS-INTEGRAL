@@ -196,8 +196,10 @@
                         <a href="mailto:fran@gs-integral.com">fran@gs-integral.com</a>.
                     </p>
                 </div>
-            </t>
-             <script type="text/javascript">
+            </t>            
+        </xpath>
+        <xpath expr="//form" position="after">
+            <script type="text/javascript">
                 function toggleCustomField(selectElement) {
                     const customField = document.getElementById('custom_estancia_field');
                     if (selectElement.value === 'otra') {
