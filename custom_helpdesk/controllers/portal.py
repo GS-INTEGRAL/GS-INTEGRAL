@@ -28,20 +28,45 @@ class CustomWebsiteHelpdeskTeams(http.Controller):
             return request.redirect("/web/login?redirect=/helpdesk")
 
         try:
+            # Verificar si el usuario tiene asignada una compañía
             if not request.env.user.partner_id.parent_id:
-                return request.render(
-                    "website_helpdesk.not_authorized",
-                    {
-                        "error_message": "No tiene asignada una compañía. Por favor, póngase en contacto con el administrador."
-                    },
+                _logger.info("El usuario no tiene asignada una compañía.")
+                # Mensaje directo para el usuario
+                return http.Response(
+                    """
+                    <html>
+                        <head>
+                            <title>Acceso restringido</title>
+                        </head>
+                        <body style="text-align: center; font-family: Arial, sans-serif;">
+                            <h1>Acceso Restringido</h1>
+                            <p style="color: red;">
+                                No tiene asignada una compañía. Por favor, contacte con el administrador para más información.
+                            </p>
+                            <a href="/helpdesk" style="text-decoration: none; color: blue;">Volver</a>
+                        </body>
+                    </html>
+                    """,
+                    status=403,
                 )
         except Exception as e:
             _logger.error(f"Error al verificar compañía del usuario: {str(e)}")
-            return request.render(
-                "website_helpdesk.not_authorized",
-                {
-                    "error_message": "Se ha producido un error al verificar su cuenta. Por favor, póngase en contacto con el administrador. Error: Compañía no asignada o problema de acceso."
-                },
+            return http.Response(
+                """
+                <html>
+                    <head>
+                        <title>Error inesperado</title>
+                    </head>
+                    <body style="text-align: center; font-family: Arial, sans-serif;">
+                        <h1>Error</h1>
+                        <p style="color: red;">
+                            Ha ocurrido un error al procesar su solicitud. Por favor, contacte con el administrador.
+                        </p>
+                        <a href="/helpdesk" style="text-decoration: none; color: blue;">Volver</a>
+                    </body>
+                </html>
+                """,
+                status=500,
             )
 
         teams_domain = [("use_website_helpdesk_form", "=", True)]
@@ -74,20 +99,45 @@ class CustomWebsiteHelpdesk(WebsiteHelpdesk):
             return redirection
 
         try:
+            # Verificar si el usuario tiene asignada una compañía
             if not request.env.user.partner_id.parent_id:
-                return request.render(
-                    "website_helpdesk.not_authorized",
-                    {
-                        "error_message": "No tiene asignada una compañía. Por favor, póngase en contacto con el administrador."
-                    },
+                _logger.info("El usuario no tiene asignada una compañía.")
+                # Mensaje directo para el usuario
+                return http.Response(
+                    """
+                    <html>
+                        <head>
+                            <title>Acceso restringido</title>
+                        </head>
+                        <body style="text-align: center; font-family: Arial, sans-serif;">
+                            <h1>Acceso Restringido</h1>
+                            <p style="color: red;">
+                                No tiene asignada una compañía. Por favor, contacte con el administrador para más información.
+                            </p>
+                            <a href="/helpdesk" style="text-decoration: none; color: blue;">Volver</a>
+                        </body>
+                    </html>
+                    """,
+                    status=403,
                 )
         except Exception as e:
             _logger.error(f"Error al verificar compañía del usuario: {str(e)}")
-            return request.render(
-                "website_helpdesk.not_authorized",
-                {
-                    "error_message": "Se ha producido un error al verificar su cuenta. Por favor, póngase en contacto con el administrador. Error: Compañía no asignada o problema de acceso."
-                },
+            return http.Response(
+                """
+                <html>
+                    <head>
+                        <title>Error inesperado</title>
+                    </head>
+                    <body style="text-align: center; font-family: Arial, sans-serif;">
+                        <h1>Error</h1>
+                        <p style="color: red;">
+                            Ha ocurrido un error al procesar su solicitud. Por favor, contacte con el administrador.
+                        </p>
+                        <a href="/helpdesk" style="text-decoration: none; color: blue;">Volver</a>
+                    </body>
+                </html>
+                """,
+                status=500,
             )
 
         # Obtener datos del usuario
