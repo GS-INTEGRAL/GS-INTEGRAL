@@ -9,11 +9,11 @@
                 <group invisible="group_maristas">
                     <field name="obras"/>
                     <field name="estanciasid"/>
-                <group>
+                </group>
                 <group invisible="group_non_maristas">
                     <field name="obras"/>
                     <field name="estanciasid"/>
-                <group>
+                </group>
 
                 <field name="obra_secundaria"/>
                 <field name="estancia_id"/>
