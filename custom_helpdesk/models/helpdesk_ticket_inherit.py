@@ -154,10 +154,14 @@ class HelpdeskTicketInherit(models.Model):
         help="Determina si la compañía asociada es Maristas.",
     )
 
-    @api.depends("partner_id.parent_id.name")
+    @api.depends("partner_id.name")
     def _compute_is_maristas(self):
-         for ticket in self:
-            ticket.is_maristas = ticket.partner_id.parent_id.name == 'Maristas'
+        for ticket in self:
+            ticket.is_maristas = (
+                ticket.partner_id.name.startswith("Maristas")
+                if ticket.partner_id.name
+                else False
+            )
 
     def write(self, vals):
         res = super().write(vals)
@@ -208,13 +212,14 @@ class HelpdeskTicketInherit(models.Model):
     def create(self, vals_list):
         if not isinstance(vals_list, list):
             vals_list = [vals_list]
-        
+
         for vals in vals_list:
-                        
+
             if vals.get("estanciasid") == "otra":
-                vals["estancia_id"] = vals.pop("estancia_id", "Especifique una estancia")
+                vals["estancia_id"] = vals.pop(
+                    "estancia_id", "Especifique una estancia"
+                )
                 vals.pop("estanciasid", None)
-        
+
         records = super().create(vals_list)
         return records
-
