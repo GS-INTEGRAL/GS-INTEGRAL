@@ -212,9 +212,9 @@ class HelpdeskTicketInherit(models.Model):
     def create(self, vals):
         record = super().create(vals)
         if record.is_maristas:
-            record.env.user.sudo().write({'groups_id': [(4, self.env.ref('your_module.group_maristas').id)]})
+            record.env.user.sudo().write({'groups_id': [(4, self.env.ref('custom_helpdesk.group_maristas').id)]})
         else:
-            record.env.user.sudo().write({'groups_id': [(4, self.env.ref('your_module.group_non_maristas').id)]})
+            record.env.user.sudo().write({'groups_id': [(4, self.env.ref('custom_helpdesk.group_non_maristas').id)]})
         return record
 
     # @api.model

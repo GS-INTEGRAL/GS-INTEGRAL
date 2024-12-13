@@ -5,10 +5,10 @@
         <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_form"/>
         <field name="arch" type="xml">
              <xpath expr="//field[@name='tag_ids']" position="after">
-                <field name="obras" groups="your_module.group_maristas"/>
-                <field name="estanciasid" groups="your_module.group_maristas"/>
-                <field name="obra_secundaria" groups="your_module.group_non_maristas"/>
-                <field name="estancia_id" groups="your_module.group_non_maristas"/>
+                <field name="obras" groups="custom_helpdesk.group_maristas"/>
+                <field name="estanciasid" groups="custom_helpdesk.group_maristas"/>
+                <field name="obra_secundaria" groups="custom_helpdesk.group_non_maristas"/>
+                <field name="estancia_id" groups="custom_helpdesk.group_non_maristas"/>
 
                 <!-- <field name="is_maristas" invisible="0"/>
                 <field name="obras"/>
