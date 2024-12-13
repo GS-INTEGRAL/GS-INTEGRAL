@@ -220,8 +220,8 @@ class HelpdeskTicketInherit(models.Model):
             #     )
             
             if vals.get("estanciasid") == "otra":
-                vals["estancia_personalizada"] = vals.pop("estancia_id", "")
-                vals.pop("estanciasid")
+                vals["estancia_id"] = vals.pop("custom_estancia", "Especifique una estancia")
+                vals.pop("estanciasid", None)
         
         records = super().create(vals_list)
         return records
