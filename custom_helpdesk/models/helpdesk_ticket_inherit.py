@@ -157,11 +157,7 @@ class HelpdeskTicketInherit(models.Model):
     @api.depends("partner_id.name")
     def _compute_is_maristas(self):
         for ticket in self:
-            ticket.is_maristas = (
-                ticket.partner_id.name.startswith("Maristas")
-                if ticket.partner_id.name
-                else False
-            )
+            ticket.is_maristas = ticket.partner_id.name and ticket.partner_id.name.startswith("Maristas")
 
     def write(self, vals):
         res = super().write(vals)
