@@ -10,10 +10,10 @@
                 <field name="estanciasid"/>
                 <field name="obra_secundaria"/>
                 <field name="estancia_id"/> -->
-                <field name="obras" invisible="[('is_maristas', '=', False)]"/>
-                <field name="estanciasid" invisible="[('is_maristas', '=', False)]"/>
-                <field name="obra_secundaria" invisible="[('is_maristas', '=', True)]"/>
-                <field name="estancia_id" invisible="[('is_maristas', '=', False)]"/> 
+                <field name="obras" invisible="not obras_visible"/>
+                <field name="estanciasid" invisible="not estanciasid_visible"/>
+                <field name="obra_secundaria" invisible="not obra_secundaria_visible"/>
+                <field name="estancia_id" invisible="not estancia_id_visible"/>
                 <field name="fecha_fin"/>
             </xpath>
             <xpath expr="//field[@name='email_cc']" position="after">
