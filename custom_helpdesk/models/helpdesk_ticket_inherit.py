@@ -210,39 +210,16 @@ class HelpdeskTicketInherit(models.Model):
 
 
     @api.model
-    def create(self, vals):
-        record = super().create(vals)
+    def create(self, vals_list):
+        if not isinstance(vals_list, list):
+            vals_list = [vals_list]
+            for vals in vals_list:
 
-        _logger.info(f"Is Maristas: {record.is_maristas}")
+                if vals.get("estanciasid") == "otra":
+                    vals["estancia_id"] = vals.pop(
+                        "estancia_id", "Especifique una estancia"
+                    )
+                    vals.pop("estanciasid", None)
 
-        if record.is_maristas:
-            group_maristas = self.env.ref('custom_helpdesk.group_maristas')
-            _logger.info(f"Adding group Maristas: {group_maristas.name}")
-            record.env.user.sudo().write({'groups_id': [(4, group_maristas.id)]})
-        else:
-            group_non_maristas = self.env.ref('custom_helpdesk.group_non_maristas')
-            _logger.info(f"Adding group Non-Maristas: {group_non_maristas.name}")
-            record.env.user.sudo().write({'groups_id': [(4, group_non_maristas.id)]})
-
-            _logger.info(f"Partner Name: {record.partner_id.parent_id.name}")
-            _logger.info(f"Is Maristas: {record.is_maristas}")
-            _logger.info(f"User Groups: {record.env.user.groups_id.mapped('name')}")
-
-        record = record.with_context(is_maristas=record.is_maristas)
-        return record
-
-    # @api.model
-    # def create(self, vals_list):
-    #     if not isinstance(vals_list, list):
-    #         vals_list = [vals_list]
-
-    #     for vals in vals_list:
-
-    #         if vals.get("estanciasid") == "otra":
-    #             vals["estancia_id"] = vals.pop(
-    #                 "estancia_id", "Especifique una estancia"
-    #             )
-    #             vals.pop("estanciasid", None)
-
-    #     records = super().create(vals_list)
-    #     return records
+        records = super().create(vals_list)
+        return records

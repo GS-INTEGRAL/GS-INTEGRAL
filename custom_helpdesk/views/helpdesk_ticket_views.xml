@@ -17,12 +17,6 @@
                     <field name="estancia_id"/>
                 </group>
 
-               
-                <!-- <field name="is_maristas" invisible="0"/>
-                <field name="obras"/>
-                <field name="estanciasid"/>
-                <field name="obra_secundaria"/>
-                <field name="estancia_id"/>  -->
                 <field name="fecha_fin"/>
             </xpath>
             <xpath expr="//field[@name='email_cc']" position="after">
