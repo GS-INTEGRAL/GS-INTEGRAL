@@ -27,13 +27,23 @@ class CustomWebsiteHelpdeskTeams(http.Controller):
         if request.env.user._is_public():
             return request.redirect("/web/login?redirect=/helpdesk")
 
-        if not request.env.user.partner_id.parent_id:
+        try:
+            if not request.env.user.partner_id.parent_id:
+                return request.render(
+                    "website_helpdesk.not_authorized",
+                    {
+                        "error_message": "No tiene asignada una compañía. Por favor, póngase en contacto con el administrador."
+                    },
+                )
+        except Exception as e:
+            _logger.error(f"Error al verificar compañía del usuario: {str(e)}")
             return request.render(
                 "website_helpdesk.not_authorized",
                 {
-                    "error_message": "No tiene asignada una compañía. Por favor, póngase en contacto con el administrador."
+                    "error_message": "Se ha producido un error al verificar su cuenta. Por favor, póngase en contacto con el administrador. Error: Compañía no asignada o problema de acceso."
                 },
             )
+
         teams_domain = [("use_website_helpdesk_form", "=", True)]
         teams = request.env["helpdesk.team"].search(teams_domain, order="id asc")
         if not teams:
@@ -63,12 +73,20 @@ class CustomWebsiteHelpdesk(WebsiteHelpdesk):
         if redirection:
             return redirection
 
-        #  # Validar que el usuario tiene asignada una compañía
-        if not request.env.user.partner_id.parent_id:
+        try:
+            if not request.env.user.partner_id.parent_id:
+                return request.render(
+                    "website_helpdesk.not_authorized",
+                    {
+                        "error_message": "No tiene asignada una compañía. Por favor, póngase en contacto con el administrador."
+                    },
+                )
+        except Exception as e:
+            _logger.error(f"Error al verificar compañía del usuario: {str(e)}")
             return request.render(
                 "website_helpdesk.not_authorized",
                 {
-                    "error_message": "No tiene asignada una compañía. Por favor, póngase en contacto con el administrador."
+                    "error_message": "Se ha producido un error al verificar su cuenta. Por favor, póngase en contacto con el administrador. Error: Compañía no asignada o problema de acceso."
                 },
             )
 
