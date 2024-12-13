@@ -160,7 +160,13 @@ class HelpdeskTicketInherit(models.Model):
     @api.depends("partner_id.parent_id.name")
     def _compute_is_maristas(self):
         for ticket in self:
-            ticket.is_maristas = ticket.partner_id.parent_id.name == "Maristas"
+            company_name = ticket.partner_id.parent_id.name if ticket.partner_id.parent_id else False
+            _logger.info(f"Company Name: {company_name}")
+            ticket.is_maristas = company_name == "Maristas"
+    # @api.depends("partner_id.parent_id.name")
+    # def _compute_is_maristas(self):
+    #     for ticket in self:
+    #         ticket.is_maristas = ticket.partner_id.parent_id.name == "Maristas"
 
     def write(self, vals):
         res = super().write(vals)
@@ -211,10 +217,18 @@ class HelpdeskTicketInherit(models.Model):
     @api.model
     def create(self, vals):
         record = super().create(vals)
+
+        _logger.info(f"Is Maristas: {record.is_maristas}")
+
         if record.is_maristas:
-            record.env.user.sudo().write({'groups_id': [(4, self.env.ref('custom_helpdesk.group_maristas').id)]})
+            group_maristas = self.env.ref('custom_helpdesk.group_maristas')
+            _logger.info(f"Adding group Maristas: {group_maristas.name}")
+            record.env.user.sudo().write({'groups_id': [(4, group_maristas.id)]})
         else:
-            record.env.user.sudo().write({'groups_id': [(4, self.env.ref('custom_helpdesk.group_non_maristas').id)]})
+            group_non_maristas = self.env.ref('custom_helpdesk.group_non_maristas')
+            _logger.info(f"Adding group Non-Maristas: {group_non_maristas.name}")
+            record.env.user.sudo().write({'groups_id': [(4, group_non_maristas.id)]})
+
         return record
 
     # @api.model
