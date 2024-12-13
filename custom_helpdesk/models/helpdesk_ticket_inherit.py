@@ -154,14 +154,10 @@ class HelpdeskTicketInherit(models.Model):
         help="Determina si la compañía asociada es Maristas.",
     )
 
-    @api.depends("company_id")
+    @api.depends("partner_id.parent_id.name")
     def _compute_is_maristas(self):
-        for record in self:
-            record.is_maristas = bool(
-                record.partner_id
-                and record.partner_id.parent_id
-                and record.partner_id.parent_id.name == 'Maristas'
-            )
+         for ticket in self:
+            ticket.is_maristas = ticket.partner_id.parent_id.name == 'Maristas'
 
     def write(self, vals):
         res = super().write(vals)

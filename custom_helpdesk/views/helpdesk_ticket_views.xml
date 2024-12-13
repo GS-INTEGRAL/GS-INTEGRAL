@@ -5,14 +5,14 @@
         <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_form"/>
         <field name="arch" type="xml">
              <xpath expr="//field[@name='tag_ids']" position="after">
-                <field name="obras"/>
+                <!-- <field name="obras"/>
                 <field name="estanciasid"/>
                 <field name="obra_secundaria"/>
-                <field name="estancia_id"/>
-                <!-- <field name="obras" invisible="[('is_maristas', '=', False)]"/>
+                <field name="estancia_id"/> -->
+                <field name="obras" invisible="[('is_maristas', '=', False)]"/>
                 <field name="estanciasid" invisible="[('is_maristas', '=', False)]"/>
                 <field name="obra_secundaria" invisible="[('is_maristas', '=', True)]"/>
-                <field name="estancia_id" invisible="[('is_maristas', '=', True)]"/> -->
+                <field name="estancia_id" invisible="[('is_maristas', '=', False)]"/> 
                 <field name="fecha_fin"/>
             </xpath>
             <xpath expr="//field[@name='email_cc']" position="after">
