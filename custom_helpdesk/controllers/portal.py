@@ -58,7 +58,7 @@ class CustomWebsiteHelpdesk(WebsiteHelpdesk):
             return redirection
 
         #  # Validar que el usuario tiene asignada una compañía
-        if not request.env.partner_id.company_id:
+        if not request.env.partner_id.parent_id:
             return request.render("website_helpdesk.not_authorized", {
                 'error_message': 'No tiene asignada una compañía. Por favor, póngase en contacto con el administrador.'
             })
