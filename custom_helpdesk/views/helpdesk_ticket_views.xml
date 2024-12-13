@@ -6,6 +6,7 @@
         <field name="arch" type="xml">
              <xpath expr="//field[@name='tag_ids']" position="after">
                 
+                <field name="is_maristas" invisible="0"/>
                <group invisible="not is_maristas">
                     <field name="obras"/>
                     <field name="estanciasid"/>
