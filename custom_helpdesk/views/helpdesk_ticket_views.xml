@@ -5,10 +5,19 @@
         <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_form"/>
         <field name="arch" type="xml">
              <xpath expr="//field[@name='tag_ids']" position="after">
-                <field name="obras" invisible="not context.get('is_maristas')" groups="custom_helpdesk.group_maristas"/>
-                <field name="estanciasid" invisible="not context.get('is_maristas')" groups="custom_helpdesk.group_maristas"/>
-                <field name="obra_secundaria" invisible="context.get('is_maristas')" groups="custom_helpdesk.group_non_maristas"/>
-                <field name="estancia_id" invisible="context.get('is_maristas')" groups="custom_helpdesk.group_non_maristas"/>
+                <field name="obras" 
+                   invisible="not is_maristas"
+                   groups="custom_helpdesk.group_maristas"/>
+                <field name="estanciasid" 
+                    invisible="not is_maristas"
+                    groups="custom_helpdesk.group_maristas"/>
+
+                <field name="obra_secundaria" 
+                   invisible="is_maristas"
+                   groups="custom_helpdesk.group_non_maristas"/>
+                <field name="estancia_id" 
+                    invisible="is_maristas"
+                    groups="custom_helpdesk.group_non_maristas"/>
                 <!-- <field name="is_maristas" invisible="0"/>
                 <field name="obras"/>
                 <field name="estanciasid"/>
