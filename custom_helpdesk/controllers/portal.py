@@ -27,7 +27,7 @@ class CustomWebsiteHelpdeskTeams(http.Controller):
         if request.env.user._is_public():
             return request.redirect("/web/login?redirect=/helpdesk")
 
-        if not request.env.partner_id.parent_id:
+        if not request.env.user.partner_id.parent_id:
             return request.render(
                 "website_helpdesk.not_authorized",
                 {
@@ -64,7 +64,7 @@ class CustomWebsiteHelpdesk(WebsiteHelpdesk):
             return redirection
 
         #  # Validar que el usuario tiene asignada una compañía
-        if not request.env.partner_id.parent_id:
+        if not request.env.user.partner_id.parent_id:
             return request.render(
                 "website_helpdesk.not_authorized",
                 {
